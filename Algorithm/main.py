@@ -219,7 +219,7 @@ while t < a:
 recursive_function(1)'''
 
 #깊이 우선탐색
-
+#내가 하는 코드 (도중에 빡쳐서 그만 둠)
 '''def dfs(startpoint):
     if check[startpoint-1] == False:
         check[startpoint-1] = True
@@ -233,7 +233,8 @@ recursive_function(1)'''
 
         return
 dfs(1)'''
-graph = [
+#이쁜 코
+'''graph = [
         [],
         [2, 3, 8],
         [1, 7],
@@ -257,4 +258,5 @@ dfs2(graph,1,vi)
 import os
 print(__file__)
 print(os.path.realpath(__file__))
-print(os.path.abspath(__file__))
+print(os.path.abspath(__file__))'''
+
