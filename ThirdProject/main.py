@@ -226,3 +226,155 @@ s = 0
 for i in range(len(realmap)):
     if realmap[i] == 1:
             print(a+i)'''
+
+
+#선택정렬 알고리즘
+
+'''a = [7,5,9,0,3,1,6,2,4,8]
+for j in range(0,len(a)):
+    min = a[j]
+    for i in range(j,len(a)):
+        if min > a[i]:
+            min = a[i]
+            index = i
+    a[j], a[index] = a[index], a[j]
+print(sorted(a))'''
+
+#삽입정렬 알고리즘
+
+#내 코드
+
+'''a = [7,5,9,0,3,1,6,2,4,8]
+for i in range(1,len(a)):
+    b = 0
+    for j in range(i-1,-1,-1):
+        if a[i] > a[j]:
+            toss = a[i]
+            a.remove(toss)
+            a.insert(j+1,toss)
+            break
+        else :
+            b += 1
+    if b == i:
+        toss = a[i]
+        a.remove(toss)
+        a.insert(0,toss)
+    print(a)'''
+
+# 갓동빈님 코드
+
+'''array = [7,5,9,0,3,1,6,2,4,8]
+for i in range(1,len(array)):
+    for j in range(i,0,-1):
+        if array[j-1] > array[j]:
+            array[j-1], array[j] = array[j], array[j-1]
+        else:
+            break
+print(array)'''
+
+# 퀵 정렬 알고리즘(어려움 주의)
+
+#갓동빈 코드
+'''def quickSort(arr,fro,to):
+    pibut = fro
+    left = fro+1
+    right = to
+    if len(arr) <= 1:
+        return
+    while left <= right:
+        while left <= len(arr)-1 and arr[left] < arr[pibut]: left += 1
+        while right >= 1 and arr[right] > arr[pibut] : right -= 1
+        if left > right:
+            arr[right], arr[pibut] = arr[pibut], arr[right]
+            quickSort(arr,0,right-1)
+            quickSort(arr,right+1,to)
+        else:
+            arr[left], arr[right] = arr[right], arr[left]
+
+quickSort(array,0,9); print(array)'''
+
+
+# 내 코드
+'''array = [5,7,9,0,3,1,6,2,4,8]
+
+def quick(array,start,end):
+    pivot = start
+    left = start+1
+    right = end
+    if len(array) <= 1:
+        return
+    while left <= right:
+        for i in range(start+1,end):
+            if array[i] > array[pivot]:
+                left = i
+                break
+            else:
+                left += 1
+        for i in range(end,start,-1):
+            if array[i] < array[pivot]:
+                right = i
+                break
+            else:
+                right -= 1
+        if left < right:
+            array[left], array[right] = array[right], array[left]
+        else:
+            array[pivot], array[right] = array[right], array[pivot]
+            quick(array,start,right-1)
+            quick(array,right+1,end)
+
+quick(array,0,9)
+print(array)'''
+
+#계수 정렬
+
+'''array = [7,5,9,0,3,1,6,2,9,1,4,8,0,5,2]
+arr = [0]*(max(array)+1)
+for i in array: arr[i] += 1
+for i in range(len(arr)):
+    for j in range(arr[i]):
+        print(i, end= " ")'''
+
+# 위에서 아래로
+
+'''length = int(input())
+checker = 0
+arr = []
+while checker < length:
+    arr.append(int(input()))
+    checker += 1
+sortedarr = sorted(arr, reverse= True)
+
+for i in sortedarr:
+    print(i, end=" ")'''
+
+# 성적이 낮으면 공부를 해야지
+
+# 내 코드
+'''length = int(input())
+arr = []
+scorearr = []
+
+for i in range(length):
+    ar = input().split()
+    print(ar)
+    arr.append(ar)
+    scorearr.append(int(ar[1]))
+
+scorearr.sort()
+
+for i in scorearr:
+    for j in arr:
+        if int(j[1]) == i:
+            print(j[0], end= " ")'''
+
+# 갓동빈 코드
+
+'''length = int(input())
+arr = []
+for i in range(length):
+    inpp = input().split()
+    arr.append((inpp[0],int(inpp[1])))
+real = sorted(arr, key= lambda student:student[1])
+for i in real:
+    print(i[0], end=" ")'''
