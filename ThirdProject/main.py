@@ -378,3 +378,38 @@ for i in range(length):
 real = sorted(arr, key= lambda student:student[1])
 for i in real:
     print(i[0], end=" ")'''
+
+# 두 배열의 원소 교체
+'''n,k = map(int,input().split())
+a = list(map(int,input().split()))
+b = list(map(int,input().split()))
+c = [sorted(b,reverse=True)[i] - sorted(a)[i] for i in range(len(a))]
+result = sum(a)
+for i in range(k):
+    if c[i] > 0:
+        result += c[i]
+print(result)'''
+
+#이진 탐색(꼭 암기하자)
+
+# 이 함수는 배열과 원하는 원소를 넣으면 그 원소가 있는 index를 반환하는 함수입니다.
+def binary_searching(arr,start,end,want):
+    #기준은 index입니다.
+    print("여기1")
+    middle = int(end-start/2)
+    if arr[middle] > want:
+        print("여기2")
+        end = middle-1
+        start = 0
+        binary_searching(arr,start,end,want)
+    elif arr[middle] < want:
+        print("여기3")
+        end = len(arr)-1
+        start = middle+1
+        binary_searching(arr, start, end, want)
+    else:
+        print(middle)
+        return middle
+
+array = [0,2,4,6,8,10,12,14,16,18]
+print(binary_searching(array,0,9,7))
