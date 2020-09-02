@@ -393,7 +393,7 @@ print(result)'''
 #이진 탐색(꼭 암기하자)
 
 # 이 함수는 배열과 원하는 원소를 넣으면 그 원소가 있는 index를 반환하는 함수입니다.
-def binary_searching(arr,start,end,want):
+'''def binary_searching(arr,start,end,want):
     #기준은 index입니다.
     print("여기1")
     middle = int(end-start/2)
@@ -412,4 +412,33 @@ def binary_searching(arr,start,end,want):
         return middle
 
 array = [0,2,4,6,8,10,12,14,16,18]
-print(binary_searching(array,0,9,7))
+print(binary_searching(array,0,9,7))'''
+
+# 부품 찾기
+
+'''n = int(input())
+parent = list(map(int,input().split()))
+m = int(input())
+wanted = list(map(int,input().split()))
+
+def is_that_right(arr,start,end,want):
+    if end<=start:
+        if arr[end] == want:
+            print("yes",end=" ")
+            return
+        else:
+            print("no",end=" ")
+            return
+    middle = start + int((end-start)/2)
+    if arr[middle] < want:
+        is_that_right(arr,middle+1,end,want)
+    elif arr[middle] == want:
+        print("yes",end=" ")
+        return
+    else:
+        is_that_right(arr,start,middle-1,want)
+
+for i in range(len(wanted)):
+    sun = wanted[i]
+    is_that_right(parent,0,len(parent)-1,sun)'''
+
