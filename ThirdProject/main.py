@@ -442,3 +442,68 @@ for i in range(len(wanted)):
     sun = wanted[i]
     is_that_right(parent,0,len(parent)-1,sun)'''
 
+# 떡볶이 떡 만들기
+
+'''n,m = map(int,input().split())
+total = list(map(int,input().split()))
+
+sorted_total = sorted(total,reverse=True)
+
+max_value_in_total = sorted_total[0]
+
+array_that_we_have_to_get_answer_from = []
+sums = 0
+for i in range(max_value_in_total,-1,-1):
+    for j in range(len(sorted_total)-1):
+        if sorted_total[j]-i <= 0:
+            break
+        else:
+            sums += sorted_total[j]-i
+    array_that_we_have_to_get_answer_from.append(sums)
+    sums = 0
+
+def findout(arr,start,end,want):
+    middle = start + int((end-start)/2)
+    middle_value = arr[middle]
+    if end <= start:
+        if middle_value >= m:
+            return print(max_value_in_total - (middle))
+        elif middle_value < m :
+            return print(max_value_in_total - (middle+1))
+
+    if middle_value < want:
+        findout(arr,middle+1,end,want)
+    elif middle_value > want:
+        findout(arr,start,middle-1,want)
+    else:
+        return print(max_value_in_total - middle)
+
+findout(array_that_we_have_to_get_answer_from,0,len(array_that_we_have_to_get_answer_from)-1,m)'''
+
+n,m = map(int,input().split())
+array = list(map(int,input().split()))
+
+start = 0
+end = max(array)
+
+while start <= end:
+    total = 0
+    middle = start + int((end-start)/2)
+
+    for i in array:
+        if i > array[middle]:
+           total += i - array[middle]
+
+    if total > m:
+        end = middle - 1
+    elif total <= m:
+        result = total
+        start = middle + 1
+
+
+
+
+
+
+
+
