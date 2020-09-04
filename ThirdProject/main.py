@@ -444,6 +444,7 @@ for i in range(len(wanted)):
 
 # 떡볶이 떡 만들기
 
+#내코드
 '''n,m = map(int,input().split())
 total = list(map(int,input().split()))
 
@@ -480,7 +481,8 @@ def findout(arr,start,end,want):
 
 findout(array_that_we_have_to_get_answer_from,0,len(array_that_we_have_to_get_answer_from)-1,m)'''
 
-n,m = map(int,input().split())
+# 갓동빈 코드
+'''n,m = map(int,input().split())
 array = list(map(int,input().split()))
 
 start = 0
@@ -498,12 +500,174 @@ while start <= end:
         end = middle - 1
     elif total <= m:
         result = total
-        start = middle + 1
+        start = middle + 1'''
 
 
+# 멱급수 만들기(업다운)
+'''arr = [0]*10001
+def pibo(s):
+    if s == 1 or 2: return 1
+    if arr[s] != 0 : return arr[s]
+    else:
+        arr[s] = pibo(s-1) + pibo(s-2)
+        return arr[s]
+print(pibo(100))'''
+
+# 멱급수 만들기(다운업)
+'''이 방식이 많이 쓰인다!'''
+
+'''arr = [0]*1000
+arr[1] = 1; arr[2] = 1
+for i in range(3,len(arr)):
+    arr[i] = arr[i-1] + arr[i-2]
+print(arr[99])'''
+
+# 1로 만들기
+
+#업다운
+'''ab = int(input())
+
+parent = [0] * 30001
+
+def find(real):
+    if real != int(real):
+        return 121545
+    if real == 1 or real == 2 or real == 3 or real == 5:
+        return 1
+    elif real == 4:
+        return 2
+    else:
+        if parent[int(real)] != 0:
+            return parent[int(real)]
+        else:
+            parent[int(real)] = min([find(real/5),find(real/3),find(real/2),find(real-1)]) + 1
+            return parent[int(real)]
+print(find(ab))'''
+
+#다운업
+
+'''parent = [0]*11
+ab = int(input())
+parent[1] = 0; parent[2] = 1; parent[3] = 1; parent[4] = 2; parent[5] = 1
+
+for i in range(6,len(parent)):
+    parent[i] = parent[i-1] + 1
+    #5로 나눠진다.
+    if parent[i] % 5 == 0:
+        parent[i] = min(parent[i//5]+1,parent[i])
+    if parent[i] % 3 == 0 :
+        parent[i] = min(parent[i//3]+1,parent[i])
+    if parent[i] % 2 == 0 :
+        parent[i] = min(parent[i//2]+1,parent[i])'''
 
 
+#개미전사
+
+'''n = int(input())
+arr = list(map(int,input().split()))
+ans = [0]*(len(arr)+1)
+trash = []
+for i in range(2,len(arr)):
+
+    if i == 2:
+        ans[i+1] = arr[0] + arr[2]
+    else:
+        for j in range(i-1):
+            trash.append(arr[i]+arr[j])
+        compare = max(trash)
+        trash = []
+        ans[i+1] = max(ans[i],compare)
+
+print(ans[n])
+
+d = [0]*100
+
+d[0] = arr[0]
+d[1] = max(arr[0],arr[1])
+for i in range(2,n):
+    d[i] = max(d[i-1],d[i-2]+arr[i])
+
+print(d[n-1])'''
+
+# 민상이가 풀어보라는 문제
+
+'''arr = list(input())
+scorearr = []
+for i in range(len(arr)):
+    returnValue = 0
+    if arr[i] != "(" and arr[i] != "{" and arr[i] != "[" and arr[i] != "]" and arr[i] != "}" and arr[i] != ")"  :
+        for j in range(i,-1,-1):
+            if arr[j] == ']'or arr[j] == ')' or arr[j] == '}':
+                break
+            if arr[j] == '(':
+                returnValue += 1
+            elif arr[j] == '{':
+                returnValue += 2
+            elif arr[j] == '[':
+                returnValue += 3
+        scorearr.append(returnValue)
+        returnValue = 0
+print(max(scorearr))'''
+
+# PPAP
+
+'''arr = list(input())
+i = 0
+while i < len(arr)-3:
+    if arr[i] == "P":
+        if [arr[i+1],arr[i+2],arr[i+3]] == ["P","A","P"]:
+            del arr[i+1]
+            del arr[i+1]
+            del arr[i+1]
+            i -= 1
+            print(i)
+        else :
+            i += 1
+    else:
+        i += 1
+
+if arr == ["P"]:
+    print("PPAP")
+else:
+    print("NP")'''
 
 
+'''arr2 = list(input())
 
+def ppap(arr):
+    count = 0
+    i = 0
+    while i < len(arr):
+        if arr[i] == "P":
+            count += 1
+        elif arr[i] == "A" and i+1 <= len(arr)-1:
+            if count >= 2 and arr[i+1] == "P":
+                count -= 1
+                i += 1
+            else:
+                return print("NP")
+        else:
+            return print("NP")
+        i += 1
+    if count == 1 :
+        return print("PPAP")
+    else :
+        return print("NP")
 
+ppap(arr2)'''
+
+# 바닥 공사
+#      1 2 3 일 때
+'''arr = [0]*1001
+arr[1] = 1 ; arr[2] = 3 ; arr[3] = 5
+n = int(input())
+
+def find(a):
+    if arr[a] != 0 :
+        return arr[a]
+    else:
+        arr[a] = find(a-1) + 2 * (find(a-2))
+        return arr[a]
+print(find(n))'''
+
+#효율적인 화폐구성
