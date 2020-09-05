@@ -671,3 +671,37 @@ def find(a):
 print(find(n))'''
 
 #효율적인 화폐구성
+
+#내코드
+n,m = map(int,input().split())
+arr = [0]*10001
+arr[a] = 1
+
+asa = []
+for i in range(n):
+    a = int(input())
+    asa.append(a)
+
+def find(a):
+    if a < 0 : return 10001;
+    cal = 10001
+    if arr[a] != 0 : return arr[a]
+    for i in asa:
+        if find(a-i) < cal : cal = find(a-i)
+    arr[a] = cal + 1
+    return arr[a]
+
+print(find(m) if find(m) < 10001 else -1)
+
+#갓동빈코드
+
+n,m = map(int,input().split())
+array = []
+realA = [10001]*(m+1)
+for i in range(n):
+    array.append(int(input()))
+for i in array:
+    for j in range(i,n+1):
+        realA[j] = min(realA[j],realA[j-i]+1)
+
+
