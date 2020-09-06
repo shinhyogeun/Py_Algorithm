@@ -675,13 +675,12 @@ print(find(n))'''
 #내코드
 n,m = map(int,input().split())
 arr = [0]*10001
-arr[a] = 1
 
 asa = []
 for i in range(n):
     a = int(input())
     asa.append(a)
-
+    arr[a] = 1
 def find(a):
     if a < 0 : return 10001;
     cal = 10001
@@ -693,6 +692,9 @@ def find(a):
 
 print(find(m) if find(m) < 10001 else -1)
 
+
+
+
 #갓동빈코드
 
 n,m = map(int,input().split())
@@ -703,5 +705,8 @@ for i in range(n):
 for i in array:
     for j in range(i,n+1):
         realA[j] = min(realA[j],realA[j-i]+1)
+
+
+        
 
 
