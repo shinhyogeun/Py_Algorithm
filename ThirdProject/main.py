@@ -707,6 +707,6 @@ for i in array:
         realA[j] = min(realA[j],realA[j-i]+1)
 
 
-        
+
 
 
