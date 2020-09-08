@@ -1,0 +1,301 @@
+# 다익스트라 구현
+
+'''n,m = map(int,input().split())
+start = int(input())
+line = [[] for _ in range(n+1)]
+visited = [False]*(n+1)
+visited[0] = True
+distance = [101]*(n+1)
+
+for i in range(m):
+    a,b,c = map(int,input().split())
+    line[a].append((b,c))
+
+
+def smallted_among_remain():
+    value = 101
+    wher = 0
+    for i in range(1,n+1):
+        if distance[i] < value and not visited[i] :
+            wher = i
+    return wher
+
+def dijekstra(start):
+    global distance
+    distance[start] = 0
+    while visited != [True] * (n+1):
+        a = smallted_among_remain()
+        visited[a] = True
+        for i in line[a]:
+            if distance[a] + i[1] < distance[i[0]]:
+                distance[i[0]] = distance[a] + i[1]
+
+dijekstra(start)
+for i in range(1,len(distance)):
+    if distance[i] == 101:
+        print("INFINITY")
+    else:
+        print(distance[i])'''
+
+# 개선된 다익스트라 알고리즘(힙정렬을 활용)
+
+'''import heapq
+import sys
+input = sys.stdin.readline
+INF = int(1e9)
+
+n,m = map(int,input().split())
+start = int(input())
+graph = [[] for _ in range(n+1)]
+distance = [INF] * (n+1)
+
+for _ in range(m):
+    a,b,c = map(int,input().split())
+    graph[a].append((b,c))
+
+def dijkstra(start):
+    q = []
+    heapq.heappush(q, (0, start))
+    distance[start] = 0
+    while q:
+        real = heapq.heappop(q)
+        if real[0] > distance[real[1]]: continue
+        for i in graph[real[1]]:
+            if real[0] + i[1] < distance[i[0]]:
+                distance[i[0]] = distance[real[1]] + i[1]
+                heapq.heappush(q,(real[0] + i[1],i[0]))
+
+dijkstra(start)
+
+for i in distance:
+    if i == INF :
+        print("INFINITY")
+    else:
+        print(i)'''
+
+# 플로이드 워셜 알고리즘
+
+'''INF = int(1e9)
+
+n = int(input())
+m = int(input())
+
+graph = [[INF] * (n+1) for _ in range(n+1)]
+
+for i in range(m):
+    a,b,c = map(int,input().split())
+    graph[a][b] = c
+
+for i in range(1,n+1):
+    for k in range(1,n+1):
+        if i == k : graph[i][k] = 0
+
+for k in range(1,n+1):
+    for i in range(1,n+1):
+        for j in range(1,n+1):
+             graph[i][j] = min(graph[i][j], graph[i][k] + graph[k][j])
+
+for i in range(1,n+1):
+    for k in range(1,n+1):
+        if graph[i][k] == INF :
+            print("INFINITY")
+        else:
+            print(graph[i][k], end= " ")
+    print()'''
+
+# 미래도시
+'''INF = int(1e9)
+
+n,m = map(int,input().split())
+graph = [[INF]*(n+1) for _ in range(n+1)]
+
+for i in range(n):
+    for k in range(n):
+        if i == k : graph[i][k] = 0
+
+for i in range(m):
+    a,b = map(int,input().split())
+    graph[a][b] = 1
+    graph[b][a] = 1
+
+for i in range(1,n+1):
+    for k in range(1,n+1):
+        for j in range(1,n+1):
+            graph[k][j] = min(graph[k][j],graph[k][i]+graph[i][j])
+
+x,k = map(int,input().split())
+if graph[1][k] == INF or graph[k][x] == INF:
+    print(-1)
+else:
+    print(graph[1][k] + graph[k][x])'''
+
+
+
+#전보
+
+'''import heapq
+import sys
+input = sys.stdin.readline
+INF = int(1e9)
+
+n,m,c = map(int,input().split())
+graph = [[] for _ in range(n+1)]
+distance = [INF]*(n+1)
+distance[0] = 0
+for i in range(m):
+    a,b,dis = map(int,input().split())
+    graph[a].append((dis,b))
+
+def dijkstar(start):
+    q = []
+    distance[start] = 0
+    heapq.heappush(q,(0,start))
+    while q:
+        dis2,wher = heapq.heappop(q)
+        if distance[wher] < dis2 : continue
+        for i in graph[wher]:
+            if i[0] + dis2 < distance[i[1]]:
+                distance[i[1]] = i[0] + dis2
+                heapq.heappush(q,(distance[i[1]],i[1]))
+
+dijkstar(c)
+total = 0
+
+for i in range(1,n+1):
+    if distance[i] != INF and i != c:
+        total += 1
+    elif distance[i] == INF:
+        distance[i] = -1
+
+print(total, max(distance))'''
+
+# 서로소 구하기
+
+'''n,m = map(int,input().split())
+
+# 재료 : 루트노드 저장소
+root = [0]*(n+1)
+
+# 시작전 자기 자신을 루트로!
+for i in range(1,n+1):
+    root[i] = i
+
+# 루트를 찾는 것!
+def find_root(a):
+    if root[a] != a:
+        root[a] = find_root(root[a])
+    return root[a]
+
+#합치기
+def union(a,b):
+    if find_root(a) < find_root(b):
+        root[b] = find_root(a)
+    else:
+        root[a] = find_root(b)
+
+for i in range(m):
+    a,b = map(int,input().split())
+    union(a,b)
+
+# 출력하자
+    print(root)'''
+
+'''def find_parent(parent, x):
+    if parent[x] != x:
+        parent[x] = find_parent(parent, parent[x])
+    return parent[x]
+
+def union_parent(parent,a,b):
+    a = find_parent(parent,a)
+    b = find_parent(parent,b)
+    if a < b:
+        for i in range(1,len(parent)):
+            if parent[i] == b:
+                parent[i] = a
+    else:
+        for i in range(1, len(parent)):
+            if parent[i] == a:
+                parent[i] = b
+
+v, e = map(int,input().split())
+parent = [0]*(v+1)
+
+for i in range(1, v+1):
+    parent[i] = i
+
+for i in range(e):
+    a, b = map(int,input().split())
+    union_parent(parent,a,b)
+
+print(parent)'''
+
+
+# 특정 원소가 속한 집합을 찾기
+'''def find_parent(parent, x):
+    # 루트 노드가 아니라면, 루트 노드를 찾을 때까지 재귀적으로 호출
+    if parent[x] != x:
+        parent[x] = find_parent(parent, parent[x])
+    return parent[x]
+
+# 두 원소가 속한 집합을 합치기
+def union_parent(parent, a, b):
+    a = find_parent(parent, a)
+    b = find_parent(parent, b)
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
+
+# 노드의 개수와 간선(Union 연산)의 개수 입력 받기
+v, e = map(int, input().split())
+parent = [0] * (v + 1) # 부모 테이블 초기화하기
+
+# 부모 테이블상에서, 부모를 자기 자신으로 초기화
+for i in range(1, v + 1):
+    parent[i] = i
+
+# Union 연산을 각각 수행
+for i in range(e):
+    a, b = map(int, input().split())
+    union_parent(parent, a, b)
+
+# 각 원소가 속한 집합 출력하
+print('각 원소가 속한 집합: ', end='')
+for i in range(1, v + 1):
+    print(find_parent(parent, i), end=' ')
+
+print()
+
+# 부모 테이블 내용 출력하기
+print('부모 테이블: ', end='')
+for i in range(1, v + 1):
+    print(parent[i], end=' ')'''
+
+#사이클 판별
+
+n,m = map(int,input().split())
+parent = [0]*(n+1)
+
+for i in range(1,n+1):
+    parent[i] = i
+
+def find_root(a):
+    if a == parent[a]:
+        return a
+    else:
+        parent[a] = find_root(parent[a])
+        return parent[a]
+
+def union(parent,a,b):
+    if find_root(a) == find_root(b):
+        print("Cycle occured in this moments")
+        return
+    else:
+        if find_root(a) > find_root(b):
+            parent[a] = b
+        else:
+            parent[b] = a
+
+for i in range(m):
+    a,b = map(int,input().split())
+    union(parent,a,b)
