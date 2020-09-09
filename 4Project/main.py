@@ -273,7 +273,7 @@ for i in range(1, v + 1):
 
 #사이클 판별
 
-n,m = map(int,input().split())
+'''n,m = map(int,input().split())
 parent = [0]*(n+1)
 
 for i in range(1,n+1):
@@ -298,4 +298,216 @@ def union(parent,a,b):
 
 for i in range(m):
     a,b = map(int,input().split())
-    union(parent,a,b)
+    union(parent,a,b)'''
+
+# 크루스칼 알고리즘(최소비용으로 신장트리를 만드는 알고리)
+
+'''n,m = map(int,input().split())
+e = []
+root = [0]*(n+1)
+result = 0
+
+for i in range(n+1):
+    root[i] = i
+
+def find_parent(a):
+    if root[a] == a:
+        return a
+    else:
+        root[a] = find_parent(root[a])
+        return root[a]
+
+for i in range(m):
+    a,b,c = map(int,input().split())
+    e.append((c,a,b))
+
+e.sort()
+
+def union(root,a,b):
+    a = find_parent(a)
+    b = find_parent(b)
+    if a > b :
+        root[a] = b
+    else:
+        root[b] = a
+
+for i in range(len(e)):
+    if find_parent(e[i][1]) == find_parent(e[i][2]):
+        continue
+    else:
+        union(root,e[i][1],e[i][2])
+        result += e[i][0]
+
+print(result)'''
+
+# 팀결성
+
+'''n,m = map(int,input().split())
+
+parent = [0]*(n+1)
+
+for i in range(1,n+1):
+    parent[i] = i
+
+def find_parent(a):
+    if a == parent[a]:
+        return a
+    else:
+        parent[a] = find_parent(parent[a])
+        return parent[a]
+
+def union(parent,a,b):
+    a = find_parent(a)
+    b = find_parent(b)
+    if a > b :
+        parent[a] = b
+    else:
+        parent[b] = a
+
+def same_team(a,b):
+    if find_parent(a) == find_parent(b):
+        print("YES")
+    else:
+        print("NO")
+
+for i in range(m):
+    a,b,c = map(int,input().split())
+    if a == 1:
+        same_team(b,c)
+    elif a == 0:
+        union(parent,b,c)'''
+
+# 도시 분할 계획
+
+'''n,m = map(int,input().split())
+parent = [0]*(n+1)
+e = []
+cost2 = 0
+woo = []
+for i in range(1,n+1):
+    parent[i] = i
+
+def find_parent(a):
+    if parent[a] == a:
+        return a
+    else:
+        parent[a] = find_parent(parent[a])
+        return parent[a]
+
+def union(parent,a,b):
+    a = find_parent(a)
+    b = find_parent(b)
+    if a > b :
+        parent[a] = b
+    else:
+        parent[b] = a
+
+for i in range(m):
+    a,b,cost = map(int,input().split())
+    e.append((cost,a,b))
+
+e.sort()
+
+for i in range(len(e)):
+    if find_parent(e[i][1]) == find_parent(e[i][2]):
+        continue
+    else:
+        union(parent,e[i][1],e[i][2])
+        woo.append(e[i][0])
+        cost2 += e[i][0]
+print(woo)
+print(cost2)
+print(max(woo))
+print(cost2-max(woo))'''
+
+#괄호변환(카카오 문제)
+
+def right(p):
+    a = 0
+    b = 0
+    for i in p:
+        if i == "(":
+            a += 1
+        elif i == ")":
+            b += 1
+        if a - b < 0: return False
+    if a - b == 0:
+        return True
+    else:
+        return False
+
+
+def formchange(list):
+    result = ""
+    print(list)
+    for i in list:
+        result = result + str(i)
+    print("form문제",result)
+    return result
+
+
+def change(p):
+    if len(p) < 3:
+        return []
+    else:
+        print("들어가기전P",p)
+        del p[0]
+        del p[len(p) - 1]
+        print("들어가기전2P", p)
+        for i in range(len(p)):
+            print(i)
+            if p[i] == "(":
+                p[i] = ")"
+                continue
+            if p[i] == ")":
+                p[i] = "("
+        print("p",p)
+        return p
+
+
+def split(list):
+    u = ""
+    v = ""
+    a = 0
+    b = 0
+    for i in list:
+        if i == "(":
+            a += 1
+        elif i == ")":
+            b += 1
+        if a == b: break
+
+    u = list[0:a + b]
+    u = "".join(u)
+    v = list[a + b:]
+    v = "".join(v)
+    return u, v
+
+
+def solution(p):
+    if p == "": return ""
+    listp = list(p)
+    list_result = []
+
+    if right(listp):
+        return p
+    else:
+        # u,v로 분리
+        u, v = split(listp)
+        listu = list(u)
+        listv = list(v)
+        print(u)
+        print(v)
+        if right(listu):
+            listu.append(solution(v))
+            return formchange(listu)
+        else:
+            list_result.append("(")
+            list_result = list_result + list(solution(v))
+            list_result.append(")")
+            list_result = list_result + change(listu)
+            answer = formchange(list_result)
+            return answer
+
+for i in range(3):
+    print("함수실행결과",solution(input()))
