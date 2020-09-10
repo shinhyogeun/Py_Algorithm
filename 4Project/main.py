@@ -422,7 +422,7 @@ print(cost2-max(woo))'''
 
 #괄호변환(카카오 문제)
 
-def right(p):
+'''def right(p):
     a = 0
     b = 0
     for i in p:
@@ -510,4 +510,25 @@ def solution(p):
             return answer
 
 for i in range(3):
-    print("함수실행결과",solution(input()))
+    print("함수실행결과",solution(input()))'''
+
+#외벽 점검(카카오 문제)
+
+def sweep(weak, n):
+    result = []
+    for i in range(len(weak)):
+        if i != len(weak) - 1:
+
+            vs1 = weak[i + 1] - weak[i]
+            vs2 = weak[i] + (n - weak[i + 1])
+            cost = vs2 if vs1 > vs2 else vs1
+            result.append(cost)
+        elif i == len(weak) - 1:
+            vs1 = weak[i] - weak[0]
+            vs2 = weak[0] + (n - weak[i])
+            cost = vs2 if vs1 > vs2 else vs1
+            result.append(cost)
+    result1 = result[:result.index(max(result))]
+    result2 = result[result.index(max(result)) + 1:]
+    return result1, result2
+
