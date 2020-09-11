@@ -514,21 +514,120 @@ for i in range(3):
 
 #외벽 점검(카카오 문제)
 
-def sweep(weak, n):
-    result = []
+'''def solution(n, weak, dist):
+    answer = 1
+    length = len(weak)
+    dist = sorted(dist)
+    print(dist)
+    for i in range(length):
+        weak.append(weak[i] + n)
+
+    answer2 = gime_me_answer(answer, weak, dist, length)
+    return answer2
+
+def gime_me_answer(answer, weak, dist, length):
+    # 출발점 설정
+    aaa = []
+    for i in range(length):
+        # 1명으로 커버가 가능합니다.
+        if weak[i] + dist[-answer] >= weak[i + (length - 1)]:
+            aaa.append(answer)
+        # 한 친구가 더 필요합니다.
+        else:
+            realtoss = find_where(weak[i]+dist[-answer],weak)
+            aaa.append(add_one(weak, dist, answer,i, length,realtoss))
+    real = aaa
+    real.sort()
+    print(real)
+    if real[0] == 10 :
+        return -1
+    else:
+        return real[0]
+
+
+# 이 함수는 "친구한명 추가하면 가능해요? 그럴경우 answer를 반납하고 다 추가해도 안되면 10을 반환해주세요."를 실행한다.
+def add_one(weak, dist, answer, i, length, realtoss):
+    answer += 1
+    if answer > len(dist):
+        return 10
+    if i == 3:
+        print(weak[realtoss] + dist[-answer])
+        print(weak[i+(length-1)])
+    if weak[realtoss] + dist[-answer] >= weak[i+(length-1)]:
+        return answer
+    else:
+        realtoss = find_where(weak[realtoss] + dist[-answer], weak)
+        return add_one(weak, dist, answer, i, length, realtoss)
+
+def find_where(a, weak):
     for i in range(len(weak)):
-        if i != len(weak) - 1:
+        if weak[i] > a:
+            return i
 
-            vs1 = weak[i + 1] - weak[i]
-            vs2 = weak[i] + (n - weak[i + 1])
-            cost = vs2 if vs1 > vs2 else vs1
-            result.append(cost)
-        elif i == len(weak) - 1:
-            vs1 = weak[i] - weak[0]
-            vs2 = weak[0] + (n - weak[i])
-            cost = vs2 if vs1 > vs2 else vs1
-            result.append(cost)
-    result1 = result[:result.index(max(result))]
-    result2 = result[result.index(max(result)) + 1:]
-    return result1, result2
+print(solution(200, [0, 10, 50, 80, 120, 160],[1, 10, 5, 40, 30]))'''
 
+#문자열 압축(카카오)
+
+'''def solution(s):
+    apple = []
+    if len(s) == 1:
+        return 1
+    else:
+        for i in range(1,len(s)//2+1):
+            apple.append(check_this_out(s,i))
+        return min(apple)
+
+def check_this_out(s,i):
+    # s[i*(j-1):i*j] VS s[i*j:i*j+i]
+    a = 1
+    sdsd = ""
+    for j in range(1,len(s)//i+2):
+        if s[i*(j-1):i*j] != s[i*j:i*j+i]:
+            if a == 1:
+                real1 = "".join(s[i*(j-1):i*j])
+            elif a > 1:
+                real1 = str(a) + "".join(s[i*(j-1):i*j])
+            sdsd += real1
+            a = 1
+        else:
+            a += 1
+            if a == len(s)//i+2:
+                real1 = str(a) + "".join(s[i*(j-1):i * j])
+                sdsd += real1
+    return len(sdsd)
+
+print(solution("a"))'''
+
+
+
+def compress(text, tok_len):
+    words = [text[i:i+tok_len] for i in range(0, len(text), tok_len)]
+    res = []
+    cur_word = words[0]
+    cur_cnt = 1
+    print(words[1:] + [''])
+    for a, b in zip(words, words[1:] + ['']):
+        print("a = ",a, "b = ", b)
+        if a == b:
+            cur_cnt += 1
+        else:
+            res.append([cur_word, cur_cnt])
+            cur_word = b
+            cur_cnt = 1
+    return sum(len(word) + (len(str(cnt)) if cnt > 1 else 0) for word, cnt in res)
+
+def solution(text):
+    return min(compress(text, tok_len) for tok_len in list(range(1, int(len(text)/2) + 1)) + [len(text)])
+
+a = [
+    "aabbaccc",
+    "ababcdcdababcdcd",
+    "abcabcdede",
+    "abcabcabcabcdededededede",
+    "xababcdcdababcdcd",
+
+    'aaaaaa',
+]
+
+for x in a:
+    print(solution(x))
