@@ -597,17 +597,14 @@ def check_this_out(s,i):
     return len(sdsd)
 
 print(solution("a"))'''
-
-
-
-def compress(text, tok_len):
+#1등 풀
+'''def compress(text, tok_len):
     words = [text[i:i+tok_len] for i in range(0, len(text), tok_len)]
     res = []
     cur_word = words[0]
     cur_cnt = 1
-    print(words[1:] + [''])
     for a, b in zip(words, words[1:] + ['']):
-        print("a = ",a, "b = ", b)
+
         if a == b:
             cur_cnt += 1
         else:
@@ -617,7 +614,7 @@ def compress(text, tok_len):
     return sum(len(word) + (len(str(cnt)) if cnt > 1 else 0) for word, cnt in res)
 
 def solution(text):
-    return min(compress(text, tok_len) for tok_len in list(range(1, int(len(text)/2) + 1)) + [len(text)])
+    return min(compress(text, tok_len) for tok_len in list(range(1, int(len(text)/2) + 1)))
 
 a = [
     "aabbaccc",
@@ -630,4 +627,237 @@ a = [
 ]
 
 for x in a:
-    print(solution(x))
+    print(solution(x))'''
+
+#카카오 문제
+'''from collections import deque
+
+def solution(board):
+    # 현재위치
+    queue = deque()
+    for i in board:
+        for j in range(len(i)):
+            if i[j] == 1 : i[j] = -100
+    l = len(board)
+    m = l
+    now = [[0,0],[0,1]]
+    # 4까지는 이동 8까지는 회전이다!()
+    dx = [-1, 1, 0, 0, -1,1,-1,1]
+    dy = [0, 0, -1, 1, -1,-1,1,1]
+    queue.append(now)
+
+    # 4방향이동!
+    while queue:
+        now = queue.popleft()
+        for i in range(8):
+            tail,head = now
+            ntail = [0,0]
+            nhead = [0,0]
+            if i < 4:
+                # 이동시 꼬리가 도착하는 부분
+                ntail[0] = tail[0] + dx[i]
+                ntail[1] = tail[1] + dy[i]
+                # 이동시 머리가 도착하는 부분
+                nhead[0] = head[0] + dx[i]
+                nhead[1] = head[1] + dy[i]
+            elif 3 < i < 6:
+                # 회전시 꼬리가 도착하는 부분
+                ntail[0] = tail[0]
+                ntail[1] = tail[1]
+                # 회전시 머리가 도착하는 부분
+                nhead[0] = head[0] + dx[i]
+                nhead[1] = head[1] + dy[i]
+            elif 5 < i:
+                # 회전시 꼬리가 도착하는 부분
+                ntail[0] = tail[0] + dx[i]
+                ntail[1] = tail[1] + dy[i]
+                # 회전시 머리가 도착하는 부분
+                nhead[0] = head[0]
+                nhead[1] = head[1]
+            print(ntail,nhead)
+            #변경시에 벗어나는 경우
+            if ntail[0] < 0 or ntail[1] < 0 or nhead[0] < 0 or nhead[1] < 0 or ntail[0] >= l or ntail[1] >=m or nhead[0] >= l or nhead[1] >= m:
+                continue
+            #변경하려는 곳이 갈 수 없는 곳이면?
+            if board[ntail[0]][ntail[1]] == -1 or board[nhead[0]][nhead[1]] == -1:
+                continue
+            #회전 불가능하면?
+            if i == 4 or i == 5 :
+                if board[nhead[0]][nhead[1]+1] == -1:
+                    continue
+            if i == 6 or i == 7:
+                if board[nhead[0]][nhead[1]-1] == -1:
+                    continue
+
+            #이동하려는 곳이 이동 가능할 때
+            if i < 4:
+                if board[ntail[0]][ntail[1]] == 0 or board[nhead[0]][nhead[1]] == 0 :
+                    board[ntail[0]][ntail[1]] = board[tail[0]][tail[1]] + 1
+                    board[nhead[0]][nhead[1]] = board[head[0]][head[1]] + 1
+                    queue.append([ntail,nhead])
+            elif i == 4 or i == 5:
+                if board[nhead[0]][nhead[1]] >= board[head[0]][head[1]] + 1 or board[nhead[0]][nhead[1]] == 0:
+                    print("걸림6")
+                    board[nhead[0]][nhead[1]] = board[head[0]][head[1]] + 1
+                    queue.append([ntail, nhead])
+            elif i == 6 or i == 7:
+                if  board[ntail[0]][ntail[1]] >= board[tail[0]][tail[1]] + 1 or board[ntail[0]][ntail[1]] == 0:
+                    board[ntail[0]][ntail[1]] = board[tail[0]][tail[1]] + 1
+                    queue.append([ntail, nhead])
+
+    return board[l-1][m-1]
+#우리는 이동 + 회전까지 고려해야한다.
+print(solution([[0, 0, 0, 1, 1], [0, 0, 0, 1, 0], [0, 1, 0, 1, 1], [1, 1, 0, 0, 1], [0, 0, 0, 0, 0]]))'''
+
+#카카오 1번 문제
+
+'''def solution(new_id):
+    new_id = new_id.lower()
+    new_id2_list = []
+    for i in new_id:
+        if 97 <= ord(i) <= 122 or 48 <= ord(i) <= 57 or i == "-" or i == "_" or i == ".":
+            new_id2_list.append(i)
+
+    count = 0
+    wher = 0
+    for i in range(len(new_id2_list)):
+        if new_id2_list[i-wher] == "." :
+            count += 1
+            if count > 1 :
+                del new_id2_list[i-wher]
+                wher += 1
+                if new_id2_list == []:
+                    break
+            continue
+        count = 0
+
+    if new_id2_list != [] and new_id2_list[0] == "." :
+        del new_id2_list[0]
+    if new_id2_list != [] and new_id2_list[-1] == ".":
+        del new_id2_list[-1]
+
+
+    if new_id2_list == []:
+        new_id2_list.append("a")
+
+    if len(new_id2_list) >= 16:
+        new_id2_list = new_id2_list[:15]
+    if new_id2_list[-1] == ".":
+        del new_id2_list[-1]
+
+    if len(new_id2_list) <= 2 :
+        while len(new_id2_list) < 3 :
+            new_id2_list += new_id2_list[-1]
+    toss = "".join(new_id2_list)
+    answer = toss
+    return answer
+
+print(solution("...!@BaT#*..y.abcdefghijklm"))'''
+
+#카카오문제2번
+from itertools import combinations
+
+def solution(orders, course):
+    li = [{}]
+    lists = []
+    lele = []
+    acc = {}
+    answer = []
+    for i in orders:
+        lists.append(i)
+        lele.append(len(i))
+        li.append( set(li[-1]) | set(i))
+    acc = li[-1]
+    course = [i for i in course if i <= max(lele)]
+    for i in course:
+        aaa = []
+        have_to_see = list(combinations(acc,i))
+        for j in have_to_see:
+            count = 0
+            for k in lists:
+                if set(j) == set(j).intersection(set(k)):
+                    count += 1
+            if count >= 2:
+                aaa.append((count,j))
+        aaa.sort(reverse= True)
+        for i in aaa:
+            if i[0] == aaa[0][0]:
+               answer.append(i[1])
+            if i[0] < aaa[0][0]:
+                break
+    for i in range(len(answer)):
+        a = sorted(list(answer[i]))
+        b = "".join(a)
+        answer[i] = b
+    answer = sorted(answer)
+    return answer
+
+print(solution(["XY","X"],[1]))
+
+#카카오 문제 4번
+'''def solution(n, s, a, b, fares):
+    INF = int(1e9)
+    grap = [[INF]*(n+1) for _ in range(n+1)]
+
+    for i in range(1,n+1):
+        for j in range(1,n+1):
+            if i == j:
+                grap[i][j] = 0
+    for i in range(len(fares)):
+        frm,to,cost = fares[i]
+        grap[frm][to] = cost
+        grap[to][frm] = cost
+
+    for i in range(1,n+1):
+        for a in range(1,n+1):
+            for b in range(1,n+1):
+                grap[a][b] = min(grap[a][b],grap[a][i]+grap[i][b])
+
+    #각자 타고 가는 경우
+    solo_play_cost = grap[s][a] + grap[s][b]
+    #같이 타고 가는 다양한 경우
+    together = []
+    for i in range(1,n+1):
+        if i == s: continue
+        together.append(grap[s][i] + grap[i][a] + grap[i][b])
+    together.append(solo_play_cost)
+    answer = min(together)
+    return answer'''
+
+#카카오 4번째 문제
+
+'''def solution(info, query):
+    answer = []
+    info2 = []
+    query2 = []
+    for i in range(len(info)):
+        a = info[i].split()
+        info[i] = a
+        info2.append(a[0:len(a)-1])
+
+    for i in range(len(query)):
+        a = query[i].replace('and','')
+        query[i] = list(a.split())
+        query2.append(query[i][:len(query[i])-1])
+
+    for i in range(len(query)):
+        count = 0
+        for j in range(len(info)):
+            if int(info[j][-1]) < int(query[i][-1]): continue
+            if query2[i] == info2[j] or query2[i] == "-":
+                count+=1
+            else:
+                allow = 0
+                for a in range(len(query[i])-1):
+                    if query[i][a] == "-":
+                        allow += 1
+                    elif query[i][a] == info[j][a]:
+                        allow += 1
+                if allow == 4:
+                    count += 1
+        answer.append(count)
+    return answer
+
+print(solution(["java backend junior pizza 150","python frontend senior chicken 210","python frontend senior chicken 150","cpp backend senior pizza 260","java backend junior chicken 80","python backend senior chicken 50"],
+               ["java and backend and junior and pizza 100","python and frontend and senior and chicken 200","cpp and - and senior and pizza 250","- and backend and senior and - 150","- and - and - and chicken 100","- and - and - and - 150"]))'''
+
