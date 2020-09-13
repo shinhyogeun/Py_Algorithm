@@ -755,7 +755,7 @@ print(solution([[0, 0, 0, 1, 1], [0, 0, 0, 1, 0], [0, 1, 0, 1, 1], [1, 1, 0, 0, 
 print(solution("...!@BaT#*..y.abcdefghijklm"))'''
 
 #카카오문제2번
-from itertools import combinations
+'''from itertools import combinations
 
 def solution(orders, course):
     li = [{}]
@@ -763,12 +763,14 @@ def solution(orders, course):
     lele = []
     acc = {}
     answer = []
+
     for i in orders:
         lists.append(i)
         lele.append(len(i))
-        li.append( set(li[-1]) | set(i))
+        li.append(set(li[-1])|set(i))
     acc = li[-1]
     course = [i for i in course if i <= max(lele)]
+
     for i in course:
         aaa = []
         have_to_see = list(combinations(acc,i))
@@ -792,10 +794,10 @@ def solution(orders, course):
     answer = sorted(answer)
     return answer
 
-print(solution(["XY","X"],[1]))
+print(solution(["XY","X"],[1]))'''
 
 #카카오 문제 4번
-'''def solution(n, s, a, b, fares):
+def solution(n, s, a, b, fares):
     INF = int(1e9)
     grap = [[INF]*(n+1) for _ in range(n+1)]
 
@@ -822,7 +824,7 @@ print(solution(["XY","X"],[1]))
         together.append(grap[s][i] + grap[i][a] + grap[i][b])
     together.append(solo_play_cost)
     answer = min(together)
-    return answer'''
+    return answer
 
 #카카오 4번째 문제
 
