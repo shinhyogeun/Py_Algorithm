@@ -101,7 +101,7 @@ for i in range(len(arr)):
 print(min(zero_zone,one_zone))'''
 
 # 4.만들 수 없는 금액
-answer = 1
+'''answer = 1
 n = int(input())
 arr = list(map(int,input().split()))
 arr.sort()
@@ -126,7 +126,7 @@ def find_remove(a,arr):
 for i in range(1,sum(arr)+1):
     if find_remove(i,arr) == False:
         print(i)
-        break
+        break'''
 
 # 5.볼링공 고르기
 
@@ -139,8 +139,61 @@ for i in range(len(arr)-1):
           answer += 1
 print(answer)'''
 
-# 무지의 먹방 라이브~
+# 무지의 먹방 라이브~(정확도 100 효율성 쓰레기)
 
+'''def count(a):
+    ans = 0
+    for i in range(len(a)):
+        if a[i] != 0: ans += 1
+    return ans
 
+def mini(a):
+    aa = []
+    for i in a:
+        if i != 0: aa.append(i)
+    return min(aa)
 
+def solution(food_times, k):
+    answer = 0
+    getin = True
+    length = count(food_times)
+    while k >= length or getin:
+        getin = False
+        a = mini(food_times)
+        if k >= a*length :
+            k -= a*length
+            food_times = [food_times[i] - a if food_times[i]-a > 0 else 0 for i in range(len(food_times))]
+            if food_times == [0]*len(food_times): return -1
+        else:
+            k = k%count(food_times)
+            break
+        length = count(food_times)
 
+    for i in range(len(food_times)):
+        if food_times[i] != 0: k -= 1
+        if k == -1:
+            answer = i+1
+            break
+    return answer'''
+
+import heapq
+
+def solution(food_times, k):
+    if sum(food_times) <= k:
+        return -1
+    q = []
+    for i in range(len(food_times)):
+        heapq.heappush(q,(food_times[i],i+1))
+
+    sum_value = 0
+    previous = 0
+    length = len(food_times)
+
+    while sum_value+(q[0][0]-previous)*length <= k :
+        now = heapq.heappop(q)[0]
+        sum_value += (now-previous)*length
+        length -= 1
+        previous = now
+
+    result = sorted(q,key=lambda x:x[1])
+    return result[(k-sum_value)%length][1]
