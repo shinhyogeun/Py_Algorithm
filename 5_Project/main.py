@@ -176,7 +176,9 @@ def solution(food_times, k):
             break
     return answer'''
 
-import heapq
+# 갓동빈 코드
+
+'''import heapq
 
 def solution(food_times, k):
     if sum(food_times) <= k:
@@ -196,4 +198,92 @@ def solution(food_times, k):
         previous = now
 
     result = sorted(q,key=lambda x:x[1])
-    return result[(k-sum_value)%length][1]
+    return result[(k-sum_value)%length][1]'''
+
+#럭키 스트라이크
+'''arr = list(map(int,input()))
+a = 0
+b = 0
+for i in range(1,len(arr)+1):
+    if i <= len(arr)/2:
+        a += arr[i-1]
+    else:
+        b += arr[i-1]
+if a == b: print("LUCKY")
+else:
+    print("READY")'''
+
+#문자열 재정렬
+
+'''arr = list(map(str,input()))
+a = []
+b = []
+for i in range(len(arr)):
+    if ord(arr[i]) >= 65:
+        a.append(arr[i])
+    else:
+        b.append(int(arr[i]))
+
+a.sort()
+print("".join(a) + str(sum(b)))'''
+
+# 자물쇠와 열쇠
+
+# 회전!
+
+def right(total_l, key_l, lock_l, mother_matrix, ans):
+    for i in range(total_l):
+        for j in range(total_l):
+            if key_l - 1 <= i <= key_l + lock_l - 2 and key_l - 1 <= j <= key_l + lock_l - 2:
+                if mother_matrix[i][j] == 1: ans += 1
+                else: return False
+    if ans == lock_l ** 2: return True
+
+def tilt_it(x):
+    real = [[0]*len(x) for i in range(len(x))]
+    for i in range(len(x)):
+        for j in range(len(x)):
+            real[j][-(i+1)] = x[i][j]
+    return real
+
+def solution(key, lock):
+    lock_l = len(lock)
+    key_l = len(key)
+    total_l = lock_l+(key_l*2-2)
+    a = 0 ; b = 0; c = 0
+
+    while True:
+        # 거대한 행렬에 기본 셋팅
+        mother_matrix = [[0] * total_l for i in range(total_l)]
+        for i in range(total_l):
+            for j in range(total_l):
+                if key_l - 1 <= i <= key_l + lock_l - 2 and key_l - 1 <= j <= key_l + lock_l - 2:
+                    mother_matrix[i][j] = lock[i - (key_l - 1)][j - (key_l - 1)]
+
+        # 거대한 행렬에 기본 셋팅2
+        for i in range(key_l):
+            for j in range(key_l):
+                mother_matrix[i][j] += key[i][j]
+
+        # 확인작업맞으면!
+        if right(total_l,key_l,lock_l,mother_matrix,0):
+            return True
+        else:
+        # 확인작업틀리면 이동작업!
+            for i in range(a,key_l+a):
+                for j in range(b,key_l+b):
+                    #   print("i",i,"j",j,"i-a",i-a,"j-b",j-b)
+                    mother_matrix[i][j] -= key[i-a][j-b]
+                    mother_matrix[i][j+1] += key[i-a][j-b]
+            b += 1
+            if key_l+b > total_l-1 : a += 1;b = 0
+            if key_l+a > total_l-1 :
+        #이동작업도 안되면 회전작업
+                key = tilt_it(key)
+                c += 1
+                a = 0
+                b = 0
+        #회전을 다했음에도 안되면 안열리는것이다.
+            if c == 4: return False
+
+print(solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]],[[1, 1, 1], [1, 1, 0], [1, 0, 1]]))
