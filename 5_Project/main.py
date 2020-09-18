@@ -252,38 +252,47 @@ def solution(key, lock):
     total_l = lock_l+(key_l*2-2)
     a = 0 ; b = 0; c = 0
 
-    while True:
-        # 거대한 행렬에 기본 셋팅
-        mother_matrix = [[0] * total_l for i in range(total_l)]
-        for i in range(total_l):
-            for j in range(total_l):
-                if key_l - 1 <= i <= key_l + lock_l - 2 and key_l - 1 <= j <= key_l + lock_l - 2:
-                    mother_matrix[i][j] = lock[i - (key_l - 1)][j - (key_l - 1)]
+    # 거대한 행렬에 기본 셋팅
+    mother_matrix = [[0] * total_l for i in range(total_l)]
+    for i in range(total_l):
+        for j in range(total_l):
+            if key_l - 1 <= i <= key_l + lock_l - 2 and key_l - 1 <= j <= key_l + lock_l - 2:
+                mother_matrix[i][j] = lock[i - (key_l - 1)][j - (key_l - 1)]
+    # 거대한 행렬에 기본 셋팅2
+    for i in range(key_l):
+        for j in range(key_l):
+            mother_matrix[i][j] += key[i][j]
 
-        # 거대한 행렬에 기본 셋팅2
-        for i in range(key_l):
-            for j in range(key_l):
-                mother_matrix[i][j] += key[i][j]
+    while True:
 
         # 확인작업맞으면!
         if right(total_l,key_l,lock_l,mother_matrix,0):
             return True
         else:
-        # 확인작업틀리면 이동작업!
+
+        # 확인작업틀리면 지우기 작업!
             for i in range(a,key_l+a):
                 for j in range(b,key_l+b):
-                    #   print("i",i,"j",j,"i-a",i-a,"j-b",j-b)
                     mother_matrix[i][j] -= key[i-a][j-b]
-                    mother_matrix[i][j+1] += key[i-a][j-b]
             b += 1
-            if key_l+b > total_l-1 : a += 1;b = 0
-            if key_l+a > total_l-1 :
-        #이동작업도 안되면 회전작업
+            if key_l+b > total_l: a += 1;b = 0
+            if key_l+a > total_l :
+            #이동작업도 안되면 회전작업
                 key = tilt_it(key)
                 c += 1
+                # 거대한 행렬에 기본 셋팅
+                mother_matrix = [[0] * total_l for i in range(total_l)]
+                for i in range(total_l):
+                    for j in range(total_l):
+                        if key_l-1 <= i <= key_l + lock_l-2 and key_l-1 <= j <= key_l+lock_l-2:
+                            mother_matrix[i][j] = lock[i-(key_l-1)][j-(key_l-1)]
                 a = 0
                 b = 0
-        #회전을 다했음에도 안되면 안열리는것이다.
-            if c == 4: return False
+            # 회전을 다했음에도 안되면 안열리는것이다.
+                if c == 4: return False
+            # 확인작업틀리면 새로그리기 작업!
+            for i in range(a, key_l+a):
+                for j in range(b, key_l+b):
+                    mother_matrix[i][j] += key[i-a][j-b]
 
 print(solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]],[[1, 1, 1], [1, 1, 0], [1, 0, 1]]))
