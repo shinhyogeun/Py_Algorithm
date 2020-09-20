@@ -231,7 +231,7 @@ print("".join(a) + str(sum(b)))'''
 
 # 회전!
 
-def right(total_l, key_l, lock_l, mother_matrix, ans):
+'''def right(total_l, key_l, lock_l, mother_matrix, ans):
     for i in range(total_l):
         for j in range(total_l):
             if key_l - 1 <= i <= key_l + lock_l - 2 and key_l - 1 <= j <= key_l + lock_l - 2:
@@ -295,4 +295,93 @@ def solution(key, lock):
                 for j in range(b, key_l+b):
                     mother_matrix[i][j] += key[i-a][j-b]
 
-print(solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]],[[1, 1, 1], [1, 1, 0], [1, 0, 1]]))
+print(solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]],[[1, 1, 1], [1, 1, 0], [1, 0, 1]]))'''
+
+#뱀
+'''n = int(input())
+miro = [[0]*(n+1) for i in range(n+1)]
+turning_point = []
+for i in range(int(input())):
+    s,t = list(map(int,input().split()))
+    miro[s][t] = 9
+for i in range(int(input())):
+    turning_point.append(list(map(str,input().split())))
+c = 1; d = 1; ss=0
+sharft = [[0,1],[1,0],[0,-1],[-1,0]]
+
+miro[c][d] = 1
+sharft_now = 0
+answer = 0
+snake = [[1,1]]
+def check_snake(a,b):
+    for i in a:
+        miro[i[0]][i[1]] = 1
+    if b == True:
+        miro[a[0][0]][a[0][1]] = 0
+
+while True:
+    answer += 1
+    c += sharft[sharft_now][0]; d += sharft[sharft_now][1]
+    #outofBounds이면 멈춰라
+    if c > n or c < 1 or d > n or d < 1:
+        print(answer)
+        break
+    #사과가 있으면 꼬리 안 자르고 이동!
+    if miro[c][d] == 9:
+        snake.append([c,d])
+        check_snake(snake,False)
+    #자기몸이면!!
+    elif miro[c][d] == 1:
+        print(answer)
+        break
+    #사과도 없고 그냥 평범한 이동!
+    else:
+        snake.append([c,d])
+        check_snake(snake,True)
+        del snake[0]
+    # 회전해야하면 해라!
+    if answer == int(turning_point[ss][0]):
+        print(ss)
+        if turning_point[ss][1] == "D":
+            sharft_now = sharft_now + 1 if sharft_now < 3 else 0
+        else:
+            sharft_now = sharft_now - 1 if sharft_now > 0 else 3
+        ss = ss + 1 if ss < len(turning_point) - 1 else 0'''
+
+#기둥과 보(기둥은 0로 보는 1로 표시합니다.)
+
+#설치가 가능한가요?
+def ok(ans):
+    for i in ans:
+        x,y,stuff = i
+        # 기둥일 경우
+        if stuff == 0:
+            # 존립이 가능하니?
+            if y == 0 or [x,y-1,0] in ans or [x-1,y,1] in ans or [x,y,1] in ans:
+                continue
+            else:
+                return False
+        #보일 경우
+        else:
+            if [x,y-1,0] in ans or [x+1,y-1,0] in ans or ([x-1,y,1] in ans and [x+1,y,1] in ans):
+                continue
+            else:
+                return False
+    return True
+
+def solution(n, build_frame):
+    answer = []
+    aa = []
+    for i in build_frame:
+        if i[3] == 1:
+            answer.append([i[0],i[1],i[2]])
+            if ok(answer) == False:
+                answer.remove([i[0],i[1],i[2]])
+        elif i[3] == 0:
+            answer.remove([i[0],i[1],i[2]])
+            if ok(answer) == False:
+                answer.append([i[0],i[1],i[2]])
+    answer.sort()
+    return answer
+
+print(solution(5,[[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]))
