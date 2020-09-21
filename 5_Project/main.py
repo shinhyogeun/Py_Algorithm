@@ -351,27 +351,22 @@ while True:
 #기둥과 보(기둥은 0로 보는 1로 표시합니다.)
 
 #설치가 가능한가요?
-def ok(ans):
+'''def ok(ans):
     for i in ans:
         x,y,stuff = i
         # 기둥일 경우
         if stuff == 0:
-            # 존립이 가능하니?
             if y == 0 or [x,y-1,0] in ans or [x-1,y,1] in ans or [x,y,1] in ans:
                 continue
-            else:
-                return False
+            else: return False
         #보일 경우
         else:
             if [x,y-1,0] in ans or [x+1,y-1,0] in ans or ([x-1,y,1] in ans and [x+1,y,1] in ans):
                 continue
-            else:
-                return False
+            else: return False
     return True
-
 def solution(n, build_frame):
     answer = []
-    aa = []
     for i in build_frame:
         if i[3] == 1:
             answer.append([i[0],i[1],i[2]])
@@ -384,4 +379,35 @@ def solution(n, build_frame):
     answer.sort()
     return answer
 
-print(solution(5,[[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]))
+print(solution(5,[[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]))'''
+
+# 연산자 끼워넣기
+'''n = int(input())
+arr = list(map(int,input().split()))
+ss = list(map(int,input().split()))
+final = []
+
+def calimax(arr,k,ss,final_component):
+    if k == len(arr)-1:
+        final.append(final_component)
+    else:
+        for i in range(4):
+            if ss[i] != 0:
+                repla = ss[:]
+                repla[i] = repla[i] - 1
+                if i == 0:
+                    calimax(arr, k+1, repla, final_component+arr[k+1])
+                if i == 1:
+                    calimax(arr, k + 1, repla, final_component-arr[k+1])
+                if i == 2:
+                    calimax(arr, k + 1, repla, final_component*arr[k+1])
+                if i == 3:
+                    calimax(arr, k + 1, repla, int(final_component/arr[k + 1]))
+
+calimax(arr,0,ss,arr[0])
+print(max(final))
+print(min(final))'''
+
+# 연산자 끼워넣기
+
+print("*"*10+" "+"*")
