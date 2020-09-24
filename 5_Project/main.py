@@ -408,6 +408,34 @@ calimax(arr,0,ss,arr[0])
 print(max(final))
 print(min(final))'''
 
-# 연산자 끼워넣기
+# 치킨배달
+'''from itertools import combinations
+n,m = map(int,input().split())
+arr = [[0]*(n+1) for _ in range(n+1)]
+real = []
+for i in range(1,n+1):
+    a = list(map(int, input().split()))
+    for j in range(n):
+        arr[i][j+1] = a[j]
+house = []
+chick = []
 
-print("*"*10+" "+"*")
+for i in range(1,n+1):
+    for j in range(1,n+1):
+        if arr[i][j] == 1:
+            house.append((i,j))
+        elif arr[i][j] == 2:
+            chick.append((i,j))
+
+def ck_distance(ho,ch):
+    ans = 0
+    for i in ho:
+        re = []
+        for j in ch:
+            re.append(abs(i[0]-j[0]) + abs(i[1]-j[1]))
+        ans += min(re)
+    return ans
+
+for i in list(combinations(chick,m)):
+    real.append(ck_distance(house,i))
+print(min(real))'''
