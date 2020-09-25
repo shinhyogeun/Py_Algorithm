@@ -439,3 +439,56 @@ def ck_distance(ho,ch):
 for i in list(combinations(chick,m)):
     real.append(ck_distance(house,i))
 print(min(real))'''
+
+# 특정거리의 도시 찾기
+'''from collections import deque
+
+n,m,k,x = map(int,input().split())
+arr = [[] for _ in range(n+1)]
+
+for i in range(m):
+    a,b = map(int,input().split())
+    arr[a].append(b)
+
+visited = [False]*(n+1)
+dis = [0]*(n+1)
+queue = deque([x])
+visited[x] = True
+
+while queue:
+    v = queue.popleft()
+    for i in arr[v]:
+        if not visited[i]:
+            dis[i] = dis[v] + 1
+            visited[i] = True
+            queue.append(i)
+
+for i in range(1,len(dis)):
+    if dis[i] == k:
+      print(i)
+
+if k not in dis:
+    print(-1)'''
+
+#연구소
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
