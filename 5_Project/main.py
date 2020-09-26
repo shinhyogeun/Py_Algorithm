@@ -470,8 +470,62 @@ for i in range(1,len(dis)):
 if k not in dis:
     print(-1)'''
 
+#10000보다 작은 소수를 모두 찾으시오.(에라토테네스의 체)
+'''a = [i for i in range(1,10001)]
+b = [True]*10001
+for i in range(1,10001):
+    if b[i] == True:
+        for j in range(2,10000):
+            if a[i] * j > 10000: break
+            else: b[a[i]*j] = False
+for i in range(1,len(b)):
+    if b[i] == True:
+        print(i)'''
+
 #연구소
 
+from itertools import combinations
+
+l,m = map(int,input().split())
+arr = []
+emp = []
+vir = []
+last = []
+for i in range(l):
+    arr.append(list(map(int,input().split())))
+
+# 바이러스를 퍼지게하는 함수이다.
+def DFS(arr,start):
+    dx = [0,1,0,-1]
+    dy = [1,0,-1,0]
+    for j in range(4):
+        if l>start[0]+dx[j]>=0 and m>start[1]+dy[j]>=0 :
+            if arr[start[0]+dx[j]][start[1]+dy[j]] == 0:
+                arr[start[0]+dx[j]][start[1]+dy[j]] = 2
+                DFS(arr,[start[0]+dx[j],start[1]+dy[j]])
+
+for i in range(l):
+    for j in range(m):
+        if arr[i][j] == 0:
+            emp.append((i,j))
+        if arr[i][j] == 2:
+            vir.append((i,j))
+
+for i in combinations(emp,3):
+    arr2 = arr[:]
+    count = 0
+    arr2[i[0][0]][i[0][1]] = 1
+    arr2[i[1][0]][i[1][1]] = 1
+    arr2[i[2][0]][i[2][1]] = 1
+    for j in vir:
+        DFS(arr2,j)
+    for k in range(l):
+        for j in range(m):
+            if arr2[k][j] == 0:
+                count += 1
+    last.append(count)
+
+print(max(last))
 
 
 
