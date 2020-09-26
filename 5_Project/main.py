@@ -484,35 +484,39 @@ for i in range(1,len(b)):
 
 #연구소
 
-from itertools import combinations
+'''from itertools import combinations
 
 l,m = map(int,input().split())
+arr2 = [[0] * m for i in range(l)]
+a = 1
 arr = []
 emp = []
 vir = []
 last = []
+result = 0
 for i in range(l):
     arr.append(list(map(int,input().split())))
-
 # 바이러스를 퍼지게하는 함수이다.
-def DFS(arr,start):
+def DFS(arr3,start):
     dx = [0,1,0,-1]
     dy = [1,0,-1,0]
     for j in range(4):
         if l>start[0]+dx[j]>=0 and m>start[1]+dy[j]>=0 :
-            if arr[start[0]+dx[j]][start[1]+dy[j]] == 0:
-                arr[start[0]+dx[j]][start[1]+dy[j]] = 2
-                DFS(arr,[start[0]+dx[j],start[1]+dy[j]])
+            if arr3[start[0]+dx[j]][start[1]+dy[j]] == 0:
+                arr3[start[0]+dx[j]][start[1]+dy[j]] = 2
+                DFS(arr3,[start[0]+dx[j],start[1]+dy[j]])
 
 for i in range(l):
     for j in range(m):
         if arr[i][j] == 0:
-            emp.append((i,j))
+            emp.append([i,j])
         if arr[i][j] == 2:
-            vir.append((i,j))
-
+            vir.append([i,j])
+real = 0
 for i in combinations(emp,3):
-    arr2 = arr[:]
+    for k in range(l):
+        for j in range(m):
+            arr2[k][j] = arr[k][j]
     count = 0
     arr2[i[0][0]][i[0][1]] = 1
     arr2[i[1][0]][i[1][1]] = 1
@@ -523,9 +527,62 @@ for i in combinations(emp,3):
         for j in range(m):
             if arr2[k][j] == 0:
                 count += 1
-    last.append(count)
+    real = max(real,count)
 
-print(max(last))
+print(real)'''
+
+# 1로 만들기
+'''arr = []
+kk = [0]*30001
+# 최소 연산갯수를 반환해주는 함수이다.
+def make_1(a):
+    # 5로 나누어 떨어지면!
+    if a != int(a):
+        return 40000
+    if kk[int(a)] != 0:
+        return kk[int(a)]
+    if a in [2,3,5]:
+        kk[int(a)] = 1
+        return 1
+    kk[int(a)] = min(make_1(a-1),make_1(a/5),make_1(a/3),make_1(a/2)) + 1
+    return kk[int(a)]
+print(make_1(1000))'''
+
+#경쟁적 전염
+from collections import deque
+
+queue = deque()
+n,k = map(int,input().split())
+arr = []
+dx = [0,1,0,-1]
+dy = [1,0,-1,0]
+visited = [[False] * n for _ in range(n)]
+
+for i in range(n):
+    arr.append(list(map(int,input().split())))
+s,X,Y = map(int,input().split())
+
+for i in range(n):
+    for j in range(n):
+        if arr[i][j] != 0:
+            queue.append([arr[i][j],i,j])
+
+for i in range(s):
+    length = len(queue)
+    while length >= 1:
+        what,x,y = queue.popleft()
+        for i in range(4):
+            if k > x + dx[i] >=0 and k > y + dy[i] >=0:
+                if arr[x+dx[i]][y+dy[i]] == 0 :
+                    arr[x+dx[i]][y+dy[i]] = what
+                elif arr[x+dx[i]][y+dy[i]] > what:
+                    arr[x+dx[i]][y+dy[i]] = what
+        length -= 1
+
+if arr[X-1][Y-1] != 0:
+    print(arr[X-1][Y-1])
+else:
+    print(0)
 
 
 
