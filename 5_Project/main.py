@@ -549,7 +549,7 @@ def make_1(a):
 print(make_1(1000))'''
 
 #경쟁적 전염
-from collections import deque
+'''from collections import deque
 
 queue = deque()
 n,k = map(int,input().split())
@@ -582,12 +582,35 @@ for i in range(s):
 if arr[X-1][Y-1] != 0:
     print(arr[X-1][Y-1])
 else:
-    print(0)
+    print(0)'''
 
+#국영수
+'''n = int(input())
+arr = []
 
+for i in range(n):
+    name,guk,eng,mat = input().split()
+    arr.append((int(guk),int(eng),int(mat),name))
 
+fin = sorted(arr,key=lambda x : (-x[0],x[1],-x[2],x[3]))
 
+for i in fin:
+    print(i[3])'''
 
+#안테나
+n = int(input())
+house = list(map(int,input()))
+arr = []
+min = 1e9
+where = 0
+for i in range(len(house)):
+    toss = 0
+    for j in range(len(house)):
+        toss += abs(house[i] - house[j])
+    if toss < min:
+        min = toss
+        where = i
+print(house[where])
 
 
 
