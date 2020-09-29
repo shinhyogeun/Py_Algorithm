@@ -619,10 +619,3 @@ print(house[where])
 
 
 
-
-
-
-
-
-
-
