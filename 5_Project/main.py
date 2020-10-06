@@ -598,7 +598,7 @@ for i in fin:
     print(i[3])'''
 
 #안테나
-n = int(input())
+'''n = int(input())
 house = list(map(int,input()))
 arr = []
 min = 1e9
@@ -610,7 +610,108 @@ for i in range(len(house)):
     if toss < min:
         min = toss
         where = i
-print(house[where])
+print(house[where])'''
+
+#실패율(카카오 코테)
+'''def solution(N, stages):
+    #각 단계별로 실패율을 구하자.
+    king = []
+    answer = []
+    for i in range(1,N+1):
+        sun = 0
+        mom = 0
+        for k in stages:
+            if k >= i :
+                mom += 1
+                if k == i:
+                    sun += 1
+        if mom == 0 :
+            failurate = 0
+        else:
+            failurate = sun/mom
+        king.append((failurate,i))
+    fin = sorted(king,key=lambda x : (-x[0],x[1]))
+    for i in fin:
+        answer.append(i[1])
+    return answer
+solution(5,[2, 1, 2, 6, 2, 4, 3, 3])'''
+
+#카드정렬하기
+
+'''n = int(input())
+arr = []
+for i in range(n):
+    arr.append(int(input()))
+length = len(arr)
+ans = 0
+for i in range(length):
+        if i in [0,1]:
+            ans += arr[i]*(length-1)
+        else:
+            ans += arr[i]*(length-i)
+print(ans)'''
+
+# 정렬된 배열에서 특정 수의 개수 구하기
+'''from bisect import bisect_left, bisect_right
+
+a,b = map(int,input().split())
+arr = list(map(int,input().split()))
+def count(total,le,ri):
+    right_index = bisect_right(arr,ri)
+    left_index = bisect_left(arr,le)
+    return right_index - left_index
+
+if count(arr,b,b) == 0:
+    print(-1)
+else:
+    print(count(arr,b,b))'''
+
+
+# 정렬된 배열에서 특정 수의 개수 구하기 (이진탐색 직접구현)
+
+'''def findout(arr,dd,frm,to):
+    pivot = (to+frm)//2
+    if frm > to:
+        return None
+    print(frm,to)
+    if arr[pivot] > dd :
+        return findout(arr,dd,frm,pivot-1)
+    elif arr[pivot] < dd:
+        return findout(arr,dd,pivot+1,to)
+    else :
+        return pivot
+print(findout([1,2,3,4,6,7,8,9],5,0,7))'''
+
+
+#고정점 찾기
+'''n = int(input())
+arr = list(map(int,input().split()))
+asw = []
+
+def find_out(arr,frm,to):
+    if frm > to :
+        return None
+    pivot = (frm + to) // 2
+    if arr[pivot] > pivot :
+        return find_out(arr,frm,pivot-1)
+    elif arr[pivot] < pivot :
+        return find_out(arr,pivot+1,to)
+    else:
+        asw.append(pivot)
+        return find_out(arr,frm,pivot-1), find_out(arr, pivot + 1, to)
+
+find_out(arr,0,len(arr)-1)
+
+if asw == []:
+    print(-1)
+else:
+    for i in asw:
+        print(i)'''
+
+#공유기 설치
+
+
+
 
 
 
