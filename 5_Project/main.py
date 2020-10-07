@@ -710,6 +710,44 @@ else:
 
 #공유기 설치
 
+n,c = map(int,input().split())
+arr = []
+maxim = 0
+
+for i in range(n):
+    arr.append(int(input()))
+
+arr.sort()
+
+min2 = arr[1]-arr[0]
+max2 = arr[-1]-arr[0]
+result = 0
+def find_out(arr,min,max):
+    global result
+    point = arr[0]
+    pivot = (min + max) // 2
+    wifi_num = 1
+
+    if min > max :
+        return
+
+    for i in range(1,n):
+        if arr[i] - point >= pivot:
+            wifi_num += 1
+
+    # 너무 많은 공유기가 설치되었어 그래서 공유기를 줄이려고 피벗을 늘려야 해!
+    if wifi_num > c :
+        return find_out(arr,pivot+1,max)
+    # 너무 적은 공유기가 설치되었어 그래서 더 많은 공유기를 설치하려고 피벗을 줄여야 해!
+    elif wifi_num <= c :
+        result = wifi_num
+        return find_out(arr, min, pivot-1)
+    # 딱 적당해!
+find_out(arr,min2,max2)
+print(result)
+
+
+
 
 
 
