@@ -709,8 +709,7 @@ else:
         print(i)'''
 
 #공유기 설치
-
-n,c = map(int,input().split())
+'''n,c = map(int,input().split())
 arr = []
 maxim = 0
 
@@ -744,17 +743,87 @@ def find_out(arr,min,max):
         return find_out(arr, min, pivot-1)
     # 딱 적당해!
 find_out(arr,min2,max2)
-print(result)
+print(result)'''
 
+# 가사 검색(카카오 코테)
+'''from bisect import bisect_left, bisect_right
 
+def count_by_range(a,left,right):
+    right_index = bisect_right(a,right)
+    left_index = bisect_left(a,left)
+    return right_index - left_index
 
+arr_lenght = [[] for _ in range(10001)]
+re_arr_lenght = [[] for _ in range(10001)]
 
+def solution(words, queries):
+    answer = []
+    for i in words:
+        arr_lenght[len(i)].append(i)
+        re_arr_lenght[len(i)].append(i[::-1])
 
+    for i in range(10001):
+        arr_lenght[i].sort()
+        re_arr_lenght[i].sort()
 
+    for i in queries:
+        start = ""
+        end = ""
+        reverse = False
+        if i[0] == "?":
+            i = i[::-1]
+            reverse = True
+        for h in i:
+            if h != "?":
+                start += h
+                end += h
+            else:
+                start += "a"
+                end += "z"
+        if reverse == True:
+            answer.append(count_by_range(re_arr_lenght[len(i)],start,end))
+        else:
+            answer.append(count_by_range(arr_lenght[len(i)], start, end))
 
+    return answer
 
+print(solution(["frodo", "front", "frost", "frozen", "frame", "kakao"],["fro??", "????o", "fr???", "fro???", "pro?"]))'''
 
+# 금 광
+'''m = int(input())
+for i in range(m):
+    l,n = map(int,input().split())
+    arr = []
+    real = []
+    arre = list(map(int,input().split()))
+    for i in range(l):
+        arr.append(arre[n*i:n*(i+1)])
+    for j in range(n):
+        a = []
+        for i in range(l):
+            a.append(arr[i][j])
+        real.append(a)
+    for i in range(1,n):
+        for j in range(l):
+            if j == 0:
+                real[i][j] += max(real[i-1][j],real[i-1][j+1])
+            elif j == l-1:
+                real[i][j] += max(real[i-1][j-1],real[i-1][j])
+            else:
+                real[i][j] += max(real[i-1][j-1],real[i-1][j],real[i-1][j+1])
+    print(max(real[n-1]))'''
 
-
-
+# a2의 1행에 = max (a2의 1행 +a1의 1행,a)
+'''import math
+ss = [True]*10001 
+for i in range(2,10000):
+    if ss[i] == True :
+        for j in range(2,10000):
+            if i*j <= 10000 :
+                ss[i*j] = False
+            else: break
+ss[0] = False;ss[1] = False
+for i in range(len(ss)):
+    if ss[i] == True:
+        print(i)'''
 
