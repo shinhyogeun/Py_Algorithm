@@ -827,3 +827,54 @@ for i in range(len(ss)):
     if ss[i] == True:
         print(i)'''
 
+# 다익스트라 구현
+'''import heapq
+
+INF = 1e9
+node,line = map(int,input().split())
+start = int(input())
+real = [[] for _ in range(node+1)]
+answer = [INF]*(node+1)
+answer[start] = 0
+q = []
+heapq.heappush(q,[0,start])
+
+for i in range(line):
+    a,b,c = map(int,input().split())
+    real[a].append((b,c))
+
+while q:
+    dis,where = heapq.heappop(q)
+    for i in real[where]:
+        if answer[i[0]] > dis+i[1]:
+            heapq.heappush(q,[dis+i[1],i[0]])
+            answer[i[0]] = dis+i[1]
+
+for i in range(1,answer):
+    print(answer[i])'''
+
+# 사이클 판별
+node, line = map(int,input().split())
+store = [0]*(node+1)
+for i in range(1,node+1):
+    store[i] = i
+
+def find_parent(store,a):
+    if store[a] != a:
+        store[a] = find_parent(store,store[a])
+    return store[a]
+
+def is_cycle_occured():
+    for i in range(line):
+        a, b = map(int, input().split())
+        root_a = find_parent(store,a)
+        root_b = find_parent(store,b)
+        if root_a > root_b:
+            store[a] = root_b
+        elif root_a < root_b:
+            store[b] = root_a
+        else:
+            return "Yes it Occured"
+    return "No that is not Occured"
+
+print(is_cycle_occured())
