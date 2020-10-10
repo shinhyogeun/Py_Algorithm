@@ -854,7 +854,7 @@ for i in range(1,answer):
     print(answer[i])'''
 
 # 사이클 판별
-node, line = map(int,input().split())
+'''node, line = map(int,input().split())
 store = [0]*(node+1)
 for i in range(1,node+1):
     store[i] = i
@@ -877,4 +877,118 @@ def is_cycle_occured():
             return "Yes it Occured"
     return "No that is not Occured"
 
-print(is_cycle_occured())
+print(is_cycle_occured())'''
+
+#쿠팡 1번
+
+'''number = 12314
+n = 4
+answer = ""
+while number // n >= 1:
+    remain = number % n
+    number = number // n
+    answer = str(remain) + answer
+    if number < n :
+        answer = str(number) + answer
+print(list(map(int,answer)))'''
+
+'''def solution(N):
+    answer = []
+    for i in range(2,10):
+        result = ""
+        a = N
+        while a // i >= 1:
+            core = a % i
+            a = a // i
+            result = str(core) + result
+            if a < i :
+                result = str(a) + result
+        k = list(map(int,result))
+        value = 1
+        for j in k:
+            if j == 0:
+                continue
+            else:
+                value = value * j
+        answer.append([i,value])
+    real = sorted(answer,key=lambda x : (x[1],x[0]), reverse=True)
+    return real[0]'''
+
+'''def solution(depar,hub,dest,roads):
+    total = set()
+    frm = 0
+    to = 0
+    toss = 0
+    for i in roads:
+        c = {i[0], i[1]}
+        total = total | c
+    arr = dict()
+    for i in range(len(total)):
+        ss = list(total)[i]
+        arr[ss] = i+1
+    for i in arr:
+        if i == depar:
+            frm = arr[i]
+        elif i == hub:
+            toss = arr[i]
+        elif i == dest:
+            to = arr[i]
+    n = len(arr)
+    graph = [[0]*(n+1) for i in range(n+1)]
+    for i in roads:
+        graph[arr[i[0]]][arr[i[1]]] = 1
+    visited = [False] * (n+1)
+    def DFS(frm,to,cnt):
+        if frm == to:
+            cnt += 1
+        else:
+            visited[frm] = True
+            for i in range(n + 1):
+                if graph[frm][i] == 0:
+                    continue
+                else:
+                    if visited[i]:
+                        continue
+                    else:
+                        cnt = DFS(i,to,cnt)
+                        visited[frm] = False
+        return cnt
+    real1 = DFS(frm,toss,0)
+    visited = [False] * (n + 1)
+    real2 = DFS(toss,to,0)
+    print(real1)
+    print(real2)
+    return real1*real2 % 10007
+
+print(solution("SEOUL","DAEGU","YEOSU",[["ULSAN","BUSAN"],["DAEJEON","ULSAN"],["DAEJEON","GWANGJU"],["SEOUL","DAEJEON"],["SEOUL","ULSAN"],["DAEJEON","DAEGU"],["GWANGJU","BUSAN"],["DAEGU","GWANGJU"],["DAEGU","BUSAN"],["ULSAN","DAEGU"],["GWANGJU","YEOSU"],["BUSAN","YEOSU"]]))'''
+
+from bisect import bisect_left,bisect_right
+
+def count_by_range(a,left,right):
+    right_index = bisect_right(a,right)
+    left_index = bisect_left(a,left)
+    return right_index - left_index
+
+def solition(k,score):
+    arr=[]
+    real = []
+    for i in range(0,len(score)-1):
+        arr.append(score[i]-score[i+1])
+        real.append([score[i]-score[i+1],i,i+1])
+    arr.sort()
+    real.sort()
+    e = set(map(int,arr))
+    many = arr[-1] - arr[0] + 1
+    king = set()
+    for i in e:
+        a = count_by_range(arr,i,i)
+        if a >= k:
+            frm = bisect_left(arr, i)
+            to = bisect_right(arr, i)
+            for i in range(to-frm):
+                a,b,c = real[frm+i]
+                king = king | {b,c}
+    return len(score) - len(list(king))
+
+print(solition(2,[1300000000,700000000,668239490,618239490,568239490,568239486,518239486,157658638,157658634,100000000,100]))
+
