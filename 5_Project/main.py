@@ -962,7 +962,7 @@ print(list(map(int,answer)))'''
 
 print(solution("SEOUL","DAEGU","YEOSU",[["ULSAN","BUSAN"],["DAEJEON","ULSAN"],["DAEJEON","GWANGJU"],["SEOUL","DAEJEON"],["SEOUL","ULSAN"],["DAEJEON","DAEGU"],["GWANGJU","BUSAN"],["DAEGU","GWANGJU"],["DAEGU","BUSAN"],["ULSAN","DAEGU"],["GWANGJU","YEOSU"],["BUSAN","YEOSU"]]))'''
 
-from bisect import bisect_left,bisect_right
+'''from bisect import bisect_left,bisect_right
 
 def count_by_range(a,left,right):
     right_index = bisect_right(a,right)
@@ -990,5 +990,10 @@ def solition(k,score):
                 king = king | {b,c}
     return len(score) - len(list(king))
 
-print(solition(2,[1300000000,700000000,668239490,618239490,568239490,568239486,518239486,157658638,157658634,100000000,100]))
+print(solition(2,[1300000000,700000000,668239490,618239490,568239490,568239486,518239486,157658638,157658634,100000000,100]))'''
+aa = 3**-7
+bb = 3**-8
+cc = 3**-9
+a = ((2/3)**9)*((6435)*aa+(12870)*bb+(24310)*cc)
+print(a)
 
