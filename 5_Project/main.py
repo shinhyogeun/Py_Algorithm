@@ -881,17 +881,6 @@ print(is_cycle_occured())'''
 
 #쿠팡 1번
 
-'''number = 12314
-n = 4
-answer = ""
-while number // n >= 1:
-    remain = number % n
-    number = number // n
-    answer = str(remain) + answer
-    if number < n :
-        answer = str(number) + answer
-print(list(map(int,answer)))'''
-
 '''def solution(N):
     answer = []
     for i in range(2,10):
@@ -914,7 +903,7 @@ print(list(map(int,answer)))'''
     real = sorted(answer,key=lambda x : (x[1],x[0]), reverse=True)
     return real[0]'''
 
-'''def solution(depar,hub,dest,roads):
+def solution(depar,hub,dest,roads):
     total = set()
     frm = 0
     to = 0
@@ -960,7 +949,9 @@ print(list(map(int,answer)))'''
     print(real2)
     return real1*real2 % 10007
 
-print(solution("SEOUL","DAEGU","YEOSU",[["ULSAN","BUSAN"],["DAEJEON","ULSAN"],["DAEJEON","GWANGJU"],["SEOUL","DAEJEON"],["SEOUL","ULSAN"],["DAEJEON","DAEGU"],["GWANGJU","BUSAN"],["DAEGU","GWANGJU"],["DAEGU","BUSAN"],["ULSAN","DAEGU"],["GWANGJU","YEOSU"],["BUSAN","YEOSU"]]))'''
+print(solution("SEOUL","DAEGU","YEOSU",[["ULSAN","BUSAN"],["DAEJEON","ULSAN"],["DAEJEON","GWANGJU"],["SEOUL","DAEJEON"],["SEOUL","ULSAN"],["DAEJEON","DAEGU"],["GWANGJU","BUSAN"],["DAEGU","GWANGJU"],["DAEGU","BUSAN"],["ULSAN","DAEGU"],["GWANGJU","YEOSU"],["BUSAN","YEOSU"]]))
+
+# 쿠팡 3번
 
 '''from bisect import bisect_left,bisect_right
 
@@ -991,9 +982,10 @@ def solition(k,score):
     return len(score) - len(list(king))
 
 print(solition(2,[1300000000,700000000,668239490,618239490,568239490,568239486,518239486,157658638,157658634,100000000,100]))'''
-aa = 3**-7
+
+'''aa = 3**-7
 bb = 3**-8
 cc = 3**-9
 a = ((2/3)**9)*((6435)*aa+(12870)*bb+(24310)*cc)
-print(a)
+print(a)'''
 
