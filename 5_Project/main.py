@@ -903,7 +903,7 @@ print(is_cycle_occured())'''
     real = sorted(answer,key=lambda x : (x[1],x[0]), reverse=True)
     return real[0]'''
 
-def solution(depar,hub,dest,roads):
+'''def solution(depar,hub,dest,roads):
     total = set()
     frm = 0
     to = 0
@@ -953,7 +953,7 @@ print(solution("SEOUL","DAEGU","YEOSU",[["ULSAN","BUSAN"],["DAEJEON","ULSAN"],["
 
 # 쿠팡 3번
 
-'''from bisect import bisect_left,bisect_right
+from bisect import bisect_left,bisect_right
 
 def count_by_range(a,left,right):
     right_index = bisect_right(a,right)
@@ -981,11 +981,40 @@ def solition(k,score):
                 king = king | {b,c}
     return len(score) - len(list(king))
 
-print(solition(2,[1300000000,700000000,668239490,618239490,568239490,568239486,518239486,157658638,157658634,100000000,100]))'''
+print(solition(2,[1300000000,700000000,668239490,618239490,568239490,568239486,518239486,157658638,157658634,100000000,100]))
 
-'''aa = 3**-7
+aa = 3**-7
 bb = 3**-8
 cc = 3**-9
 a = ((2/3)**9)*((6435)*aa+(12870)*bb+(24310)*cc)
 print(a)'''
+
+
+#애플워치 통계량 만들기
+
+white = [7,8,5,7,8,3,8.5,5]
+black = [9.5,5,8,4,7,7,8.5,7.5]
+
+a = 0
+b = 0
+for i in range(len(white)):
+    a += white[i]
+    b += black[i]
+mean_white = a/8
+mean_black = b/8
+var_white = 0
+var_black = 0
+for i in range(len(white)):
+    var_white += (white[i] - mean_white)**2
+    var_black += (black[i] - mean_black)**2
+var_white /= 8
+var_black /= 8
+score_white = (10 - mean_white)**2 + var_white
+score_black = (10 - mean_black)**2 + var_black
+print(mean_black,var_black)
+print(mean_white,var_white)
+print("하얀색 점수 : ",10 - abs(10 - score_white))
+print("검은색 점수 : ",10 - abs(score_black - 10))
+
+
 
