@@ -992,7 +992,7 @@ print(a)'''
 
 #애플워치 통계량 만들기
 
-white = [7,8,5,7,8,3,8.5,5]
+'''white = [7,8,5,7,8,3,8.5,5]
 black = [9.5,5,8,4,7,7,8.5,7.5]
 
 a = 0
@@ -1014,7 +1014,15 @@ score_black = (10 - mean_black)**2 + var_black
 print(mean_black,var_black)
 print(mean_white,var_white)
 print("하얀색 점수 : ",10 - abs(10 - score_white))
-print("검은색 점수 : ",10 - abs(score_black - 10))
+print("검은색 점수 : ",10 - abs(score_black - 10))'''
 
+def pibo(i):
+    a = 1
+    b = 1
+    for k in range(2,i):
+        c = a
+        a = b
+        b = c + b
+    print(b)
 
-
+pibo(3032)
