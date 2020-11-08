@@ -1016,7 +1016,7 @@ print(mean_white,var_white)
 print("하얀색 점수 : ",10 - abs(10 - score_white))
 print("검은색 점수 : ",10 - abs(score_black - 10))'''
 
-def pibo(i):
+'''def pibo(i):
     a = 1
     b = 1
     for k in range(2,i):
@@ -1025,4 +1025,229 @@ def pibo(i):
         b = c + b
     print(b)
 
-pibo(3032)
+pibo(3032)'''
+
+
+'''7. numCount([1, 1, 2]) == 2 가 되는 numCount 함수를 구현하시오. (15점)'''
+
+'''def numCount(Array) :
+    return len(set(Array))'''
+
+'''함수실행'''
+'''print(numCount([1,1,2]))'''
+
+'''a,b  = map(int,input().split())
+c = {}
+c[str(a)] = b'''
+
+
+'''def solution(grades, weights, threshold):
+    real = {"A+":10,"A0":9,"B+":8,"B0":7,"C+":6,"C0":5,"D+":4,"D0":3,"F":0}
+    answer = 0
+    for i in range(len(grades)):
+       answer += real[grades[i]] * weights[i]
+    answer -= threshold
+    return answer'''
+
+
+'''def solution(s, op):
+    li = list(str(s))
+    answer = []
+    if op == "+" :
+        for i in range(len(li)-1):
+            a = int(''.join(li[:i+1]))
+            b = int(''.join(li[i+1:]))
+            answer.append(a+b)
+    elif op == "-":
+        for i in range(len(li)-1):
+            a = int(''.join(li[:i+1]))
+            b = int(''.join(li[i+1:]))
+            answer.append(a-b)
+    elif op == "*":
+        for i in range(len(li)-1):
+            a = int(''.join(li[:i+1]))
+            b = int(''.join(li[i+1:]))
+            answer.append(a*b)
+    return answer'''
+
+'''def solution(money, expected, actual):
+    answer = money
+    bating = 100
+    for i in range(len(expected)):
+        if expected[i] == actual[i]:
+            answer += bating
+            bating = 100
+        else :
+            answer -= bating
+            if bating*2 < answer:
+                bating *= 2
+            else :
+                bating = answer
+    print(answer)
+    return answer
+solution(1000,['H', 'T', 'H', 'T', 'H', 'T', 'H'],['T', 'T', 'H', 'H', 'T', 'T', 'H'])'''
+
+'''def solution(penter, pexit, pescape, data):
+    a = [penter,pexit,pescape]
+    chunck = []
+    answer = ''
+    answer += penter
+    for i in range(int(len(data)/int(len(penter)))):
+        what = data[int(len(penter))*i:int(len(penter))*(i+1)]
+        if what in a:
+            answer += pescape+what
+        else:
+            answer += what
+    answer += pexit
+    return answer
+#chunck.append(data[int(len(penter))*i:int(len(penter))*(i+1)])
+    print(answer)
+solution("123","4","5","123456789123")'''
+
+'''from itertools import combinations
+
+def solution(logs):
+    people = set()
+    king = {}
+    answer = set()
+    for i in range(len(logs)):
+        a,b,c = logs[i].split()
+        people.add(a)
+    for i in list(people):
+        king[i] = {}
+    for i in range(len(logs)):
+        a,b,c = logs[i].split()
+        king[a][b] = int(c)
+    permute = combinations(king, 2)
+    for i in list(permute):
+        a,b = i
+        if king[a] == king[b] and len(king[a]) > 4 :
+            answer.add(a)
+            answer.add(b)
+    if list(answer) == []:
+        answer.add("None")
+    return list(answer)
+
+solution(["1901 10 50", "1909 10 50"])'''
+
+
+'''def solution(n, horizontal):
+    whereUare =[0,0]
+    answer = [[0]*n for i in range(n)]
+    value = 0
+    # whereuare[0] = 세로, whereuare[1] = 가로
+    answer[whereUare[0]][whereUare[1]] = value
+
+    direction = True
+    half = False
+
+    while True:
+        print(value)
+
+        if horizontal:
+            
+            if whereUare[0] == 0:
+                horizontal = not horizontal
+                whereUare[1] += 1
+                value += 1
+                answer[whereUare[0]][whereUare[1]] = value
+                if whereUare == [n - 1, n - 1]: break
+            else:
+                whereUare[1] -= 1
+                whereUare[0] += 1
+                value += 2
+                answer[whereUare[0]][whereUare[1]] = value
+        else:
+            if whereUare[1] == 0:
+                whereUare[0] += 1
+                value += 1
+                answer[whereUare[0]][whereUare[1]] = value
+                if whereUare == [n - 1, n - 1]: break
+                horizontal = not horizontal
+            else:
+                whereUare[0] -= 1
+                whereUare[1] += 1
+                value += 2
+                answer[whereUare[0]][whereUare[1]] = value
+    print(answer)
+    return answer'''
+
+
+def solution(n, horizontal):
+    answer = [[0]*n for i in range(n)]
+    coco = [0,0]
+    answer[0][0] = 0
+    value = 0
+
+    a = 0
+    for i in range(n**2-1):
+        #처음결정
+        if coco == [n-1,n-1]:
+            break
+        if 0 in coco or n-1 in coco:
+            if horizontal :
+                if coco[1] == n-1:
+                    coco[0] += 1
+                    value += 1
+                    answer[coco[0]][coco[1]] = value
+                    if a == 0:
+                        horizontal = not horizontal
+                        a+=1
+                else:
+                    coco[1] += 1
+                    value += 1
+                    answer[coco[0]][coco[1]] = value
+                coco[0] += 1
+                coco[1] -= 1
+                value += 2
+                answer[coco[0]][coco[1]] = value
+            else:
+                if coco[0] == n-1:
+                    coco[1] += 1
+                    value += 1
+                    answer[coco[0]][coco[1]] = value
+                    if a == 0:
+                        horizontal = not horizontal
+                        a+=1
+                else:
+                    coco[0] += 1
+                    value += 1
+                    answer[coco[0]][coco[1]] = value
+                coco[0] -= 1
+                coco[1] += 1
+                value += 2
+                answer[coco[0]][coco[1]] = value
+        else:
+            if horizontal:
+                coco[0] -= 1
+                coco[1] += 1
+                value += 2
+                answer[coco[0]][coco[1]] = value
+            else:
+                coco[0] += 1
+                coco[1] -= 1
+                value += 2
+                answer[coco[0]][coco[1]] = value
+    print(answer)
+solution(4,True)
+
+'''def solution(n, board):
+    answer = 0
+    where = {}
+    pivot = int(n/2)
+    for i in range(n):
+        for j in range(n):
+            where[board[i][j]] = [i,j]
+    start = board[0][0]
+    for i in range(n**2):
+        if i == 0 :
+            c = [abs(a-b) for a,b in zip(list(where[start]),list(where[1]))]
+        else:
+            c = [abs(a-b) for a,b in zip(where[i],where[i+1])]
+        for i in range(len(c)):
+            if c[i] > pivot:
+                c[i] = n - c[i]
+        answer += sum(c) + 1
+    return answer'''
+
+solution(4,[[11, 9, 8, 12], [2, 15, 4, 14], [1, 10, 16, 3], [13, 7, 5, 6]])
