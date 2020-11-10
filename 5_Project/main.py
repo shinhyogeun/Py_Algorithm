@@ -1173,7 +1173,7 @@ solution(["1901 10 50", "1909 10 50"])'''
     return answer'''
 
 
-def solution(n, horizontal):
+'''def solution(n, horizontal):
     answer = [[0]*n for i in range(n)]
     coco = [0,0]
     answer[0][0] = 0
@@ -1229,7 +1229,7 @@ def solution(n, horizontal):
                 value += 2
                 answer[coco[0]][coco[1]] = value
     print(answer)
-solution(4,True)
+solution(4,True)'''
 
 '''def solution(n, board):
     answer = 0
@@ -1248,6 +1248,62 @@ solution(4,True)
             if c[i] > pivot:
                 c[i] = n - c[i]
         answer += sum(c) + 1
-    return answer'''
+    return answer
+    solution(4,[[11, 9, 8, 12], [2, 15, 4, 14], [1, 10, 16, 3], [13, 7, 5, 6]])'''
 
-solution(4,[[11, 9, 8, 12], [2, 15, 4, 14], [1, 10, 16, 3], [13, 7, 5, 6]])
+# 정수 삼각형
+
+'''a = int(input())
+b = [0 for i in range(a)]
+c = []
+for i in range(a):
+    c.append([-1]*(i+1))
+    b[i] = list(map(int,input().split()))
+result = []
+print(c)
+#layer층에서 front위치에서 수행한다면?'''
+'''def who_is_best(front, layer):
+
+    if layer == 1:
+        return b[0][0]
+
+    if c[layer-1][front-1] != -1:
+        return c[layer-1][front-1]
+
+    else:
+        if front == 1:
+            c[layer-1][0] = b[layer-1][0] + who_is_best(front, layer-1)
+        elif front == layer:
+            c[layer-1][layer-1] = b[layer-1][layer-1] + who_is_best(layer-1, layer-1)
+        else:
+            c[layer-1][front-1] = b[layer-1][front-1] + max(who_is_best(front-1,layer-1),who_is_best(front,layer-1))
+
+        return c[layer-1][front-1]
+
+for i in range(a):
+    result.append(who_is_best(i+1,a))'''
+
+# 퇴사
+a = []
+c = int(input())
+b = [0] * (c)
+max_value = 0
+
+for i in range(c):
+    a.append(list(map(int,input().split())))
+
+for i in range(c-1,-1,-1):
+
+    # 기간안에 끝나는 일
+    if i+a[i][0] <= c-1 :
+        b[i] = max(b[i+a[i][0]]+a[i][1],max_value)
+        max_value = b[i]
+    else:
+        b[i] = max_value
+
+print(b)
+
+
+
+
+
