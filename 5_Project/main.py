@@ -1284,26 +1284,165 @@ for i in range(a):
     result.append(who_is_best(i+1,a))'''
 
 # 퇴사
-a = []
+'''a = []
 c = int(input())
-b = [0] * (c)
+b = [0] * (c+1)
 max_value = 0
-
 for i in range(c):
     a.append(list(map(int,input().split())))
-
+print(a)
 for i in range(c-1,-1,-1):
-
     # 기간안에 끝나는 일
-    if i+a[i][0] <= c-1 :
+    print(i+a[i][0])
+    if i+a[i][0] <= c :
         b[i] = max(b[i+a[i][0]]+a[i][1],max_value)
         max_value = b[i]
     else:
-        b[i] = max_value
+        b[i] = max_value'''
 
-print(b)
+# 퇴사(거꾸로)
+'''a = []
+c = int(input())
+b = [0] * (c+1)
+max_value = 0
+for i in range(c):
+    a.append(list(map(int,input().split())))
+
+for i in range(c):
+    if i+a[i][0] <= c:
+        b[i+a[i][0]] = max(a[i][1],max_value)
+        max_value = b[i+a[i][0]]
 
 
+print(b)'''
+
+# 못생긴 수
+'''n = int(input())
+ugly = [0]
+ugly[0] = 1
+
+heart1 = heart2 = heart3 = 0
+a,b,c = 2,3,5
+
+for i in range(1,n) :
+    ugly.append(min(a,b,c))
+    print(a,b,c)
+    if ugly[i] == a:
+        heart1 += 1
+        a = ugly[heart1] * 2
+    if ugly[i] == b:
+        heart2 += 1
+        b = ugly[heart2] * 3
+    if ugly[i] == c:
+        heart3 += 1
+        c = ugly[heart3] * 5
+print(ugly)'''
+#병사 배치하기
+
+
+
+
+'''n = int(input())
+
+arr = list(map(int,input().split()))
+
+for i in range(n-1):
+    if arr[i] <= arr[i+1]:
+        del arr[i]'''
+
+
+# 카카오 인턴 대비 문자열 압축
+
+'''def solution(s):
+    # 가능한 경우 s의 길이
+    a = len(s)//2
+    answer = len(s)
+    front = 1
+    result = ""
+    for i in range(1,a+1):
+        for j in range((len(s)//i)):
+            if j != ((len(s)//i)-1):
+                if s[j*i:(j+1)*i] == s[(j+1)*i:(j+2)*i]:
+                    front += 1
+                else:
+                    if front != 1:
+                        result += str(front) + s[j*i:(j+1)*i]
+                        front = 1
+                    else:
+                        result += s[j*i:(j+1)*i]
+            else:
+                if front != 1:
+                    result += str(front) + s[j*i:(j+1)*i]
+                    front = 1
+                else:
+                    result += s[j*i:(j+1)*i]
+        result += s[i*(len(s)//i):]
+        if len(result) < answer:
+            answer = len(result)
+        result = ""
+    return answer
+solution("aassddasdas")'''
+
+#배민 7번.. 넘나 빡치네..
+
+def solution(number,whether):
+    a = [[0] * number for i in range(number)]
+    w = [0,0]
+    a[0][0] = 1
+    king = 2
+
+    def left_down(king):
+        # 왼쪽 아래로 갈 수 있습니다.
+        if w == [number-1, number-1]: return
+
+        if w[1] > 0 and w[0] != number - 1:
+            w[0] += 1
+            w[1] -= 1
+            king += 1
+            a[w[0]][w[1]] = king
+            left_down(king)
+        # 갈 수 없습니다.
+        else:
+            if w[0] == number - 1:
+                w[1] += 1
+                king += 1
+            else:
+                w[0] += 1
+                king += 1
+            a[w[0]][w[1]] = king
+            right_up(king)
+
+    def right_up(king):
+        # 오른쪽 위로 갈 수 있습니다.
+        if w == [number-1, number-1]: return
+
+        if w[0] > 0 and w[1] != number - 1:
+            w[0] -= 1
+            w[1] += 1
+            king += 1
+            a[w[0]][w[1]] = king
+            right_up(king)
+        else:
+            if w[1] == number - 1:
+                w[0] += 1
+                king += 1
+            else:
+                w[1] += 1
+                king += 1
+            a[w[0]][w[1]] = king
+            left_down(king)
+
+    if whether == True:
+        w[1] += 1
+        a[w[0]][w[1]] = king
+        left_down(king)
+    else:
+        w[0] += 1
+        a[w[0]][w[1]] = king
+        right_up(king)
+    print(a)
+
+solution(20,False)
 
 
 
