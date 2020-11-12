@@ -1385,12 +1385,11 @@ solution("aassddasdas")'''
 
 #배민 7번.. 넘나 빡치네..
 
-def solution(number,whether):
+'''def solution(number,whether):
     a = [[0] * number for i in range(number)]
     w = [0,0]
     a[0][0] = 1
     king = 2
-
     def left_down(king):
         # 왼쪽 아래로 갈 수 있습니다.
         if w == [number-1, number-1]: return
@@ -1411,7 +1410,6 @@ def solution(number,whether):
                 king += 1
             a[w[0]][w[1]] = king
             right_up(king)
-
     def right_up(king):
         # 오른쪽 위로 갈 수 있습니다.
         if w == [number-1, number-1]: return
@@ -1441,8 +1439,68 @@ def solution(number,whether):
         a[w[0]][w[1]] = king
         right_up(king)
     print(a)
+solution(20,False)'''
 
-solution(20,False)
+# 카카오 인턴 알고리즘 준비
+from collections import deque
 
+def solution(board):
+    queue = deque()
+    a = [[1] * (len(board)+2) for i in range(len(board)+2)]
+    answer = 0
+    start = [[1,1],[1,2]]
+    queue.append((0,start))
+    leng = len(board)
+    visited = []
+    visited.append(start)
+    for i in range(leng):
+        for j in range(leng):
+            if board[i][j] == 0:
+                a[i+1][j+1] = 0
 
+    x = [0,-1,0,1]
+    y = [-1,0,1,0]
+    while queue:
+        kk,ans = queue.popleft()
+        print(kk,ans)
+        left, right = ans
+        if [leng,leng] in ans:
+            print(kk)
+            return kk
+        # 4칸의 이동
+        for i in range(4):
+            #이동이 가능할 때!
+            if leng >= left[0]+x[i] > 0 and leng >= left[1]+y[i] > 0 and leng >= right[0]+x[i] > 0 and leng >= right[1]+x[i] > 0 and [[left[0]+x[i],left[1]+y[i]],[right[0]+x[i],right[1]+y[i]]] not in visited:
+                if a[left[0]+x[i]][left[1]+y[i]] == 0 and a[right[0]+x[i]][right[1]+y[i]] == 0:
+                    queue.append((kk+1,[[left[0]+x[i],left[1]+y[i]],[right[0]+x[i],right[1]+y[i]]]))
+                    visited.append([[left[0]+x[i],left[1]+y[i]],[right[0]+x[i],right[1]+y[i]]])
+        #4칸의 회전
+        #세로
+        if left[0] != right[0]:
+            x2 = [1,1,-1,-1]
+            y2 = [-1,1,-1,1]
+            for i in range(4):
+                if i < 2:
+                    if leng>=left[0]+x2[i]>0 and leng>=left[1]+y2[i]>0 and a[left[0]][left[1]+y2[i]] == 0 and a[left[0]+x2[i]][left[1]+y2[i]] == 0 and [[left[0]+x2[i],left[1]+y2[i]],[right[0],right[1]]] not in visited:
+                        queue.append((kk+1,[[left[0]+x2[i],left[1]+y2[i]],[right[0],right[1]]]))
+                        visited.append([[left[0]+x2[i],left[1]+y2[i]],[right[0],right[1]]])
+                else:
+                    if leng>=right[0]+x2[i]>0 and leng>=right[1]+y2[i]>0 and a[right[0]][right[1]+y2[i]] == 0 and a[right[0]+x2[i]][right[1]+y2[i]] == 0 and [[left[0],left[1]],[right[0]+x2[i],right[1]+y2[i]]] not in visited :
+                        queue.append((kk+1,[[left[0],left[1]],[right[0]+x2[i],right[1]+y2[i]]]))
+                        visited.append([[left[0],left[1]],[right[0]+x2[i],right[1]+y2[i]]])
+        #가로
+        else:
+            x3 = [-1,1,-1,1]
+            y3 = [1,1,-1,-1]
+            for i in range(4):
+                if i < 2:
+                    if leng>=left[0]+x3[i]>0 and leng>=left[1]+y3[i]>0 and a[left[0]+x3[i]][left[1]] == 0 and a[left[0]+x3[i]][left[1]+y3[i]] == 0 and [[left[0]+x3[i],left[1]+y3[i]],[right[0],right[1]]] not in visited:
+                        queue.append((kk+1,[[left[0]+x3[i],left[1]+y3[i]],[right[0],right[1]]]))
+                        visited.append([[left[0]+x3[i],left[1]+y3[i]],[right[0],right[1]]])
+                else:
+                    if leng>=right[0]+x3[i]>0 and leng>=right[1]+y3[i]>0 and a[right[0]+x3[i]][right[1]] == 0 and a[right[0]+x3[i]][right[1]+y3[i]] == 0 and [[left[0],left[1]],[right[0]+x3[i],right[1]+y3[i]]] not in visited:
+                        queue.append((kk+1,[[left[0],left[1]],[right[0]+x3[i],right[1]+y3[i]]]))
+                        visited.append([[left[0],left[1]],[right[0]+x3[i],right[1]+y3[i]]])
+
+solution([[0, 0, 0, 1, 1],[0, 0, 0, 1, 0],[0, 1, 0, 1, 1],[1, 1, 0, 0, 1],[0, 0, 0, 0, 0]])
 
