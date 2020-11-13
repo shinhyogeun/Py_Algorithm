@@ -1442,65 +1442,165 @@ solution("aassddasdas")'''
 solution(20,False)'''
 
 # 카카오 인턴 알고리즘 준비
-from collections import deque
+'''from collections import deque
 
 def solution(board):
     queue = deque()
-    a = [[1] * (len(board)+2) for i in range(len(board)+2)]
-    answer = 0
-    start = [[1,1],[1,2]]
-    queue.append((0,start))
     leng = len(board)
+    a = [[1] * (leng+1) for i in range(leng+1)]
+    answer = 0
+    start = {(1,1),(1,2)}
+    queue.append((0,start))
     visited = []
     visited.append(start)
+
     for i in range(leng):
         for j in range(leng):
             if board[i][j] == 0:
                 a[i+1][j+1] = 0
 
+      #  좌 상 우 하
     x = [0,-1,0,1]
     y = [-1,0,1,0]
     while queue:
         kk,ans = queue.popleft()
         print(kk,ans)
-        left, right = ans
-        if [leng,leng] in ans:
+        left, right = list(ans)
+        if (leng,leng) in ans:
             print(kk)
             return kk
         # 4칸의 이동
         for i in range(4):
             #이동이 가능할 때!
-            if leng >= left[0]+x[i] > 0 and leng >= left[1]+y[i] > 0 and leng >= right[0]+x[i] > 0 and leng >= right[1]+x[i] > 0 and [[left[0]+x[i],left[1]+y[i]],[right[0]+x[i],right[1]+y[i]]] not in visited:
+            if leng >= left[0]+x[i] > 0 and leng >= left[1]+y[i] > 0 and leng >= right[0]+x[i] > 0 and leng >= right[1]+y[i] > 0 and {(left[0]+x[i],left[1]+y[i]),(right[0]+x[i],right[1]+y[i])} not in visited:
                 if a[left[0]+x[i]][left[1]+y[i]] == 0 and a[right[0]+x[i]][right[1]+y[i]] == 0:
-                    queue.append((kk+1,[[left[0]+x[i],left[1]+y[i]],[right[0]+x[i],right[1]+y[i]]]))
-                    visited.append([[left[0]+x[i],left[1]+y[i]],[right[0]+x[i],right[1]+y[i]]])
+                    queue.append((kk+1,{(left[0]+x[i],left[1]+y[i]),(right[0]+x[i],right[1]+y[i])}))
+                    visited.append({(left[0]+x[i],left[1]+y[i]),(right[0]+x[i],right[1]+y[i])})
         #4칸의 회전
         #세로
-        if left[0] != right[0]:
+        if left[1] == right[1]:
             x2 = [1,1,-1,-1]
             y2 = [-1,1,-1,1]
             for i in range(4):
                 if i < 2:
-                    if leng>=left[0]+x2[i]>0 and leng>=left[1]+y2[i]>0 and a[left[0]][left[1]+y2[i]] == 0 and a[left[0]+x2[i]][left[1]+y2[i]] == 0 and [[left[0]+x2[i],left[1]+y2[i]],[right[0],right[1]]] not in visited:
-                        queue.append((kk+1,[[left[0]+x2[i],left[1]+y2[i]],[right[0],right[1]]]))
-                        visited.append([[left[0]+x2[i],left[1]+y2[i]],[right[0],right[1]]])
+                    if leng>=left[0]+x2[i]>0 and leng>=left[1]+y2[i]>0 and a[left[0]][left[1]+y2[i]] == 0 and a[left[0]+x2[i]][left[1]+y2[i]] == 0 and {(left[0]+x2[i],left[1]+y2[i]),(right[0],right[1])} not in visited:
+                        queue.append((kk+1,{(left[0]+x2[i],left[1]+y2[i]),(right[0],right[1])}))
+                        visited.append({(left[0]+x2[i],left[1]+y2[i]),(right[0],right[1])})
                 else:
-                    if leng>=right[0]+x2[i]>0 and leng>=right[1]+y2[i]>0 and a[right[0]][right[1]+y2[i]] == 0 and a[right[0]+x2[i]][right[1]+y2[i]] == 0 and [[left[0],left[1]],[right[0]+x2[i],right[1]+y2[i]]] not in visited :
-                        queue.append((kk+1,[[left[0],left[1]],[right[0]+x2[i],right[1]+y2[i]]]))
-                        visited.append([[left[0],left[1]],[right[0]+x2[i],right[1]+y2[i]]])
+                    if leng>=right[0]+x2[i]>0 and leng>=right[1]+y2[i]>0 and a[right[0]][right[1]+y2[i]] == 0 and a[right[0]+x2[i]][right[1]+y2[i]] == 0 and {(left[0],left[1]),(right[0]+x2[i],right[1]+y2[i])} not in visited :
+                        queue.append((kk+1,{(left[0],left[1]),(right[0]+x2[i],right[1]+y2[i])}))
+                        visited.append({(left[0],left[1]),(right[0]+x2[i],right[1]+y2[i])})
         #가로
         else:
             x3 = [-1,1,-1,1]
             y3 = [1,1,-1,-1]
             for i in range(4):
                 if i < 2:
-                    if leng>=left[0]+x3[i]>0 and leng>=left[1]+y3[i]>0 and a[left[0]+x3[i]][left[1]] == 0 and a[left[0]+x3[i]][left[1]+y3[i]] == 0 and [[left[0]+x3[i],left[1]+y3[i]],[right[0],right[1]]] not in visited:
-                        queue.append((kk+1,[[left[0]+x3[i],left[1]+y3[i]],[right[0],right[1]]]))
-                        visited.append([[left[0]+x3[i],left[1]+y3[i]],[right[0],right[1]]])
+                    if leng>=left[0]+x3[i]>0 and leng>=left[1]+y3[i]>0 and a[left[0]+x3[i]][left[1]] == 0 and a[left[0]+x3[i]][left[1]+y3[i]] == 0 and {(left[0]+x3[i],left[1]+y3[i]),(right[0],right[1])} not in visited:
+                        queue.append((kk+1,{(left[0]+x3[i],left[1]+y3[i]),(right[0],right[1])}))
+                        visited.append({(left[0]+x3[i],left[1]+y3[i]),(right[0],right[1])})
                 else:
-                    if leng>=right[0]+x3[i]>0 and leng>=right[1]+y3[i]>0 and a[right[0]+x3[i]][right[1]] == 0 and a[right[0]+x3[i]][right[1]+y3[i]] == 0 and [[left[0],left[1]],[right[0]+x3[i],right[1]+y3[i]]] not in visited:
-                        queue.append((kk+1,[[left[0],left[1]],[right[0]+x3[i],right[1]+y3[i]]]))
-                        visited.append([[left[0],left[1]],[right[0]+x3[i],right[1]+y3[i]]])
+                    if leng>=right[0]+x3[i]>0 and leng>=right[1]+y3[i]>0 and a[right[0]+x3[i]][right[1]] == 0 and a[right[0]+x3[i]][right[1]+y3[i]] == 0 and {(left[0],left[1]),(right[0]+x3[i],right[1]+y3[i])} not in visited:
+                        queue.append((kk+1,{(left[0],left[1]),(right[0]+x3[i],right[1]+y3[i])}))
+                        visited.append({(left[0],left[1]),(right[0]+x3[i],right[1]+y3[i])})
 
-solution([[0, 0, 0, 1, 1],[0, 0, 0, 1, 0],[0, 1, 0, 1, 1],[1, 1, 0, 0, 1],[0, 0, 0, 0, 0]])
+solution([[0, 0, 0, 1, 1],[0, 0, 0, 1, 0],[0, 1, 0, 1, 1],[1, 1, 0, 0, 1],[0, 0, 0, 0, 0]])'''
+
+'''from collections import deque
+
+def get_next_pos(pos, board):
+    next_pos = [] # 반환 결과 (이동 가능한 위치들)
+    pos = list(pos) # 현재 위치 정보를 리스트로 변환 (집합 → 리스트)
+    pos1_x, pos1_y, pos2_x, pos2_y = pos[0][0], pos[0][1], pos[1][0], pos[1][1]
+    # (상, 하, 좌, 우)로 이동하는 경우에 대해서 처리
+    dx = [-1, 1, 0, 0]
+    dy = [0, 0, -1, 1]
+    for i in range(4):
+        pos1_next_x, pos1_next_y, pos2_next_x, pos2_next_y = pos1_x + dx[i], pos1_y + dy[i], pos2_x + dx[i], pos2_y + dy[i]
+        # 이동하고자 하는 두 칸이 모두 비어 있다면
+        if board[pos1_next_x][pos1_next_y] == 0 and board[pos2_next_x][pos2_next_y] == 0:
+            next_pos.append({(pos1_next_x, pos1_next_y), (pos2_next_x, pos2_next_y)})
+    # 현재 로봇이 가로로 놓여 있는 경우
+    if pos1_x == pos2_x:
+        for i in [-1, 1]: # 위쪽으로 회전하거나, 아래쪽으로 회전
+            if board[pos1_x + i][pos1_y] == 0 and board[pos2_x + i][pos2_y] == 0: # 위쪽 혹은 아래쪽 두 칸이 모두 비어 있다면
+                next_pos.append({(pos1_x, pos1_y), (pos1_x + i, pos1_y)})
+                next_pos.append({(pos2_x, pos2_y), (pos2_x + i, pos2_y)})
+    # 현재 로봇이 세로로 놓여 있는 경우
+    elif pos1_y == pos2_y:
+        for i in [-1, 1]: # 왼쪽으로 회전하거나, 오른쪽으로 회전
+            if board[pos1_x][pos1_y + i] == 0 and board[pos2_x][pos2_y + i] == 0: # 왼쪽 혹은 오른쪽 두 칸이 모두 비어 있다면
+                next_pos.append({(pos1_x, pos1_y), (pos1_x, pos1_y + i)})
+                next_pos.append({(pos2_x, pos2_y), (pos2_x, pos2_y + i)})
+    # 현재 위치에서 이동할 수 있는 위치를 반환
+    return next_pos
+
+def solution(board):
+    # 맵의 외곽에 벽을 두는 형태로 맵 변형
+    n = len(board)
+    new_board = [[1] * (n + 2) for _ in range(n + 2)]
+    for i in range(n):
+        for j in range(n):
+            new_board[i + 1][j + 1] = board[i][j]
+    # 너비 우선 탐색(BFS) 수행
+    q = deque()
+    visited = []
+    pos = {(1, 1), (1, 2)} # 시작 위치 설정
+    q.append((pos, 0)) # 큐에 삽입한 뒤에
+    visited.append(pos) # 방문 처리
+    # 큐가 빌 때까지 반복
+    while q:
+        pos, cost = q.popleft()
+        # (n, n) 위치에 로봇이 도달했다면, 최단 거리이므로 반환
+        print(cost,pos)
+        if (n, n) in pos:
+            return cost
+        # 현재 위치에서 이동할 수 있는 위치 확인
+        for next_pos in get_next_pos(pos, new_board):
+            # 아직 방문하지 않은 위치라면 큐에 삽입하고 방문 처리
+            if next_pos not in visited:
+                q.append((next_pos, cost + 1))
+                visited.append(next_pos)
+    return 0
+
+print(solution([[0, 0, 0, 1, 1],[0, 0, 0, 1, 0],[0, 1, 0, 1, 1],[1, 1, 0, 0, 1],[0, 0, 0, 0, 0]]))'''
+
+
+#이진탐색 복습
+
+'''n = int(input())
+arr = list(map(int,input().split()))
+def find_out(arr,frm,to):
+    pivot = (to+frm)//2
+    if frm > to:
+        return -1
+    if arr[pivot] == pivot:
+        return pivot
+    elif arr[pivot] > pivot:
+        return find_out(arr,frm,pivot-1)
+    else:
+        return find_out(arr,pivot+1,to)
+print(find_out(arr,0,n-1))'''
+
+n,m = list(map(int,input().split()))
+arr = list(map(int,input().split()))
+
+start = 0
+end = max(arr)-1
+answer = 0
+while start <= end:
+    pivot = (start + end) // 2
+    dduk = 0
+    for i in arr:
+        if i - pivot > 0:
+            dduk += i - pivot
+    if dduk >= m:
+        answer = pivot
+        start = pivot + 1
+    elif dduk < m:
+        end = pivot - 1
+
+
+
+print(answer)
 
