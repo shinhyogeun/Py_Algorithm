@@ -1582,7 +1582,7 @@ def find_out(arr,frm,to):
         return find_out(arr,pivot+1,to)
 print(find_out(arr,0,n-1))'''
 
-n,m = list(map(int,input().split()))
+'''n,m = list(map(int,input().split()))
 arr = list(map(int,input().split()))
 
 start = 0
@@ -1602,5 +1602,13 @@ while start <= end:
 
 
 
-print(answer)
+print(answer)'''
 
+import requests
+import json
+
+def avgRotorSpeed(statusQuery, parentId):
+    ss = 'https://jsonmock.hackerrank.com/api/iot_devices/search?status=' + str(statusQuery) + '&page=2'
+    res = requests.get(ss)
+    print(res.text)
+    dict()
