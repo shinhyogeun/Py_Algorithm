@@ -1604,11 +1604,80 @@ while start <= end:
 
 print(answer)'''
 
-import requests
+'''import requests
 import json
 
 def avgRotorSpeed(statusQuery, parentId):
     ss = 'https://jsonmock.hackerrank.com/api/iot_devices/search?status=' + str(statusQuery) + '&page=2'
     res = requests.get(ss)
     print(res.text)
-    dict()
+    dict()'''
+
+def PREPROCESSING(file, colum_name):
+    # 날짜, 좋아요, 싫어요, 구독자수 전처리를 시행합니다.
+    if colum_name == "날짜" :
+        # 날짜 전처리 코드
+        when = file[colum_name]
+        try:
+            for i in range(len(when)):
+                listi = list(when[i])
+                if listi[0] == "최" or listi[2] == "시" or listi[0] == "실":
+                    # 전처리가 필요한 DATA
+                    # 최초공개 SYTLE
+                    if listi[0] == "최":
+                        when[i] = str(''.join(listi[7:]))
+                    # 00시간 전 STYLE
+                    if listi[2] == "시":
+                        if 23 - int(''.join(listi[:2])) >= 0:
+                            when[i] = '2020. 11. 2.'
+                        else:
+                            when[i] = '2020. 11. 1.'
+                    # 실시간 SYTLE
+                    if listi[4] == "스":
+                        when[i] = str(''.join(listi[14:]))
+            file[colum_name] = when
+            return file
+
+        except :
+            return print("날짜에서 특이케이스 발생\n 전처리를 연속으로 돌리면 안됩니다.")
+
+    elif colum_name in ["좋아요수","싫어요"]:
+        like_or_dislike = file[colum_name]
+        try:
+            for i in range(len(like_or_dislike)):
+                listi = like_or_dislike[i]
+                before = []
+                after = 0
+                if len(listi) >= 10:
+                    where = listi.index("\r")
+                    before = listi[:where]
+                    if before in [["좋아요"],["싫어요"]]:
+                        before = ["0"]
+                else:
+                    before = listi
+                if "만" in before:
+                    after = int(float(''.join(before[:before.index("만")])) * 10000)
+                elif "천" in before:
+                    after = int(float(''.join(before[:before.index("천")])) * 1000)
+                else:
+                    after = int(float(''.join(before)))
+                like_or_dislike[i] = after
+            file[colum_name] = like_or_dislike
+            return file
+        except :
+            return print(colum_name+"에서 특이케이스 발생 \n 전처리를 연속으로 돌리면 안됩니다.")
+
+    elif colum_name == "구독자수":
+        subscriber = file[colum_name]
+        try:
+            sub = list(map(float, subscriber))
+            for i in range(len(sub)):
+                if sub[i] < 100:
+                    sub[i] *= 10000
+            subscriber = list(map(int, sub))
+            file[colum_name] = subscriber
+            return file
+        except:
+            return print(colum_name+"에서 특이케이스 발생 \n 전처리를 연속으로 돌리면 안됩니다.")
+
+
