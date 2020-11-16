@@ -1613,7 +1613,7 @@ def avgRotorSpeed(statusQuery, parentId):
     print(res.text)
     dict()'''
 
-def PREPROCESSING(file, colum_name):
+'''def PREPROCESSING(file, colum_name):
     # 날짜, 좋아요, 싫어요, 구독자수 전처리를 시행합니다.
     if colum_name == "날짜" :
         # 날짜 전처리 코드
@@ -1678,6 +1678,56 @@ def PREPROCESSING(file, colum_name):
             file[colum_name] = subscriber
             return file
         except:
-            return print(colum_name+"에서 특이케이스 발생 \n 전처리를 연속으로 돌리면 안됩니다.")
+            return print(colum_name+"에서 특이케이스 발생 \n 전처리를 연속으로 돌리면 안됩니다.")'''
 
+
+
+# 데이터 크롤링 과제(12163252 신효근)
+# 빌보드 HOT100차트 크롤링 및 대략적 통계량 분석
+# 이후에 진행되는 코드는 20년 11월 16일의 HOT100 차트(11월 3째 주)를 바탕으로 합니다.
+
+
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import numpy as np
+
+
+webpage = requests.get("https://www.billboard.com/charts/hot-100")
+soup = BeautifulSoup(webpage.content, "html.parser")
+DATA = {}
+
+tag_class_dictionary = {
+                        "노래제목":".chart-element__information__song",
+                        "가수":".chart-element__information__artist",
+                        "지난주 순위":".text--last",
+                        "최고순위":".text--peak",
+                        "HOT100에 들었던 기간":".text--week"
+                        }
+
+for key in tag_class_dictionary.keys():
+    new = []
+    if key in ["지난주 순위","최고순위","HOT100에 들었던 기간"]:
+        col = soup.select(tag_class_dictionary[key])
+        for i in col:
+            if col.index(i) % 2 != 0:
+                new.append(i.get_text())
+    else:
+        col = soup.select(tag_class_dictionary[key])
+        for i in col:
+            new.append(i.get_text())
+    DATA[key] = new
+print(DATA)
+
+
+
+'''import requests
+from bs4 import BeautifulSoup
+
+source = requests.get("https://www.billboard.com/charts/hot-100").text
+soup = BeautifulSoup(source, "html.parser")
+keys = soup.select(".chart-element__information__song text--truncate color--primary")
+print(keys)
+for key in keys :
+    print(key.text)'''
 
