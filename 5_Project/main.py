@@ -1698,13 +1698,14 @@ soup = BeautifulSoup(webpage.content, "html.parser")
 DATA = {}
 
 tag_class_dictionary = {
+                        "순위":"RANK",
                         "노래제목":".chart-element__information__song",
                         "가수":".chart-element__information__artist",
                         "지난주 순위":".text--last",
                         "최고순위":".text--peak",
                         "HOT100에 들었던 기간":".text--week"
                         }
-
+import matplotlib.pylab as plt
 for key in tag_class_dictionary.keys():
     new = []
     if key in ["지난주 순위","최고순위","HOT100에 들었던 기간"]:
