@@ -179,31 +179,133 @@
 
 # 최후의 문제 9번
 
-def parse(s,i):
-    arr = ''
-    real = s[:i]
-    count = 1
-    for j in range(1, len(s)//i+2):
-        if real == s[i*j:i*(j+1)]:
-            count += 1
-        else:
-            real = (str(count) if count > 1 else '') + real
-            arr += str(real)
-            count = 1
-            real = s[i*j:i*(j+1)]
-    return len(arr)
+# def parse(s,i):
+#     arr = ''
+#     real = s[:i]
+#     count = 1
+#     for j in range(1, len(s)//i+2):
+#         if real == s[i*j:i*(j+1)]:
+#             count += 1
+#         else:
+#             real = (str(count) if count > 1 else '') + real
+#             arr += str(real)
+#             count = 1
+#             real = s[i*j:i*(j+1)]
+#     return len(arr)
+#
+# def solution(s):
+#     dic = []
+#     if len(s) == 1:
+#         return 1
+#     for i in range(1, len(s)//2+1):
+#         dic.append(parse(s,i))
+#     return min(dic)
 
-def solution(s):
-    dic = []
-    if len(s) == 1:
-        return 1
-    for i in range(1, len(s)//2+1):
-        dic.append(parse(s,i))
-    return min(dic)
+# 최후의 문제 10번
+# def tilt(s):
+#     length = len(s)
+#     answer = [[0 for i in range(length)] for j in range(length)]
+#
+#     for i in range(length):
+#         for j in range(length):
+#             answer[j][length-1-i] = s[i][j]
+#     return answer
+#
+# def check(total, keyLength, length):
+#     for i in range(keyLength-1, length-keyLength+1):
+#         for j in range(keyLength-1, length-keyLength+1):
+#             if total[i][j] in [0,2]:
+#                 return False
+#
+#     return True
+#
+# def insert(total,row,col,key):
+#     for i in range(len(key)):
+#         for j in range(len(key)):
+#             total[row+i][col+j] += key[i][j]
+#     return total
+#
+# def solution(key, lock):
+#     keyLength = len(key)
+#     lockLength = len(lock)
+#     key2 = key
+#
+#     length = lockLength + 2 * (keyLength - 1)
+#
+#     total = [[0 for i in range(length)] for i in range(length)]
+#
+#     for i in range(keyLength-1, length-keyLength+1):
+#         for j in range(keyLength-1, length-keyLength+1):
+#             total[i][j] = lock[i-(keyLength-1)][j-(keyLength-1)]
+#
+#     for i in range(4):
+#         key2 = tilt(key2)
+#         for i in range(length-keyLength+1):
+#             for j in range(length-keyLength+1):
+#                 copy = [[i for i in j] for j in total]
+#                 result = insert(copy, i, j, key2)
+#                 if check(result,keyLength,length):
+#                     return True
+#
+#     return False
+#
+# print(solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]], [[1, 1, 1], [1, 1, 0], [1, 0, 1]]))
 
-print(solution("a"))
-print(solution("ababcdcdababcdcd"))
-print(solution("abcabcdede"))
-print(solution("abcabcabcabcdededededede"))
-print(solution("xababcdcdababcdcd"))
+#최후의 문제 11번
+# def findTail(total):
+#     return min([(total[i][j], i, j) for i in range(len(total)) for j in range(len(total)) if total[i][j] > 0])[1:]
+#
+# length = int(input())
+# total = [[0 for i in range(length+2)] for j in range(length+2)]
+#
+# apples = int(input())
+# for i in range(apples):
+#     row,col = list(map(int,input().split(' ')))
+#     total[row][col] = -1
+# total[1][1] = 1
+# turns = int(input())
+# turnsInfo = ['X' for i in range(10001)]
+# for i in range(turns):
+#     time, to = list(input().split(' '))
+#     turnsInfo[int(time)] = to
+#
+# timeCount = 0
+#
+# # 0,1 -> 1,0 -> 0,-1 -> -1,0
+#
+# tilArr = [[0,1],[1,0],[0,-1],[-1,0]]
+# til = 0
+# ################
+# tail = [1,1]
+# head = [1,1]
+# ################
+# while True:
+#     if turnsInfo[timeCount] == 'D':
+#         til = til+1 if til < 3 else 0
+#     elif turnsInfo[timeCount] == 'L':
+#         til = til-1 if til > 0 else 3
+#
+#     nextPositionRow = head[0]+tilArr[til][0]
+#     nextPositionCol = head[1]+tilArr[til][1]
+#
+#     if total[nextPositionRow][nextPositionCol] >= 1:
+#         print(timeCount+1)
+#         break
+#     if nextPositionRow in [0, length+1] or nextPositionCol in [0, length+1]:
+#         print(timeCount+1)
+#         break
+#
+#     if total[nextPositionRow][nextPositionCol] == -1:
+#         total[nextPositionRow][nextPositionCol] = total[head[0]][head[1]]+1
+#         head=[nextPositionRow, nextPositionCol]
+#     else:
+#         total[nextPositionRow][nextPositionCol] = total[head[0]][head[1]] + 1
+#         total[tail[0]][tail[1]] = 0
+#         head = [nextPositionRow, nextPositionCol]
+#         tail = findTail(total)
+#
+#     timeCount += 1
+
+# 최후의 문제 13번
+
 
