@@ -306,6 +306,99 @@
 #
 #     timeCount += 1
 
-# 최후의 문제 13번
+# 최후의 문제 12번
+# def isPossible(copy,canvas2):
+#     canvas = [[j[:] for j in i] for i in canvas2]
+#     length = len(canvas)-1
+#
+#     for x, y, item in copy:
+#         if item == 0:
+#             canvas[length-y][x].append('2-1')
+#             canvas[length-y-1][x].append('2-2')
+#         else:
+#             canvas[length-y][x].append('1-1')
+#             canvas[length-y][x+1].append('1-2')
+#
+#     for x, y, item in copy:
+#         if item == 0:
+#             if y == 0 or ('1-1' in canvas[length-y][x]) or ('2-2' in canvas[length-y][x]) or '1-2' in canvas[length-y][x]:
+#                 continue
+#             else:
+#                 return False
+#         else:
+#             if '2-1' in canvas[length-y+1][x] or '2-1' in canvas[length-y+1][x+1]:
+#                 continue
+#             elif '1-2' in canvas[length-y][x] and '1-1' in canvas[length-y][x+1]:
+#                 continue
+#             else:
+#                 return False
+#     return True
+#
+# def updateResult(item, result, canvas):
+#     copy = [[j for j in i] for i in result]
+#     x, y, what, make = item
+#
+#     if make == 1:
+#         copy.append([x, y, what])
+#     else:
+#         copy.remove([x, y, what])
+#
+#     if isPossible(copy,canvas):
+#         return copy
+#
+#     return result
+#
+# def solution(n, build_frame):
+#     canvas = [[[] for i in range(n+1)] for j in range(n+1)]
+#
+#     result = []
+#
+#     for item in build_frame:
+#         result = updateResult(item, result, canvas)
+#
+#     return sorted(result)
+#
+# print(solution(5,[[1,0,0,1],[1,1,1,1],[2,1,0,1],[2,2,1,1],[5,0,0,1],[5,1,0,1],[4,2,1,1],[3,2,1,1]]))
+# print(solution(5,[[0,0,0,1],[2,0,0,1],[4,0,0,1],[0,1,1,1],[1,1,1,1],[2,1,1,1],[3,1,1,1],[2,0,0,0],[1,1,1,0],[2,2,0,1]]))
+# print(solution(100,[[0,0,0,1],[0,1,0,1]]))
+
+# 최후의 문제 13번`
+
+# from itertools import permutations
+#
+# def calculateDistance(arr,homeArr):
+#     answer = []
+#     for home in homeArr:
+#         arr2 = []
+#         for chicken in arr:
+#             arr2.append(abs(chicken[0]-home[0])+abs(chicken[1]-home[1]))
+#         answer.append(min(arr2))
+#     return sum(answer)
+#
+#
+# length, max = list(map(int,input().split()))
+#
+# total = [[] for i in range(length)]
+# for i in range(length):
+#     total[i] = list(map(int,input().split()))
+#
+# homeArr = []
+# chickenArr = []
+#
+# for i in range(length):
+#     for j in range(length):
+#         if(total[i][j]) == 1:
+#             homeArr.append((i,j))
+#         elif total[i][j] == 2:
+#             chickenArr.append((i,j))
+#
+# answerArr = []
+#
+# for i in range(1,max+1):
+#     arr = list(permutations(chickenArr,i))
+#     for j in arr:
+#         answerArr.append(calculateDistance(j,homeArr))
+#
+# print(min(answerArr))
 
 
