@@ -401,4 +401,176 @@
 #
 # print(min(answerArr))
 
+## 다잌스트라
 
+# import heapq
+#
+# nodes,lines = list(map(int,input().split(' ')))
+# fro = int(input())
+#
+# INF = int(1e9)
+# answers = [INF for i in range(nodes+1)]
+# visited = [False for i in range(nodes+1)]
+#
+# kings = []
+# heapq.heappush(kings,(0, fro))
+# infoArr = [[] for _ in range(nodes+1)]
+#
+# for i in range(lines):
+#     start, end, time = list(map(int, input().split(' ')))
+#     infoArr[start].append([end,time])
+#
+# while kings:
+#     answer, index = heapq.heappop(kings)
+#     if visited[index]:
+#         continue
+#     visited[index] = True
+#     answers[index] = answer
+#
+#     for end, time in infoArr[index]:
+#         if answers[end] > answer + time:
+#             answers[end] = answer + time
+#             heapq.heappush(kings,(answer + time, end))
+#
+# for i in range(1,len(answers)):
+#     print(answers[i])
+
+# INF = int(1e9)
+# company, routes = list(map(int,input().split(' ')))
+# total = [[INF for i in range(company+1)] for j in range(company+1)]
+#
+# for i in range(1,company+1):
+#     total[i][i] = 0
+#
+# for i in range(routes):
+#     fro,to = list(map(int,input().split(' ')))
+#     total[fro][to] = 1
+#     total[to][fro] = 1
+#
+# for k in range(1,company+1):
+#     for i in range(1,company+1):
+#         for j in range(1,company+1):
+#             total[i][j] = min(total[i][k]+total[k][j], total[i][j])
+#
+# x, k = list(map(int,input().split()))
+#
+# if INF in [total[1][k], total[k][x]]:
+#     print(-1)
+# else:
+#     print(total[1][k]+total[k][x])
+
+# import heapq
+#
+# city,tube,start = list(map(int,input().split(' ')))
+#
+# tubeInfo = [[] for j in range(city+1)]
+#
+# INF = int(1e9)
+# for i in range(tube):
+#     frm,to,distance = list(map(int,input().split(' ')))
+#     tubeInfo[frm].append([to,distance])
+#
+# answers = [INF for i in range(city+1)]
+# answers[start] = 0
+#
+# hist = []
+# heapq.heappush(hist,(0,start))
+#
+# while hist:
+#     answer, index = heapq.heappop(hist)
+#
+#     if answers[index] < answer:
+#         continue
+#
+#     for to, distance in tubeInfo[index]:
+#         if answers[to] > answer + distance:
+#             answers[to] = answer+distance
+#             heapq.heappush(hist,(answer+distance, to))
+#
+# print(len(answers)-answers.count(INF)-1, max([i for i in answers if i != INF]))
+
+# l,m = list(map(int,input().split()))
+#
+# total = []
+#
+# for i in range(l):
+#     total.append(list(map(int,list(input()))))
+#
+# answer = 0
+#
+# def dfs(i,j):
+#     global total
+#     total[i][j] = 1
+#
+#     dx = [1,0,-1,0]
+#     dy = [0,1,0,-1]
+#
+#     for k in range(4):
+#         if l-1 >= i+dy[k] >= 0 and m-1 >= j+dx[k] >= 0:
+#             if total[i+dy[k]][j+dx[k]] == 0:
+#                 dfs(i+dy[k], j+dx[k])
+#
+#
+# for i in range(l):
+#     for j in range(m):
+#         if total[i][j] == 0:
+#             answer += 1
+#             dfs(i,j)
+#
+# print(answer)
+
+# from collections import deque
+#
+# l,m = list(map(int,input().split()))
+#
+# total= []
+#
+# for i in range(l):
+#     total.append(list(map(int,list(input()))))
+#
+# total = [[0 if j != 0 else -1 for j in i] for i in total]
+# total[0][0] = 1
+#
+# q = deque([(0,0)])
+#
+# dx = [1,0,-1,0]
+# dy = [0,1,0,-1]
+#
+# while q:
+#     x,y = deque.pop(q)
+#     for i in range(4):
+#         if l-1 >= y+dy[i] >= 0 and m-1 >= x+dx[i] >= 0:
+#             if total[y+dy[i]][x+dx[i]] == 0:
+#                 total[y+dy[i]][x+dx[i]] = total[y][x] + 1
+#                 q.append((x+dx[i],y+dy[i]))
+#
+# print(total[l-1][m-1])
+
+#4의 인덱스를 찾아라!
+
+# def find(start,end,target,arr):
+#     if start > end :
+#         return '없어요'
+#     pivot = start + (end-start)//2
+#     if arr[pivot] > target:
+#         return find(start,pivot-1,target,arr)
+#     elif arr[pivot] < target:
+#         return find(pivot+1, end, target, arr)
+#     else:
+#         return pivot
+
+# def find(target,arr):
+#     start = 0
+#     end = len(arr)-1
+#     while start <= end:
+#         pivot = start + (end-start)//2
+#         if arr[pivot] > target:
+#             end = pivot-1
+#         elif arr[pivot] < target:
+#             start = pivot+1
+#         else:
+#             return pivot
+#     return '없어요'
+#
+#
+# print(find(10,[0,2,4,6,8,10,12,14,16,18]))
