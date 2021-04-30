@@ -574,3 +574,126 @@
 #
 #
 # print(find(10,[0,2,4,6,8,10,12,14,16,18]))
+
+# how = int(input())
+# total = list(map(int,input().split()))
+# want = int(input())
+# wantArr = list(map(int,input().split()))
+#
+# answer = []
+#
+# def find(i,total):
+#     start = 0
+#     end = len(total)-1
+#     while start <= end:
+#         pivot = start + (end-start)//2
+#         if total[pivot] > i:
+#             end = pivot-1
+#         elif total[pivot] < i:
+#             start = pivot+1
+#         else:
+#             return pivot
+#     return None
+#
+# for i in wantArr:
+#     if find(i,total) != None:
+#         answer.append('yes')
+#     else:
+#         answer.append('no')
+#
+# print(' '.join(answer))
+
+#
+# n,m = list(map(int,input().split()))
+#
+# total = list(map(int,input().split()))
+#
+# def find(target,total):
+#     start = 0
+#     end = max(total)
+#
+#     while start <= end:
+#         pivot = start + (end-start)//2
+#         if sum([i-pivot for i in total if i > pivot]) < target:
+#             end = pivot - 1
+#         elif sum([i-pivot for i in total if i > pivot]) > target:
+#             start = pivot + 1
+#         else:
+#             return pivot
+#
+#     return pivot-1
+#
+# print(find(m,total))
+
+def find_peice(table2, i, j, pivot):
+    peice = []
+
+    def dfs(table2, i, j, startY, startX):
+        x = len(table2[0]) - 1
+        y = len(table2) - 1
+
+        dx = [1, 0, -1, 0]
+        dy = [0, 1, 0, -1]
+
+        if table2[i][j] == pivot:
+            table2[i][j] = 7
+            for k in range(4):
+                if y >= i + dy[k] >= 0 and x >= j + dx[k] >= 0:
+                    if table2[i + dy[k]][j + dx[k]] == pivot:
+                        peice.append([i + dy[k] - startY, j + dx[k] - startX])
+                        dfs(table2, i + dy[k], j + dx[k], startY, startX)
+
+        return peice
+
+    if table2[i][j] != pivot:
+        return None
+
+    peice.append([0, 0])
+
+    return dfs(table2, i, j, i, j)
+
+def tilt(game_board):
+    length = len(game_board)
+    new = [[0 for i in range(length)] for j in range(length)]
+
+    for i in range(length):
+        for j in range(length):
+            new[j][length-1-i] = game_board[i][j]
+
+    return new
+
+def solution(game_board,table):
+    table2 = table
+
+    length1 = len(game_board)
+    length2 = len(table)
+
+    peices = []
+    for i in range(length2):
+        for j in range(length2):
+            result = find_peice(table2,i,j,1)
+            if result != None:
+                peices.append(result)
+    answer = 0
+
+    tiledTable = game_board
+    for i in range(4):
+        table1 = tilt(tiledTable)
+        tiledTable = [[i for i in j] for j in table1]
+        king = []
+        for i in range(length1):
+            for j in range(length1):
+                result2 = find_peice(table1,i,j,0)
+                if result2 != None:
+                    king.append(result2)
+
+        for peice in peices:
+            if peice in king:
+                answer += len(peice)
+                peices.remove(peice)
+
+    return answer
+
+print(solution([[0,0,0],[1,1,0],[1,1,1]],[[1,1,1],[1,0,0],[0,0,0]]))
+print(solution([[1,1,0,0,1,0],[0,0,1,0,1,0],[0,1,1,0,0,1],[1,1,0,1,1,1],[1,0,0,0,1,0],[0,1,1,1,0,0]],
+               [[1,0,0,1,1,0],[1,0,1,0,1,0],[0,1,1,0,1,1],[0,0,1,0,0,0],[1,1,0,1,1,0],[0,1,0,0,0,0]]))
