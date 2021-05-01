@@ -625,75 +625,161 @@
 #
 # print(find(m,total))
 
-def find_peice(table2, i, j, pivot):
-    peice = []
+# def find_peice(table2, i, j, pivot):
+#     peice = []
+#
+#     def dfs(table2, i, j, startY, startX):
+#         x = len(table2[0]) - 1
+#         y = len(table2) - 1
+#
+#         dx = [1, 0, -1, 0]
+#         dy = [0, 1, 0, -1]
+#
+#         if table2[i][j] == pivot:
+#             table2[i][j] = 7
+#             for k in range(4):
+#                 if y >= i + dy[k] >= 0 and x >= j + dx[k] >= 0:
+#                     if table2[i + dy[k]][j + dx[k]] == pivot:
+#                         peice.append([i + dy[k] - startY, j + dx[k] - startX])
+#                         dfs(table2, i + dy[k], j + dx[k], startY, startX)
+#
+#         return peice
+#
+#     if table2[i][j] != pivot:
+#         return None
+#
+#     peice.append([0, 0])
+#
+#     return dfs(table2, i, j, i, j)
+#
+# def tilt(game_board):
+#     length = len(game_board)
+#     new = [[0 for i in range(length)] for j in range(length)]
+#
+#     for i in range(length):
+#         for j in range(length):
+#             new[j][length-1-i] = game_board[i][j]
+#
+#     return new
+#
+# def solution(game_board,table):
+#     table2 = table
+#
+#     length1 = len(game_board)
+#     length2 = len(table)
+#
+#     peices = []
+#     for i in range(length2):
+#         for j in range(length2):
+#             result = find_peice(table2,i,j,1)
+#             if result != None:
+#                 peices.append(result)
+#     answer = 0
+#
+#     tiledTable = game_board
+#     for i in range(4):
+#         table1 = tilt(tiledTable)
+#         tiledTable = [[i for i in j] for j in table1]
+#         king = []
+#         for i in range(length1):
+#             for j in range(length1):
+#                 result2 = find_peice(table1,i,j,0)
+#                 if result2 != None:
+#                     king.append(result2)
+#
+#         for peice in peices:
+#             if peice in king:
+#                 answer += len(peice)
+#                 peices.remove(peice)
+#
+#     return answer
+#
+# print(solution([[0,0,0],[1,1,0],[1,1,1]],[[1,1,1],[1,0,0],[0,0,0]]))
+# print(solution([[1,1,0,0,1,0],[0,0,1,0,1,0],[0,1,1,0,0,1],[1,1,0,1,1,1],[1,0,0,0,1,0],[0,1,1,1,0,0]],
+#                [[1,0,0,1,1,0],[1,0,1,0,1,0],[0,1,1,0,1,1],[0,0,1,0,0,0],[1,1,0,1,1,0],[0,1,0,0,0,0]]))
 
-    def dfs(table2, i, j, startY, startX):
-        x = len(table2[0]) - 1
-        y = len(table2) - 1
 
-        dx = [1, 0, -1, 0]
-        dy = [0, 1, 0, -1]
 
-        if table2[i][j] == pivot:
-            table2[i][j] = 7
-            for k in range(4):
-                if y >= i + dy[k] >= 0 and x >= j + dx[k] >= 0:
-                    if table2[i + dy[k]][j + dx[k]] == pivot:
-                        peice.append([i + dy[k] - startY, j + dx[k] - startX])
-                        dfs(table2, i + dy[k], j + dx[k], startY, startX)
 
-        return peice
+# def solution(inputString):
+#     arr = list(inputString)
+#     openTarget = ['[','<','{','(']
+#     closeTarget = [']','>','}',')']
+#
+#     cont = 0
+#     for i in arr:
+#         if i in openTarget or i in closeTarget:
+#             cont += 1
+#
+#     if cont == 0:
+#         return 0
+#
+#     open = []
+#
+#     total = 0
+#
+#     for i in range(len(arr)):
+#         if arr[i] in openTarget:
+#             open.append(arr[i])
+#         if arr[i] in closeTarget:
+#             if open == []:
+#                 return -i
+#             if arr[i] != closeTarget[openTarget.index(open[-1])]:
+#                 return -i
+#             else:
+#                 del open[-1]
+#                 if open == []:
+#                     total += 1
+#
+#     if open != []:
+#         return -(len(arr)-1)
+#     return total
+#
+# print(solution('Hello, world!'))
+# print(solution('line [({<plus>)}]'))
+# print(solution('line [({<plus>})'))
+# print(solution('line [({<plus>)}]'))
+# print(solution('x * (y + z) ^ 2 = ?'))
+# import heapq
+#
+# def solution(array):
+#     answer = []
+#     new = []
+#     length = len(array)
+#
+#     for i in range(length):
+#         heapq.heappush(new, (array[i],i))
+#
+#     a = heapq.heappop(new)
+#
+#     for i in range(1,length):
+#            b = heapq.heappop(new)
+#
+#     answer = []
+#     return answer
 
-    if table2[i][j] != pivot:
-        return None
+import heapq
 
-    peice.append([0, 0])
+def find(arr,i,a):
+    new = []
+    for j in range(len(arr)):
+        if i < arr[j]:
+            heapq.heappush(new,(abs(a-j),j))
 
-    return dfs(table2, i, j, i, j)
+    if new == []:
+        return -1
 
-def tilt(game_board):
-    length = len(game_board)
-    new = [[0 for i in range(length)] for j in range(length)]
+    w,b = heapq.heappop(new)
 
-    for i in range(length):
-        for j in range(length):
-            new[j][length-1-i] = game_board[i][j]
+    return b
 
-    return new
 
-def solution(game_board,table):
-    table2 = table
-
-    length1 = len(game_board)
-    length2 = len(table)
-
-    peices = []
-    for i in range(length2):
-        for j in range(length2):
-            result = find_peice(table2,i,j,1)
-            if result != None:
-                peices.append(result)
-    answer = 0
-
-    tiledTable = game_board
-    for i in range(4):
-        table1 = tilt(tiledTable)
-        tiledTable = [[i for i in j] for j in table1]
-        king = []
-        for i in range(length1):
-            for j in range(length1):
-                result2 = find_peice(table1,i,j,0)
-                if result2 != None:
-                    king.append(result2)
-
-        for peice in peices:
-            if peice in king:
-                answer += len(peice)
-                peices.remove(peice)
-
+def solution(array):
+    answer = []
+    a = 0
+    for i in array:
+        answer.append(find(array,i,a))
+        a+=1
     return answer
 
-print(solution([[0,0,0],[1,1,0],[1,1,1]],[[1,1,1],[1,0,0],[0,0,0]]))
-print(solution([[1,1,0,0,1,0],[0,0,1,0,1,0],[0,1,1,0,0,1],[1,1,0,1,1,1],[1,0,0,0,1,0],[0,1,1,1,0,0]],
-               [[1,0,0,1,1,0],[1,0,1,0,1,0],[0,1,1,0,1,1],[0,0,1,0,0,0],[1,1,0,1,1,0],[0,1,0,0,0,0]]))
+print(solution([3, 5, 4, 1, 2]))
