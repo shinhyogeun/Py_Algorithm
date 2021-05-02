@@ -758,28 +758,65 @@
 #     answer = []
 #     return answer
 
-import heapq
+# import heapq
+#
+# def find(arr,i,a):
+#     new = []
+#     for j in range(len(arr)):
+#         if i < arr[j]:
+#             heapq.heappush(new,(abs(a-j),j))
+#
+#     if new == []:
+#         return -1
+#
+#     w,b = heapq.heappop(new)
+#
+#     return b
+#
+#
+# def solution(array):
+#     answer = []
+#     a = 0
+#     for i in array:
+#         answer.append(find(array,i,a))
+#         a+=1
+#     return answer
+#
+# print(solution([3, 5, 4, 1, 2]))
 
-def find(arr,i,a):
-    new = []
-    for j in range(len(arr)):
-        if i < arr[j]:
-            heapq.heappush(new,(abs(a-j),j))
+INF = int(1e9)
 
-    if new == []:
-        return -1
+#i번째 광고를 어떤 것을 틀까? 그것을 틀었을 떄 추가되는 비용,그때의 시간,틀었던 광고를 돌려줘라!
 
-    w,b = heapq.heappop(new)
-
-    return b
-
-
-def solution(array):
+def calculateTime(now, ads):
+    print("ads : ",ads)
     answer = []
-    a = 0
-    for i in array:
-        answer.append(find(array,i,a))
-        a+=1
-    return answer
+    for ad in ads:
+        startTime, cost = ad
+        king = startTime + 5 if now < startTime else now + 5
+        answer.append((
+            sum([j * (king - max(i, now)) for i, j in ads if i < king and [i,j] != ad]),
+            ad,
+            king
+        ))
+    print('answer 3: ',answer)
+    addCost, ad, now2 = min(answer)
+    return [now2, addCost,ad]
 
-print(solution([3, 5, 4, 1, 2]))
+def solution(ads):
+    copyedAds = [i[:] for i in ads]
+    now = 0
+    answer = 0
+
+    for i in range(len(ads)):
+        now, addCost, ad = calculateTime(now,copyedAds)
+        print(now, addCost, ad)
+        answer += addCost
+        copyedAds.remove(ad)
+
+    return answer
+# print('answer :',solution([[0,3],[5,4]]))
+print('answer :',solution([[1,3],[3,2],[5,4]]))
+# print('answer :',solution([[0,1],[0,2],[6,3],[8,4]]))
+# print(solution([[1,3],[3,2],[5,4]]))
+print('answer :',solution([[5,2],[2,2],[6,3],[9,2]]))
