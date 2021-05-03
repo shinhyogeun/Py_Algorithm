@@ -784,39 +784,79 @@
 #
 # print(solution([3, 5, 4, 1, 2]))
 
-INF = int(1e9)
+# INF = int(1e9)
 
 #i번째 광고를 어떤 것을 틀까? 그것을 틀었을 떄 추가되는 비용,그때의 시간,틀었던 광고를 돌려줘라!
 
-def calculateTime(now, ads):
-    print("ads : ",ads)
-    answer = []
-    for ad in ads:
-        startTime, cost = ad
-        king = startTime + 5 if now < startTime else now + 5
-        answer.append((
-            sum([j * (king - max(i, now)) for i, j in ads if i < king and [i,j] != ad]),
-            ad,
-            king
-        ))
-    print('answer 3: ',answer)
-    addCost, ad, now2 = min(answer)
-    return [now2, addCost,ad]
-
-def solution(ads):
-    copyedAds = [i[:] for i in ads]
-    now = 0
-    answer = 0
-
-    for i in range(len(ads)):
-        now, addCost, ad = calculateTime(now,copyedAds)
-        print(now, addCost, ad)
-        answer += addCost
-        copyedAds.remove(ad)
-
-    return answer
+# def calculateTime(now, ads):
+#     print("ads : ",ads)
+#     answer = []
+#     for ad in ads:
+#         startTime, cost = ad
+#         king = startTime + 5 if now < startTime else now + 5
+#         answer.append((
+#             sum([j * (king - max(i, now)) for i, j in ads if i < king and [i,j] != ad]),
+#             ad,
+#             king
+#         ))
+#     print('answer 3: ',answer)
+#     addCost, ad, now2 = min(answer)
+#     return [now2, addCost,ad]
+#
+# def solution(ads):
+#     copyedAds = [i[:] for i in ads]
+#     now = 0
+#     answer = 0
+#
+#     for i in range(len(ads)):
+#         now, addCost, ad = calculateTime(now,copyedAds)
+#         print(now, addCost, ad)
+#         answer += addCost
+#         copyedAds.remove(ad)
+#
+#     return answer
 # print('answer :',solution([[0,3],[5,4]]))
-print('answer :',solution([[1,3],[3,2],[5,4]]))
+# print('answer :',solution([[1,3],[3,2],[5,4]]))
 # print('answer :',solution([[0,1],[0,2],[6,3],[8,4]]))
 # print(solution([[1,3],[3,2],[5,4]]))
-print('answer :',solution([[5,2],[2,2],[6,3],[9,2]]))
+# print('answer :',solution([[5,2],[2,2],[6,3],[9,2]]))
+
+# import heapq
+#
+# def solution(jobs):
+#     copy = [i[:] for i in jobs]
+#     copy2 = [i[:] for i in jobs]
+#     q = []
+#     time = 0
+#     running = False
+#     expectedTime = 0
+#     result = []
+#
+#     while len(result) != len(jobs):
+#         #지금 실행되야하는 애들을 다 뽑아라
+#         dm = []
+#         for startTime, length in copy:
+#             if startTime <= time:
+#                 heapq.heappush(q,(length, startTime))
+#                 dm.append([startTime, length])
+#
+#         for i in dm:
+#             copy.remove(i)
+#
+#         # 시간에 도착하면 running을 멈추자
+#         if time == expectedTime:
+#             running = False
+#
+#         # 새로운 애들을 돌려야할 때
+#         if not running and q != []:
+#             leng, startime = heapq.heappop(q)
+#             result.append(time + leng - startime)
+#             expectedTime = time + leng
+#             running = True
+#
+#         time += 1
+#     return sum(result)//len(result)
+#
+# print(solution([[24, 10], [28, 39], [43, 20], [37, 5], [47, 22], [20, 47], [15, 34], [15, 2], [35, 43], [26, 1]]), 72)
+
+print([i for i in range(100) if i % 2 == 0])
