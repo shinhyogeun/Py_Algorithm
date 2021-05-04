@@ -859,4 +859,93 @@
 #
 # print(solution([[24, 10], [28, 39], [43, 20], [37, 5], [47, 22], [20, 47], [15, 34], [15, 2], [35, 43], [26, 1]]), 72)
 
-print([i for i in range(100) if i % 2 == 0])
+# import heapq
+#
+# def solution(arr):
+#     time = 0
+#     copy = [[i,j] for i,j in arr]
+#     q = []
+#     total = []
+#     running = False
+#     expectedTime = 0
+#     while len(total) != len(arr):
+#         qq = []
+#         if running and time == expectedTime:
+#             running = False
+#
+#         for startTime, cost in copy:
+#             if startTime == time:
+#                 heapq.heappush(q,[-cost, startTime])
+#                 qq.append([startTime,cost])
+#
+#         if qq != []:
+#             for i in qq:
+#                 copy.remove(i)
+#
+#         if not running and q != []:
+#             running = True
+#             minusCost, startTime = heapq.heappop(q)
+#             total.append((time-startTime) * -minusCost)
+#             expectedTime = time + 5
+#
+#         time += 1
+#
+#     return sum(total)
+#
+# print(solution([[1,10],[3,1],[5,3]]))
+# print(solution([[1,3],[3,2],[5,4]]))
+# print(solution([[0,3],[5,4]]))
+# print(solution([[0,1],[0,2],[6,3],[8,4]]))
+# print(solution([[5,2],[2,2],[6,3],[9,2]]))
+
+# total = [0 for i in range(10001)]
+
+
+# def pibo(x):
+#     total[1] = 1
+#     total[2] = 2
+#
+#     for i in range(3,x+1):
+#         total[i] = total[i-1] + total[i-2]
+#
+#     return total[x]
+
+# print(pibo(10000))
+
+# def fibonachi(number):
+#     if number in [1, 2]:
+#         return 1
+#
+#     if total[number] != 0:
+#         return total[number]
+#
+#     total[number] = fibonachi(number-1) + fibonachi(number-2)
+#
+#     return total[number]
+#
+# print(fibonachi(9))
+
+total = [0] * 30001
+
+total[1] = 1
+total[2] = 1
+total[3] = 1
+total[5] = 1
+
+def solution(number):
+    cc = [number-1]
+    if number in [1,2,3,5]:
+        return 1
+
+    if number % 5 == 0:
+        cc.append(number // 5)
+    if number % 3 == 0:
+        cc.append(number // 3)
+    if number % 2 == 0:
+        cc.append(number // 2)
+
+    total[number] = min([solution(i) if total[i] == 0 else total[i] for i in cc]) + 1
+
+    return total[number]
+
+print(solution(200))
