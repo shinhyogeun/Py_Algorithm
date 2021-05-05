@@ -925,27 +925,155 @@
 #
 # print(fibonachi(9))
 
-total = [0] * 30001
+# total = [0] * 30001
+#
+# total[1] = 0
+# total[2] = 1
+# total[3] = 1
+# total[5] = 1
+#
+# def solution(number):
+#     for i in range(2,number+1):
+#         cc = [total[i-1]]
+#
+#         if i % 5 == 0:
+#             cc.append(total[i // 5])
+#         if i % 3 == 0:
+#             cc.append(total[i // 3])
+#         if i % 2 == 0:
+#             cc.append(total[i // 2])
+#
+#         total[i] = min(cc) + 1
+#
+#     return total[number]
+#
+# print(solution(30000))
 
-total[1] = 1
-total[2] = 1
-total[3] = 1
-total[5] = 1
 
-def solution(number):
-    cc = [number-1]
-    if number in [1,2,3,5]:
-        return 1
+# def solution(number):
+#     cc = [number-1]
+#     if number in [1,2,3,5]:
+#         return 1
+#
+#     if number % 5 == 0:
+#         cc.append(number // 5)
+#     if number % 3 == 0:
+#         cc.append(number // 3)
+#     if number % 2 == 0:
+#         cc.append(number // 2)
+#
+#     total[number] = min([solution(i) if total[i] == 0 else total[i] for i in cc]) + 1
+#
+#     return total[number]
+#
+# print(solution(200))
 
-    if number % 5 == 0:
-        cc.append(number // 5)
-    if number % 3 == 0:
-        cc.append(number // 3)
-    if number % 2 == 0:
-        cc.append(number // 2)
 
-    total[number] = min([solution(i) if total[i] == 0 else total[i] for i in cc]) + 1
+# count = int(input())
+#
+# arr = list(map(int,input().split()))
+#
+# total = [0 for i in range(count+1)]
+#
+# total[1] = arr[0]
+# total[2] = max(arr[0],arr[1])
+# total[3] = max(arr[0]+arr[2], arr[1])
+#
+# for i in range(4,count+1):
+#     total[i] = max(total[i-2] + arr[i-1], total[i-3] + arr[i-2])
+#
+# print(total[count])
 
-    return total[number]
+# n, target = list(map(int,input().split()))
+# arr = []
+#
+# for i in range(n):
+#     arr.append(int(input()))
+#
+# total = [1e9] * 10001
+#
+# for i in arr:
+#     total[i] = 1
+#
+# for i in range(1, target+1):
+#     if i not in arr:
+#         aa = [total[i-j] for j in arr if i-j > 0]
+#         if aa != []:
+#             total[i] = min([total[i-j] for j in arr if i-j > 0]) + 1
+#
+# print(total[target] if total[target] < 1e9 else -1)
 
-print(solution(200))
+
+# def solution(n,horizontal):
+#     total = [[0 for i in range(n)] for i in range(n)]
+#     now = [0,0]
+#
+#     def goTiltUp(now, total):
+#         length = len(total)-1
+#
+#         if now == [length, length]: return
+#
+#         if now[0] == 0:
+#             total[now[0]][now[1] + 1] = total[now[0]][now[1]] + 1
+#             now = [now[0], now[1] + 1]
+#             goTiltDown(now,total)
+#         elif now[1] == length:
+#             total[now[0] + 1][now[1]] = total[now[0]][now[1]] + 1
+#             now = [now[0] + 1, now[1]]
+#             goTiltDown(now, total)
+#         else:
+#             total[now[0] - 1][now[1] + 1] = total[now[0]][now[1]] + 2
+#             now = [now[0] - 1, now[1] + 1]
+#             goTiltUp(now, total)
+#
+#     def goTiltDown(now, total):
+#         length = len(total)-1
+#
+#         if now == [length,length]: return
+#
+#         if now[0] == length:
+#             total[now[0]][now[1] + 1] = total[now[0]][now[1]] + 1
+#             now = [now[0], now[1] + 1]
+#             goTiltUp(now, total)
+#         elif now[1] == 0:
+#             total[now[0] + 1][now[1]] = total[now[0]][now[1]] + 1
+#             now = [now[0] + 1, now[1]]
+#             goTiltUp(now,total)
+#         else:
+#             total[now[0] + 1][now[1] - 1] = total[now[0]][now[1]] + 2
+#             now = [now[0] + 1, now[1] - 1]
+#             goTiltDown(now, total)
+#
+#     if horizontal:
+#         goTiltUp(now,total)
+#     else:
+#         goTiltDown(now,total)
+#
+#     return total
+#
+# print('answer: ',solution(4,True))
+# print('answer: ',solution(5,False))
+
+
+
+length = int(input())
+
+arr = list(map(int,input().split()))
+
+def find(total):
+    start = 0
+    end = len(total)-1
+
+    while start <= end:
+        pivot = (start + end) // 2
+        if total[pivot] < pivot :
+            start = pivot+1
+        elif total[pivot] > pivot:
+            end = pivot-1
+
+        if total[pivot] == pivot:
+            return pivot
+
+print(find(arr))
+
+
