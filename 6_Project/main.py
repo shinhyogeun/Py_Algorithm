@@ -1074,59 +1074,99 @@
 #
 # print(find(arr))
 
-from itertools import combinations
+# from itertools import combinations
+#
+# n = int(input())
+#
+# total = []
+#
+# for i in range(n):
+#     total.append(input().split())
+#
+# def find(what):
+#     box = []
+#     for i in range(n):
+#         for j in range(n):
+#             if total[i][j] == what:
+#                 box.append([i,j])
+#     return box
+#
+# teachers = find('T'); students = find('S'); remains = find('X')
+#
+# def solution():
+#     for i in list(combinations(remains, 3)):
+#         total2 = [[i for i in j] for j in total]
+#         def colDFS(l, m, checkmark):
+#             total2[l][m] = 'T'+checkmark
+#             for k in [-1, 1]:
+#                 if n-1 >= l + k >= 0 and total2[l + k][m] not in ['O', 'T'+checkmark]:
+#                     colDFS(l + k, m, checkmark)
+#
+#         def rowDFS(l, m, checkmark):
+#             total2[l][m] = 'T' + checkmark
+#             for k in [-1, 1]:
+#                 if n-1 >= m+k >= 0 and total2[l][m + k] not in ['O', 'T'+checkmark]:
+#                     rowDFS(l, m + k, checkmark)
+#
+#         for j in i:
+#             total2[j[0]][j[1]] = 'O'
+#
+#         for teacher in teachers:
+#             colDFS(teacher[0], teacher[1], ''.join(list(map(str,teacher))))
+#             rowDFS(teacher[0], teacher[1], ''.join(list(map(str,teacher))))
+#
+#         count = 0
+#         for i in range(n):
+#             for j in range(n):
+#                 if total2[i][j] == 'S':
+#                     count += 1
+#
+#         if count == len(students):
+#             for i in total2:
+#                 print(i)
+#             print()
+#             return 'YES'
+#
+#     return 'NO'
+#
+# print(solution())
+
+# t = int(input())
+#
+# answer = []
+# for i in range(t):
+#     n, m = list(map(int,input().split()))
+#     flatArr = list(map(int,input().split()))
+#     arr2 = []
+#     arr = []
+#     for i in range(n):
+#         arr2.append(flatArr[m*i:m*(i+1)])
+#
+#     for j in range(m):
+#         arr.append([i[j] for i in arr2])
+#
+#     total = [arr[0]]
+#
+#     for i in range(m-1):
+#         added = []
+#         for j in range(n):
+#             if j == 0:
+#                 added.append(arr[i+1][j] + max(total[i][j],total[i][j+1]))
+#             elif j == n-1:
+#                 added.append(arr[i+1][j] + max(total[i][j],total[i][j-1]))
+#             else:
+#                 added.append(arr[i+1][j] + max(total[i][j],total[i][j+1],total[i][j-1]))
+#         total.append(added)
+#
+#     answer.append(max(total[m-1]))
+#
+# for i in answer:
+#     print(i)
 
 n = int(input())
 
-total = []
+arr = []
 
 for i in range(n):
-    total.append(input().split())
+    arr.append(list(map(int,input().split())))
 
-def find(what):
-    box = []
-    for i in range(n):
-        for j in range(n):
-            if total[i][j] == what:
-                box.append([i,j])
-    return box
-
-teachers = find('T'); students = find('S'); remains = find('X')
-
-def solution():
-    for i in list(combinations(remains, 3)):
-        total2 = [[i for i in j] for j in total]
-        def colDFS(l, m, checkmark):
-            total2[l][m] = 'T'+checkmark
-            for k in [-1, 1]:
-                if n-1 >= l + k >= 0 and total2[l + k][m] not in ['O', 'T'+checkmark]:
-                    colDFS(l + k, m, checkmark)
-
-        def rowDFS(l, m, checkmark):
-            total2[l][m] = 'T' + checkmark
-            for k in [-1, 1]:
-                if n-1 >= m+k >= 0 and total2[l][m + k] not in ['O', 'T'+checkmark]:
-                    rowDFS(l, m + k, checkmark)
-
-        for j in i:
-            total2[j[0]][j[1]] = 'O'
-
-        for teacher in teachers:
-            colDFS(teacher[0], teacher[1], ''.join(list(map(str,teacher))))
-            rowDFS(teacher[0], teacher[1], ''.join(list(map(str,teacher))))
-
-        count = 0
-        for i in range(n):
-            for j in range(n):
-                if total2[i][j] == 'S':
-                    count += 1
-
-        if count == len(students):
-            for i in total2:
-                print(i)
-            print()
-            return 'YES'
-
-    return 'NO'
-
-print(solution())
