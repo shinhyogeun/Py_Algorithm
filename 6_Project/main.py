@@ -1163,10 +1163,26 @@
 # for i in answer:
 #     print(i)
 
-n = int(input())
-
-arr = []
-
-for i in range(n):
-    arr.append(list(map(int,input().split())))
-
+# n = int(input())
+#
+# arr = []
+#
+# for i in range(n):
+#     arr.append(list(map(int,input().split())))
+#
+# total = [arr[0]]
+#
+# for i in range(1, n):
+#     length = len(arr[i])
+#     added = []
+#     for j in range(length):
+#         if j == 0:
+#             added.append(total[i-1][j] + arr[i][j])
+#         elif j == length-1:
+#             added.append(total[i-1][j-1] + arr[i][j])
+#         else:
+#             added.append(max(total[i-1][j-1],total[i-1][j]) + arr[i][j])
+#
+#     total.append(added)
+#
+# print(max(total[n-1]))
