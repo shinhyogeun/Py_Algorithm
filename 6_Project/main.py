@@ -1054,26 +1054,79 @@
 # print('answer: ',solution(4,True))
 # print('answer: ',solution(5,False))
 
+# length = int(input())
+#
+# arr = list(map(int,input().split()))
+#
+# def find(total):
+#     start = 0
+#     end = len(total)-1
+#
+#     while start <= end:
+#         pivot = (start + end) // 2
+#         if total[pivot] < pivot :
+#             start = pivot+1
+#         elif total[pivot] > pivot:
+#             end = pivot-1
+#
+#         if total[pivot] == pivot:
+#             return pivot
+#
+# print(find(arr))
 
+from itertools import combinations
 
-length = int(input())
+n = int(input())
 
-arr = list(map(int,input().split()))
+total = []
 
-def find(total):
-    start = 0
-    end = len(total)-1
+for i in range(n):
+    total.append(input().split())
 
-    while start <= end:
-        pivot = (start + end) // 2
-        if total[pivot] < pivot :
-            start = pivot+1
-        elif total[pivot] > pivot:
-            end = pivot-1
+def find(what):
+    box = []
+    for i in range(n):
+        for j in range(n):
+            if total[i][j] == what:
+                box.append([i,j])
+    return box
 
-        if total[pivot] == pivot:
-            return pivot
+teachers = find('T'); students = find('S'); remains = find('X')
 
-print(find(arr))
+def solution():
+    for i in list(combinations(remains, 3)):
+        total2 = [[i for i in j] for j in total]
+        def colDFS(l, m, checkmark):
+            total2[l][m] = 'T'+checkmark
+            for k in [-1, 1]:
+                if n-1 >= l + k >= 0 and total2[l + k][m] not in ['O', 'T'+checkmark]:
+                    colDFS(l + k, m, checkmark)
 
+        def rowDFS(l, m, checkmark):
+            total2[l][m] = 'T' + checkmark
+            for k in [-1, 1]:
+                if n-1 >= m+k >= 0 and total2[l][m + k] not in ['O', 'T'+checkmark]:
+                    rowDFS(l, m + k, checkmark)
 
+        for j in i:
+            total2[j[0]][j[1]] = 'O'
+
+        for teacher in teachers:
+            colDFS(teacher[0], teacher[1], ''.join(list(map(str,teacher))))
+            rowDFS(teacher[0], teacher[1], ''.join(list(map(str,teacher))))
+
+        count = 0
+        for i in range(n):
+            for j in range(n):
+                if total2[i][j] == 'S':
+                    count += 1
+
+        if count == len(students):
+            for i in total2:
+                print(i)
+            print()
+            return 'YES'
+
+    return 'NO'
+
+print(solution())
