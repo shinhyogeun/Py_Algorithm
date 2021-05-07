@@ -1186,3 +1186,55 @@
 #     total.append(added)
 #
 # print(max(total[n-1]))
+
+# import heapq
+#
+# node,line = list(map(int,input().split()))
+# start = int(input())
+# INF = 1e9
+#
+# answers = [INF] * (node+1)
+#
+# q = []
+#
+# heapq.heappush(q,(0, start))
+#
+# info = [[] for i in range(node+1)]
+#
+# for i in range(line):
+#     frm,to,cost = list(map(int,input().split()))
+#     info[frm].append((to,cost))
+#
+# while q:
+#     answer, index = heapq.heappop(q)
+#     if answers[index] < answer:
+#         continue
+#     answers[index] = answer
+#     for to, cost in info[index]:
+#         if answers[to] > answers[index] + cost:
+#             answers[to] = answers[index] + cost
+#             heapq.heappush(q,(answers[to], to))
+#
+# for i in answers:
+#     print(i)
+
+n = int(input())
+
+total = [[]]
+
+for i in range(n):
+    total.append(list(map(int,input().split())))
+
+answer = [0 for i in range(n+1)]
+
+# Day까지 벌수 있는 최대 돈
+for day in range(1, n+1):
+    interval, cost = total[day]
+    if day + interval - 1 <= n:
+        if answer[day + interval - 1] < answer[day - 1] + cost:
+            answer[day + interval - 1] = answer[day - 1] + cost
+        if answer[day] < answer[day - 1]:
+            answer[day] = answer[day - 1]
+
+print(max(answer))
+
