@@ -1218,23 +1218,211 @@
 # for i in answers:
 #     print(i)
 
-n = int(input())
+# n = int(input())
+#
+# total = [[]]
+#
+# for i in range(n):
+#     total.append(list(map(int,input().split())))
+#
+# answer = [0 for i in range(n+1)]
+#
+# # Day까지 벌수 있는 최대 돈
+# for day in range(1, n+1):
+#     interval, cost = total[day]
+#     if day + interval - 1 <= n:
+#         if answer[day + interval - 1] < answer[day - 1] + cost:
+#             answer[day + interval - 1] = answer[day - 1] + cost
+#         if answer[day] < answer[day - 1]:
+#             answer[day] = answer[day - 1]
+#
+# print(max(answer))
 
-total = [[]]
 
-for i in range(n):
-    total.append(list(map(int,input().split())))
 
-answer = [0 for i in range(n+1)]
+# def solution(s):
+#     number = ['zero','one','two','three','four','five','six','seven','eight','nine']
+#     real = ['0','1','2','3','4','5','6','7','8','9']
+#     arr = list(s)
+#     em = []
+#     answer = []
+#     for i in range(len(arr)):
+#         if arr[i] not in real:
+#             em.append(arr[i])
+#             if ''.join(em) in number:
+#                 answer.append(str(number.index(''.join(em))))
+#                 em = []
+#         else:
+#             answer.append(arr[i])
+#     aa = ''.join(answer)
+#     return int(aa)
+#
+#
+# print(solution("one4seveneight"))
 
-# Day까지 벌수 있는 최대 돈
-for day in range(1, n+1):
-    interval, cost = total[day]
-    if day + interval - 1 <= n:
-        if answer[day + interval - 1] < answer[day - 1] + cost:
-            answer[day + interval - 1] = answer[day - 1] + cost
-        if answer[day] < answer[day - 1]:
-            answer[day] = answer[day - 1]
+# from itertools import combinations
+#
+# def solution(places):
+#     answer = []
+#     for place in places:
+#         PArr = []
+#         for i in range(len(place)):
+#             for j in range(len(place)):
+#                 if place[i][j] == 'P':
+#                  PArr.append((i,j))
+#
+#         allCombi = list(combinations(PArr,2))
+#
+#         result = 1
+#
+#         for combi in allCombi:
+#             a,b = combi
+#             if abs(a[0]-b[0]) + abs(a[1]-b[1]) > 2:
+#                 continue
+#
+#             if abs(a[0] - b[0]) + abs(a[1] - b[1]) == 1:
+#                 result = 0
+#                 break
+#
+#             if abs(a[0]-b[0]) + abs(a[1]-b[1]) == 2:
+#                 if a[0] == b[0] or a[1] == b[1]:
+#                     if a[0] == b[0]:
+#                         if a[1] > b[1]:
+#                             if place[a[0]][a[1]-1] != 'X':
+#                                 result = 0
+#                                 break
+#                         else:
+#                             if place[a[0]][a[1]+1] != 'X':
+#                                 result = 0
+#                                 break
+#                     if a[1] == b[1]:
+#                         if a[0] > b[0]:
+#                             if place[a[0]-1][a[1]] != 'X':
+#                                 result = 0
+#                                 break
+#                         else:
+#                             if place[a[0]+1][a[1]] != 'X':
+#                                 result = 0
+#                                 break
+#                 else:
+#                     if a[1] < b[1]:
+#                         if a[0] < b[0]:
+#                             if place[a[0]+1][a[1]] != 'X' or place[a[0]][a[1]+1] != 'X':
+#                                 result = 0
+#                                 break
+#                         else:
+#                             if place[a[0]-1][a[1]] != 'X' or place[a[0]][a[1]+1] != 'X':
+#                                 result = 0
+#                                 break
+#                     else:
+#                         if a[0] < b[0]:
+#                             if place[a[0]][a[1]-1] != 'X' or place[a[0]+1][a[1]] != 'X':
+#                                 result = 0
+#                                 break
+#                         else:
+#                             if place[a[0]-1][a[1]] != 'X' or place[a[0]][a[1]-1] != 'X':
+#                                 result = 0
+#                                 break
+#         answer.append(result)
+#     return answer
+#
+# print(solution([["POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"], ["POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"], ["PXOPX", "OXOXP", "OXPXX", "OXXXP", "POOXX"], ["OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"], ["PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"]]))
 
-print(max(answer))
+
+
+# import heapq
+#
+# def solution(n, start, end, roads, traps):
+#     INF = 1e9
+#
+#     answers = [INF] * (n+1)
+#
+#     q = []
+#
+#     heapq.heappush(q,(0, start))
+#
+#     info = [[] for i in range(n+1)]
+#
+#     for road in roads:
+#         frm,to,cost = road
+#         info[frm].append((to, cost))
+#
+#     reverse = [[] for i in range(n + 1)]
+#     for one in range(n + 1):
+#         for to, cost in info[one]:
+#             reverse[to].append((one, cost))
+#
+#     while q:
+#         answer, index = heapq.heappop(q)
+#         if index in traps:
+#             if answers[index] < answer:
+#                 new = [[] for i in range(n + 1)]
+#                 for one in range(n+1):
+#                     for to,cost in info[one]:
+#                         new[to].append((one,cost))
+#                 info = new
+#                 for to, cost in info[index]:
+#                     if answers[to] > answers[index] + cost:
+#                         answers[to] = answers[index] + cost
+#                         heapq.heappush(q, (answers[to], to))
+#             else:
+#                 new = [[] for i in range(n+1)]
+#                 for one in range(n+1):
+#                     for to,cost in info[one]:
+#                         new[to].append((one,cost))
+#                 info = new
+#                 answers[index] = answer
+#             for to, cost in info[index]:
+#                 if answers[to] > answers[index] + cost:
+#                     answers[to] = answers[index] + cost
+#                     heapq.heappush(q, (answers[to], to))
+#         else:
+#             if answers[index] < answer:
+#                 continue
+#             answers[index] = answer
+#             for to, cost in info[index]:
+#                 if answers[to] > answers[index] + cost:
+#                     answers[to] = answers[index] + cost
+#                     heapq.heappush(q,(answers[to], to))
+#
+#     return answers[end]
+#
+# # print(solution(3,1,3,[[1, 2, 2], [3, 2, 3]],[2]))
+# print(solution(4,1,4,[[1, 2, 1], [3, 2, 1], [2, 4, 1]]	,[2,3]))
+a = [1,2,3,4]
+del a[-1]
+print(a)
+def solution(n, k, cmd):
+    total = [str(i) for i in range(n)]
+    print(total)
+    deletedArr = []
+    now = k
+
+    for order in cmd:
+        if order == 'C':
+            deletedArr.append(total[now])
+            del total[now]
+            if now == len(total):
+                now -= 1
+        elif order == 'Z':
+            total.insert(int(deletedArr[-1]), deletedArr[-1])
+            if int(deletedArr[-1]) <= now:
+                now += 1
+            del deletedArr[-1]
+        else:
+            wher, number = order.split()
+            if wher == 'D':
+                now += int(number)
+            else:
+                now -= int(number)
+
+    answer = ['O'] * n
+    for i in deletedArr:
+        answer[int(i)] = 'X'
+
+    return ''.join(answer)
+
+# print(solution(8,2,["D 2","C","U 3","C","D 4","C","U 2","Z","Z"]))
+print(solution(5,1,["C","Z","C","C","C","Z","Z","Z"]))
+# print(solution(8,2,["D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C"]))
 
