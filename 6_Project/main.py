@@ -1389,40 +1389,137 @@
 #
 # # print(solution(3,1,3,[[1, 2, 2], [3, 2, 3]],[2]))
 # print(solution(4,1,4,[[1, 2, 1], [3, 2, 1], [2, 4, 1]]	,[2,3]))
-a = [1,2,3,4]
-del a[-1]
-print(a)
-def solution(n, k, cmd):
-    total = [str(i) for i in range(n)]
-    print(total)
-    deletedArr = []
-    now = k
-
-    for order in cmd:
-        if order == 'C':
-            deletedArr.append(total[now])
-            del total[now]
-            if now == len(total):
-                now -= 1
-        elif order == 'Z':
-            total.insert(int(deletedArr[-1]), deletedArr[-1])
-            if int(deletedArr[-1]) <= now:
-                now += 1
-            del deletedArr[-1]
-        else:
-            wher, number = order.split()
-            if wher == 'D':
-                now += int(number)
-            else:
-                now -= int(number)
-
-    answer = ['O'] * n
-    for i in deletedArr:
-        answer[int(i)] = 'X'
-
-    return ''.join(answer)
+# a = [1,2,3,4]
+# del a[-1]
+# print(a)
+# def solution(n, k, cmd):
+#     total = [str(i) for i in range(n)]
+#     print(total)
+#     deletedArr = []
+#     now = k
+#
+#     for order in cmd:
+#         if order == 'C':
+#             deletedArr.append(total[now])
+#             del total[now]
+#             if now == len(total):
+#                 now -= 1
+#         elif order == 'Z':
+#             total.insert(int(deletedArr[-1]), deletedArr[-1])
+#             if int(deletedArr[-1]) <= now:
+#                 now += 1
+#             del deletedArr[-1]
+#         else:
+#             wher, number = order.split()
+#             if wher == 'D':
+#                 now += int(number)
+#             else:
+#                 now -= int(number)
+#
+#     answer = ['O'] * n
+#     for i in deletedArr:
+#         answer[int(i)] = 'X'
+#
+#     return ''.join(answer)
 
 # print(solution(8,2,["D 2","C","U 3","C","D 4","C","U 2","Z","Z"]))
-print(solution(5,1,["C","Z","C","C","C","Z","Z","Z"]))
+# print(solution(5,1,["C","Z","C","C","C","Z","Z","Z"]))
 # print(solution(8,2,["D 2","C","U 3","C","D 4","C","U 2","Z","Z","U 1","C"]))
 
+# def solution(code, day, data):
+#     answer = []
+#     new = []
+#     for dat in data:
+#         price, code2, time = dat.split(' ')
+#         a, exactCode = code2.split('=')
+#         b, exactTime = time.split('=')
+#         c, exactPrice = price.split('=')
+#         new.append([exactPrice,exactCode,int(exactTime)])
+#         new = sorted(new,key=lambda x:x[2])
+#     for dat in new:
+#         price, code2, time = dat
+#         if code == code2 and str(time)[:8] == day:
+#             answer.append(int(price))
+#
+#     return answer
+#
+# print(solution("012345",'20190620',["price=80 code=987654 time=2019062113","price=90 code=012345 time=2019062014","price=120 code=987654 time=2019062010","price=110 code=012345 time=2019062009","price=95 code=012345 time=2019062111"]))
+
+
+# import heapq
+#
+# def solution(t, r):
+#     total = []
+#     for i in range(len(t)):
+#         total.append([r[i],t[i],i])
+#     now = 0
+#     q = []
+#     answer = []
+#     while len(answer) != len(t):
+#         for i in total:
+#             if i[1] == now:
+#                 heapq.heappush(q,i)
+#
+#         if q != []:
+#             ridePoeple = heapq.heappop(q)
+#             answer.append(ridePoeple[2])
+#         now += 1
+#     return answer
+#
+# print(solution([0,1,3,0],[0,1,2,3]))
+# print(solution([7,6,8,1],[0,1,2,3]))
+
+def calculate(maps,p,r,i,j):
+    count = 0
+    king = r//2 - 1
+    what = []
+    for a in range(-king,king):
+        for b in range(-king,king):
+            if a == -king and b in [-king,king-1]:
+                continue
+            if b == -king and a in [-king, king-1]:
+                continue
+            if a ==king-1 and b == king-1:
+                continue
+
+            if len(maps) > i+a >=0 and len(maps) > j+b >=0:
+                if maps[i+a][j+b] <= p:
+
+                    what.append([maps[i+a][j+b]])
+                    count += 1
+
+        for j in range(king):
+            if maps[j+(r//2 - 2)-j][i-r//2] <= p/2:
+                count += 1
+        for i in range(king):
+            if maps[j+(r//2 - 2)-king - i][i-r//2 + i] <= p/2:
+                count += 1
+        for i in range(king):
+            if maps[j+(r//2 - 2)-king - king][i-r//2 + king+i] <= p/2:
+                count += 1
+        for i in range(king):
+            if maps[j+(r//2 - 2)-king - king + i][i-r//2 + king + king + i] <= p/2:
+                count += 1
+        for i in range(king):
+            if maps[j+(r//2 - 2)-king + i][i-r//2 + king + king + king] <= p/2:
+                count += 1
+        for i in range(king):
+            if maps[j+(r//2 - 2) + i][i-r//2 + king + king + king - i] <= p/2:
+                count += 1
+        for i in range(king):
+            if maps[j+(r//2 - 2) + king][i-r//2 + king + king-i] <= p/2:
+                count += 1
+        for i in range(king):
+            if maps[j+(r//2 - 2) + king - i][i-r//2 + king - i] <= p/2:
+                count += 1
+
+        return count
+
+    return what
+print(calculate([[1, 28, 41, 22, 25, 79, 4], [39, 20, 10, 17, 19, 18, 8], [21, 4, 13, 12, 9, 29, 19], [58, 1, 20, 5, 8, 16, 9], [5, 6, 15, 2, 39, 8, 29],[39, 7, 17, 5, 4, 49, 5], [74, 46, 8, 11, 25, 2, 11]],19,6,1,1))
+def solution(maps, p, r):
+    answer = []
+    for i in range(len(maps)+1):
+        for j in range(len(maps)+1):
+            answer.append(calculate(maps,p,r,i,j))
+    return max(answer)
