@@ -1469,57 +1469,119 @@
 # print(solution([0,1,3,0],[0,1,2,3]))
 # print(solution([7,6,8,1],[0,1,2,3]))
 
-def calculate(maps,p,r,i,j):
-    count = 0
-    king = r//2 - 1
-    what = []
-    for a in range(-king,king):
-        for b in range(-king,king):
-            if a == -king and b in [-king,king-1]:
-                continue
-            if b == -king and a in [-king, king-1]:
-                continue
-            if a ==king-1 and b == king-1:
-                continue
+# def calculate(maps,p,r,i,j):
+#     count = 0
+#     king = r//2 - 1
+#     what = []
+#     for a in range(-king,king):
+#         for b in range(-king,king):
+#             if a == -king and b in [-king,king-1]:
+#                 continue
+#             if b == -king and a in [-king, king-1]:
+#                 continue
+#             if a ==king-1 and b == king-1:
+#                 continue
+#
+#             if len(maps) > i+a >=0 and len(maps) > j+b >=0:
+#                 if maps[i+a][j+b] <= p:
+#
+#                     what.append([maps[i+a][j+b]])
+#                     count += 1
+#
+#         for j in range(king):
+#             if maps[j+(r//2 - 2)-j][i-r//2] <= p/2:
+#                 count += 1
+#         for i in range(king):
+#             if maps[j+(r//2 - 2)-king - i][i-r//2 + i] <= p/2:
+#                 count += 1
+#         for i in range(king):
+#             if maps[j+(r//2 - 2)-king - king][i-r//2 + king+i] <= p/2:
+#                 count += 1
+#         for i in range(king):
+#             if maps[j+(r//2 - 2)-king - king + i][i-r//2 + king + king + i] <= p/2:
+#                 count += 1
+#         for i in range(king):
+#             if maps[j+(r//2 - 2)-king + i][i-r//2 + king + king + king] <= p/2:
+#                 count += 1
+#         for i in range(king):
+#             if maps[j+(r//2 - 2) + i][i-r//2 + king + king + king - i] <= p/2:
+#                 count += 1
+#         for i in range(king):
+#             if maps[j+(r//2 - 2) + king][i-r//2 + king + king-i] <= p/2:
+#                 count += 1
+#         for i in range(king):
+#             if maps[j+(r//2 - 2) + king - i][i-r//2 + king - i] <= p/2:
+#                 count += 1
+#
+#         return count
+#
+#     return what
+# print(calculate([[1, 28, 41, 22, 25, 79, 4], [39, 20, 10, 17, 19, 18, 8], [21, 4, 13, 12, 9, 29, 19], [58, 1, 20, 5, 8, 16, 9], [5, 6, 15, 2, 39, 8, 29],[39, 7, 17, 5, 4, 49, 5], [74, 46, 8, 11, 25, 2, 11]],19,6,1,1))
+# def solution(maps, p, r):
+#     answer = []
+#     for i in range(len(maps)+1):
+#         for j in range(len(maps)+1):
+#             answer.append(calculate(maps,p,r,i,j))
+#     return max(answer)
 
-            if len(maps) > i+a >=0 and len(maps) > j+b >=0:
-                if maps[i+a][j+b] <= p:
+from itertools import combinations
 
-                    what.append([maps[i+a][j+b]])
-                    count += 1
+def isIn(a,b):
+    for i in a:
+        if i not in b:
+            return False
+    return True
 
-        for j in range(king):
-            if maps[j+(r//2 - 2)-j][i-r//2] <= p/2:
-                count += 1
-        for i in range(king):
-            if maps[j+(r//2 - 2)-king - i][i-r//2 + i] <= p/2:
-                count += 1
-        for i in range(king):
-            if maps[j+(r//2 - 2)-king - king][i-r//2 + king+i] <= p/2:
-                count += 1
-        for i in range(king):
-            if maps[j+(r//2 - 2)-king - king + i][i-r//2 + king + king + i] <= p/2:
-                count += 1
-        for i in range(king):
-            if maps[j+(r//2 - 2)-king + i][i-r//2 + king + king + king] <= p/2:
-                count += 1
-        for i in range(king):
-            if maps[j+(r//2 - 2) + i][i-r//2 + king + king + king - i] <= p/2:
-                count += 1
-        for i in range(king):
-            if maps[j+(r//2 - 2) + king][i-r//2 + king + king-i] <= p/2:
-                count += 1
-        for i in range(king):
-            if maps[j+(r//2 - 2) + king - i][i-r//2 + king - i] <= p/2:
+
+def solution(orders, course):
+    kind = []
+
+    for i in orders:
+        for j in i:
+            kind.append(j)
+
+    kind = list(set(kind))
+
+    remover = []
+
+    for i in kind:
+        count = 0
+        for order in orders:
+            if i in order:
                 count += 1
 
-        return count
+        if count < 2:
+            remover.append(i)
 
-    return what
-print(calculate([[1, 28, 41, 22, 25, 79, 4], [39, 20, 10, 17, 19, 18, 8], [21, 4, 13, 12, 9, 29, 19], [58, 1, 20, 5, 8, 16, 9], [5, 6, 15, 2, 39, 8, 29],[39, 7, 17, 5, 4, 49, 5], [74, 46, 8, 11, 25, 2, 11]],19,6,1,1))
-def solution(maps, p, r):
+    for j in remover:
+        kind.remove(j)
+
+
     answer = []
-    for i in range(len(maps)+1):
-        for j in range(len(maps)+1):
-            answer.append(calculate(maps,p,r,i,j))
-    return max(answer)
+    for i in course:
+        total = []
+        menus = [i for i in combinations(kind, i)]
+        for menu in menus:
+            count = 0
+            for order in orders:
+                if isIn(menu,order):
+                    count += 1
+            if count >= 2:
+                total.append([count, menu])
+        total = sorted(total,reverse=True)
+
+        if total != []:
+            target = total[0][0]
+            for i in total:
+                if i[0] == target:
+                    answer.append(i[1])
+
+    answer = [''.join(sorted(i)) for i in answer]
+
+    return sorted(answer)
+
+
+# print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"],[2,3,4]))
+# print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"],[2,3,4]))
+print(solution(["ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"],[2,3,5]))
+print(solution(["XYZ", "XWY", "WXA"],[2,3,4]))
