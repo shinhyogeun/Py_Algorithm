@@ -1524,67 +1524,59 @@
 #             answer.append(calculate(maps,p,r,i,j))
 #     return max(answer)
 
-from itertools import combinations
+# from itertools import combinations
+#
+# def solution(orders,course):
+#     answer = []
+#     news = []
+#     for order in orders:
+#         for j in order:
+#             news.append(j)
+#     news = sorted(list(set(news)))
+#
+#     real = []
+#
+#     for new in news:
+#         count = 0
+#         for order in orders:
+#             if new in order:
+#                 count += 1
+#         if count >= 2 :
+#             real.append(new)
+#
+#     for i in course:
+#         totaldic = {}
+#
+#         for order in orders:
+#             target = ''
+#
+#             for one in order:
+#                 if one in real:
+#                     target += one
+#
+#             oneTotal = combinations(target,i)
+#
+#             for one in oneTotal:
+#                 if ''.join(sorted(one)) in  totaldic.keys():
+#                     totaldic[''.join(sorted(one))] += 1
+#                 else:
+#                     totaldic[''.join(sorted(one))] = 1
+#
+#             result = sorted([(totaldic[one], one) for one in totaldic if totaldic[one] >= 2],reverse=True)
+#
+#
+#         if result != []:
+#             big = result[0][0]
+#             for j in result:
+#                 if j[0] == big and big >= 2:
+#                     answer.append(j[1])
+#
+#     return sorted(answer)
 
 
-a = ["A","B","C",""]
-print(list(combinations(a,2)))
-def isIn(a,b):
-    for i in a:
-        if i not in b:
-            return False
-    return True
 
 
-def solution(orders, course):
-    kind = []
-
-    for i in orders:
-        for j in i:
-            kind.append(j)
-
-    kind = list(set(kind))
-
-    remover = []
-
-    for i in kind:
-        count = 0
-        for order in orders:
-            if i in order:
-                count += 1
-
-        if count < 2:
-            remover.append(i)
-
-    for j in remover:
-        kind.remove(j)
-
-
-    answer = []
-    for i in course:
-        total = []
-        menus = [i for i in combinations(kind, i)]
-        for menu in menus:
-            count = 0
-            for order in orders:
-                if isIn(menu,order):
-                    count += 1
-            if count >= 2:
-                total.append([count, menu])
-        total = sorted(total,reverse=True)
-
-        if total != []:
-            target = total[0][0]
-            for i in total:
-                if i[0] == target:
-                    answer.append(i[1])
-
-    answer = [''.join(sorted(i)) for i in answer]
-
-    return sorted(answer)
-
-
-# print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"],[2,3,4]))
+print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"],[2,3,4]))
 # print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"],[2,3,4]))
 # print(solution(["ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"],[2,3,5]))
 # print(solution(["XYZ", "XWY", "WXA"],[2,3,4]))
