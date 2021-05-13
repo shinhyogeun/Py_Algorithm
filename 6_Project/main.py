@@ -1576,7 +1576,93 @@
 
 
 
-print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"],[2,3,4]))
+# print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"],[2,3,4]))
 # print(solution(["ABCFG", "AC", "CDE", "ACDE", "BCFG", "ACDEH"],[2,3,4]))
 # print(solution(["ABCDE", "AB", "CD", "ADE", "XYZ", "XYZ", "ACD"],[2,3,5]))
 # print(solution(["XYZ", "XWY", "WXA"],[2,3,4]))
+
+# from itertools import permutations
+#
+# def solution(expression):
+#     number = []
+#     pri = []
+#     buket = []
+#
+#     answer = []
+#     for i in expression:
+#         if i in ['*','+','-']:
+#             number.append(int(''.join(buket)))
+#             buket = []
+#             pri.append(i)
+#         else:
+#             buket.append(i)
+#     number.append(int(''.join(buket)))
+#
+#     print(number, pri, buket)
+#     for oper in permutations(['*','+','-'],3):
+#         count = 'start'
+#         for op in oper:
+#             for index in range(len(pri)):
+#                 if pri[index] == op:
+#                     if count == 'start':
+#                         count = number[index]
+#                     if op == '*':
+#                         count *= number[index + 1]
+#                     elif op == '+':
+#                         count += number[index + 1]
+#                     else:
+#                         count -=  number[index + 1]
+#
+#         answer.append(abs(count))
+#
+#     return max(answer)
+#
+# print(solution('100-200*300-500+20'))
+
+import datetime
+
+def solution(lines):
+    total = []
+    answer = []
+
+    for line in lines:
+        convertedLine = ' '.join(line.split(' ')[:2])
+        length = float(line.split(' ')[2].replace('s',''))*1000-1
+        convertedLine = datetime.datetime.strptime(convertedLine,"%Y-%m-%d %H:%M:%S.%f")
+        total.append([convertedLine - datetime.timedelta(milliseconds=length), convertedLine])
+
+    for startTime, endTime in total:
+        interval1 = [startTime, startTime + datetime.timedelta(milliseconds=999)]
+        interval2 = [endTime, endTime + datetime.timedelta(milliseconds=999)]
+
+        vs = [0,0]
+        for start, end in total:
+            if not ((interval1[1] < start) or (interval1[0] > end)):
+               vs[0] += 1
+            if not ((interval2[1] < start) or (interval2[0] > end)):
+               vs[1] += 1
+
+        answer.append(max(vs))
+
+    return max(answer)
+
+
+# print(solution([
+# "2016-09-15 20:59:57.421 0.351s",
+# "2016-09-15 20:59:58.233 1.181s",
+# "2016-09-15 20:59:58.299 0.8s",
+# "2016-09-15 20:59:58.688 1.041s",
+# "2016-09-15 20:59:59.591 1.412s",
+# "2016-09-15 21:00:00.464 1.466s",
+# "2016-09-15 21:00:00.741 1.581s",
+# "2016-09-15 21:00:00.748 2.31s",
+# "2016-09-15 21:00:00.966 0.381s",
+# "2016-09-15 21:00:02.066 2.62s"
+# ]))
+#
+# print(solution([
+# "2016-09-15 01:00:04.002 2.0s",
+# "2016-09-15 01:00:07.000 2s"
+# ]))
+
+print(solution(["2016-09-15 01:00:04.001 2.0s", "2016-09-15 01:00:07.000 2s"]))
