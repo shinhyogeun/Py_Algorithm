@@ -1619,50 +1619,99 @@
 #
 # print(solution('100-200*300-500+20'))
 
-import datetime
+# import datetime
+#
+# def solution(lines):
+#     total = []
+#     answer = []
+#
+#     for line in lines:
+#         convertedLine = ' '.join(line.split(' ')[:2])
+#         length = float(line.split(' ')[2].replace('s',''))*1000-1
+#         convertedLine = datetime.datetime.strptime(convertedLine,"%Y-%m-%d %H:%M:%S.%f")
+#         total.append([convertedLine - datetime.timedelta(milliseconds=length), convertedLine])
+#
+#     for startTime, endTime in total:
+#         interval1 = [startTime, startTime + datetime.timedelta(milliseconds=999)]
+#         interval2 = [endTime, endTime + datetime.timedelta(milliseconds=999)]
+#
+#         vs = [0,0]
+#         for start, end in total:
+#             if not ((interval1[1] < start) or (interval1[0] > end)):
+#                vs[0] += 1
+#             if not ((interval2[1] < start) or (interval2[0] > end)):
+#                vs[1] += 1
+#
+#         answer.append(max(vs))
+#
+#     return max(answer)
+#
+#
+#  print(solution([
+#  "2016-09-15 20:59:57.421 0.351s",
+#  "2016-09-15 20:59:58.233 1.181s",
+#  "2016-09-15 20:59:58.299 0.8s",
+#  "2016-09-15 20:59:58.688 1.041s",
+#  "2016-09-15 20:59:59.591 1.412s",
+#  "2016-09-15 21:00:00.464 1.466s",
+#  "2016-09-15 21:00:00.741 1.581s",
+#  "2016-09-15 21:00:00.748 2.31s",
+#  "2016-09-15 21:00:00.966 0.381s",
+#  "2016-09-15 21:00:02.066 2.62s"
+#  ]))
+#
+#  print(solution([
+#  "2016-09-15 01:00:04.002 2.0s",
+#  "2016-09-15 01:00:07.000 2s"
+#  ]))
+#
+# print(solution(["2016-09-15 01:00:04.001 2.0s", "2016-09-15 01:00:07.000 2s"]))
 
-def solution(lines):
-    total = []
-    answer = []
 
-    for line in lines:
-        convertedLine = ' '.join(line.split(' ')[:2])
-        length = float(line.split(' ')[2].replace('s',''))*1000-1
-        convertedLine = datetime.datetime.strptime(convertedLine,"%Y-%m-%d %H:%M:%S.%f")
-        total.append([convertedLine - datetime.timedelta(milliseconds=length), convertedLine])
+def tilt(s):
+    length = len(s)
+    answer = [[0 for i in range(length)] for j in range(length)]
 
-    for startTime, endTime in total:
-        interval1 = [startTime, startTime + datetime.timedelta(milliseconds=999)]
-        interval2 = [endTime, endTime + datetime.timedelta(milliseconds=999)]
+    for i in range(length):
+        for j in range(length):
+            answer[j][length-1-i] = s[i][j]
+    return answer
 
-        vs = [0,0]
-        for start, end in total:
-            if not ((interval1[1] < start) or (interval1[0] > end)):
-               vs[0] += 1
-            if not ((interval2[1] < start) or (interval2[0] > end)):
-               vs[1] += 1
+def check(total, keyLength, length):
+    for i in range(keyLength-1, length-keyLength+1):
+        for j in range(keyLength-1, length-keyLength+1):
+            if total[i][j] in [0,2]:
+                return False
 
-        answer.append(max(vs))
+    return True
 
-    return max(answer)
+def insert(total,row,col,key):
+    for i in range(len(key)):
+        for j in range(len(key)):
+            total[row+i][col+j] += key[i][j]
+    return total
 
+def solution(key, lock):
+    keyLength = len(key)
+    lockLength = len(lock)
+    key2 = key
 
- print(solution([
- "2016-09-15 20:59:57.421 0.351s",
- "2016-09-15 20:59:58.233 1.181s",
- "2016-09-15 20:59:58.299 0.8s",
- "2016-09-15 20:59:58.688 1.041s",
- "2016-09-15 20:59:59.591 1.412s",
- "2016-09-15 21:00:00.464 1.466s",
- "2016-09-15 21:00:00.741 1.581s",
- "2016-09-15 21:00:00.748 2.31s",
- "2016-09-15 21:00:00.966 0.381s",
- "2016-09-15 21:00:02.066 2.62s"
- ]))
+    length = lockLength + 2 * (keyLength - 1)
 
- print(solution([
- "2016-09-15 01:00:04.002 2.0s",
- "2016-09-15 01:00:07.000 2s"
- ]))
+    total = [[0 for i in range(length)] for i in range(length)]
 
-print(solution(["2016-09-15 01:00:04.001 2.0s", "2016-09-15 01:00:07.000 2s"]))
+    for i in range(keyLength-1, length-keyLength+1):
+        for j in range(keyLength-1, length-keyLength+1):
+            total[i][j] = lock[i-(keyLength-1)][j-(keyLength-1)]
+
+    for i in range(4):
+        key2 = tilt(key2)
+        for i in range(length-keyLength+1):
+            for j in range(length-keyLength+1):
+                copy = [[i for i in j] for j in total]
+                result = insert(copy, i, j, key2)
+                if check(result,keyLength,length):
+                    return True
+
+    return False
+
