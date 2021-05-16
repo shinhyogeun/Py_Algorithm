@@ -1715,24 +1715,54 @@
 #
 #     return False
 
-import math
+# import math
+#
+# def solution(n, times):
+#     end = math.ceil(n//len(times)) * max(times)
+#     start = 0
+#     pivot = 0
+#     answer = 0
+#     while start <= end:
+#         pivot = (end + start) // 2
+#         target = 0
+#         for time in times:
+#             target += pivot//time
+#         print('pivot: ',pivot,'target: ',target,'start: ',start,'end: ',end)
+#         if target >= n:
+#             answer = pivot
+#             end = pivot - 1
+#         elif target < n:
+#             start = pivot + 1
+#     return answer
+#
+# print(solution(6,[7,10]))
 
-def solution(n, times):
-    end = math.ceil(n//len(times)) * max(times)
-    start = 0
-    pivot = 0
-    answer = 0
-    while start <= end:
-        pivot = (end + start) // 2
-        target = 0
-        for time in times:
-            target += pivot//time
-        print('pivot: ',pivot,'target: ',target,'start: ',start,'end: ',end)
-        if target >= n:
-            answer = pivot
-            end = pivot - 1
-        elif target < n:
-            start = pivot + 1
-    return answer
 
-print(solution(6,[7,10]))
+# def solution(n, results):
+#     total = [['?' for i in range(n)] for j in range(n)]
+#
+#     for i in range(n):
+#         total[i][i] = 'SELF'
+#
+#     for result in results:
+#         total[result[0]-1][result[1]-1] = 'WIN'
+#         total[result[1]-1][result[0]-1] = 'LOSE'
+#
+#     for k in range(n):
+#         for i in range(n):
+#             for j in range(n):
+#                 if total[i][k] == 'WIN' and total[k][j] == 'WIN':
+#                     total[i][j] = 'WIN'
+#                 elif total[i][k] == 'LOSE' and total[k][j] == 'LOSE':
+#                     total[i][j] = 'LOSE'
+# 
+#     answer = 0
+#
+#     for i in total:
+#         if '?' not in i:
+#             answer += 1
+#
+#     return answer
+#
+#
+# print(solution(5,[[4, 3], [4, 2], [3, 2], [1, 2], [2, 5]]))
