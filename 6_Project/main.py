@@ -1668,50 +1668,71 @@
 # print(solution(["2016-09-15 01:00:04.001 2.0s", "2016-09-15 01:00:07.000 2s"]))
 
 
-def tilt(s):
-    length = len(s)
-    answer = [[0 for i in range(length)] for j in range(length)]
+# def tilt(s):
+#     length = len(s)
+#     answer = [[0 for i in range(length)] for j in range(length)]
+#
+#     for i in range(length):
+#         for j in range(length):
+#             answer[j][length-1-i] = s[i][j]
+#     return answer
+#
+# def check(total, keyLength, length):
+#     for i in range(keyLength-1, length-keyLength+1):
+#         for j in range(keyLength-1, length-keyLength+1):
+#             if total[i][j] in [0,2]:
+#                 return False
+#
+#     return True
+#
+# def insert(total,row,col,key):
+#     for i in range(len(key)):
+#         for j in range(len(key)):
+#             total[row+i][col+j] += key[i][j]
+#     return total
+#
+# def solution(key, lock):
+#     keyLength = len(key)
+#     lockLength = len(lock)
+#     key2 = key
+#
+#     length = lockLength + 2 * (keyLength - 1)
+#
+#     total = [[0 for i in range(length)] for i in range(length)]
+#
+#     for i in range(keyLength-1, length-keyLength+1):
+#         for j in range(keyLength-1, length-keyLength+1):
+#             total[i][j] = lock[i-(keyLength-1)][j-(keyLength-1)]
+#
+#     for i in range(4):
+#         key2 = tilt(key2)
+#         for i in range(length-keyLength+1):
+#             for j in range(length-keyLength+1):
+#                 copy = [[i for i in j] for j in total]
+#                 result = insert(copy, i, j, key2)
+#                 if check(result,keyLength,length):
+#                     return True
+#
+#     return False
 
-    for i in range(length):
-        for j in range(length):
-            answer[j][length-1-i] = s[i][j]
+import math
+
+def solution(n, times):
+    end = math.ceil(n//len(times)) * max(times)
+    start = 0
+    pivot = 0
+    answer = 0
+    while start <= end:
+        pivot = (end + start) // 2
+        target = 0
+        for time in times:
+            target += pivot//time
+        print('pivot: ',pivot,'target: ',target,'start: ',start,'end: ',end)
+        if target >= n:
+            answer = pivot
+            end = pivot - 1
+        elif target < n:
+            start = pivot + 1
     return answer
 
-def check(total, keyLength, length):
-    for i in range(keyLength-1, length-keyLength+1):
-        for j in range(keyLength-1, length-keyLength+1):
-            if total[i][j] in [0,2]:
-                return False
-
-    return True
-
-def insert(total,row,col,key):
-    for i in range(len(key)):
-        for j in range(len(key)):
-            total[row+i][col+j] += key[i][j]
-    return total
-
-def solution(key, lock):
-    keyLength = len(key)
-    lockLength = len(lock)
-    key2 = key
-
-    length = lockLength + 2 * (keyLength - 1)
-
-    total = [[0 for i in range(length)] for i in range(length)]
-
-    for i in range(keyLength-1, length-keyLength+1):
-        for j in range(keyLength-1, length-keyLength+1):
-            total[i][j] = lock[i-(keyLength-1)][j-(keyLength-1)]
-
-    for i in range(4):
-        key2 = tilt(key2)
-        for i in range(length-keyLength+1):
-            for j in range(length-keyLength+1):
-                copy = [[i for i in j] for j in total]
-                result = insert(copy, i, j, key2)
-                if check(result,keyLength,length):
-                    return True
-
-    return False
-
+print(solution(6,[7,10]))
