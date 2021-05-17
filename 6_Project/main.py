@@ -1755,7 +1755,7 @@
 #                     total[i][j] = 'WIN'
 #                 elif total[i][k] == 'LOSE' and total[k][j] == 'LOSE':
 #                     total[i][j] = 'LOSE'
-# 
+#
 #     answer = 0
 #
 #     for i in total:
@@ -1766,3 +1766,53 @@
 #
 #
 # print(solution(5,[[4, 3], [4, 2], [3, 2], [1, 2], [2, 5]]))
+
+# def solution(n, computers):
+#     copyedComputers = [computer[:] for computer in computers]
+#     answer = 0
+#
+#     def dfs(i):
+#         for j in range(n):
+#             if copyedComputers[i][j] == 1:
+#                 copyedComputers[i][j] = 2
+#                 dfs(j)
+#
+#     for i in range(n):
+#         if 1 in copyedComputers[i]:
+#             answer += 1
+#             dfs(i)
+#
+#     return answer
+#
+# print(solution(3,[[1, 1, 0], [1, 1, 0], [0, 0, 1]]))
+# print(solution(3,[[1, 1, 0], [1, 1, 1], [0, 1, 1]]))
+
+
+import math
+
+def distance(a,b):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+
+
+def solution(k,field):
+    length = len(field)
+    answers = []
+
+    for i in range(length+1):
+        for j in range(length+1):
+            answer = 0
+            for a in range(-k, k+1):
+                for b in range(-k, k + 1):
+                    row = int(math.floor(i-0.5)+a)
+                    col = int(math.floor(j-0.5)+b)
+
+                    if length > row >= 0 and length > col >= 0:
+                        if distance([row,col], [i,j]) == k:
+                            answer += field[row][col]/2
+                        elif distance([row,col], [i,j]) < k:
+                            answer += field[row][col]
+            answers.append(answer)
+
+    return int(max(answers))
+
+print(solution(2,[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]]))
