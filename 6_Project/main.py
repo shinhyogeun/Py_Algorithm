@@ -1788,31 +1788,54 @@
 # print(solution(3,[[1, 1, 0], [1, 1, 1], [0, 1, 1]]))
 
 
-import math
+# import math
+#
+# def distance(a,b):
+#     return abs(a[0] - b[0]) + abs(a[1] - b[1])
+#
+#
+# def solution(k,field):
+#     length = len(field)
+#     answers = []
+#
+#     for i in range(length+1):
+#         for j in range(length+1):
+#             answer = 0
+#             for a in range(-k, k+1):
+#                 for b in range(-k, k + 1):
+#                     row = int(math.floor(i-0.5)+a)
+#                     col = int(math.floor(j-0.5)+b)
+#
+#                     if length > row >= 0 and length > col >= 0:
+#                         if distance([row,col], [i,j]) == k:
+#                             answer += field[row][col]/2
+#                         elif distance([row,col], [i,j]) < k:
+#                             answer += field[row][col]
+#             answers.append(answer)
+#
+#     return int(max(answers))
+#
+# print(solution(2,[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]]))
 
-def distance(a,b):
-    return abs(a[0] - b[0]) + abs(a[1] - b[1])
 
+n = int(input())
 
-def solution(k,field):
-    length = len(field)
-    answers = []
+arr = list(map(int,input().split()))[::-1]
+arr.insert(0,0)
 
-    for i in range(length+1):
-        for j in range(length+1):
-            answer = 0
-            for a in range(-k, k+1):
-                for b in range(-k, k + 1):
-                    row = int(math.floor(i-0.5)+a)
-                    col = int(math.floor(j-0.5)+b)
+answer = [0 for i in range(n)]
+k = 0
 
-                    if length > row >= 0 and length > col >= 0:
-                        if distance([row,col], [i,j]) == k:
-                            answer += field[row][col]/2
-                        elif distance([row,col], [i,j]) < k:
-                            answer += field[row][col]
-            answers.append(answer)
+for i in range(1,n):
+    if arr[i-k] >= arr[i-k+1]:
+        if arr[i-k-1] < arr[i-k+1]:
+            del arr[i-k]
+        else:
+            del arr[i-k+1]
+        k += 1
+        answer[i] = answer[i-1] + 1
+    else:
+        answer[i] = answer[i-1]
 
-    return int(max(answers))
+print(answer)
 
-print(solution(2,[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]]))
