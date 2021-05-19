@@ -1818,24 +1818,24 @@
 # print(solution(2,[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]]))
 
 
-n = int(input())
-
-arr = list(map(int,input().split()))[::-1]
-arr.insert(0,0)
-
-answer = [0 for i in range(n)]
-k = 0
-
-for i in range(1,n):
-    if arr[i-k] >= arr[i-k+1]:
-        if arr[i-k-1] < arr[i-k+1]:
-            del arr[i-k]
-        else:
-            del arr[i-k+1]
-        k += 1
-        answer[i] = answer[i-1] + 1
-    else:
-        answer[i] = answer[i-1]
-
-print(answer)
+# n = int(input())
+#
+# arr = list(map(int,input().split()))[::-1]
+# arr.insert(0,0)
+#
+# answer = [0 for i in range(n)]
+# k = 0
+#
+# for i in range(1,n):
+#     if arr[i-k] >= arr[i-k+1]:
+#         if arr[i-k-1] < arr[i-k+1]:
+#             del arr[i-k]
+#         else:
+#             del arr[i-k+1]
+#         k += 1
+#         answer[i] = answer[i-1] + 1
+#     else:
+#         answer[i] = answer[i-1]
+#
+# print(answer)
 
