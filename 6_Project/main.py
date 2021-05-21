@@ -1864,7 +1864,7 @@ def solution(board):
                         elif i in [0,2] and target >= copyBoard[l][m] + 100:
                             copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 100
                             q.append((l + dx[i], m + dy[i], 'vertical'))
-                    elif arrow == 'horizontal': 
+                    elif arrow == 'horizontal':
                         if i in [0,2] and target >= copyBoard[l][m] + 600:
                             copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 600
                             q.append((l + dx[i], m + dy[i], 'vertical'))
