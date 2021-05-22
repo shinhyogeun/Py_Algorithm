@@ -1839,55 +1839,87 @@
 #
 # print(answer)
 
-from collections import deque
-
-def solution(board):
-    length = len(board)-1
-    INF = 1e9
-    copyBoard = [[INF if cell == 0 else cell for cell in row] for row in board]
-    q = deque([])
-    q.append((0,0,'no'))
-
-    dx = [-1,0,1,0]
-    dy = [0,1,0,-1]
-
-    while q:
-        l, m, arrow = q.popleft()
-        for i in range(4):
-            if length >= l+dx[i] >= 0 and length >= m+dy[i] >= 0:
-                target = copyBoard[l+dx[i]][m+dy[i]]
-                if target != 1:
-                    if arrow == 'vertical':
-                        if i in [1,3] and target >= copyBoard[l][m] + 600:
-                            copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 600
-                            q.append((l+dx[i], m+dy[i], 'horizontal'))
-                        elif i in [0,2] and target >= copyBoard[l][m] + 100:
-                            copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 100
-                            q.append((l + dx[i], m + dy[i], 'vertical'))
-                    elif arrow == 'horizontal':
-                        if i in [0,2] and target >= copyBoard[l][m] + 600:
-                            copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 600
-                            q.append((l + dx[i], m + dy[i], 'vertical'))
-                        elif i in [1,3] and target >= copyBoard[l][m] + 100:
-                            copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 100
-                            q.append((l + dx[i], m + dy[i], 'horizontal'))
-                    else:
-                        if i == 1:
-                            copyBoard[l+dx[i]][m+dy[i]] = 100
-                            q.append((l+dx[i], m+dy[i], 'horizontal'))
-                        else:
-                            copyBoard[l + dx[i]][m + dy[i]] = 100
-                            q.append((l + dx[i], m + dy[i], 'vertical'))
-
-    answer = copyBoard[length][length]
-    for i in copyBoard:
-        print(i)
-    return answer
+# from collections import deque
+#
+# def solution(board):
+#     length = len(board)-1
+#     INF = 1e9
+#     copyBoard = [[INF if cell == 0 else cell for cell in row] for row in board]
+#     q = deque([])
+#     q.append((0,0,'no'))
+#
+#     dx = [-1,0,1,0]
+#     dy = [0,1,0,-1]
+#
+#     while q:
+#         l, m, arrow = q.popleft()
+#         for i in range(4):
+#             if length >= l+dx[i] >= 0 and length >= m+dy[i] >= 0:
+#                 target = copyBoard[l+dx[i]][m+dy[i]]
+#                 if target != 1:
+#                     if arrow == 'vertical':
+#                         if i in [1,3] and target >= copyBoard[l][m] + 600:
+#                             copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 600
+#                             q.append((l+dx[i], m+dy[i], 'horizontal'))
+#                         elif i in [0,2] and target >= copyBoard[l][m] + 100:
+#                             copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 100
+#                             q.append((l + dx[i], m + dy[i], 'vertical'))
+#                     elif arrow == 'horizontal':
+#                         if i in [0,2] and target >= copyBoard[l][m] + 600:
+#                             copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 600
+#                             q.append((l + dx[i], m + dy[i], 'vertical'))
+#                         elif i in [1,3] and target >= copyBoard[l][m] + 100:
+#                             copyBoard[l+dx[i]][m+dy[i]] = copyBoard[l][m] + 100
+#                             q.append((l + dx[i], m + dy[i], 'horizontal'))
+#                     else:
+#                         if i == 1:
+#                             copyBoard[l+dx[i]][m+dy[i]] = 100
+#                             q.append((l+dx[i], m+dy[i], 'horizontal'))
+#                         else:
+#                             copyBoard[l + dx[i]][m + dy[i]] = 100
+#                             q.append((l + dx[i], m + dy[i], 'vertical'))
+#
+#     answer = copyBoard[length][length]
+#     for i in copyBoard:
+#         print(i)
+#     return answer
 
 # print(solution([[0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0],[0,0,0,0,1,0,0,0],[0,0,0,1,0,0,0,1],[0,0,1,0,0,0,1,0],[0,1,0,0,0,1,0,0],[1,0,0,0,0,0,0,0]]))
 # print(solution([[0,0,0,0,0,0],[0,1,1,1,1,0],[0,0,1,0,0,0],[1,0,0,1,0,1],[0,1,0,0,0,1],[0,0,0,0,0,0]]))
-print(solution([[0,0,0],[0,0,0],[0,0,0]]))
+# print(solution([[0,0,0],[0,0,0],[0,0,0]]))
 # print(solution([[0, 0, 1, 0], [0, 0, 0, 0], [0, 1, 0, 1], [1, 0, 0, 0]]))
 
 
-
+# import heapq
+#
+# def solution(scoville, K):
+#     length = len(scoville)
+#     copyedScoville = []
+#
+#     for i in range(length):
+#         heapq.heappush(copyedScoville,scoville[i])
+#
+#     count = 0
+#
+#     while True :
+#         one = heapq.heappop(copyedScoville)
+#         if one >= K:
+#             return count
+#         if count == length-1:
+#             return -1
+#         two = heapq.heappop(copyedScoville)
+#         heapq.heappush(copyedScoville, one + two*2)
+#         count += 1
+#
+# print(solution([1, 1, 1], 4), 2)
+# print(solution([10, 10, 10, 10, 10], 100), 4)
+# print(solution([1, 2, 3, 9, 10, 12], 7), 2)
+# print(solution([0, 2, 3, 9, 10, 12], 7), 2)
+# print(solution([0, 0, 3, 9, 10, 12], 7), 3)
+# print(solution([0, 0, 0, 0], 7), -1)
+# print(solution([0, 0, 3, 9, 10, 12], 7000), -1)
+# print(solution([0, 0, 3, 9, 10, 12], 0), 0)
+# print(solution([0, 0, 3, 9, 10, 12], 1), 2)
+# print(solution([0, 0], 0), 0)
+# print(solution([0, 0], 1), -1)
+# print(solution([1, 0], 1), 1)
