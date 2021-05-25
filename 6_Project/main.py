@@ -1873,55 +1873,55 @@
 # print(solution([0, 0], 1), -1)
 # print(solution([1, 0], 1), 1)
 
-from collections import deque
-
-def solution(board):
-    length = len(board)-1
-    INF = 1e9
-    copyBoard = [[INF if cell == 0 else cell for cell in row] for row in board]
-    q = deque([])
-    q.append((0,0,'no',0))
-
-    dx = [-1,0,1,0]
-    dy = [0,1,0,-1]
-
-    while q:
-        l, m, arrow, score = q.popleft()
-        for i in range(4):
-            if length >= l+dx[i] >= 0 and length >= m+dy[i] >= 0:
-                target = copyBoard[l+dx[i]][m+dy[i]]
-                if target != 1:
-                    if arrow == 'vertical':
-                        if i in [1,3] and target >= score + 600:
-                            copyBoard[l+dx[i]][m+dy[i]] = score + 600
-                            q.append((l+dx[i], m+dy[i], 'horizontal', score + 600))
-                        elif i in [0,2] and target >= score + 100:
-                            copyBoard[l+dx[i]][m+dy[i]] = score + 100
-                            q.append((l + dx[i], m + dy[i], 'vertical', score + 100))
-                    elif arrow == 'horizontal':
-                        if i in [0,2] and target >= score + 600:
-                            copyBoard[l+dx[i]][m+dy[i]] = score + 600
-                            q.append((l + dx[i], m + dy[i], 'vertical',score + 600))
-                        elif i in [1,3] and target >= score + 100:
-                            copyBoard[l+dx[i]][m+dy[i]] = score + 100
-                            q.append((l + dx[i], m + dy[i], 'horizontal',score + 100))
-                    else:
-                        if i == 1:
-                            copyBoard[l+dx[i]][m+dy[i]] = 100
-                            q.append((l+dx[i], m+dy[i], 'horizontal',100))
-                        else:
-                            copyBoard[l + dx[i]][m + dy[i]] = 100
-                            q.append((l + dx[i], m + dy[i], 'vertical',100))
-
-    answer = copyBoard[length][length]
-    return answer
+# from collections import deque
+#
+# def solution(board):
+#     length = len(board)-1
+#     INF = 1e9
+#     copyBoard = [[INF if cell == 0 else cell for cell in row] for row in board]
+#     q = deque([])
+#     q.append((0,0,'no',0))
+#
+#     dx = [-1,0,1,0]
+#     dy = [0,1,0,-1]
+#
+#     while q:
+#         l, m, arrow, score = q.popleft()
+#         for i in range(4):
+#             if length >= l+dx[i] >= 0 and length >= m+dy[i] >= 0:
+#                 target = copyBoard[l+dx[i]][m+dy[i]]
+#                 if target != 1:
+#                     if arrow == 'vertical':
+#                         if i in [1,3] and target >= score + 600:
+#                             copyBoard[l+dx[i]][m+dy[i]] = score + 600
+#                             q.append((l+dx[i], m+dy[i], 'horizontal', score + 600))
+#                         elif i in [0,2] and target >= score + 100:
+#                             copyBoard[l+dx[i]][m+dy[i]] = score + 100
+#                             q.append((l + dx[i], m + dy[i], 'vertical', score + 100))
+#                     elif arrow == 'horizontal':
+#                         if i in [0,2] and target >= score + 600:
+#                             copyBoard[l+dx[i]][m+dy[i]] = score + 600
+#                             q.append((l + dx[i], m + dy[i], 'vertical',score + 600))
+#                         elif i in [1,3] and target >= score + 100:
+#                             copyBoard[l+dx[i]][m+dy[i]] = score + 100
+#                             q.append((l + dx[i], m + dy[i], 'horizontal',score + 100))
+#                     else:
+#                         if i == 1:
+#                             copyBoard[l+dx[i]][m+dy[i]] = 100
+#                             q.append((l+dx[i], m+dy[i], 'horizontal',100))
+#                         else:
+#                             copyBoard[l + dx[i]][m + dy[i]] = 100
+#                             q.append((l + dx[i], m + dy[i], 'vertical',100))
+#
+#     answer = copyBoard[length][length]
+#     return answer
 #
 #
 # print(solution([[0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0],[0,0,0,0,1,0,0,0],[0,0,0,1,0,0,0,1],[0,0,1,0,0,0,1,0],[0,1,0,0,0,1,0,0],[1,0,0,0,0,0,0,0]]))
 # print(solution([[0,0,0,0,0,0],[0,1,1,1,1,0],[0,0,1,0,0,0],[1,0,0,1,0,1],[0,1,0,0,0,1],[0,0,0,0,0,0]]))
 # print(solution([[0,0,0],[0,0,0],[0,0,0]]))
 # print(solution([[0, 0, 1, 0], [0, 0, 0, 0], [0, 1, 0, 1], [1, 0, 0, 0]]))
-print(solution([[0,0,0,0,0],[0,1,1,1,0],[0,0,1,0,0],[1,0,0,0,1],[0,1,1,0,0]]))
+# print(solution([[0,0,0,0,0],[0,1,1,1,0],[0,0,1,0,0],[1,0,0,0,1],[0,1,1,0,0]]))
 
 # from itertools import permutations
 #
@@ -1941,7 +1941,7 @@ print(solution([[0,0,0,0,0],[0,1,1,1,0],[0,0,1,0,0],[1,0,0,0,1],[0,1,1,0,0]]))
 #     for i in expression:
 #         if i in ['+','-','*']:
 #             numbers.append(int(''.join(box)))
-#             operators.append(i)
+#             operators.append(i)q
 #             box = []
 #         else:
 #             box.append(i)
