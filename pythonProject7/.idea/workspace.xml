@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb0400f-fdef-4d3c-a714-bb6eae6cca91" name="Default Changelist" comment="" />
+    <list default="true" id="cdb0400f-fdef-4d3c-a714-bb6eae6cca91" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,5 +55,23 @@
       <updated>1622038060792</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="772" height="203" key="GridCell.Tab.0.bottom" timestamp="1622277669980">
+      <screen x="0" y="25" width="1440" height="801" />
+    </state>
+    <state width="772" height="203" key="GridCell.Tab.0.bottom/0.25.1440.801@0.25.1440.801" timestamp="1622277669980" />
+    <state width="772" height="203" key="GridCell.Tab.0.center" timestamp="1622277669980">
+      <screen x="0" y="25" width="1440" height="801" />
+    </state>
+    <state width="772" height="203" key="GridCell.Tab.0.center/0.25.1440.801@0.25.1440.801" timestamp="1622277669980" />
+    <state width="772" height="203" key="GridCell.Tab.0.left" timestamp="1622277669979">
+      <screen x="0" y="25" width="1440" height="801" />
+    </state>
+    <state width="772" height="203" key="GridCell.Tab.0.left/0.25.1440.801@0.25.1440.801" timestamp="1622277669979" />
+    <state width="772" height="203" key="GridCell.Tab.0.right" timestamp="1622277669980">
+      <screen x="0" y="25" width="1440" height="801" />
+    </state>
+    <state width="772" height="203" key="GridCell.Tab.0.right/0.25.1440.801@0.25.1440.801" timestamp="1622277669980" />
   </component>
 </project>
