@@ -18,27 +18,42 @@
 #
 #     return answer
 #
-# print(solution(["classic", "pop", "classic", ®"classic", "pop"],[500, 600, 150, 800, 2500]))
+# print(solution(["classic", "pop", "classic", "classic", "pop"], [500, 600, 150, 800, 2500]))
+
 
 def solution(a):
-    if len(a) <= 3:
-        return 0
+    all = {i:[] for i in set(a)}
+    ende = len(a)
+    answer = []
 
-    answerArrs = []
-    answerArrs.append([[a[0]]])
+    for i in range(ende):
+        all[a[i]].append(i)
 
-    target = [[a[0]]]
-    for i in range(len(a)):
-        for j in range(len(answerArrs)):
-            if len(answerArrs[j])//2 == 0:
-                if target[j]:
+    for key in all.keys():
+        count = 0
+        out = [0,[]]
+
+        for i in range(1, len(all[key])):
+            if all[key][i] == all[key][i-1] + 1:
+                out[0] += 1
             else:
-                answerArr
+                if (1 in out[1]):
+                    count += 2 + 2
+                elif ende in out[1]:
+                    count += 2 + 2
+                elif out[0] > 0:
+                    count += 4 + 2
+                out = [0,[]]
 
-        answerArrs.append([a[i]])
-        target.append([a[i]])
+            if (1 in out[1]):
+                count += 2 + 2
+            elif ende in out[1]:
+                count += 2 + 2
+            elif out[0] > 0:
+                count += 4 + 2
 
-    answer = -1
-    return answer
+        answer.append(count)
+    return max(answer)
 
-solution([5,2,3,3,5,3])
+print(solution([5,2,3,3,5,3]))
+print(solution([1,2,2,3]))
