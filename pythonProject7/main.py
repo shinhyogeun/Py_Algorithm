@@ -164,25 +164,45 @@
 # a = "a1 4 6 6"
 # print(a.split(' ')[1])
 
-def solution(m):
-    t = m
+# def solution(m):
+#     t = m
+#
+#     answer = []
+#
+#     while t > 0:
+#         if t % 3 == 0:
+#             answer.append('4')
+#         elif t % 3 == 1:
+#             answer.append('1')
+#         elif t % 3 == 2:
+#             answer.append('2')
+#
+#         t = (t-1) // 3
+#
+#     return ''.join(answer[::-1])
+#
+# print(solution(1))
+# print(solution(2))
+# print(solution(3))
+# print(solution(9))
+# print(solution(10))
 
+def solution(record):
+    uids = {}
     answer = []
 
-    while t > 0:
-        if t % 3 == 0:
-            answer.append('4')
-        elif t % 3 == 1:
-            answer.append('1')
-        elif t % 3 == 2:
-            answer.append('2')
+    for i in record:
+        iArray =  i.split(' ')
+        if iArray[0] == "Enter":
+            uids[iArray[1]] = iArray[2]
+        elif iArray[0] == "Change":
+            uids[iArray[1]] = iArray[2]
 
-        t = (t-1) // 3
+    for i in record:
+        iArray = i.split(' ')
+        if iArray[0] == "Enter":
+            answer.append(uids[iArray[1]]+"님이 들어왔습니다.")
+        elif iArray[0] =="Leave":
+            answer.append(uids[iArray[1]] + "님이 나갔습니다.")
 
-    return ''.join(answer[::-1])
-
-print(solution(1))
-print(solution(2))
-print(solution(3))
-print(solution(9))
-print(solution(10))
+    return answer
