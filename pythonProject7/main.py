@@ -114,52 +114,75 @@
 # print(solution(12345))
 # print(solution(7234032479947))
 
-def solution(n, data, limit):
-    problemNumber = []
+# def solution(n, data, limit):
+#     problemNumber = []
+#
+#     for i in data:
+#         problemNumber.append(i.split(' ')[1])
+#
+#     problemInfo = {i:[] for i in set(problemNumber)}
+#
+#     for i in data:
+#         problemInfo[i.split(' ')[1]].append(i.split(' '))
+#
+#     for i in problemInfo.keys():
+#         problemInfo[i] = sorted(problemInfo[i], key=lambda x : x[0])
+#
+#     mxin = sorted(problemInfo)
+#
+#     new = {i: problemInfo[i] for i in mxin}
+#
+#     answer = []
+#     answerName = []
+#
+#     for key in list(new.keys()):
+#         im = []
+#         sd = []
+#         for i in problemInfo[key]:
+#             im.append([i[2],i[3]])
+#             sd.append(i[0])
+#         answer.append(im)
+#         answerName.append(sd)
+#
+#     for i in range(1,len(answer)):
+#         for k in answer[i]:
+#             ultra = []
+#             for j in answer[i-1]:
+#                 if (limit[0] != 0 and k[0]+j[0] <= limit[0]) or limit[0] == 0:
+#                     if (limit[1] != 0 and k[1]+j[1] <= limit[1]) or limit[1] == 0:
+#                         ultra.append([k[0]+j[0], k[1]+j[1]])
+#                 aa = []
+#                 for i in ultra:
+#                     aa.append(sum(i))
+#                 ultra[aa.index(min(aa))]
+#
+#
+#     return 0
+#
+# print(solution(2, ["a1 1 6 6", "a2 1 2 9", "b1 2 3 3", "b2 2 4 1"], "0 0"))
+#
+# a = "a1 4 6 6"
+# print(a.split(' ')[1])
 
-    for i in data:
-        problemNumber.append(i.split(' ')[1])
-
-    problemInfo = {i:[] for i in set(problemNumber)}
-
-    for i in data:
-        problemInfo[i.split(' ')[1]].append(i.split(' '))
-
-    for i in problemInfo.keys():
-        problemInfo[i] = sorted(problemInfo[i], key=lambda x : x[0])
-
-    mxin = sorted(problemInfo)
-
-    new = {i: problemInfo[i] for i in mxin}
+def solution(m):
+    t = m
 
     answer = []
-    answerName = []
 
-    for key in list(new.keys()):
-        im = []
-        sd = []
-        for i in problemInfo[key]:
-            im.append([i[2],i[3]])
-            sd.append(i[0])
-        answer.append(im)
-        answerName.append(sd)
+    while t > 0:
+        if t % 3 == 0:
+            answer.append('4')
+        elif t % 3 == 1:
+            answer.append('1')
+        elif t % 3 == 2:
+            answer.append('2')
 
-    for i in range(1,len(answer)):
-        for k in answer[i]:
-            ultra = []
-            for j in answer[i-1]:
-                if (limit[0] != 0 and k[0]+j[0] <= limit[0]) or limit[0] == 0:
-                    if (limit[1] != 0 and k[1]+j[1] <= limit[1]) or limit[1] == 0:
-                        ultra.append([k[0]+j[0], k[1]+j[1]])
-                aa = []
-                for i in ultra:
-                    aa.append(sum(i))
-                ultra[aa.index(min(aa))]
+        t = (t-1) // 3
 
+    return ''.join(answer[::-1])
 
-    return 0
-
-print(solution(2, ["a1 1 6 6", "a2 1 2 9", "b1 2 3 3", "b2 2 4 1"], "0 0"))
-
-a = "a1 4 6 6"
-print(a.split(' ')[1])
+print(solution(1))
+print(solution(2))
+print(solution(3))
+print(solution(9))
+print(solution(10))
