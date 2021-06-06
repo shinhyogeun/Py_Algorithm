@@ -187,22 +187,44 @@
 # print(solution(9))
 # print(solution(10))
 
-def solution(record):
-    uids = {}
+# def solution(record):
+#     uids = {}
+#     answer = []
+#
+#     for i in record:
+#         iArray =  i.split(' ')
+#         if iArray[0] == "Enter":
+#             uids[iArray[1]] = iArray[2]
+#         elif iArray[0] == "Change":
+#             uids[iArray[1]] = iArray[2]
+#
+#     for i in record:
+#         iArray = i.split(' ')
+#         if iArray[0] == "Enter":
+#             answer.append(uids[iArray[1]]+"님이 들어왔습니다.")
+#         elif iArray[0] =="Leave":
+#             answer.append(uids[iArray[1]] + "님이 나갔습니다.")
+#
+#     return answer
+
+def solution(s):
+    arr = list(s)
+
     answer = []
 
-    for i in record:
-        iArray =  i.split(' ')
-        if iArray[0] == "Enter":
-            uids[iArray[1]] = iArray[2]
-        elif iArray[0] == "Change":
-            uids[iArray[1]] = iArray[2]
+    for i in arr:
+        if answer == []:
+            answer.append(i)
+        elif answer[-1] == i:
+            del answer[-1]
+        else:
+            answer.append(i)
 
-    for i in record:
-        iArray = i.split(' ')
-        if iArray[0] == "Enter":
-            answer.append(uids[iArray[1]]+"님이 들어왔습니다.")
-        elif iArray[0] =="Leave":
-            answer.append(uids[iArray[1]] + "님이 나갔습니다.")
+    if answer == []:
+        return 1
+    else:
+        return 0
 
-    return answer
+print(solution('baabaa'))
+print(solution('abccba'))
+
