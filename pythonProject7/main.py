@@ -207,24 +207,205 @@
 #
 #     return answer
 
-def solution(s):
-    arr = list(s)
+# def solution(s):
+#     arr = list(s)
+#
+#     answer = []
+#
+#     for i in arr:
+#         if answer == []:
+#             answer.append(i)
+#         elif answer[-1] == i:
+#             del answer[-1]
+#         else:
+#             answer.append(i)
+#
+#     if answer == []:
+#         return 1
+#     else:
+#         return 0
+#
+# print(solution('baabaa'))
+# print(solution('abccba'))
 
-    answer = []
+# def solution(n):
+#     target = n // 2
+#     answer = 0
+#     for i in range(1, target + 1):
+#         total = i
+#         k = 1
+#
+#         while total < n:
+#             total += i + k
+#             k += 1
+#
+#         if total == n:
+#             answer += 1
+#
+#     return answer + 1
+#
+# print(solution(15))
 
-    for i in arr:
-        if answer == []:
-            answer.append(i)
-        elif answer[-1] == i:
-            del answer[-1]
+# def delete(arr,speed):
+#     arr2 = arr[:]
+#     speed2 = speed[:]
+#     while True:
+#         if arr2 == []:
+#             break
+#         elif arr2[0] < 100:
+#             break
+#         else:
+#             del arr2[0]
+#             del speed2[0]
+#
+#     return arr2,speed2
+#
+# def solution(progresses, speeds):
+#     week = progresses[:]
+#     speed = speeds[:]
+#     answer = []
+#
+#     while week != []:
+#         if week[0] >= 100:
+#             a,speed = delete(week,speed)
+#             answer.append(len(week)-len(a))
+#             week = a[:]
+#         else:
+#             for i in range(len(week)):
+#                 week[i] += speeds[i]
+#
+#     return answer
+
+# print(solution([93, 30, 55], [1, 30, 5]))
+
+# def solution(w,h):
+#     answer = 0
+#     h = max(w,h)
+#     w = min(w,h)
+#
+#     total = w * h
+#     tilt = w/h
+#
+#     ultra = 1
+#
+#     while int(h) == h and h != 2:
+#         h = h/2
+#         ultra *= 2
+#     print(h)
+#     k = 1
+#
+#     for i in range(1,int(tilt*h + 1)):
+#         answer += int(1/tilt * i) - int(1/tilt * (i-1)) + 1
+#
+#     print(answer*ultra)
+#
+# solution(4,8)
+# solution(8,12)
+# solution(3,4)
+# print(solution(3,3))
+
+# def solution(numbers, target):
+#     answer = []
+#
+#     def dfs(value,index):
+#         if index != len(numbers):
+#             dfs(value+numbers[index],index+1)
+#             dfs(value-numbers[index],index+1)
+#         else:
+#             answer.append(value)
+#
+#     dfs(0,0)
+#
+#     return answer.count(target)
+#
+# print(solution(	[1, 1, 1, 1, 1], 3))
+
+# import math
+#
+# def solution(w,h):
+#     k = 1
+#     answer = 0
+#     while True:
+#         if w%2 == 1:
+#             if k == w//2 + 1:
+#                 answer += math.ceil(h / w * k) - math.floor(h / w * (k - 1)) + answer
+#                 return int(w*h - answer)
+#
+#         answer += math.ceil(h / w * k) - math.floor(h / w * (k - 1))
+#
+#         if int((h/w) * k) == (h/w) * k:
+#             break
+#
+#         k+=1
+#
+#     answer *= (w / k)
+#
+#     return int(w*h - answer)
+# print(solution(3,7))
+# print(solution(5,7))
+# print(solution(12,8))
+# print(solution(4,3))
+# print(solution(100,100))
+
+# from collections import deque
+#
+# def solution(maps):
+#     q = deque([])
+#
+#     q.append([0,0])
+#     dm = [1,0,-1,0]
+#     dl = [0,1,0,-1]
+#
+#     while q:
+#         l,m = q.popleft()
+#         for i in range(4):
+#             if len(maps) > l+dl[i] >= 0 and len(maps[0]) > m+dm[i] >= 0:
+#                 if maps[l+dl[i]][m+dm[i]] == 1:
+#                     maps[l + dl[i]][m + dm[i]] = maps[l][m] + 1
+#                     q.append([l + dl[i],m + dm[i]])
+#
+#     if maps[len(maps)-1][len(maps[0])-1] == 1:
+#         return -1
+#     else:
+#         return maps[len(maps)-1][len(maps[0])-1]
+#
+# print(solution([[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,1],[0,0,0,0,1]]))
+# print(solution([[1,0,1,1,1],[1,0,1,0,1],[1,0,1,1,1],[1,1,1,0,0],[0,0,0,0,1]]))
+
+def solution(name):
+    answer = 0
+    target = list(name)
+    now = 0
+
+    for i in range(len(target)):
+        if i == 0:
+            if abs(ord(target[i]) - 65) <= abs(91 - ord(target[i])):
+                answer += abs(ord(target[i]) - 65)
+            else:
+                answer += abs(91 - ord(target[i]))
+            continue
+
+        if target[i] == 'A':
+            continue
         else:
-            answer.append(i)
+            if abs(i-now) <= len(target) - abs(i-now):
+                answer += abs(i-now)
+            else:
+                answer += len(target) - abs(i-now)
 
-    if answer == []:
-        return 1
-    else:
-        return 0
+            if abs(ord(target[i]) - 65) <= 91 - ord(target[i]):
+                answer += abs(ord(target[i]) - 65)
+            else:
+                answer += abs(91 - ord(target[i]))
 
-print(solution('baabaa'))
-print(solution('abccba'))
+            now += abs(i - now)
+
+    return answer
+
+# print(solution("JEROEN"))
+# print(solution("JAZ"))
+# print(solution("ZAZA"))
+print(solution("EEAAE"))
+print(solution("ZZZZZZ"))
+print(solution("BBAAABAAAAAAAAAAAABA"))
 
