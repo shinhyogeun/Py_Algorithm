@@ -798,32 +798,310 @@ import math
 #
 # print(solution(')()('))
 
-def isSquareExist(board,number):
-    a = len(board) - number
-    b = len(board[0]) - number
+# def isSquareExist(board,number):
+#     a = len(board) - number
+#     b = len(board[0]) - number
+#
+#     for i in range(a+1):
+#         for j in range(b+1):
+#             trigger = False
+#             for k in range(number):
+#                 for u in range(number):
+#                     if board[i+k][j+u] == 0:
+#                         trigger = True
+#                         break
+#                 if trigger:
+#                     break
+#             if trigger:
+#                 continue
+#             return True
+#     return False
+#
+# def solution(board):
+#     short = len(board) if len(board[0]) >= len(board) else len(board[0])
+#     for i in range(short,0,-1):
+#         if isSquareExist(board,i):
+#             return i**2
+#     return 0
+#
+# print('답: ',solution([[0,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,1,0]]))
+# print('답: ',solution([[0,0,1,1],[1,1,1,1]]))
+# print('답: ',solution([[0,0,0,0]]))
 
-    for i in range(a+1):
-        for j in range(b+1):
-            trigger = False
-            for k in range(number):
-                for u in range(number):
-                    if board[i+k][j+u] == 0:
-                        trigger = True
-                        break
-                if trigger:
-                    break
-            if trigger:
-                continue
-            return True
-    return False
+# def solution(A,B):
+#     a = sorted(A)
+#     b = sorted(B,reverse=True)
+#     answer = 0
+#     for i in range(len(a)):
+#         answer += a[i] * b[i]
+#
+#     return answer
 
-def solution(board):
-    short = len(board) if len(board[0]) >= len(board) else len(board[0])
-    for i in range(short,0,-1):
-        if isSquareExist(board,i):
-            return i**2
-    return 0
+# def solution(land):
+#     total = [land[0][:]]
+#     for i in range(1,len(land)):
+#         new = []
+#         for j in range(4):
+#             slsl = total[i-1][:j]
+#             for k in total[i-1][j+1:]:
+#                 slsl.append(k)
+#             new.append(land[i][j]+max(slsl))
+#         total.append(new)
+#
+#     return max(total[-1])
+#
+# print(solution([[1,2,3,5],[5,6,7,8],[4,3,2,1]]))
 
-print('답: ',solution([[0,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,1,0]]))
-print('답: ',solution([[0,0,1,1],[1,1,1,1]]))
-print('답: ',solution([[0,0,0,0]]))
+# def jinbubConvert(jinbub,number):
+#     if number == 0:
+#         return '0'
+#
+#     maps = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F']
+#     answer = []
+#
+#     while number > 0:
+#         answer.append(maps[number % jinbub])
+#         number //= jinbub
+#
+#     return ''.join(answer[::-1])
+#
+# def solution(n, t, m, p):
+#     long = ''
+#     answer = ''
+#     until = p + (t-1) * m
+#
+#     king = 0
+#     while len(long) < until:
+#         long += jinbubConvert(n,king)
+#         king += 1
+#
+#     for i in range(t):
+#         answer += long[(p + i*m)-1]
+#
+#     return answer
+#
+# print(solution(2,4,2,1))
+# print(solution(16,16,2,1))
+# print(solution(16,16,2,2))
+
+
+# def combination(arr):
+#     answer = []
+#
+#     def pops(arr):
+#         answer.append(arr.pop(0))
+#         for i in arr:
+#             pops(i)
+#
+#     for i in range(len(arr)):
+#         answer.append(pops(arr[:]))
+
+# def solution(n):
+#     total = [[0 for k in range(i+1)] for i in range(n)]
+#     target = n
+#     a = 0
+#     what = 0
+#     while True:
+#         print(total)
+#         asd = 0
+#         for i in total:
+#             if 0 not in i:
+#                 asd += 1
+#         if asd == n:
+#             break
+#         for i in range(target-2*a):
+#             total[a+i][a] = what
+#             what += 1
+#
+#         for i in range(1,target-2*a):
+#             total[(target-1)-a][i] = what
+#             what += 1
+# # 1,2
+#         for i in range(a+1,target-2*(a+1)):
+#             total[(target-1)-a-i][(target-2)-a] = what
+#             what += 1
+#
+#         a += 1
+#
+#     return total
+
+# def solution(skill, skill_trees):
+#     skill = list(skill)
+#     dic = {skill[i]:i+1 for i in range(len(skill))}
+#
+#     answer = 0
+#
+#     for skill_tree in skill_trees:
+#         now = 0
+#         possible = True
+#         for i in skill_tree:
+#             if i in skill:
+#                 if dic[i] - now > 1:
+#                     possible = False
+#                     break
+#                 if now + 1 == dic[i]:
+#                     now += 1
+#         if possible:
+#             answer += 1
+#
+#     return answer
+
+# print(solution("CBD",["BACDE", "CBADF", "AECB", "BDA"]))
+
+# def solution(n):
+#     answer = 0
+#     while n != 0:
+#         if n % 2 == 0:
+#             n /= 2
+#         else:
+#             answer += 1
+#             n -= 1
+#     return answer
+#
+# print(solution(5))
+
+# def apend(string):
+#     if string == '0':
+#         return 0
+#
+#     while len(string) < 4:
+#         string += string
+#
+#     return int(''.join(list(string)[:3]))
+#
+# def solution(numbers):
+#     answer = ""
+#     a = sorted(list(map(str,numbers)),reverse=True)
+#     new = []
+#
+#     for i in a:
+#         new.append([apend(i),i])
+#
+#     new = sorted(new,reverse=True)
+#     print(new)
+#
+#     for i in new:
+#         answer += i[1]
+#
+#     if answer.count('0') == len(answer):
+#         return '0'
+#
+#     return answer
+#
+# print(solution([898,89]))
+
+
+# def solution(cacheSize, cities):
+#     total = []
+#     answer = 0
+#     for city in cities:
+#         if city in total:
+#             answer += 1
+#             total.remove(city)
+#             total.append(city)
+#         else:
+#             answer += 5
+#             if len(total) == cacheSize:
+#                 total.pop(0)
+#             total.append(city)
+#
+#     return answer
+
+
+
+def howmany(arr,number):
+    count = 0
+    for i in arr:
+        if i < number:
+            count += 1
+        else:
+            break
+    return len(arr) - count
+#
+# def solution(citations):
+#     citations = sorted(citations)
+#     max1 = 0
+#
+#     for i in range(len(citations)+1):
+#         # i번 이상 인용된 논문의 수 == kick
+#         kick = howmany(citations,i)
+#         # 만약 i번 이상 인용된 논문의 수가 i편 이상일때
+#         if i <= kick:
+#             max = i
+#
+#     return max
+#
+# print(solution([3,0,6,1,5]))
+# print(solution([0,0,1,2,3,45]))
+# print([1,2,3,4][:0])
+
+# def solution(citations):
+#     citations = sorted(citations)
+#
+#     answer = 0
+#
+#     for i in range(len(citations)):
+#         if howmany(citations,i) >= i:
+#             answer = i
+#     return answer
+#
+# print(solution([3,0,6,1,5]))
+# print([1,2,3,4,5,6][:0])
+
+# def solution(number):
+#     answer = [0,0]
+#     while number != '1':
+#         answer[0] += 1
+#         next = ''
+#         for i in number:
+#             if i == '0':
+#                 answer[1] += 1
+#                 continue
+#             next += '1'
+#         number = str(format(len(next),'b'))
+#
+#     return answer
+#
+# print(solution("01110"))
+
+# def solution(n, words):
+#     total = set()
+#     beforeWord = 'a'
+#
+#     cycle = 0
+#
+#     while True:
+#         for i in range(n):
+#             if words == []:
+#                 return [0,0]
+#
+#             if words[0] in total:
+#                 return [i+1, cycle+1]
+#             elif list(words[0])[0] != list(beforeWord)[-1] and len(total) != 0:
+#                 return [i+1, cycle+1]
+#             else:
+#                 beforeWord = words.pop(0)
+#                 total.add(beforeWord)
+#
+#         cycle += 1
+#
+# print(solution(3,["tank", "kick", "know", "wheel", "land", "dream", "mother", "robot", "tank"]))
+# print(solution(5,["hello", "observe", "effect", "take", "either", "recognize", "encourage", "ensure", "establish", "hang", "gather", "refer", "reference", "estimate", "executive"]))
+# print(solution(2,["hello", "one", "even", "never", "now", "world", "draw"]))
+
+def solution(number, k):
+    num = list(number)
+    length = len(num)
+    remaim = length - k
+    dic = {str(i):[] for i in set(number)}
+
+    answer = ''
+
+    for i in range(length):
+        dic[num[i]].append(len(num)-i-1)
+
+    print(dic)
+
+    return answer
+
+solution("19225311354534243545435421343544",4)
