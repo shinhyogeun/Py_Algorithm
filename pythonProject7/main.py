@@ -1089,19 +1089,164 @@ def howmany(arr,number):
 # print(solution(5,["hello", "observe", "effect", "take", "either", "recognize", "encourage", "ensure", "establish", "hang", "gather", "refer", "reference", "estimate", "executive"]))
 # print(solution(2,["hello", "one", "even", "never", "now", "world", "draw"]))
 
-def solution(number, k):
-    num = list(number)
-    length = len(num)
-    remaim = length - k
-    dic = {str(i):[] for i in set(number)}
+# def solution(number, k):
+#     num = list(number)
+#     length = len(num)
+#     remain = length - k
+#     dic = {str(i):[] for i in set(number)}
+#     answer = ''
+#
+#     for i in range(length):
+#         dic[num[i]].append(len(num)-i)
+#
+#     limit = 1e9
+#     while remain:
+#         for i in sorted(dic.keys(),reverse=True):
+#             while dic[i] != [] and limit <= dic[i][0]:
+#                 dic[i].pop(0)
+#             if dic[i] != [] and limit > dic[i][0] >= remain:
+#                 remain -= 1
+#                 limit = dic[i].pop(0)
+#                 answer += str(i)
+#                 break
+#
+#     return str(int(answer))
+#
+# print(solution("4177252841",4))
 
-    answer = ''
+# def solution(prices):
+#     answers = []
+#     king = []
+#     while prices:
+#         answer = 0
+#         copyedKing = king[:]
+#         new = prices.pop()
+#         print(new)
+#
+#         while copyedKing:
+#             if new <= copyedKing[0]:
+#                 copyedKing.pop(0)
+#                 answer += 1
+#             else:
+#                 answer += 1
+#                 break
+#         king.insert(0,new)
+#         answers.append(answer)
+#
+#     return answers[::-1]
+#
+# print(solution([1,2,3,2,3]))
 
-    for i in range(length):
-        dic[num[i]].append(len(num)-i-1)
+# from itertools import combinations
+#
+# def solution(clothes):
+#     total = {j:[] for j in set([i[1] for i in clothes])}
+#     mix = len(total)
+#     answer = 0
+#     for clothe in clothes:
+#         total[clothe[1]].append(clothe[0])
+#
+#     for i in total.keys():
+#         total[i] = len(total[i])
+#
+#     print(total)
+#     # for i in range(1,mix+1):
+#     #     miniAnswer = 0
+#     #     for combi in list(combinations(total.keys(),i)):
+#     #         a = 1
+#     #         for eaxh in combi:
+#     #             a *= len(total[eaxh])
+#     #         miniAnswer += a
+#     #     answer += miniAnswer
+#
+#     return answer
 
-    print(dic)
+# print(solution([["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"]]))
+# print(solution([["crowmask", "face"], ["bluesunglasses", "face"], ["smoky_makeup", "face"]]))
+# print(len(list(combinations([i for i in range(30)],6))))
+
+# def solution(bridge_length, weight, truck_weights):
+#     complite = []
+#     ing = []
+#     k = 0
+#
+#     while truck_weights:
+#         if weight >= sum(ing) + truck_weights[0]:
+#             k += 1
+#             ing.append(truck_weights.pop(0))
+#         else:
+#
+#
+#     answer = 0
+#     return answer
+
+# def solution(people, limit):
+#     people = sorted(people)
+#     answer = 0
+#
+#     left = 0
+#     right = len(people) - 1
+#
+#     now = 0
+#     while left != right:
+#         if people[left] + people[right] > limit:
+#             right -= 1
+#         elif people[left] + people[right] < limit:
+#             now += people[right]
+#             left += 1
+#         else:
+#             answer += 1
+#
+#     return answer
+#
+# print(solution([160, 150, 140, 60, 50, 40], 200))
+
+# def solution(prices):
+#     min = [prices[-1],len(prices)-1]
+#     max = [prices[-1],len(prices)-1]
+#     answer = [0]
+#     for i in range(len(prices)-2,-1,-1):
+#         print(prices[i],'   min :',min,'max :',max)
+#         if min[0] < prices[i]:
+#             if max[0] < prices[i]:
+#                 answer.append(1)
+#                 max = [prices[i],i]
+#                 # min = [prices[i],i]
+#             else:
+#                 # print(min[1],i)
+#                 answer.append(min[1]-i)
+#         else:
+#             answer.append(len(prices)-i-1)
+#             min = [prices[i],i]
+#             max = [prices[i],i]
+#     print(prices)
+#     return answer[::-1]
+
+# print(solution([1,2,3,2,3]))
+# print(solution([0,1,6,7,1,4,2,5]))
+# print(solution([1,2,3,4,5,7]))
+# print(solution([2,1,4,9,2,1]))
+
+from collections import deque
+
+def solution(prices):
+    answer = []
+    q = deque()
+    for i in prices:
+        q.append(i)
+
+    while q:
+        a = q.popleft()
+        for i in range(len(q)):
+            if q[i] < a:
+                answer.append(i+1)
+                break
+        else:
+            answer.append(len(q))
 
     return answer
 
-solution("19225311354534243545435421343544",4)
+print(solution([1,2,3,2,3]))
+print(solution([0,1,6,7,1,4,2,5]))
+print(solution([1,2,3,4,5,7]))
+print(solution([2,1,4,9,2,1]))
