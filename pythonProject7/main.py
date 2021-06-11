@@ -1227,26 +1227,332 @@ def howmany(arr,number):
 # print(solution([1,2,3,4,5,7]))
 # print(solution([2,1,4,9,2,1]))
 
-from collections import deque
+# from collections import deque
+#
+# def solution(prices):
+#     answer = []
+#     q = deque(prices)
+#
+#     while q:
+#         a = q.popleft()
+#         an = 0
+#         for i in range(len(q)):
+#             an += 1
+#             if q[i] < a:
+#                 break
+#         answer.append(an)
+#
+#     return answer
+#
+# print(solution([1,2,3,2,3]))
+# print(solution([0,1,6,7,1,4,2,5]))
+# print(solution([1,2,3,4,5,7]))
+# print(solution([2,1,4,9,2,1]))
 
-def solution(prices):
-    answer = []
-    q = deque()
-    for i in prices:
-        q.append(i)
+# from collections import deque
+#
+# def solution(bridge_length, weight, truck_weights):
+#     q = deque(truck_weights)
+#     now = deque()
+#     complete = []
+#     answer = 0
+#
+#     while len(q) != 0 and sum(now) + q[0] <= weight and len(now) < bridge_length:
+#         now.append(q.popleft())
+#         answer += 1
+#
+#     while complete != truck_weights:
+#         # 이동!
+#         answer += bridge_length - len(now)
+#
+#         # 다 내려
+#         for i in range(len(now)):
+#             complete.append(now.popleft())
+#             # 한자리 탈 수 있니?
+#             answer += 1
+#             if len(q) != 0 and sum(now) + q[0] <= weight:
+#                 now.append(q.popleft())
+#         print(complete)
+#
+#         # 그 후에도 혹시 더 탈 수 있니?
+#         while len(q) != 0 and sum(now) + q[0] <= weight and len(now) < bridge_length:
+#             now.append(q.popleft())
+#             answer += 1
+#     return answer
 
-    while q:
-        a = q.popleft()
-        for i in range(len(q)):
-            if q[i] < a:
-                answer.append(i+1)
-                break
-        else:
-            answer.append(len(q))
+
+# print(solution(1,100,[1,1,1,1,1,1]))
+# print(solution(2,10,[7,4,5,6]))
+# print(solution(2,110,[1,2,10]))
+# print(solution(100,100,[10,10,10,10,10,10,10,10,10,10]))
+
+
+# def solution(numbers):
+#     answer = []
+#     for number in numbers:
+#         pivot = list(map(int,list(str(format(number,'b')))))
+#         if pivot[-1] == 0:
+#             number += 1
+#         else:
+#             count = -1
+#             for i in range(1, len(pivot) + 1):
+#                 if pivot[-i] == 0:
+#                     break
+#                 count += 1
+#             bb = 0
+#             for i in range(count):
+#                 bb += 2**i
+#             number += 1 + bb
+#
+#         answer.append(number)
+#     return answer
+#
+# print(solution([2,7]))
+
+# from collections import deque
+#
+# def solution(s):
+#     s = deque(s)
+#     s.popleft()
+#     s.pop()
+#     arr = []
+#
+#     while s:
+#         start = s.popleft()
+#         if start == '{':
+#             new = s.popleft()
+#             l = ''
+#             while new != '}':
+#                 l += new
+#                 new = s.popleft()
+#             arr.append(set(map(int,l.split(','))))
+#     arr = sorted(arr, key=len)
+#
+#     answer = [list(arr[0])[0]]
+#
+#     for i in range(1,len(arr)):
+#         answer.append(list(arr[i] - arr[i-1])[0])
+#
+#     return answer
+#
+# print(solution("{{2,1},{2},{2,1,3},{2,1,3,4}}"))
+
+# from collections import deque
+#
+# def isPossible(s):
+#     s = deque(s)
+#     total = deque([s.popleft()])
+#     while s:
+#         new = s.popleft()
+#         if len(total) != 0 and total[-1] == '{':
+#             if new == '}':
+#                 total.pop()
+#             else:
+#                 total.append(new)
+#         elif len(total) != 0 and total[-1] == '[':
+#             if new == ']':
+#                 total.pop()
+#             else:
+#                 total.append(new)
+#         elif len(total) != 0 and total[-1] == '(':
+#             if new == ')':
+#                 total.pop()
+#             else:
+#                 total.append(new)
+#         else:
+#             total.append(new)
+#
+#     if len(total) == 0:
+#         return True
+#
+#     return False
+#
+# def solution(s):
+#     s = deque(s)
+#     answer = 0
+#
+#     for i in range(len(s)):
+#         if isPossible(s):
+#             answer += 1
+#         s.append(s.popleft())
+#     return answer
+#
+# print('답',solution('[](){}'))
+# print('답',solution('}]()[{'))
+# print('답',solution('[)(]'))
+# print('답',solution('}}}'))
+
+from itertools import combinations
+
+# def solution(clothes):
+#     total = {j:[] for j in set([i[1] for i in clothes])}
+#     mix = len(total)
+#     answer = 1
+#
+#     for clothe in clothes:
+#         total[clothe[1]].append(clothe[0])
+#
+#     for a in total.keys():
+#         total[a] = len(total[a])
+#
+#     for a in total.values():
+#         answer *= a+1
+#
+#     return answer - 1
+#
+# print(solution([["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"]]))
+
+# from collections import deque
+#
+# def convert(file):
+#     realName = file
+#     head = ''
+#     number = ''
+#     file = deque(file)
+#     numbers = ['0','1','2','3','4','5','6','7','8','9']
+#
+#     while True:
+#         if len(file) == 0 or file[0] in numbers:
+#             break
+#         head += file.popleft()
+#
+#     for i in range(5):
+#         if len(file) == 0 or file[0] not in numbers:
+#             break
+#         number += file.popleft()
+#
+#     return [head.lower(),int(number),''.join(file),realName]
+#
+# def solution(files):
+#     total = []
+#     for file in files:
+#         total.append(convert(file))
+#
+#     total.sort(key=lambda x:(x[0], x[1]))
+#
+#     return [i[3] for i in total]
+#
+# print(solution(["img12.png", "img10.png", "img02.png", "img1.png", "IMG01.GIF", "img2.JPG"]))
+
+# from collections import deque
+#
+# def solution(msg):
+#     dic = [chr(i).upper() for i in range(97,123)]
+#     msg = deque(msg)
+#     answer = []
+#
+#     while msg:
+#         mini = ''
+#         while len(msg) != 0 and (mini + msg[0]) in dic:
+#             mini += msg.popleft()
+#
+#         if len(msg) != 0:
+#             dic.append(mini + msg[0])
+#
+#         answer.append(dic.index(mini)+1)
+#
+#     return answer
+#
+# print(solution("KAKAO"))
+# print(solution("TOBEORNOTTOBEORTOBEORNOT"))
+
+
+# import datetime
+# from collections import deque
+#
+# def calGap(startTime,endTime):
+#     startTime = datetime.datetime.strptime(startTime,'%H:%M')
+#     endTime = datetime.datetime.strptime(endTime,'%H:%M')
+#
+#     pretty = str(endTime-startTime).split(',')[-1].split(':')
+#
+#     return 60*int(pretty[0]) + int(pretty[1])
+#
+# def turnToList(music):
+#     answer = []
+#     music = deque(music)
+#
+#     while music:
+#         alpha = music.popleft()
+#         if len(music) != 0 and music[0] == '#':
+#             alpha += music.popleft()
+#         answer.append(alpha)
+#     return '/'.join(answer)+'/',answer
+#
+# def solution(m, musicinfos):
+#     for i,musicinfo in enumerate(musicinfos):
+#         startTime,endTime,name,music = musicinfo.split(',')
+#         musicinfos[i] = [calGap(startTime, endTime),name,music]
+#
+#     musicinfos.sort(key=lambda x:(-x[0]))
+#
+#     for dutaiton, name, music in musicinfos:
+#         totalMusic = ''
+#         newMusic, newList = turnToList(music)
+#         for i in range(dutaiton):
+#             totalMusic += newList[i%(len(newList))] + '/'
+#         sting, target = turnToList(m)
+#         # print(sting,(totalMusic))
+#         if sting in totalMusic:
+#             return name
+#
+#     return '(None)'
+#
+# print(solution("ABCDEFG",["12:00,12:14,HELLO,CDEFGAB", "13:00,13:05,WORLD,ABCDEF"]))
+# print(solution("CC#BCC#BCC#BCC#B",["03:00,03:30,FOO,CC#B", "04:00,04:08,BAR,CC#BCC#BCC#B"]))
+# print(solution("ABC",["12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"]))
+
+from itertools import combinations
+
+def isIn(a,b):
+    count = 0
+    for i in a:
+        for j in b:
+            if i == j:
+                count += 1
+    if count == len(a):
+        return True
+    return False
+
+def solution(relation):
+    kind = [i for i in range(len(relation[0]))]
+    k = 1
+    answer = 0
+    total = []
+
+    while k <= len(kind):
+        miniAnswer = []
+        for case in list(combinations(kind,k)):
+            news = []
+            for i in relation:
+                new = ''
+                for j in case:
+                    new += i[j]
+                news.append(new)
+            if len(news) == len(list(set(news))):
+                miniAnswer.append(case)
+
+        real = []
+        for i in miniAnswer:
+            for j in total:
+                if isIn(j,i):
+                    break
+            else:
+                real.append(i)
+
+        for i in real:
+            total.append(i)
+
+        answer += len(real)
+
+        k += 1
 
     return answer
 
-print(solution([1,2,3,2,3]))
-print(solution([0,1,6,7,1,4,2,5]))
-print(solution([1,2,3,4,5,7]))
-print(solution([2,1,4,9,2,1]))
+print(solution([["100","ryan","music","2"],["200","apeach","math","2"],["300","tube","computer","3"],["400","con","computer","4"],["500","muzi","music","3"],["600","apeach","music","2"]]))
+# solution([
+#     ['a','1','aaa','c','ng'],
+#     ['b','1','bbb','c','g'],
+#     ['c','1','aaa','d','ng'],
+#     ['d','2','bbb','d','ng']
+# ])
