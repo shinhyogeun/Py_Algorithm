@@ -1502,57 +1502,189 @@ from itertools import combinations
 # print(solution("CC#BCC#BCC#BCC#B",["03:00,03:30,FOO,CC#B", "04:00,04:08,BAR,CC#BCC#BCC#B"]))
 # print(solution("ABC",["12:00,12:14,HELLO,C#DEFGAB", "13:00,13:05,WORLD,ABCDEF"]))
 
-from itertools import combinations
+# from itertools import combinations
+#
+# def isIn(a,b):
+#     count = 0
+#     for i in a:
+#         for j in b:
+#             if i == j:
+#                 count += 1
+#     if count == len(a):
+#         return True
+#     return False
+#
+# def solution(relation):
+#     kind = [i for i in range(len(relation[0]))]
+#     k = 1
+#     answer = 0
+#     total = []
+#
+#     while k <= len(kind):
+#         miniAnswer = []
+#         for case in list(combinations(kind,k)):
+#             news = []
+#             for i in relation:
+#                 new = ''
+#                 for j in case:
+#                     new += i[j]
+#                 news.append(new)
+#             if len(news) == len(list(set(news))):
+#                 miniAnswer.append(case)
+#
+#         real = []
+#         for i in miniAnswer:
+#             for j in total:
+#                 if isIn(j,i):
+#                     break
+#             else:
+#                 real.append(i)
+#
+#         for i in real:
+#             total.append(i)
+#
+#         answer += len(real)
+#
+#         k += 1
+#
+#     return answer
 
-def isIn(a,b):
-    count = 0
-    for i in a:
-        for j in b:
-            if i == j:
-                count += 1
-    if count == len(a):
-        return True
-    return False
-
-def solution(relation):
-    kind = [i for i in range(len(relation[0]))]
-    k = 1
-    answer = 0
-    total = []
-
-    while k <= len(kind):
-        miniAnswer = []
-        for case in list(combinations(kind,k)):
-            news = []
-            for i in relation:
-                new = ''
-                for j in case:
-                    new += i[j]
-                news.append(new)
-            if len(news) == len(list(set(news))):
-                miniAnswer.append(case)
-
-        real = []
-        for i in miniAnswer:
-            for j in total:
-                if isIn(j,i):
-                    break
-            else:
-                real.append(i)
-
-        for i in real:
-            total.append(i)
-
-        answer += len(real)
-
-        k += 1
-
-    return answer
-
-print(solution([["100","ryan","music","2"],["200","apeach","math","2"],["300","tube","computer","3"],["400","con","computer","4"],["500","muzi","music","3"],["600","apeach","music","2"]]))
+# print(solution([["100","ryan","music","2"],["200","apeach","math","2"],["300","tube","computer","3"],["400","con","computer","4"],["500","muzi","music","3"],["600","apeach","music","2"]]))
 # solution([
 #     ['a','1','aaa','c','ng'],
 #     ['b','1','bbb','c','g'],
 #     ['c','1','aaa','d','ng'],
 #     ['d','2','bbb','d','ng']
 # ])
+
+# def flat(arr):
+#     new = []
+#     for i in arr:
+#         for j in i:
+#             new.append(j)
+#     return new
+#
+# def solution(arr):
+#     answer = [0,0]
+#
+#     def cal(arr):
+#         if len(arr) == 1:
+#             answer[arr[0][0]] += 1
+#         else:
+#             if 0 not in flat(arr):
+#                 answer[1] += 1
+#             elif 1 not in flat(arr):
+#                 answer[0] += 1
+#             else:
+#                 cal([[i for i in j[:len(arr) // 2]] for j in arr[:len(arr) // 2]])
+#                 cal([[i for i in j[len(arr) // 2:]] for j in arr[:len(arr) // 2]])
+#                 cal([[i for i in j[:len(arr) // 2]] for j in arr[len(arr) // 2:]])
+#                 cal([[i for i in j[len(arr) // 2:]] for j in arr[len(arr) // 2:]])
+#
+#     cal(arr)
+#
+#     return answer
+#
+# print(solution([[1,1,0,0],[1,0,0,0],[1,0,0,1],[1,1,1,1]]))
+# print(solution([[1,1,1,1,1,1,1,1],[0,1,1,1,1,1,1,1],[0,0,0,0,1,1,1,1],[0,1,0,0,1,1,1,1],[0,0,0,0,0,0,1,1],[0,0,0,0,0,0,0,1],[0,0,0,0,1,0,0,1],[0,0,0,0,1,1,1,1]]))
+
+# def down(board):
+#     for i in range(1,len(board)):
+#         for k in range(len(board[0])):
+#             if board[i][k] == '^':
+#                 for j in range(i,0,-1):
+#                     board[j][k] = board[j-1][k]
+#                     board[j-1][k] = '^'
+
+    # for i in board:
+    #     print(i)
+#     return  board
+#
+# down([
+#     ['H', 'G', 'N', 'H', 'U'],
+#     ['C', 'R', 'S', 'H', 'V'],
+#     ['U', 'K', 'H', 'V', 'L'],
+#     ['M', 'J', 'H', 'Q', 'B'],
+#     ['G', 'S', 'H', 'O', 'T'],
+#     ['M', 'Q', 'M', 'J', 'J'],
+#     ['A', 'G', 'J', '^', '^'],
+#     ['Q', 'U', 'L', '^', '^']
+#     ])
+
+# def solution(m, n, board):
+#     board = [[j for j in list(i)] for i in board]
+#     answer = [0]
+#
+#     def pissoff(arr):
+#         for i in arr:
+#             print(i)
+#         print()
+#         total = []
+#         for i in range(m-1):
+#             for j in range(n-1):
+#                 sqaur = [arr[i][j],arr[i][j+1],arr[i+1][j],arr[i+1][j+1]]
+#                 if len(list(set(sqaur))) == 1 and sqaur[0] != '^':
+#                     for k in [(i,j),(i,j+1),(i+1,j),(i+1,j+1)]:
+#                         total.append(k)
+#         print(total)
+#         total = list(set(total))
+#         answer[0] += len(total)
+#
+#         if total != []:
+#             for x,y in total:
+#                 board[x][y] = '^'
+#             pissoff(down(board))
+#         else:
+#             return
+#
+#     pissoff(board)
+#
+#     return answer[0]
+#
+# print(solution(8,5,[
+#     "HGNHU",
+#     "CRSHV",
+#     "UKHVL",
+#     "MJHQB",
+#     "GSHOT",
+#     "MQMJJ",
+#     "AGJKK",
+#     "QULKK"
+# ]))
+
+# print(solution(4,5,["CCBDE", "AAADE", "AAABF", "CCBBF"]))
+# print(solution(6,6,["TTTANT", "RRFACC", "RRRFCC", "TRRRAA", "TTMMMF", "TMMTTJ"]))
+
+import heapq
+
+def solution(N, road, K):
+    INF = int(1e9)
+    answer = [INF for _ in range(N+1)]
+
+    info = {i: [] for i in range(1,N+1)}
+
+    for frm, t, time in road:
+        info[frm].append((t,time))
+        info[t].append((frm,time))
+
+    answer[1] = 0
+    q = []
+    heapq.heappush(q,(0,1))
+
+    while q:
+        dist, now = heapq.heappop(q)
+
+        if dist <= answer[now]:
+            for i in info[now]:
+                if dist + i[1] < answer[i[0]]:
+                    answer[i[0]] = dist + i[1]
+                    heapq.heappush(q,(dist + i[1], i[0]))
+    count = 0
+
+    for i in answer[1:]:
+        if i <= K:
+            count += 1
+
+    return count
+
+print(solution(5,[[1,2,1],[2,3,3],[5,2,2],[1,4,2],[5,3,1],[5,4,2]],3))
