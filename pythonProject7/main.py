@@ -1655,36 +1655,285 @@ from itertools import combinations
 # print(solution(4,5,["CCBDE", "AAADE", "AAABF", "CCBBF"]))
 # print(solution(6,6,["TTTANT", "RRFACC", "RRRFCC", "TRRRAA", "TTMMMF", "TMMTTJ"]))
 
-import heapq
+# import heapq
+#
+# def solution(N, road, K):
+#     INF = int(1e9)
+#     answer = [INF for _ in range(N+1)]
+#
+#     info = {i: [] for i in range(1,N+1)}
+#
+#     for frm, t, time in road:
+#         info[frm].append((t,time))
+#         info[t].append((frm,time))
+#
+#     answer[1] = 0
+#     q = []
+#     heapq.heappush(q,(0,1))
+#
+#     while q:
+#         dist, now = heapq.heappop(q)
+#
+#         if dist <= answer[now]:
+#             for i in info[now]:
+#                 if dist + i[1] < answer[i[0]]:
+#                     answer[i[0]] = dist + i[1]
+#                     heapq.heappush(q,(dist + i[1], i[0]))
+#     count = 0
+#
+#     for i in answer[1:]:
+#         if i <= K:
+#             count += 1
+#
+#     return count
+#
+# print(solution(5,[[1,2,1],[2,3,3],[5,2,2],[1,4,2],[5,3,1],[5,4,2]],3))
 
-def solution(N, road, K):
-    INF = int(1e9)
-    answer = [INF for _ in range(N+1)]
+# def solution(dirs):
+#     dic = {'U':[-1,0],'R':[0,1],'D':[1,0],'L':[0,-1]}
+#     total = [['X' for i in range(11)] for j in range(11)]
+#     now = [5, 5]
+#     answer = []
+#
+#     for dir in dirs:
+#         if 10 >= now[0] + dic[dir][0] >= 0 and 10 >= now[1] + dic[dir][1] >= 0:
+#             answer.append([(now[0],now[1]),(now[0] + dic[dir][0],now[1] + dic[dir][1])])
+#             now = [now[0] + dic[dir][0],now[1] + dic[dir][1]]
+#
+#
+#     return len(list(set([tuple(sorted(i)) for i in answer])))
+#
+# print(solution('ULURRDLLU'))
+# print(solution('LULLLLLLU'))
 
-    info = {i: [] for i in range(1,N+1)}
+# def solution(n):
+#
+#     total = [[0 for i in range(j)] for j in range(1,n+1)]
+#     pivot = [1]
+#     N = [n]
+#     def pissoff(depth):
+#         if N[0] == 0: return
+#         for i in range(N[0]):
+#             total[(2*depth)+i][depth] = pivot[0]
+#             pivot[0] += 1
+#         N[0] -= 1
+#         if N[0] == 0: return
+#         for i in range(N[0]):
+#             total[len(total)-1-depth][depth+1+i] = pivot[0]
+#             pivot[0] += 1
+#         N[0] -= 1
+#         if N[0] == 0: return
+#         for i in range(N[0]):
+#             total[len(total)-1-(depth+1)-i][len(total)-1-(2*depth+1)-i] = pivot[0]
+#             pivot[0] += 1
+#         N[0] -= 1
+#         if N[0] == 0: return
+#         return pissoff(depth+1)
+#
+#     pissoff(0)
+#     answer = []
+#
+#     for i in total:
+#         for j in i:
+#             answer.append(j)
+#
+#     return answer
 
-    for frm, t, time in road:
-        info[frm].append((t,time))
-        info[t].append((frm,time))
+# from collections import deque
+#
+# def solution(people, limit):
+#     people = deque(sorted(people))
+#     answer = 0
+#
+#     while people:
+#         new = [people.pop()]
+#         if len(people) != 0 and new[0] + people[0] <= limit:
+#             new.append(people.popleft())
+#         answer += 1
+#
+#     return answer
 
-    answer[1] = 0
-    q = []
-    heapq.heappush(q,(0,1))
+from bisect import bisect_left,bisect_right
 
-    while q:
-        dist, now = heapq.heappop(q)
+from collections import deque
 
-        if dist <= answer[now]:
-            for i in info[now]:
-                if dist + i[1] < answer[i[0]]:
-                    answer[i[0]] = dist + i[1]
-                    heapq.heappush(q,(dist + i[1], i[0]))
-    count = 0
+# def solution2(bridge_length, weight, truck_weights):
+#     q = deque(truck_weights)
+#     now = deque()
+#     complete = []
+#     answer = 0
+#
+#     while len(q) != 0 and sum(now) + q[0] <= weight and len(now) < bridge_length:
+#         now.append(q.popleft())
+#         answer += 1
+#
+#     while complete != truck_weights:
+#         # 이동!
+#         answer += bridge_length - len(now)
+#
+#         # 다 내려
+#         for i in range(len(now)):
+#             answer += 1
+#             complete.append(now.popleft())
+#             # 한자리 탈 수 있니?
+#             if len(q) != 0 and sum(now) + q[0] <= weight and len(now) < bridge_length:
+#                 now.append(q.popleft())
+#
+#         # 그 후에도 혹시 더 탈 수 있니?
+#         while len(q) != 0 and sum(now) + q[0] <= weight and len(now) < bridge_length:
+#             now.append(q.popleft())
+#             answer += 1
+#
+#     return answer
+#
+# from collections import deque
+#
+# def solution(bridge_length, weight, truck_weights):
+#     answer = 0
+#     wait = deque(truck_weights[:])
+#     passed = []
+#     passing = deque([0] * bridge_length)
+#     passingWeight = 0
+#
+#     while len(passed) != len(truck_weights):
+#         print(passing)
+#         answer += 1
+#         if passing[-1] != 0:
+#             if len(wait) != 0 and passingWeight + wait[0] - passing[-1] <= weight:
+#                 passingWeight += wait[0]
+#                 passing.appendleft(wait.popleft())
+#             else:
+#                 passing.appendleft(0)
+#             passingWeight -= passing[-1]
+#             passed.append(passing.pop())
+#         else:
+#             if len(wait) != 0 and passingWeight + wait[0] <= weight:
+#                 passingWeight += wait[0]
+#                 passing.appendleft(wait.popleft())
+#                 passing.pop()
+#             else:
+#                 passing.appendleft(passing.pop())
+#     return answer
+#
+# print([1,2,3,4][:3])
+#
+# print(solution(2,10,[2,1,6,8,5,3,2,3,5,2,3,5]))
+# print(solution2(2,10,[2,1,6,8,5,3,2,3,5,2,3,5]))
 
-    for i in answer[1:]:
-        if i <= K:
-            count += 1
+# print(solution(100,100,[10]))
+# print(solution(100,100,[100]))
+# print(solution(100,100,[100,100,100,100,100,100,100,100,100,100]))
 
-    return count
+# def solution(rows, columns, queries):
+#     total = [[i+1 for i in range(j*columns, j*columns + columns)] for j in range(rows)]
+#     answer = []
+#
+#     def circlePop(query):
+#         target = []
+#         for i in range(query[1]-1,query[3]):
+#             target.append(total[query[0]-1][i])
+#         for i in range(query[0],query[2]):
+#             target.append(total[i][query[3]-1])
+#         for i in range(query[3]-2, query[1]-2,-1):
+#             print(i)
+#             target.append(total[query[2]-1][i])
+#         for i in range(query[2]-2, query[0]-1,-1):
+#             target.append(total[i][query[1]-1])
+#         return target
+#
+#     def circlePush(query, target):
+#         k = 0
+#         for i in range(query[1]-1,query[3]):
+#             total[query[0]-1][i] = target[k]
+#             k+=1
+#         for i in range(query[0],query[2]):
+#             total[i][query[3]-1] = target[k]
+#             k += 1
+#         for i in range(query[3]-2, query[1]-2,-1):
+#             total[query[2]-1][i] = target[k]
+#             k += 1
+#         for i in range(query[2]-2, query[0]-1,-1):
+#             total[i][query[1]-1] = target[k]
+#             k += 1
+#
+#     for query in queries:
+#         for i in total:
+#             print(i)
+#         print()
+#         circle = circlePop(query)
+#         circle.insert(0,circle.pop())
+#         answer.append(min(circle))
+#         circlePush(query,circle)
+#     for i in total:
+#         print(i)
+#     return answer
 
-print(solution(5,[[1,2,1],[2,3,3],[5,2,2],[1,4,2],[5,3,1],[5,4,2]],3))
+# print(solution(6,6,[[2,2,5,4],[3,3,6,6],[5,1,6,3]]))
+# print(solution(3,3,[[1,1,2,2],[1,2,2,3],[2,1,3,2],[2,2,3,3]]))
+# print(solution(4,6,[[2,2,3,5],[1,1,2,2],]))
+# print(solution(100,97,[[1,1,100,97]]))
+
+# def isSquareExist(board,number):
+#     a = len(board) - number
+#     b = len(board[0]) - number
+#
+#     for i in range(a+1):
+#         for j in range(b+1):
+#             trigger = False
+#             for k in range(number):
+#                 for u in range(number):
+#                     if board[i+k][j+u] == 0:
+#                         trigger = True
+#                         break
+#                 if trigger:
+#                     break
+#             if trigger:
+#                 continue
+#             return True
+#     return False
+#
+# def solution(board):
+#     short = len(board) if len(board[0]) >= len(board) else len(board[0])
+#     for i in range(short,0,-1):
+#         if isSquareExist(board,i):
+#             return i**2
+#     return 0
+
+def solution(name):
+    target = list(name)
+    total = []
+    mini = 0
+    for i in range(len(target)):
+        if abs(ord(target[i]) - 65) <= abs(91 - ord(target[i])):
+            mini += abs(ord(target[i]) - 65)
+        else:
+            mini += abs(91 - ord(target[i]))
+
+    def check(target,now,much):
+        target[now] = 'A'
+        if ''.join(target) == 'A' * len(target):
+            total.append(much)
+            return
+        #['A','C','A','D']
+        for i in range(1,len(target)):
+            if target[now-i] != 'A':
+                new = target[:]
+                new[now-i] = 'A'
+                if now-i < 0:
+                    check(new,len(target)+now-i,much+i)
+                else:
+                    check(new, now-i, much+i)
+                break
+        for i in range(1,len(target)):
+            if now+i < len(target) and target[now+i] != 'A':
+                new = target[:]
+                new[now+i] = 'A'
+                check(new,now+i,much+i)
+                break
+
+    check(target,0,0)
+    return mini+min(total)
+
+print(solution('JAAABANSKJDLKSDLNSDLKSJNDOIDJSODJSOIDNDOISNOIDSNODIINDSOIDNSOIN'))
+print(solution('JEROEN'))
+print(solution('JAN'))
