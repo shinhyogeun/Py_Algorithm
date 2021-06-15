@@ -1008,15 +1008,15 @@ import math
 #     return answer
 
 
-
-def howmany(arr,number):
-    count = 0
-    for i in arr:
-        if i < number:
-            count += 1
-        else:
-            break
-    return len(arr) - count
+#
+# def howmany(arr,number):
+#     count = 0
+#     for i in arr:
+#         if i < number:
+#             count += 1
+#         else:
+#             break
+#     return len(arr) - count
 #
 # def solution(citations):
 #     citations = sorted(citations)
@@ -1899,41 +1899,163 @@ from collections import deque
 #             return i**2
 #     return 0
 
-def solution(name):
-    target = list(name)
-    total = []
-    mini = 0
-    for i in range(len(target)):
-        if abs(ord(target[i]) - 65) <= abs(91 - ord(target[i])):
-            mini += abs(ord(target[i]) - 65)
+# def solution(name):
+#     target = list(name)
+#     total = []
+#     mini = 0
+#     for i in range(len(target)):
+#         if abs(ord(target[i]) - 65) <= abs(91 - ord(target[i])):
+#             mini += abs(ord(target[i]) - 65)
+#         else:
+#             mini += abs(91 - ord(target[i]))
+#
+#     def check(target,now,much):
+#         target[now] = 'A'
+#         if ''.join(target) == 'A' * len(target):
+#             total.append(much)
+#             return
+#         #['A','C','A','D']
+#         for i in range(1,len(target)):
+#             if target[now-i] != 'A':
+#                 new = target[:]
+#                 new[now-i] = 'A'
+#                 if now-i < 0:
+#                     check(new,len(target)+now-i,much+i)
+#                 else:
+#                     check(new, now-i, much+i)
+#                 break
+#         for i in range(1,len(target)):
+#             if now+i < len(target) and target[now+i] != 'A':
+#                 new = target[:]
+#                 new[now+i] = 'A'
+#                 check(new,now+i,much+i)
+#                 break
+#
+#     check(target,0,0)
+#     return mini+min(total)
+
+# def solution(board):
+#     m = len(board[0])
+#     l = len(board)
+#     total = []
+#
+#     for j in range(1,m):
+#         for i in range(1,l):
+#             if 0 not in [board[i-1][j],board[i][j-1],board[i-1][j-1]] and board[i][j] != 0:
+#                 board[i][j] = min([board[i-1][j],board[i][j-1],board[i-1][j-1]])+1
+#
+#     for i in board:
+#         for j in i:
+#             total.append(j)
+#
+#     maximum = max(total)
+#
+#     return maximum**2
+#
+# print(solution([[0,1,1,1],[1,1,1,1],[1,1,1,1],[0,0,1,0]]))
+# print(solution([[0,0,1,1],[1,1,1,1]]))
+
+from bisect import bisect_left,bisect_right
+from itertools import combinations
+
+def solution(info, query):
+    all = {}
+    all['0'] = sorted([i.split(' ') for i in info])
+    for i in range(len(all['0'])):
+        all['0'][i][4] = int(all['0'][i][4])
+    answer = []
+    for i in range(1,5):
+        for j in list(combinations((1,2,3,4),i)):
+            all[''.join(list(map(str,j)))] = []
+
+    for i in info:
+        aa = i.split(' ')
+        for w in range(1, 5):
+            for j in list(combinations((1,2,3,4),w)):
+                reala = aa[:]
+                for k in j:
+                    reala[k-1] = '-'
+                reala[4] = int(reala[4])
+                all[''.join(list(map(str,j)))].append(reala)
+
+    for i in all.keys():
+        all[i] = sorted(all[i])
+
+    for qury in query:
+        filteredQury = qury.split(' ')
+        for i in filteredQury:
+            if i == 'and':
+                filteredQury.remove(i)
+        mini = ''
+        for i,v in enumerate(filteredQury):
+            if v == '-':
+                mini += str(i+1)
+        filteredQury[4] = int(filteredQury[4])
+        if mini == '':
+            a = bisect_left(all['0'], filteredQury)
+            filteredQury[4] = 100000
+            answer.append(bisect_right(all['0'], filteredQury) - a)
         else:
-            mini += abs(91 - ord(target[i]))
+            a = bisect_left(all[mini], filteredQury)
+            filteredQury[4] = 100000
+            answer.append(bisect_right(all[mini], filteredQury) - a)
 
-    def check(target,now,much):
-        target[now] = 'A'
-        if ''.join(target) == 'A' * len(target):
-            total.append(much)
-            return
-        #['A','C','A','D']
-        for i in range(1,len(target)):
-            if target[now-i] != 'A':
-                new = target[:]
-                new[now-i] = 'A'
-                if now-i < 0:
-                    check(new,len(target)+now-i,much+i)
-                else:
-                    check(new, now-i, much+i)
-                break
-        for i in range(1,len(target)):
-            if now+i < len(target) and target[now+i] != 'A':
-                new = target[:]
-                new[now+i] = 'A'
-                check(new,now+i,much+i)
-                break
+    return answer
+    #
+    # total = {
+    #     0:['cpp','python','java'],
+    #     1:['backend','frontend'],
+    #     2:['junior','senior'],
+    #     3:['pizza','chicken']
+    # }
+    #
+    # for qury in query:
+    #     filteredQury = qury.split(' ')
+    #     for i in filteredQury:
+    #         if i == 'and':
+    #             filteredQury.remove(i)
+    #     bases.append(filteredQury)
+    #
+    # for k, base in enumerate(bases):
+    #     for i, v in enumerate(base):
+    #         if v == '-':
+    #             bases[k][i] = total[i]
+    #         else:
+    #             bases[k][i] = [bases[k][i]]
+    #
+    # for k, base in enumerate(bases):
+    #     ultra = []
+    #     for one in base[0]:
+    #         for two in base[1]:
+    #             for three in base[2]:
+    #                 for four in base[3]:
+    #                     for five in base[4]:
+    #                         ultra.append([one,two,three,four,int(five)])
+    #
+    #     miniAnswer = 0
+    #
+    #     for i in ultra:
+    #         a = bisect_left(info, i)
+    #         i[4] = 100000
+    #         b = bisect_right(info,i)
+    #         miniAnswer += b-a
+    #
+    #     answer.append(miniAnswer)
 
-    check(target,0,0)
-    return mini+min(total)
+    return 0
 
-print(solution('JAAABANSKJDLKSDLNSDLKSJNDOIDJSODJSOIDNDOISNOIDSNODIINDSOIDNSOIN'))
-print(solution('JEROEN'))
-print(solution('JAN'))
+print(solution([
+    "java backend junior pizza 150",
+    "python frontend senior chicken 210",
+    "python frontend senior chicken 150",
+    "cpp backend senior pizza 260",
+    "java backend junior chicken 80",
+    "python backend senior chicken 50"
+],[
+    "java and backend and junior and pizza 100",
+    "python and frontend and senior and chicken 200",
+    "cpp and - and senior and pizza 250",
+    "- and backend and senior and - 150",
+    "- and - and - and chicken 100",
+    "- and - and - and - 150"
+]))
