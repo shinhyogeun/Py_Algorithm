@@ -573,27 +573,165 @@
 
 #18111 마인크래프트
 
-n,m,b = map(int,input().split())
-total = []
-answerArr = []
+# n,m,b = map(int,input().split())
+# total = []
+# answerArr = []
+#
+# for i in range(n):
+#     total.extend(list(map(int,input().split())))
+#
+# dic = {i:0 for i in set(total)}
+#
+# for i in total:
+#     dic[i] += 1
+#
+# for i in range(min(total),max(total)+1):
+#     an = b
+#     time = 0
+#     for j in dic.keys():
+#         if j >= i:
+#             time += (j-i)*dic[j]*2
+#             an += (j-i)*dic[j]
+#         else:
+#             time += (i-j)*dic[j]
+#             an -= (i-j)*dic[j]
+#     if an >= 0:
+#         answerArr.append((-time,i))
+#
+# result = sorted(answerArr,reverse=True)
+#
+# print(-result[0][0], result[0][1])
 
-for i in range(n):
-    total.append(list(map(int,input().split())))
+#15829번 Hashing
+# n = int(input())
+# word = list(input())
+#
+# answer = 0
+#
+# for i,v in enumerate(word):
+#     answer += (ord(v) - 96)*(31**i)
+#
+# print(answer%1234567891)
 
-dic = {i:0 for i in set(total)}
+#10845번 큐
+# from collections import deque
+# import sys
+# input = sys.stdin.readline
+# mother = deque()
+# n = int(input())
+#
+# for i in range(n):
+#     n = list(input().split())
+#     if n[0] == 'push':
+#         mother.append(n[1])
+#     elif n[0] =='pop':
+#         if len(mother) == 0:
+#             print(-1)
+#         else:
+#             print(mother.popleft())
+#     elif n[0] == 'size':
+#         print(len(mother))
+#     elif n[0] == 'empty':
+#         if len(mother) == 0:
+#             print(1)
+#         else:
+#             print(0)
+#     elif n[0] == 'front':
+#         if len(mother) == 0:
+#             print(-1)
+#         else:
+#             print(mother[0])
+#     else:
+#         if len(mother) == 0:
+#             print(-1)
+#         else:
+#             print(mother[-1])
 
-for i in range(len(total)):
-    dic[i] += 1
-    
-for i in set(total):
-    an = 99
-    time = 0
-    for j in dic.keys():
-        if j >= i:
-            time += (j-i)*2
-            an += (j-i)
-        else:
-            time += (i-j)
-            an -= (i-j)
-    if an >= 0:
+#10845번 덱
+# from collections import deque
+# import sys
+# input = sys.stdin.readline
+# mother = deque()
+# n = int(input())
+#
+# for i in range(n):
+#     n = list(input().split())
+#     if n[0] == 'push_front':
+#         mother.appendleft(n[1])
+#     elif n[0] =='push_back':
+#         mother.append(n[1])
+#     elif n[0] =='pop_front':
+#         if len(mother) == 0:
+#             print(-1)
+#         else:
+#             print(mother.popleft())
+#     elif n[0] =='pop_back':
+#         if len(mother) == 0:
+#             print(-1)
+#         else:
+#             print(mother.pop())
+#     elif n[0] == 'size':
+#         print(len(mother))
+#     elif n[0] == 'empty':
+#         if len(mother) == 0:
+#             print(1)
+#         else:
+#             print(0)
+#     elif n[0] == 'front':
+#         if len(mother) == 0:
+#             print(-1)
+#         else:
+#             print(mother[0])
+#     else:
+#         if len(mother) == 0:
+#             print(-1)
+#         else:
+#             print(mother[-1])
+
+#2805번 나무 자르기
+# n, m = map(int,input().split())
+#
+# arr = [i for i in list(map(int,input().split()))]
+#
+# mini = 0
+# maxi = max(arr)
+# answer = 0
+# while mini <= maxi:
+#     pivot = (mini + maxi) // 2
+#     target = sum([i-pivot for i in arr if i > pivot])
+#     if target > m:
+#         mini = pivot + 1
+#         answer = pivot
+#     elif target < m:
+#         maxi = pivot - 1
+#     else:
+#         answer = pivot
+#         break
+#
+# print(answer)
+
+#1654번 랜선 자르기
+# k,n = map(int,input().split())
+# arr = []
+# for i in range(k):
+#     arr.append(int(input()))
+#
+# mini = 1
+# maxi = max(arr)
+#
+# answer = 0
+#
+# while mini <= maxi:
+#     pivot = (mini+maxi)//2
+#     total = sum([i//pivot for i in arr])
+#     if total >= n:
+#         answer = pivot
+#         mini = pivot+1
+#     elif total < n:
+#         maxi = pivot-1
+#
+# print(answer)
+
+
+
 
