@@ -526,37 +526,369 @@
 # print(answer['0'])
 # print(answer['1'])
 
-# 7662번 이중 우선순위 큐
-import sys
-import heapq
-input = sys.stdin.readline
+# 7576번 토마토
+# from collections import deque
+#
+# n,k = map(int,input().split())
+# arr = []
+#
+# dm = [1, 0, -1, 0]
+# dl = [0, 1, 0, -1]
+# q = deque()
+#
+# for i in range(k):
+#     arr.append(list(map(int,input().split())))
+#
+# for i in range(k):
+#     for j in range(n):
+#         if arr[i][j] == 1:
+#             q.append((i,j))
+#
+# count = -1
+#
+# while q:
+#     count += 1
+#     for i in range(len(q)):
+#         l,m = q.popleft()
+#         for a, b in zip(dm, dl):
+#             if k > l + b >= 0 and n > m + a >= 0 and arr[l + b][m + a] == 0:
+#                 arr[l+b][m+a] = 'X'
+#                 q.append((l+b, m+a))
+#
+# total = []
+#
+# for i in arr:
+#     for j in i:
+#         total.append(j)
+#
+# if 0 in total:
+#     print(-1)
+# else:
+#     print(count)
 
-n = int(input())
+# 17219번 비밀번호찾기
+# import sys
+# input = sys.stdin.readline
+#
+#
+# n,m = map(int,input().split())
+# dic = {}
+#
+# for i in range(n):
+#     home,password = input().split()
+#     dic[home] = password
+#
+# for i in range(m):
+#     print(dic[input()[:-1]])
 
-for i in range(n):
-    m = int(input())
-    a = []
-    b = []
-    for j in range(m):
-        kind, number = input().split()
-        print('명령문 : ', kind, number)
-        if kind == 'I':
-            heapq.heappush(a,int(number))
-            b = [-i for i in a]
-        elif kind == 'D' and len(a) != 0:
-            if number == '-1':
-                heapq.heappop(a)
-                b = [-i for i in a]
-            else:
-                heapq.heappop(b)
-                a = [-i for i in b]
-        print('a', a)
-        print('b', b)
-    if len(a) == 0:
-        print('EMPTY')
-    else:
-        real1 = heapq.heappop(b)
-        real2 = heapq.heappop(a)
-        print(-real1, real2)
+# 17626번 Four Squares
+# import math
+# n = int(input())
+#
+# arr = [5] * (n+1)
+# arr[0] = 0
+# arr[1] = 1
+# arr[2] = 2
+# arr[3] = 3
+# for i in range(3,n+1):
+#     for j in range(2, math.floor(math.sqrt(i))+1):
+#         arr[i] = min(arr[i],arr[i-(j**2)]+1)
+# print(arr[n])
+
+# 2606번 바이러스
+# from collections import deque
+#
+# n = int(input())
+# m = int(input())
+# q = deque()
+#
+# checked = [False] * (n+1)
+# checked[1] = True
+# dic = {i+1:[] for i in range(n)}
+#
+# for i in range(m):
+#     a,b = map(int,input().split())
+#     dic[a].append(b)
+#     dic[b].append(a)
+#
+# for i in dic[1]:
+#     q.append(i)
+#
+# answer = 0
+#
+# while q:
+#     to = q.popleft()
+#     if checked[to] == False:
+#         answer += 1
+#         checked[to] = True
+#         for i in dic[to]:
+#             q.append(i)
+#
+# print(answer)
+
+# 2630번 색종이 만들기
+# import sys
+# input = sys.stdin.readline
+#
+# n = int(input())
+# answer = [0,0]
+# total = []
+#
+# for i in range(n):
+#     total.append(list(map(int,input().split())))
+#
+# def dfs(l,m,n):
+#     if n == 0:
+#         return
+#
+#     target = []
+#
+#     for i in total[l:l+n]:
+#         for j in i[m:m+n]:
+#             target.append(j)
+#
+#     if len(set(target)) == 1:
+#         answer[target[0]] += 1
+#         return
+#
+#     dfs(l,m,n//2)
+#     dfs(l,m+(n//2),n//2)
+#     dfs(l+(n//2),m,n//2)
+#     dfs(l+(n//2),m+(n//2),n//2)
+#
+# dfs(0,0,n)
+#
+# for i in answer:
+#     print(i)
+
+# 2667번 단지번호 붙이기
+# n = int(input())
+# total = []
+# answer = []
+#
+# def dfs(l,m):
+#     dm = [1,0,-1,0]
+#     dl = [0,1,0,-1]
+#     if total[l][m] == 1:
+#         answer[-1] += 1
+#         total[l][m] = 'X'
+#         for a,b in zip(dl,dm):
+#             if n > l+a >= 0 and n > m+b >= 0 and total[l+a][m+b] == 1:
+#                 dfs(l+a,m+b)
+#
+# for i in range(n):
+#     total.append(list(map(int,list(input()))))
+#
+# for i in range(n):
+#     for j in range(n):
+#         if total[i][j] == 1:
+#             answer.append(0)
+#             dfs(i,j)
+#
+# print(len(answer))
+# for i in sorted(answer):
+#     print(i)
+
+# 5525번 IOIOI
+# from collections import deque
+#
+# n = int(input())
+# m = int(input())
+# arr = deque(list(input()))
+# answer = 0
+# target = deque([])
+# while arr:
+#     added = arr.popleft()
+#     if added == 'I':
+#         target.append(added)
+#         while len(target) != 2*n+1:
+#             if len(arr) != 0 and arr[0] != target[-1]:
+#                 if len(target) < 2*n:
+#                     target.append(arr.popleft())
+#                 else:
+#                     answer += 1
+#                     target.popleft()
+#                     target.popleft()
+#                     break
+#             else:
+#                 target = deque()
+#                 break
+#
+# print(answer)
+
+#6064번 카잉 달력
+# import sys
+# import math
+#
+# input = sys.stdin.readline
+#
+# n = int(input())
+# answer = []
+# for i in range(n):
+#     a,b,one,two = map(int,input().split())
+#     gcd = math.gcd(a,b)
+#     end = (a * b) // gcd
+#     for j in range(one,end+1,a):
+#         if j%b == two or (j%b == 0 and b == two):
+#             answer.append(j)
+#             break
+#     else:
+#         answer.append(-1)
+#
+# for i in answer:
+#     print(i)
+
+#11659번 구간합 구하기
+# import sys
+# input = sys.stdin.readline
+#
+# n,m = map(int,input().split())
+# arr = list(map(int,input().split()))
+# startSum = [0,arr[0]]
+# answer = []
+# for i in range(2,len(arr)+1):
+#     startSum.append(startSum[i-1] + arr[i-1])
+#
+# for i in range(m):
+#     a,b = map(int,input().split())
+#     answer.append(startSum[b]-startSum[a-1])
+#
+# for i in answer:
+#     print(i)
+
+#16928번 뱀과 사다리게임
+# from collections import deque
+#
+# n,m = map(int,input().split())
+# INF = 1e9
+# total = [INF] * 101
+# total[1] = 0
+# up = {}
+# down = {}
+#
+# for i in range(n):
+#     a,b = map(int,input().split())
+#     up[str(a)] = b
+#
+# for i in range(m):
+#     a, b = map(int, input().split())
+#     down[str(a)] = b
+#
+# q = deque()
+# q.append(1)
+#
+# while q:
+#     start = q.popleft()
+#     for j in range(1,7):
+#         if start+j <= 100 and total[start+j] > total[start] + 1:
+#             total[start+j] = total[start] + 1
+#             if str(start+j) in up.keys():
+#                 if total[up[str(start + j)]] > total[start] + 1:
+#                     total[up[str(start + j)]] = total[start] + 1
+#                     q.append(up[str(start + j)])
+#             elif str(start+j) in down.keys():
+#                 if total[down[str(start + j)]] > total[start] + 1:
+#                     total[down[str(start + j)]] = total[start] + 1
+#                     q.append(down[str(start + j)])
+#             else:
+#                 q.append(start + j)
+#
+# print(total[-1])
+
+#18870번 좌표압축
+# import heapq
+#
+# n = int(input())
+#
+# total = list(map(int,input().split()))
+# new = [(v,i) for i,v in enumerate(total)]
+# heapq.heapify(new)
+# answer = [0] * n
+# count = 0
+#
+# a,b = heapq.heappop(new)
+# pivot = a
+# answer[b] = count
+#
+# while new:
+#     v,i = heapq.heappop(new)
+#     if pivot < v:
+#         pivot = v
+#         count += 1
+#     answer[i] = count
+#
+# print(' '.join(map(str,answer)))
+
+#1389번 케빈 베이컨의 6단계 법칙
+# import heapq
+#
+# n,m = map(int,input().split())
+# INF = 1e8
+# total = [[INF for i in range(n)] for j in range(n)]
+#
+# for i in range(m):
+#     a,b = map(int,input().split())
+#     total[a-1][b-1] = 1
+#     total[b-1][a-1] = 1
+#
+# for i in range(n):
+#     total[i][i] = 0
+#
+# for k in range(n):
+#     for i in range(n):
+#         for j in range(n):
+#             total[i][j] = min(total[i][j],total[i][k]+total[k][j])
+#
+# answer = []
+#
+# for i,v in enumerate(total):
+#     answer.append((sum(v),i+1))
+#
+# heapq.heapify(answer)
+# aa,answer = heapq.heappop(answer)
+#
+# print(answer)
+
+#1260번 DFS와 BFS
+from collections import deque
+
+n,m,v = map(int,input().split())
+dic = {i+1:[] for i in range(n)}
+q = deque()
+q.append(v)
+
+BFSAnswer = []
+DFSAnswer = []
+
+for i in range(m):
+    a,b = map(int,input().split())
+    dic[a].append(b)
+    dic[b].append(a)
+for i in dic.keys():
+    dic[i] = sorted(dic[i])
+
+def dfs(startPoint):
+    if startPoint in DFSAnswer:
+        return
+    DFSAnswer.append(startPoint)
+    for i in dic[startPoint]:
+        dfs(i)
+dfs(v)
+print(' '.join(map(str,DFSAnswer)))
+
+while q:
+    now = q.popleft()
+    if now in BFSAnswer:
+        continue
+    BFSAnswer.append(now)
+    for i in dic[now]:
+        q.append(i)
+print(' '.join(map(str,BFSAnswer)))
+
+
+
+
+
+
 
 
