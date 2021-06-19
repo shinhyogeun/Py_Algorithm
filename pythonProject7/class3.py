@@ -850,45 +850,187 @@
 # print(answer)
 
 #1260번 DFS와 BFS
+# from collections import deque
+#
+# n,m,v = map(int,input().split())
+# dic = {i+1:[] for i in range(n)}
+# q = deque()
+# q.append(v)
+#
+# BFSAnswer = []
+# DFSAnswer = []
+#
+# for i in range(m):
+#     a,b = map(int,input().split())
+#     dic[a].append(b)
+#     dic[b].append(a)
+# for i in dic.keys():
+#     dic[i] = sorted(dic[i])
+#
+# def dfs(startPoint):
+#     if startPoint in DFSAnswer:
+#         return
+#     DFSAnswer.append(startPoint)
+#     for i in dic[startPoint]:
+#         dfs(i)
+# dfs(v)
+# print(' '.join(map(str,DFSAnswer)))
+#
+# while q:
+#     now = q.popleft()
+#     if now in BFSAnswer:
+#         continue
+#     BFSAnswer.append(now)
+#     for i in dic[now]:
+#         q.append(i)
+# print(' '.join(map(str,BFSAnswer)))
+
+#7569번 토마토
+# from collections import deque
+#
+# m,l,k = map(int,input().split())
+# total = []
+# q = deque()
+# count = -1
+#
+# for i in range(l*k):
+#     total.append(list(map(int,input().split())))
+#
+# for i in range(l*k):
+#     for j in range(m):
+#         if total[i][j] == 1:
+#             total[i][j] = "X"
+#             q.append(((i,j),i//l+1))
+# while q:
+#     count += 1
+#     for _ in range(len(q)):
+#         pointer,floor = q.popleft()
+#         dm = [1,0,-1,0,0,0]
+#         dl = [0,1,0,-1,-l,l]
+#         for a,b in zip(dl,dm):
+#             if l*floor > pointer[0]+a >= l*(floor-1) and m > pointer[1]+b >= 0 and total[pointer[0]+a][pointer[1]+b] == 0:
+#                 total[pointer[0]+a][pointer[1]+b] = 'X'
+#                 q.append(((pointer[0]+a,pointer[1]+b),floor))
+#             elif m > pointer[1]+b >= 0 and l*k > pointer[0]+a >= 0 and total[pointer[0]+a][pointer[1]+b] == 0:
+#                 if a == l:
+#                     total[pointer[0] + a][pointer[1] + b] = 'X'
+#                     q.append(((pointer[0]+a, pointer[1]+b), floor+1))
+#                 elif a == -l:
+#                     total[pointer[0] + a][pointer[1] + b] = 'X'
+#                     q.append(((pointer[0]+a, pointer[1]+b), floor-1))
+# arr = []
+# for i in total:
+#     for j in i:
+#         arr.append(j)
+#
+# if 0 in arr:
+#     print(-1)
+# else:
+#     print(count)
+
+#11724번 연결 요소의 개수
+# from collections import deque
+# import sys
+# input = sys.stdin.readline
+#
+# n,m = map(int,input().split())
+# dic = {i+1:[] for i in range(n)}
+# visited = [False] * (n+1)
+# q = deque()
+# answer = 0
+#
+# for i in range(m):
+#     a,b = map(int,input().split())
+#     dic[a].append(b)
+#     dic[b].append(a)
+#
+# for i in range(n):
+#     if visited[i+1] == False:
+#         answer += 1
+#         visited[i+1] = True
+#         q.append(i+1)
+#         while q:
+#             now = q.popleft()
+#             for k in dic[now]:
+#                 if visited[k] == False:
+#                     visited[k] = True
+#                     q.append(k)
+# print(answer)
+
+#5430번 AC
+# from collections import deque
+#
+# n = int(input())
+#
+# for i in range(n):
+#     front = True
+#     order = list(input())
+#     length = int(input())
+#     inp = ''.join(list(input()))
+#     arr = []
+#     if len(inp) > 2:
+#         arr = deque(map(int,inp[1:-1].split(',')))
+#     try:
+#         for i in order:
+#             if i == 'R':
+#                 front = not front
+#             else:
+#                 if front:
+#                     arr.popleft()
+#                 else:
+#                     arr.pop()
+#         if front:
+#             print('['+ ','.join(map(str,arr)) + ']')
+#         else:
+#             print('['+ ','.join(map(str,list(arr)[::-1])) + ']')
+#     except:
+#         print('error')
+
+# 9019번 DSLR
 from collections import deque
+import sys
+import math
+input = sys.stdin.readline
 
-n,m,v = map(int,input().split())
-dic = {i+1:[] for i in range(n)}
-q = deque()
-q.append(v)
+n = int(input())
 
-BFSAnswer = []
-DFSAnswer = []
+for i in range(n):
+    start, end = map(int,input().split())
+    total = ['' for _ in range(10000)]
+    total[start] = 'START'
+    q = deque()
+    q.append(start)
 
-for i in range(m):
-    a,b = map(int,input().split())
-    dic[a].append(b)
-    dic[b].append(a)
-for i in dic.keys():
-    dic[i] = sorted(dic[i])
+    while q:
+        now = q.popleft()
+        if now == end:
+            break
+        nowS = now-1 if now != 0 else 9999
+        nowD = (now*2) % 10000
+        nowL = 0
+        nowR = 0
+        if now >= 1000:
+            target = int(list(str(now))[0])
+            target2 = int(list(str(now))[-1])
+            nowL = (now * 10) - (target * 10000) + target
+            nowR = target2*1000 + math.floor(now / 10)
+        else:
+            target = deque(str(now))
+            for i in range(4-len(target)):
+                target.appendleft(0)
+            nowL = (now * 10) - (int(target[0]) * 10000) + int(target[0])
+            nowR = int(target[-1]) * 1000 + math.floor(now / 10)
+        if total[nowS] == '':
+            total[nowS] = total[now] + 'S'
+            q.append(nowS)
+        if total[nowD] == '':
+            total[nowD] = total[now] + 'D'
+            q.append(nowD)
+        if total[nowL] == '':
+            total[nowL] = total[now] + 'L'
+            q.append(nowL)
+        if total[nowR] == '':
+            total[nowR] = total[now] + 'R'
+            q.append(nowR)
 
-def dfs(startPoint):
-    if startPoint in DFSAnswer:
-        return
-    DFSAnswer.append(startPoint)
-    for i in dic[startPoint]:
-        dfs(i)
-dfs(v)
-print(' '.join(map(str,DFSAnswer)))
-
-while q:
-    now = q.popleft()
-    if now in BFSAnswer:
-        continue
-    BFSAnswer.append(now)
-    for i in dic[now]:
-        q.append(i)
-print(' '.join(map(str,BFSAnswer)))
-
-
-
-
-
-
-
-
+    print(total[end][5:])
