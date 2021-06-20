@@ -987,50 +987,226 @@
 #         print('error')
 
 # 9019번 DSLR
-from collections import deque
-import sys
-import math
-input = sys.stdin.readline
+# from collections import deque
+# import sys
+# import math
+# input = sys.stdin.readline
+#
+# n = int(input())
+#
+# for i in range(n):
+#     start, end = map(int,input().split())
+#     total = ['' for _ in range(10000)]
+#     total[start] = 'START'
+#     q = deque()
+#     q.append(start)
+#
+#     while q:
+#         now = q.popleft()
+#         if now == end:
+#             break
+#         nowS = now-1 if now != 0 else 9999
+#         nowD = (now*2) % 10000
+#         nowL = 0
+#         nowR = 0
+#         if now >= 1000:
+#             target = int(list(str(now))[0])
+#             target2 = int(list(str(now))[-1])
+#             nowL = (now * 10) - (target * 10000) + target
+#             nowR = target2*1000 + math.floor(now / 10)
+#         else:
+#             target = deque(str(now))
+#             for i in range(4-len(target)):
+#                 target.appendleft(0)
+#             nowL = (now * 10) - (int(target[0]) * 10000) + int(target[0])
+#             nowR = int(target[-1]) * 1000 + math.floor(now / 10)
+#         if total[nowS] == '':
+#             total[nowS] = total[now] + 'S'
+#             q.append(nowS)
+#         if total[nowD] == '':
+#             total[nowD] = total[now] + 'D'
+#             q.append(nowD)
+#         if total[nowL] == '':
+#             total[nowL] = total[now] + 'L'
+#             q.append(nowL)
+#         if total[nowR] == '':
+#             total[nowR] = total[now] + 'R'
+#             q.append(nowR)
+#
+#     print(total[end][5:])
 
-n = int(input())
+# 1107번 리모콘
+# from itertools import product
+# import sys
+# input = sys.stdin.readline
+#
+# target = int(input())
+# n = int(input())
+# arr = list(map(int,input().split()))
+# total = [0,1,2,3,4,5,6,7,8,9]
+#
+# for i in range(n):
+#     total.remove(arr[i])
+#
+# answer = abs(target-100)
+#
+# if target == 100:
+#     print(0)
+# elif len(total) == 0:
+#     print(answer)
+# else:
+#     for k in range(1,7):
+#         for i in list(product(total,repeat=k)):
+#             number = int(''.join(map(str,i)))
+#             if answer > len(str(number)) + abs(target-number):
+#                 answer = len(str(number)) + abs(target-number)
+#     print(answer)
 
-for i in range(n):
-    start, end = map(int,input().split())
-    total = ['' for _ in range(10000)]
-    total[start] = 'START'
-    q = deque()
-    q.append(start)
+# 7662번 이중 우선순위 큐!
+# import sys
+# import heapq
+# input = sys.stdin.readline
+#
+# isIn = [False] * 1000001
+#
+# for _ in range(int(input())):
+#     a = []
+#     b = []
+#     for i in range(int(input())):
+#         kind, number = input().split()
+#         if kind == 'I':
+#             heapq.heappush(a,(int(number),i))
+#             heapq.heappush(b,(-int(number),i))
+#             isIn[i] = True
+#         else:
+#             if number == '-1':
+#                 while len(a) != 0 and isIn[a[0][1]] == False:
+#                     heapq.heappop(a)
+#                 if a:
+#                     isIn[a[0][1]] = False
+#                     heapq.heappop(a)
+#             else:
+#                 while len(b) != 0 and isIn[b[0][1]] == False:
+#                     heapq.heappop(b)
+#                 if b:
+#                     isIn[b[0][1]] = False
+#                     heapq.heappop(b)
+#
+#     if len(a) == 0 or len(b) == 0:
+#         print('EMPTY')
+#     else:
+#         while len(a) != 0 and isIn[a[0][1]] == False: heapq.heappop(a)
+#         while len(b) != 0 and isIn[b[0][1]] == False: heapq.heappop(b)
+#         print(-b[0][0], a[0][0])
 
-    while q:
-        now = q.popleft()
-        if now == end:
-            break
-        nowS = now-1 if now != 0 else 9999
-        nowD = (now*2) % 10000
-        nowL = 0
-        nowR = 0
-        if now >= 1000:
-            target = int(list(str(now))[0])
-            target2 = int(list(str(now))[-1])
-            nowL = (now * 10) - (target * 10000) + target
-            nowR = target2*1000 + math.floor(now / 10)
-        else:
-            target = deque(str(now))
-            for i in range(4-len(target)):
-                target.appendleft(0)
-            nowL = (now * 10) - (int(target[0]) * 10000) + int(target[0])
-            nowR = int(target[-1]) * 1000 + math.floor(now / 10)
-        if total[nowS] == '':
-            total[nowS] = total[now] + 'S'
-            q.append(nowS)
-        if total[nowD] == '':
-            total[nowD] = total[now] + 'D'
-            q.append(nowD)
-        if total[nowL] == '':
-            total[nowL] = total[now] + 'L'
-            q.append(nowL)
-        if total[nowR] == '':
-            total[nowR] = total[now] + 'R'
-            q.append(nowR)
+# 7662번 테트로미노
+# import sys
+# input = sys.stdin.readline
+#
+# check = [
+#     [[0, 0], [0, 1], [0, 2], [0, 3]],
+#     [[0, 0], [1, 0], [2, 0], [3, 0]],
+#     [[0, 0], [1, 0], [2, 0], [2, 1]],
+#     [[0, 1], [1, 1], [2, 1], [2, 0]],
+#     [[0, 0], [1, 0], [1, 1], [1, 2]],
+#     [[0, 2], [1, 2], [1, 1], [1, 0]],
+#     [[1, 0], [0, 0], [0, 1], [0, 2]],
+#     [[1, 2], [0, 0], [0, 1], [0, 2]],
+#     [[2, 0], [1, 0], [0, 0], [0, 1]],
+#     [[2, 1], [1, 1], [0, 1], [0, 0]],
+#     [[0, 0], [1, 0], [1, 1], [2, 1]],
+#     [[0, 1], [1, 1], [1, 0], [2, 0]],
+#     [[0, 0], [0, 1], [1, 1], [1, 2]],
+#     [[1, 0], [1, 1], [0, 1], [0, 2]],
+#     [[0, 0], [0, 1], [0, 2], [1, 1]],
+#     [[1, 0], [1, 1], [1, 2], [0, 1]],
+#     [[0, 0], [1, 0], [2, 0], [1, 1]],
+#     [[0, 1], [1, 1], [2, 1], [1, 0]],
+#     [[0, 0], [0, 1], [1, 0], [1, 1]]
+# ]
+#
+# n,m = map(int,input().split())
+# arr = []
+# for i in range(n):
+#     arr.append(list(map(int,input().split())))
+#
+# answer = 0
+#
+# for tet in check:
+#     for i in range(n):
+#         for j in range(m):
+#             now = 0
+#             for t in tet:
+#                 if n > t[0]+i >= 0 and m > t[1]+j >= 0:
+#                     now += arr[t[0]+i][t[1]+j]
+#                 else:
+#                     now = 0
+#                     break
+#             if answer < now :
+#                 answer = now
+# print(answer)
 
-    print(total[end][5:])
+# 16236번 아기상어
+# import sys
+# from collections import deque
+#
+# input = sys.stdin.readline
+#
+# n = int(input())
+# arr = []
+# eat = 0
+# answer = 0
+# nowWhere = (0,0)
+# nowSize = 2
+# dl = [-1, 0, 0, 1]
+# dm = [0, -1, 1, 0]
+# visited = [[0 for _ in range(n)] for _ in range(n)]
+#
+# for i in range(n): arr.append(list(map(int,input().split())))
+#
+# for i in range(n):
+#     for j in range(n):
+#         if arr[i][j] == 9:
+#             arr[i][j] = 0
+#             nowWhere = (i,j)
+#             visited[i][j] = 1
+#             break
+#
+# def goToNext():
+#     global eat
+#     global nowWhere
+#     global nowSize
+#     global answer
+#     global visited
+#     q = deque()
+#     q.append(nowWhere)
+#     while q:
+#         q = deque(sorted(list(q)))
+#         for _ in range(len(q)):
+#             l,m = q.popleft()
+#             if arr[l][m] < nowSize and arr[l][m] != 0:
+#                 answer += visited[l][m]-1
+#                 eat += 1
+#                 if eat == nowSize:
+#                     eat = 0
+#                     nowSize += 1
+#                 nowWhere = (l,m)
+#                 arr[l][m] = 0
+#                 visited = [[0 for _ in range(n)] for _ in range(n)]
+#                 visited[l][m] = 1
+#                 return True
+#             for a,b in zip(dl,dm):
+#                 if n > l+a >= 0 and n > m+b >= 0:
+#                     if arr[l+a][m+b] <= nowSize and visited[l+a][m+b] == 0:
+#                         visited[l+a][m+b] = visited[l][m] + 1
+#                         q.append((l+a,m+b))
+#     return False
+#
+# while True:
+#     if goToNext():
+#         continue
+#     else:
+#         break
+#
+# print(answer)
+
