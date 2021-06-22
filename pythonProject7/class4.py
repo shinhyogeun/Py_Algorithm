@@ -230,7 +230,7 @@
 #
 # print(total[end])
 
-# import heapq
+import heapq
 # from collections import deque
 #
 # INF = 1e9
@@ -240,21 +240,20 @@
 # for i in range(m):
 #     frm,to,much = map(int,input().split())
 #     dic[frm].append((much,to))
-#     dic[to].append((much, frm))
 #
 # def getMinimumDistanceWhitQ(frm):
 #     xx = deque()
 #     distance = [INF] * (n + 1)
 #     xx.append((0, frm))
 #     distance[frm] = 0
-#     count = 0
+#     count = []
 #     while xx:
-#         count += 1
 #         much,whr = xx.popleft()
+#         count.append((much,whr))
 #         if distance[whr] < much:
 #             continue
 #         for i in dic[whr]:
-#             if much + i[0] < distance[i[1]]:
+#             if much + i[0] <= distance[i[1]]:
 #                 distance[i[1]] = much + i[0]
 #                 xx.append((much + i[0],i[1]))
 #     return distance,count
@@ -264,10 +263,10 @@
 #     distance = [INF] * (n + 1)
 #     heapq.heappush(xx, (0, frm))
 #     distance[frm] = 0
-#     count = 0
+#     count = []
 #     while xx:
-#         count += 1
 #         much,whr = heapq.heappop(xx)
+#         count.append((much, whr))
 #         if distance[whr] < much:
 #             continue
 #         for i in dic[whr]:
@@ -305,21 +304,271 @@
 #     print(max(newArr[-1]))
 
 # 11660번 구간 합 구하기
-n,m = map(int,input().split())
-arr = []
+# import sys
+# input = sys.stdin.readline
+#
+# n,m = map(int,input().split())
+# arr = []
+#
+# for i in range(n): arr.append(list(map(int,input().split())))
+#
+# for i in arr:
+#     for j in range(1,len(i)):
+#         i[j] += i[j-1]
+#
+# for i in range(1,len(arr)):
+#     new = []
+#     for j in range(len(arr[0])):
+#         new.append(arr[i][j] + arr[i-1][j])
+#     arr[i] = new
+#
+# for i in range(m):
+#     a,b,c,d = map(int,input().split())
+#     big = arr[c-1][d-1]
+#     rightSmall = 0
+#     leftSmall = 0
+#     totalSmall = 0
+#     if a != 1:
+#         rightSmall = arr[a-2][d-1]
+#     if b != 1:
+#         leftSmall = arr[c-1][b-2]
+#     if rightSmall != 0 and leftSmall != 0:
+#         totalSmall = arr[a-2][b-2]
+#     print(big-rightSmall-leftSmall+totalSmall)
 
-for i in range(n):
-    arr.append(list(map(int,input().split())))
+# 1753번 최단경로
+# import sys
+# import heapq
+#
+# input = sys.stdin.readline
+# INF = 1e9
+#
+# n, m = map(int,input().split())
+# dic = {i+1:[] for i in range(n)}
+# distance = [INF for i in range(n+1)]
+#
+# start = int(input())
+#
+#
+# for i in range(m):
+#     frm,to,much = map(int,input().split())
+#     dic[frm].append((much,to))
+#
+# q = []
+# heapq.heappush(q,(0,start))
+#
+# while q:
+#     much,now = heapq.heappop(q)
+#
+#     if distance[now] < much:
+#         continue
+#
+#     distance[now] = much
+#
+#     for i in dic[now]:
+#         if distance[i[1]] > much+i[0]:
+#             heapq.heappush(q,(much+i[0],i[1]))
+#             distance[i[1]] = much+i[0]
+#
+# for i in range(1,len(distance)):
+#     if distance[i] == INF:
+#         print('INF')
+#     else:
+#         print(distance[i])
 
-for i in arr:
-    for j in range(1,len(i)):
-        i[j] += i[j-1]
-print(arr)
-for i in range(1,len(arr)):
-    new = []
-    for j in range(len(arr[0])):
-        new.append(arr[i][j] + arr[i-1][j])
-    arr[i] = new
+# 11404번 플로이드
+# import sys
+# input = sys.stdin.readline
+#
+# INF = 1e9
+# n = int(input())
+# m = int(input())
+# total = [[INF for _ in range(n)] for _ in range(n)]
+#
+# for i in range(n): total[i][i] = 0
+#
+# for i in range(m):
+#     a,b,c = map(int,input().split())
+#     if total[a-1][b-1] > c:
+#         total[a-1][b-1] = c
+#
+# for k in range(n):
+#     for i in range(n):
+#         for j in range(n):
+#             total[i][j] = min(total[i][j], total[i][k] + total[k][j])
+#
+# for i in range(n):
+#     for j in range(n):
+#         if total[i][j] == INF:
+#             total[i][j] = 0
+#
+# for i in total:
+#     print(' '.join(map(str,i)))
 
-print(arr)
+#11053번 가장 긴 증가하는 부분 수열
+# n = int(input())
+# arr = list(map(int,input().split()))
+# answer = [1]
+#
+# for i in range(1,n):
+#     if arr[i] == arr[i-1]:
+#         answer.append(answer[i-1])
+#     else:
+#         a = []
+#         for k in range(i,-1,-1):
+#             if arr[k] < arr[i]:
+#                 a.append(answer[k])
+#         if a != []:
+#             answer.append(max(a)+1)
+#         else:
+#             answer.append(1)
+#
+# print(max(answer))
+
+#10830번 행렬 제곱
+# n,b = map(int,input().split())
+# matrix = []
+# for i in range(n): matrix.append(list(map(int,input().split())))
+#
+# def powMaxtrix(mat1,mat2,c):
+#     if mat2 == []:
+#         new = [[0 for i in range(len(mat1))] for i in range(len(mat1))]
+#         for i in range(len(mat1)):
+#             for j in range(len(mat1)):
+#                 new[i][j] = mat1[i][j] % c
+#         return new
+#
+#     new = [[0 for i in range(len(mat1))] for i in range(len(mat1))]
+#     for i in range(len(mat1)):
+#         a = [j%c for j in mat1[i]]
+#         for j in range(len(mat1)):
+#             b = []
+#             for k in range(len(mat2)):
+#                 b.append(mat2[k][j]%c)
+#             new[i][j] = sum([v*x for v,x in zip(a,b)]) % c
+#
+#     return new
+#
+# def ultar(a,b,c):
+#     if b == 1:
+#         return powMaxtrix(a,[],c)
+#     if b == 2:
+#         return powMaxtrix(a,a,c)
+#     if b % 2 == 0 :
+#         result = ultar(a,b//2,c)
+#         return powMaxtrix(result,result, c)
+#     else:
+#         result = ultar(a, b // 2, c)
+#         return powMaxtrix(powMaxtrix(result,result, c),a,c)
+#
+# for i in ultar(matrix,b,1000):
+#     print(' '.join(map(str,i)))
+
+#11725번 트리의 부모찾기
+# from collections import deque
+# import sys
+# input = sys.stdin.readline
+#
+# n = int(input())
+# dic = {i+1:[] for i in range(n)}
+# visited = [False for i in range(n+1)]
+# answer = [0 for _ in range(n+1)]
+#
+# for i in range(n-1):
+#     a, b = map(int,input().split())
+#     dic[a].append(b)
+#     dic[b].append(a)
+#
+# q = deque()
+# q.append(1)
+#
+# while q:
+#     now = q.popleft()
+#
+#     if visited[now] == True:
+#         continue
+#     visited[now] = True
+#
+#     for i in dic[now]:
+#         if visited[i] == False:
+#             answer[i] = now
+#             q.append(i)
+#
+# for i in answer[2:]:
+#     print(i)
+
+# 14502번 연구소
+# from itertools import combinations
+# from collections import deque
+#
+# l,m = map(int,input().split())
+# total = []
+# zero = []
+# virus = []
+# answer = 0
+# dm = [1,0,-1,0]
+# dl = [0,1,0,-1]
+# for i in range(l):
+#     total.append(list(map(int,input().split())))
+#
+# for i in range(l):
+#     for j in range(m):
+#         if total[i][j] == 0:
+#             zero.append((i,j))
+#         elif total[i][j] == 2:
+#             virus.append((i,j))
+#
+# for candidate in list(combinations(zero,3)):
+#     newTotal = [i[:] for i in total]
+#     for one in candidate:
+#         newTotal[one[0]][one[1]] = 1
+#     q = deque(virus[:])
+#     while q:
+#         now = q.popleft()
+#         for a,b in zip(dl,dm):
+#             if l > now[0]+a >= 0 and m > now[1]+b >= 0:
+#                 if newTotal[now[0]+a][now[1]+b] == 0:
+#                     newTotal[now[0]+a][now[1]+b] = 2
+#                     q.append((now[0]+a,now[1]+b))
+#     count = 0
+#     for i in range(l):
+#         for j in range(m):
+#             if newTotal[i][j] == 0:
+#                 count += 1
+#     if answer < count:
+#         answer = count
+#
+# print(answer)
+
+# 15686번 치킨 배달
+# from itertools import combinations
+#
+# n,m = map(int,input().split())
+# total = []
+# home = []
+# chicken = []
+# answer = 1e9
+#
+# for i in range(n):
+#     total.append(list(map(int,input().split())))
+#
+# for i in range(n):
+#     for j in range(n):
+#         if total[i][j] == 1:
+#             home.append((i,j))
+#         elif total[i][j] == 2:
+#             chicken.append((i,j))
+#
+# for candidate in list(combinations(chicken,m)):
+#     count = 0
+#     for h in home:
+#         mini = []
+#         for one in candidate:
+#             mini.append(abs(h[0]-one[0])+abs(h[1]-one[1]))
+#         count += min(mini)
+#     if answer > count:
+#         answer = count
+#
+# print(answer)
+
 
