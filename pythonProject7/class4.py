@@ -571,4 +571,142 @@ import heapq
 #
 # print(answer)
 
+# 1916번 최소비용 구하기
+# import sys
+# import heapq
+#
+# input = sys.stdin.readline
+#
+# n = int(input())
+# dic = {i+1:[] for i in range(n)}
+# m = int(input())
+# distance = [1e9] * (n+1)
+#
+# for i in range(m):
+#     frm,to,cost = map(int,input().split())
+#     dic[frm].append((to,cost))
+#
+# start,end = map(int,input().split())
+#
+# q = []
+# distance[start] = 0
+# heapq.heappush(q,(0,start))
+#
+# while q:
+#     cost, frm = heapq.heappop(q)
+#     if distance[frm] < cost:
+#         continue
+#     if frm == end:
+#         break
+#     for i in dic[frm]:
+#         if cost + i[1] < distance[i[0]]:
+#             distance[i[0]] = cost+i[1]
+#             heapq.heappush(q,(cost+i[1],i[0]))
+#
+# print(distance[end])
+
+#2638번 치즈
+# import sys
+# from collections import deque
+#
+# input = sys.stdin.readline
+# n,m = map(int,input().split())
+# total = []
+# cheese = []
+# dm = [1,0,-1,0]
+# dl = [0,1,0,-1]
+#
+# for i in range(n):
+#     total.append(list(map(int,input().split())))
+#
+# for i in range(n):
+#     for j in range(m):
+#         if total[i][j] == 1:
+#             cheese.append(((i,j)))
+#
+# answer = 0
+#
+# def blew():
+#     global n
+#     global m
+#     q = deque()
+#     q.append([0,0])
+#     total[0][0] = 9
+#     while q:
+#         now = q.popleft()
+#         for a, b in zip(dl, dm):
+#             if n > now[0] + a >= 0 and m > now[1]+b >= 0 and total[now[0] + a][now[1] + b] == 0:
+#                 total[now[0] + a][now[1] + b] = 9
+#                 q.append([now[0] + a,now[1] + b])
+#
+# def reset():
+#     for i in range(n):
+#         for j in range(m):
+#             if total[i][j] == 9:
+#                 total[i][j] = 0
+#
+# while cheese:
+#     blew()
+#     bucket = []
+#     for i in cheese:
+#         count = 0
+#         for a, b in zip(dl, dm):
+#             if total[i[0] + a][i[1] + b] == 9:
+#                 count += 1
+#         if count >= 2:
+#             bucket.append(i)
+#     for k in bucket:
+#         total[k[0]][k[1]] = 0
+#         cheese.remove(k)
+#     answer += 1
+#     reset()
+#
+# print(answer)
+
+#1865번 웜홀
+# import sys
+# import heapq
+#
+# input = sys.stdin.readline
+# tc = int(input())
+#
+# for _ in range(tc):
+#     n,m,w = map(int,input().split())
+#     dic = {i+1:[] for i in range(n)}
+#
+#     for _ in range(m):
+#         start,end,time = map(int,input().split())
+#         dic[start].append((end,time))
+#         dic[end].append((start,time))
+#     for _ in range(w):
+#         start,end,time = map(int,input().split())
+#         dic[start].append((end,-time))
+#
+#     for k in range(1,n+1):
+#         distance = [1e9] * (n+1)
+#         q = []
+#         heapq.heappush(q,(0,k))
+#         distance[k] = 0
+#         count = 0
+#         while q:
+#             cost,now = heapq.heappop(q)
+#             if distance[now] < cost:
+#                 continue
+#             if now == k:
+#                 count += 1
+#                 if count == 2:
+#                     break
+#             for i in dic[now]:
+#                 if cost+i[1] < distance[i[0]]:
+#                     distance[i[0]] = cost+i[1]
+#                     heapq.heappush(q,(cost+i[1],i[0]))
+#
+#         if distance[k] < 0 :
+#             print('YES')
+#             break
+#     else:
+#         print('NO')
+
+
+
 
