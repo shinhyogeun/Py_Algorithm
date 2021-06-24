@@ -707,6 +707,150 @@ import heapq
 #     else:
 #         print('NO')
 
+# n = int(input())
+#
+# if (n%4 == 0 and n%100 != 0) or n%400 == 0:
+#     print(1)
+# else:
+#     print(0)
+# from collections import deque
+#
+# total = deque(input())
+# answer = 0
+# bucket = ['c=','c-','dz=','d-','lj','nj','s=','z=']
+#
+# while total:
+#     now = total.popleft()
+#     if now in ['c','d','l','n','s','z'] and len(total) >= 1:
+#         if now + total[0] in bucket:
+#             answer += 1
+#             total.popleft()
+#         elif len(total) >= 2 and now + total[0] + total[1] == 'dz=':
+#             answer += 1
+#             total.popleft()
+#             total.popleft()
+#         else:
+#             answer += 1
+#     else:
+#         answer += 1
+#
+# print(answer)
 
+# a = [1,2,3,3,3,4,4,5,5]
+# i = 0
+# answer = []
+#
+# while i < len(a)-1:
+#     if i < len(a)-1 and a[i] != a[i+1]:
+#         i+=1
+#     else:
+#         count = 1
+#         while i < len(a)-1 and a[i] == a[i+1]:
+#             count += 1
+#             i += 1
+#         answer.append(count)
+# print(answer)
+
+# def solution(n):
+#     an = ''
+#     while n != 0:
+#         an += str(n%3)
+#         n = n//3
+#     answer = 0
+#     for i,v in enumerate(str(int(an))[::-1]):
+#         answer += int(v)*(3**i)
+#     return answer
+#
+#
+# print(solution(125))
+
+# def solution(param0):
+#     dic = {}
+#     for i in param0:
+#         new = ''
+#         for j in i[::-1]:
+#             if j == '/':
+#                 break
+#             new += j
+#         real = ''.join(list(new)[::-1])
+#         one = ''
+#         two = ''
+#         for i,v in enumerate(real):
+#             if v == '_':
+#                 one = real[:i]
+#                 two = real[i+3:]
+#         if one:
+#             real = one+two
+#         if real in dic.keys():
+#             dic[real] += 1
+#         else:
+#             dic[real] = 1
+#         answer =
+#         for i in dic.keys():
+#
+# solution(['/a/v/s/b/a.x'])
+
+# def solution(param0):
+#     answer = ''
+#     for i in param0:
+#         if i == 'BOOL':
+#             if len(answer) > 0 and len(answer) % 8 == 0:
+#                 answer += ','
+#             answer += '#'
+#         elif i == 'SHORT':
+#             if (8 - len(answer) % 8) // 2:
+#                 if (8 - len(answer) % 8) != 0:
+#                     answer += '##'
+#                 else:
+#                     answer += ',##'
+def solution(param0):
+    answer = ''
+    for i in param0:
+        if i == 'BOOL':
+            if (8 - (len(answer) % 8)) % 1 == 0:
+                answer += '#'
+        elif i == 'SHORT':
+            if (8 - (len(answer) % 8)) % 2 == 0:
+                answer += '##'
+            else:
+                while len(answer) % 2 != 0:
+                    answer += '.'
+                answer += '##'
+        elif i == 'FLOAT':
+            if (8 - (len(answer) % 8)) % 4 == 0:
+                answer += '####'
+            else:
+                while len(answer) % 4 != 0:
+                    answer += '.'
+                answer += '####'
+        elif i == 'INT':
+            if (8 - (len(answer) % 8)) % 8 == 0:
+                answer += '########'
+            else:
+                while len(answer) % 8 != 0:
+                    answer += '.'
+                answer += '########'
+        elif i == 'LONG':
+            while len(answer) % 8 != 0:
+                answer += '.'
+            answer += '################'
+    while len(answer) % 8 != 0:
+        answer += '.'
+    new = ''
+    if len(answer) > 128:
+        return 'HALT'
+    else:
+        for i,v in enumerate(answer):
+            new += v
+            if i != 0 and (i+1) % 8 == 0:
+                new+= ','
+        if new[-1] == ',':
+            return new[:-1]
+        else:
+            return new
+
+print(solution(['INT','INT','BOOL','SHORT','LONG']))
+print(solution(['INT','SHORT','FLOAT','INT','BOOL']))
+print(solution(['FLOAT','SHORT','BOOL','BOOL','BOOL','INT']))
 
 
