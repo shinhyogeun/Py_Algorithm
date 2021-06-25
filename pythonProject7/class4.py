@@ -764,93 +764,84 @@ import heapq
 #
 # print(solution(125))
 
-# def solution(param0):
-#     dic = {}
-#     for i in param0:
-#         new = ''
-#         for j in i[::-1]:
-#             if j == '/':
-#                 break
-#             new += j
-#         real = ''.join(list(new)[::-1])
-#         one = ''
-#         two = ''
-#         for i,v in enumerate(real):
-#             if v == '_':
-#                 one = real[:i]
-#                 two = real[i+3:]
-#         if one:
-#             real = one+two
-#         if real in dic.keys():
-#             dic[real] += 1
-#         else:
-#             dic[real] = 1
-#         answer =
-#         for i in dic.keys():
+# 트리순회
+# n = int(input())
+# dic = {}
 #
-# solution(['/a/v/s/b/a.x'])
+# for i in range(n):
+#     node,right,left = input().split()
+#     dic[node] = [right,left]
+#
+# oneAnswer = ''
+# def one(root):
+#     global oneAnswer
+#     oneAnswer += root
+#     if dic[root][0] != '.':
+#         one(dic[root][0])
+#     if dic[root][1] != '.':
+#         one(dic[root][1])
+#
+# secondAnswer = ''
+# def two(root):
+#     global secondAnswer
+#     if dic[root][0] != '.':
+#         two(dic[root][0])
+#     secondAnswer += root
+#     if dic[root][1] != '.':
+#         two(dic[root][1])
+#
+# thirdAnswer = ''
+# def third(root):
+#     global thirdAnswer
+#     if dic[root][0] != '.':
+#         third(dic[root][0])
+#     if dic[root][1] != '.':
+#         third(dic[root][1])
+#     thirdAnswer += root
+#
+# one('A')
+# two('A')
+# third('A')
+#
+# print(oneAnswer)
+# print(secondAnswer)
+# print(thirdAnswer)
 
-# def solution(param0):
-#     answer = ''
-#     for i in param0:
-#         if i == 'BOOL':
-#             if len(answer) > 0 and len(answer) % 8 == 0:
-#                 answer += ','
-#             answer += '#'
-#         elif i == 'SHORT':
-#             if (8 - len(answer) % 8) // 2:
-#                 if (8 - len(answer) % 8) != 0:
-#                     answer += '##'
+# 이진 검색 트리
+# import sys
+# input = sys.stdin.readline
+#
+# class Node:
+#     def __init__(self,value):
+#         self.value = value
+#         self.left = None
+#         self.right = None
+#
+# class NodeMgmt:
+#     def __init__(self,head):
+#         self.head = head
+#
+#     def insert(self,value):
+#         self.currunt_node = self.head
+#         while True:
+#             if value < self.currunt_node.value:
+#                 if self.currunt_node.left != None:
+#                     self.currunt_node = self.currunt_node.left
 #                 else:
-#                     answer += ',##'
-def solution(param0):
-    answer = ''
-    for i in param0:
-        if i == 'BOOL':
-            if (8 - (len(answer) % 8)) % 1 == 0:
-                answer += '#'
-        elif i == 'SHORT':
-            if (8 - (len(answer) % 8)) % 2 == 0:
-                answer += '##'
-            else:
-                while len(answer) % 2 != 0:
-                    answer += '.'
-                answer += '##'
-        elif i == 'FLOAT':
-            if (8 - (len(answer) % 8)) % 4 == 0:
-                answer += '####'
-            else:
-                while len(answer) % 4 != 0:
-                    answer += '.'
-                answer += '####'
-        elif i == 'INT':
-            if (8 - (len(answer) % 8)) % 8 == 0:
-                answer += '########'
-            else:
-                while len(answer) % 8 != 0:
-                    answer += '.'
-                answer += '########'
-        elif i == 'LONG':
-            while len(answer) % 8 != 0:
-                answer += '.'
-            answer += '################'
-    while len(answer) % 8 != 0:
-        answer += '.'
-    new = ''
-    if len(answer) > 128:
-        return 'HALT'
-    else:
-        for i,v in enumerate(answer):
-            new += v
-            if i != 0 and (i+1) % 8 == 0:
-                new+= ','
-        if new[-1] == ',':
-            return new[:-1]
-        else:
-            return new
+#                     self.currunt_node.left = Node(value)
+#                     break
+#             else:
+#                 if self.currunt_node.left != None:
+#                     self.
+#
+# total = []
+#
+# while True:
+#     try:
+#         total.append(int(input()))
+#     except:
+#         break
 
-print(solution(['INT','INT','BOOL','SHORT','LONG']))
-print(solution(['INT','SHORT','FLOAT','INT','BOOL']))
-print(solution(['FLOAT','SHORT','BOOL','BOOL','BOOL','INT']))
-
-
+a = int(input())
+a = int(input())
+a = int(input())
