@@ -841,7 +841,197 @@ import heapq
 #         total.append(int(input()))
 #     except:
 #         break
+# l,m,k = map(int, input().split(' '))
+# total = [list(map(int,input().split(' '))) for _ in range(l)]
+# where = []
+#
+# for i in range(l):
+#     if total[i][0] == -1:
+#         where.append(i)
+#
+# def upper():
+#     a = [0]
+#     a.extend(total[where[0]][1:])
+#     a.extend([i[-1] for i in total[:where[0]]][::-1])
+#     a.extend(total[0][:-1][::-1])
+#     a.extend([i[0] for i in total[1:where[0]-1]])
+#
+#     index = 0
+#     for i in range(1,m):
+#         total[where[0]][i] = a[index]
+#         index += 1
+#     for i in range(where[0]-1,-1,-1):
+#         total[i][-1] = a[index]
+#         index += 1
+#     for i in range(m-2,-1,-1):
+#         total[0][i] = a[index]
+#         index += 1
+#     for i in range(1,where[0]):
+#         total[i][0] = a[index]
+#         index += 1
+#
+# def lower():
+#     a = [0]
+#     a.extend(total[where[1]][1:])
+#     a.extend([i[-1] for i in total[where[1]+1:]])
+#     a.extend(total[-1][:-1][::-1])
+#     a.extend([i[0] for i in total[where[1]+2:-1]][::-1])
+#
+#     index = 0
+#     for i in range(1,m):
+#         total[where[1]][i] = a[index]
+#         index += 1
+#     for i in range(where[1]+1,l):
+#         total[i][-1] = a[index]
+#         index += 1
+#     for i in range(m-2,-1,-1):
+#         total[-1][i] = a[index]
+#         index += 1
+#     for i in range(l-2,where[1],-1):
+#         total[i][0] = a[index]
+#         index += 1
+#
+# def spread():
+#     dm = [1,0,-1,0]
+#     dl = [0,1,0,-1]
+#     target = []
+#     for i in range(l):
+#         for j in range(m):
+#             if total[i][j] != -1 and total[i][j] != 0:
+#                 target.append([i,j])
+#
+#     dic = {str(x)+str(s): [] for s in range(m) for x in range(l)}
+#
+#     for i,j in target:
+#         count = 0
+#         for s in range(4):
+#             if l > i+dl[s] >= 0 and m > j+dm[s] >= 0 and total[i+dl[s]][j+dm[s]] != -1:
+#                 if str(i+dl[s])+str(j+dm[s]) in dic.keys():
+#                     dic[str(i+dl[s])+str(j+dm[s])].append(total[i][j]//5)
+#                 count += 1
+#         total[i][j] -= (total[i][j]//5) * count
+#
+#     for i in dic.keys():
+#         a,b = map(int,i)
+#         for j in dic[i]:
+#             total[a][b] += j
 
-a = int(input())
-a = int(input())
-a = int(input())
+
+# def dust_move():
+#     temp = [[0] * m for _ in range(l)]
+#     for i in range(l):
+#         for j in range(m):
+#             if total[i][j] >= 5:
+#                 val = 0
+#                 if i - 1 >= 0 and total[i - 1][j] != -1:
+#                     temp[i - 1][j] += total[i][j] // 5
+#                     val += total[i][j] // 5
+#                 # 하
+#                 if i + 1 < l and total[i + 1][j] != -1:
+#                     temp[i + 1][j] += total[i][j] // 5
+#                     val += total[i][j] // 5
+#                 # 좌
+#                 if j - 1 >= 0 and total[i][j - 1] != -1:
+#                     temp[i][j - 1] += total[i][j] // 5
+#                     val += total[i][j] // 5
+#                 # 우
+#                 if j + 1 < m and total[i][j + 1] != -1:
+#                     temp[i][j + 1] += total[i][j] // 5
+#                     val += total[i][j] // 5
+#                 temp[i][j] -= val
+#     for i in range(l):
+#         for j in range(m):
+#             total[i][j] += temp[i][j]
+#
+# for i in range(k):
+#     dust_move()
+#     upper()
+#     lower()
+#
+# answer = 0
+#
+# for i in range(l):
+#     for j in range(m):
+#         if total[i][j] > 0:
+#             answer += total[i][j]
+#
+# print(answer)
+
+#17413번 단어뒤집기
+# word = list(input())
+# answer = ''
+# i = 0
+# while i <= len(word)-1:
+#     if word[i] == '<':
+#         while word[i] != '>':
+#             answer += word[i]
+#             i += 1
+#         answer += word[i]
+#         i += 1
+#     elif word[i] != ' ':
+#         miniAnswer = ''
+#         while i <= len(word)-1 and (word[i] != ' ' and word[i] != '<'):
+#             miniAnswer += word[i]
+#             i += 1
+#         if i <= len(word)-1 and word[i] == ' ':
+#             answer += miniAnswer[::-1] + ' '
+#             i += 1
+#         elif i >= len(word):
+#             answer += miniAnswer[::-1]
+#         elif word[i] == '<':
+#             answer += miniAnswer[::-1]
+# print(answer)
+
+# n = int(input())
+# m = int(input())
+# total = list(input())
+# answer = 0
+# target = 'I' + 'OI'*n
+# now = 0
+# i = 0
+#
+# while i < len(total):
+#     if total[i] == target[now]:
+#         if now == len(target)-1:
+#             answer += 1
+#             now -= 1
+#         else:
+#             now += 1
+#     else:
+#         if total[i] == "I":
+#             now = 1
+#         else:
+#             now = 0
+#     i += 1
+#
+# print(answer)
+
+# target = input()
+# length = len(target)
+# candidate = []
+#
+# def solution():
+#     for i in range(length,length*2+1):
+#         if i % 2 == 0:
+#             k = 0
+#             while True:
+#                 if i//2-1-k < 0 or i//2-1+k+1 >= length:
+#                     return i
+#                 if target[i//2-1-k] == target[i//2-1+k+1]:
+#                     k += 1
+#                 else:
+#                     break
+#         else:
+#             k = 1
+#             while True:
+#                 if i//2 - k < 0 or i // 2 + k >=length:
+#                     return i
+#                 if target[i//2-k] == target[i//2+k]:
+#                     k += 1
+#                 else:
+#                     break
+#
+# print(solution())
+
+
+
