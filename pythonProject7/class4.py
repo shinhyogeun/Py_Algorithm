@@ -1035,3 +1035,241 @@ import heapq
 
 
 
+# n = int(input())
+# answer = 0
+# for i in range(n):
+#     word = input()
+#     dic = {}
+#     index = 0
+#     isRight = True
+#
+#     while index < len(word):
+#         if word[index] not in dic.keys():
+#             dic[word[index]] = 1
+#             while index < len(word)-1 and word[index] == word[index+1]:
+#                 dic[word[index]] += 1
+#                 index += 1
+#             index += 1
+#         else:
+#             isRight = False
+#             break
+#
+#     if isRight:
+#         answer += 1
+#
+# print(answer)
+
+# arr = []
+# for i in range(4): arr.append(list(map(int,list(input()))))
+#
+# n = int(input())
+# orders = []
+# turned = [False]*4
+#
+# for i in range(n): orders.append(list(map(int,input().split())))
+#
+# def turn(target,direction):
+#     dx = [-1,1]
+#     turned[target] = True
+#     for i in dx:
+#         if 3 >= target + i >= 0:
+#             if target+i < target:
+#                 if arr[target+i][2] != arr[target][6] and not turned[target+i]:
+#                     turn(target+i,-direction)
+#             else:
+#                 if arr[target+i][6] != arr[target][2] and not turned[target+i]:
+#                     turn(target+i,-direction)
+#
+#     if direction == 1:
+#         new = arr[target].pop(-1)
+#         arr[target].insert(0,new)
+#     else:
+#         new = arr[target].pop(0)
+#         arr[target].append(new)
+#
+# for order in orders:
+#     turned = [False] * 4
+#     turn(order[0]-1,order[1])
+#
+# answer = 0
+#
+# for i,v in enumerate(arr):
+#     if v[0] == 1:
+#         answer += 2**i
+#
+# print(answer)
+
+# 드래곤 커브
+# n = int(input())
+# arr = []
+# total = []
+# for i in range(n):
+#     arr.append(list(map(int,input().split())))
+#
+# def grow(dragon):
+#     for i in range(len(dragon)-1,0,-1):
+#         if dragon[i][0] - dragon[i-1][0] == 1:
+#             dragon.append([dragon[-1][0],dragon[-1][1]-1])
+#         elif dragon[i][0] - dragon[i-1][0] == -1:
+#             dragon.append([dragon[-1][0],dragon[-1][1]+1])
+#         elif dragon[i][1] - dragon[i-1][1] == 1:
+#             dragon.append([dragon[-1][0]+1, dragon[-1][1]])
+#         elif dragon[i][1] - dragon[i-1][1] == -1:
+#             dragon.append([dragon[-1][0]-1, dragon[-1][1]])
+#     return dragon
+#
+# for one in arr:
+#     mini = [[one[0],one[1]]]
+#     if one[2] == 0:
+#         mini.append([one[0]+1,one[1]])
+#     elif one[2] == 1:
+#         mini.append([one[0],one[1]-1])
+#     elif one[2] == 2:
+#         mini.append([one[0]-1,one[1]])
+#     elif one[2] == 3:
+#         mini.append([one[0],one[1]+1])
+#     for i in range(one[3]):
+#         mini = grow(mini)
+#     for i in mini:
+#         total.append(i)
+#
+# total = list(set([tuple(i) for i in total]))
+#
+# answer = 0
+#
+# for i in range(0,100):
+#     for j in range(0,100):
+#         for k in [(i,j),(i,j+1),(i+1,j),(i+1,j+1)]:
+#             if k not in total:
+#                 break
+#         else:
+#             answer += 1
+#
+# print(answer)
+
+# 2607번 비슷한 단어
+# n = int(input())
+# mom = input()
+# compare = []
+# answer = 0
+#
+# for i in range(n-1):
+#     compare.append(input())
+#
+# def comparing(word1,word2):
+#     if set(word1) != set(word2):
+#         return False
+#     for i in set(word1):
+#         if word1.count(i) != word2.count(i):
+#             return False
+#     return True
+#
+# for one in compare:
+#     for i in range(65,91):
+#         new1 = list(mom)
+#         if chr(i) in new1:
+#             new1.remove(chr(i))
+#         if comparing(new1,one):
+#             answer += 1
+#             break
+#
+#         new2 = list(mom)
+#         new2.append(chr(i))
+#         if comparing(new2,one):
+#             answer += 1
+#             break
+#         continued = True
+#         for j in range(len(mom)):
+#             new3 = list(mom)
+#             new3[j] = chr(i)
+#             if comparing(new3,one):
+#                 answer += 1
+#                 continued = False
+#                 break
+#         if not continued:
+#             break
+# print(answer)
+
+# 15683번 감시
+from itertools import product
+from collections import deque
+import copy
+l,m = map(int,input().split())
+total = [list(map(int,input().split())) for _ in range(l)]
+cctv = []
+answers = []
+
+for i in range(l):
+    for j in range(m):
+        if total[i][j] == 1:
+            cctv.append([(i, j),deque([0,1,0,0])])
+        elif total[i][j] == 2:
+            cctv.append([(i, j), deque([0, 1, 0, 1])])
+        elif total[i][j] == 3:
+            cctv.append([(i, j), deque([1, 1, 0, 0])])
+        elif total[i][j] == 4:
+            cctv.append([(i, j), deque([1, 1, 1, 0])])
+        elif total[i][j] == 5:
+            cctv.append([(i, j), deque([1, 1, 1, 1])])
+
+for i in product('ABCD',repeat=len(cctv)):
+    copyedTotal = copy.deepcopy(total)
+    copyedCCTV = copy.deepcopy(cctv)
+    for index,one in enumerate(copyedCCTV):
+        if i[index] == 'B':
+            for _ in range(1):
+                copyedCCTV[index][1].appendleft(copyedCCTV[index][1].pop())
+        elif i[index] == 'C':
+            for _ in range(2):
+                copyedCCTV[index][1].appendleft(copyedCCTV[index][1].pop())
+        elif i[index] == 'D':
+            for _ in range(3):
+                copyedCCTV[index][1].appendleft(copyedCCTV[index][1].pop())
+
+    for one in copyedCCTV:
+        for x in range(4):
+            if one[1][x] == 1:
+                if x == 0:
+                    c = 1
+                    while True:
+                        if l > one[0][0]-c >= 0 and copyedTotal[one[0][0]-c][one[0][1]] != 6:
+                            if copyedTotal[one[0][0]-c][one[0][1]] == 0:
+                                copyedTotal[one[0][0]-c][one[0][1]] = '#'
+                            c += 1
+                        else:
+                            break
+                elif x == 1:
+                    c = 1
+                    while True:
+                        if m > one[0][1] + c >= 0 and copyedTotal[one[0][0]][one[0][1]+c] != 6:
+                            if copyedTotal[one[0][0]][one[0][1]+c] == 0:
+                                copyedTotal[one[0][0]][one[0][1]+c] = '#'
+                            c += 1
+                        else:
+                            break
+                elif x == 2:
+                    c = 1
+                    while True:
+                        if l > one[0][0] + c >= 0 and copyedTotal[one[0][0]+c][one[0][1]] != 6:
+                            if copyedTotal[one[0][0]+c][one[0][1]] == 0:
+                                copyedTotal[one[0][0]+c][one[0][1]] = '#'
+                            c += 1
+                        else:
+                            break
+                elif x == 3:
+                    c = 1
+                    while True:
+                        if m > one[0][1] - c >= 0 and copyedTotal[one[0][0]][one[0][1]-c] != 6:
+                            if copyedTotal[one[0][0]][one[0][1]-c] == 0:
+                                copyedTotal[one[0][0]][one[0][1]-c] = '#'
+                            c += 1
+                        else:
+                            break
+    miniAnswer = 0
+    for a in copyedTotal:
+        for j in a:
+            if j == 0:
+                miniAnswer += 1
+    answers.append(miniAnswer)
+
+print(min(answers))
