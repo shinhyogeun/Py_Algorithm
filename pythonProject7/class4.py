@@ -1191,85 +1191,115 @@ import heapq
 # print(answer)
 
 # 15683번 감시
-from itertools import product
-from collections import deque
-import copy
-l,m = map(int,input().split())
-total = [list(map(int,input().split())) for _ in range(l)]
-cctv = []
-answers = []
+# from itertools import product
+# from collections import deque
+# import copy
+# l,m = map(int,input().split())
+# total = [list(map(int,input().split())) for _ in range(l)]
+# cctv = []
+# answers = []
+#
+# for i in range(l):
+#     for j in range(m):
+#         if total[i][j] == 1:
+#             cctv.append([(i, j),deque([0,1,0,0])])
+#         elif total[i][j] == 2:
+#             cctv.append([(i, j), deque([0, 1, 0, 1])])
+#         elif total[i][j] == 3:
+#             cctv.append([(i, j), deque([1, 1, 0, 0])])
+#         elif total[i][j] == 4:
+#             cctv.append([(i, j), deque([1, 1, 1, 0])])
+#         elif total[i][j] == 5:
+#             cctv.append([(i, j), deque([1, 1, 1, 1])])
+#
+# for i in product('ABCD',repeat=len(cctv)):
+#     copyedTotal = copy.deepcopy(total)
+#     copyedCCTV = copy.deepcopy(cctv)
+#     for index,one in enumerate(copyedCCTV):
+#         if i[index] == 'B':
+#             for _ in range(1):
+#                 copyedCCTV[index][1].appendleft(copyedCCTV[index][1].pop())
+#         elif i[index] == 'C':
+#             for _ in range(2):
+#                 copyedCCTV[index][1].appendleft(copyedCCTV[index][1].pop())
+#         elif i[index] == 'D':
+#             for _ in range(3):
+#                 copyedCCTV[index][1].appendleft(copyedCCTV[index][1].pop())
+#
+#     for one in copyedCCTV:
+#         for x in range(4):
+#             if one[1][x] == 1:
+#                 if x == 0:
+#                     c = 1
+#                     while True:
+#                         if l > one[0][0]-c >= 0 and copyedTotal[one[0][0]-c][one[0][1]] != 6:
+#                             if copyedTotal[one[0][0]-c][one[0][1]] == 0:
+#                                 copyedTotal[one[0][0]-c][one[0][1]] = '#'
+#                             c += 1
+#                         else:
+#                             break
+#                 elif x == 1:
+#                     c = 1
+#                     while True:
+#                         if m > one[0][1] + c >= 0 and copyedTotal[one[0][0]][one[0][1]+c] != 6:
+#                             if copyedTotal[one[0][0]][one[0][1]+c] == 0:
+#                                 copyedTotal[one[0][0]][one[0][1]+c] = '#'
+#                             c += 1
+#                         else:
+#                             break
+#                 elif x == 2:
+#                     c = 1
+#                     while True:
+#                         if l > one[0][0] + c >= 0 and copyedTotal[one[0][0]+c][one[0][1]] != 6:
+#                             if copyedTotal[one[0][0]+c][one[0][1]] == 0:
+#                                 copyedTotal[one[0][0]+c][one[0][1]] = '#'
+#                             c += 1
+#                         else:
+#                             break
+#                 elif x == 3:
+#                     c = 1
+#                     while True:
+#                         if m > one[0][1] - c >= 0 and copyedTotal[one[0][0]][one[0][1]-c] != 6:
+#                             if copyedTotal[one[0][0]][one[0][1]-c] == 0:
+#                                 copyedTotal[one[0][0]][one[0][1]-c] = '#'
+#                             c += 1
+#                         else:
+#                             break
+#     miniAnswer = 0
+#     for a in copyedTotal:
+#         for j in a:
+#             if j == 0:
+#                 miniAnswer += 1
+#     answers.append(miniAnswer)
+#
+# print(min(answers))
 
-for i in range(l):
-    for j in range(m):
-        if total[i][j] == 1:
-            cctv.append([(i, j),deque([0,1,0,0])])
-        elif total[i][j] == 2:
-            cctv.append([(i, j), deque([0, 1, 0, 1])])
-        elif total[i][j] == 3:
-            cctv.append([(i, j), deque([1, 1, 0, 0])])
-        elif total[i][j] == 4:
-            cctv.append([(i, j), deque([1, 1, 1, 0])])
-        elif total[i][j] == 5:
-            cctv.append([(i, j), deque([1, 1, 1, 1])])
+#1987번 알파벳
+# import copy
+#
+# l,m = map(int,input().split())
+# arr = [list(input()) for _ in range(l)]
+# total = []
+#
+# def dfs(startPoint,until):
+#     dm = [0,0,1,-1]
+#     dl = [1,-1,0,0]
+#     count = 0
+#     for a,b in zip(dl,dm):
+#         if l > startPoint[0]+a >= 0 and m > startPoint[1]+b >= 0:
+#             if arr[startPoint[0]+a][startPoint[1]+b] not in until:
+#                 vv = copy.deepcopy(until)
+#                 vv.append(arr[startPoint[0]+a][startPoint[1]+b])
+#                 dfs([startPoint[0]+a,startPoint[1]+b],vv)
+#                 count += 1
+#
+#     if count == 0:
+#         total.append(len(until))
+#
+# dfs([0,0],[arr[0][0]])
+#
+# print(max(total))
 
-for i in product('ABCD',repeat=len(cctv)):
-    copyedTotal = copy.deepcopy(total)
-    copyedCCTV = copy.deepcopy(cctv)
-    for index,one in enumerate(copyedCCTV):
-        if i[index] == 'B':
-            for _ in range(1):
-                copyedCCTV[index][1].appendleft(copyedCCTV[index][1].pop())
-        elif i[index] == 'C':
-            for _ in range(2):
-                copyedCCTV[index][1].appendleft(copyedCCTV[index][1].pop())
-        elif i[index] == 'D':
-            for _ in range(3):
-                copyedCCTV[index][1].appendleft(copyedCCTV[index][1].pop())
-
-    for one in copyedCCTV:
-        for x in range(4):
-            if one[1][x] == 1:
-                if x == 0:
-                    c = 1
-                    while True:
-                        if l > one[0][0]-c >= 0 and copyedTotal[one[0][0]-c][one[0][1]] != 6:
-                            if copyedTotal[one[0][0]-c][one[0][1]] == 0:
-                                copyedTotal[one[0][0]-c][one[0][1]] = '#'
-                            c += 1
-                        else:
-                            break
-                elif x == 1:
-                    c = 1
-                    while True:
-                        if m > one[0][1] + c >= 0 and copyedTotal[one[0][0]][one[0][1]+c] != 6:
-                            if copyedTotal[one[0][0]][one[0][1]+c] == 0:
-                                copyedTotal[one[0][0]][one[0][1]+c] = '#'
-                            c += 1
-                        else:
-                            break
-                elif x == 2:
-                    c = 1
-                    while True:
-                        if l > one[0][0] + c >= 0 and copyedTotal[one[0][0]+c][one[0][1]] != 6:
-                            if copyedTotal[one[0][0]+c][one[0][1]] == 0:
-                                copyedTotal[one[0][0]+c][one[0][1]] = '#'
-                            c += 1
-                        else:
-                            break
-                elif x == 3:
-                    c = 1
-                    while True:
-                        if m > one[0][1] - c >= 0 and copyedTotal[one[0][0]][one[0][1]-c] != 6:
-                            if copyedTotal[one[0][0]][one[0][1]-c] == 0:
-                                copyedTotal[one[0][0]][one[0][1]-c] = '#'
-                            c += 1
-                        else:
-                            break
-    miniAnswer = 0
-    for a in copyedTotal:
-        for j in a:
-            if j == 0:
-                miniAnswer += 1
-    answers.append(miniAnswer)
-
-print(min(answers))
+def solution(n):
+    total = []
+    for i in range(n):
