@@ -1299,7 +1299,34 @@ import heapq
 # dfs([0,0],[arr[0][0]])
 #
 # print(max(total))
+def solution(stones, k):
+    mini = min(stones)
+    maxi = max(stones)
 
-def solution(n):
-    total = []
-    for i in range(n):
+    def isPossible(number):
+        i = 0
+        while i < len(stones):
+            if stones[i] <= number:
+                count = 0
+                while i < len(stones) and stones[i] <= number:
+                    i += 1
+                    count += 1
+                if count >= k:
+                    return False
+            else:
+                i += 1
+        return True
+
+    answer = 0
+
+    while mini <= maxi:
+        pivot = (mini + maxi) // 2
+        print(pivot, mini, maxi)
+        print(isPossible(pivot))
+        if isPossible(pivot):
+            answer = pivot
+            mini = pivot + 1
+        else:
+            maxi = pivot - 1
+
+    return answer
