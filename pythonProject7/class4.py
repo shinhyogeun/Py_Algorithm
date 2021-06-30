@@ -1299,34 +1299,150 @@ import heapq
 # dfs([0,0],[arr[0][0]])
 #
 # print(max(total))
-def solution(stones, k):
-    mini = min(stones)
-    maxi = max(stones)
+# def solution(stones, k):
+#     mini = min(stones)
+#     maxi = max(stones)
+#
+#     def isPossible(number):
+#         i = 0
+#         while i < len(stones):
+#             if stones[i] <= number:
+#                 count = 0
+#                 while i < len(stones) and stones[i] <= number:
+#                     i += 1
+#                     count += 1
+#                 if count >= k:
+#                     return False
+#             else:
+#                 i += 1
+#         return True
+#
+#     answer = 0
+#
+#     while mini <= maxi:
+#         pivot = (mini + maxi) // 2
+#         print(pivot, mini, maxi)
+#         print(isPossible(pivot))
+#         if isPossible(pivot):
+#             answer = pivot
+#             mini = pivot + 1
+#         else:
+#             maxi = pivot - 1
+#
+#     return answer
 
-    def isPossible(number):
-        i = 0
-        while i < len(stones):
-            if stones[i] <= number:
-                count = 0
-                while i < len(stones) and stones[i] <= number:
-                    i += 1
-                    count += 1
-                if count >= k:
-                    return False
-            else:
-                i += 1
-        return True
+# def solution(routes):
+#     routes = sorted(routes, key=lambda x: x[1] - x[0])
+#     checked = [False] * len(routes)
+#
+#     def cal(one):
+#         count = 0
+#         arr = []
+#         count2 = 0
+#         arr2 = []
+#
+#         for i, v in enumerate(routes):
+#             if v[0] <= one[0] <= v[1] and not checked[i]:
+#                 count += 1
+#                 arr.append([i, v])
+#             if v[0] <= one[1] <= v[1] and not checked[i]:
+#                 count2 += 1
+#                 arr2.append([i, v])
+#
+#         if count >= count2:
+#             return arr
+#         else:
+#             return arr2
+#
+#     answer = 0
+#
+#     for i in routes:
+#
+#         if False not in checked:
+#             break
+#         if checked[routes.index(i)] == False:
+#             deletedCar = cal(i)
+#             answer += 1
+#             for k in deletedCar:
+#                 checked[k[0]] = True
+#
+#     return answer
+#
+# print(solution([ [-191, -107],[-184,-151],[-150,-102],[-171,-124],[-120,-114]]))
 
-    answer = 0
+# 1213 팰린드롬 만들기
 
-    while mini <= maxi:
-        pivot = (mini + maxi) // 2
-        print(pivot, mini, maxi)
-        print(isPossible(pivot))
-        if isPossible(pivot):
-            answer = pivot
-            mini = pivot + 1
-        else:
-            maxi = pivot - 1
+# n = input()
+#
+# if len(n) % 2 == 0:
+#     answer = ''
+#     n = sorted(n,reverse=True)
+#     dic = {i:0 for i in set(n)}
+#     for i in n:
+#         dic[i] += 1
+#     for i in dic.keys():
+#         if dic[i] % 2 == 1:
+#             print("I'm Sorry Hansoo")
+#             break
+#     else:
+#         for i in range(len(n)):
+#             if i % 2 == 1:
+#                 answer += n[i]
+#             else:
+#                 answer = n[i]+answer
+#     print(answer)
+# else:
+#     answer = ''
+#     n = sorted(n, reverse=True)
+#     dic = {i: 0 for i in set(n)}
+#     for i in n:
+#         dic[i] += 1
+#     count = 0
+#     whr = ''
+#     for i in dic.keys():
+#         if dic[i] % 2 == 1:
+#             count += 1
+#             whr = i
+#     if count != 1:
+#         print("I'm Sorry Hansoo")
+#     else:
+#         n.remove(whr)
+#         for i in range(len(n)):
+#             if i % 2 == 1:
+#                 answer += n[i]
+#             else:
+#                 answer = n[i] + answer
+#         answer = list(answer)
+#         answer.insert(len(n)//2,whr)
+#         answer = ''.join(answer)
+#         print(answer)
 
-    return answer
+# 1213 시리얼 번호
+# n = int(input())
+# arr = []
+# for i in range(n):
+#     arr.append(input())
+# number = ['0','1','2','3','4','5','6','7','8','9']
+# arr = sorted(arr,key= lambda x:(len(x),sum([int(i) for i in x if i in number]),x))
+#
+# for i in arr:
+#     print(i)
+
+# 12904번 A와 B
+start = input()
+end = input()
+can = False
+
+while len(end) >= len(start):
+    if end == start:
+        can = True
+        break
+    if end[-1] == 'B':
+        end = end[:-1][::-1]
+    else:
+        end = end[:-1]
+
+if can:
+    print(1)
+else:
+    print(0)
