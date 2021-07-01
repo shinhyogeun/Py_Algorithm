@@ -1429,20 +1429,61 @@ import heapq
 #     print(i)
 
 # 12904번 A와 B
-start = input()
-end = input()
-can = False
+# start = input()
+# end = input()
+# can = False
+#
+# while len(end) >= len(start):
+#     if end == start:
+#         can = True
+#         break
+#     if end[-1] == 'B':
+#         end = end[:-1][::-1]
+#     else:
+#         end = end[:-1]
+#
+# if can:
+#     print(1)
+# else:
+#     print(0)
 
-while len(end) >= len(start):
-    if end == start:
-        can = True
-        break
-    if end[-1] == 'B':
-        end = end[:-1][::-1]
-    else:
-        end = end[:-1]
 
-if can:
-    print(1)
-else:
-    print(0)
+def solution(user_id, banned_id):
+    ultar = []
+    for i in banned_id:
+        whr = []
+        for index, v in enumerate(i):
+            if v == '*':
+                whr.append(index)
+        copyed = user_id[:]
+        for k in range(len(copyed)):
+            aa = list(copyed[k])
+            for kk in whr:
+                if kk <= len(aa) - 1:
+                    aa[kk] = '*'
+            copyed[k] = ''.join(aa)
+
+        mini = []
+        for k, v in enumerate(copyed):
+            if v == i:
+                mini.append(user_id[k])
+        ultar.append(mini)
+    answer = set()
+
+    def dfs(index, currentset):
+        if len(currentset) == len(ultar):
+            print(currentset)
+            # answer.add(set(currentset))
+            return
+
+        for i in ultar[index]:
+            if i not in currentset:
+                new = currentset
+                new.append(i)
+                dfs(index + 1, new)
+
+    dfs(0, [])
+    print(answer)
+    return answer
+
+solution(["frodo", "fradi", "crodo", "abc123", "frodoc"],["*rodo", "*rodo", "******"])
