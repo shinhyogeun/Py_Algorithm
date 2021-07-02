@@ -1448,42 +1448,55 @@ import heapq
 #     print(0)
 
 
-def solution(user_id, banned_id):
-    ultar = []
-    for i in banned_id:
-        whr = []
-        for index, v in enumerate(i):
-            if v == '*':
-                whr.append(index)
-        copyed = user_id[:]
-        for k in range(len(copyed)):
-            aa = list(copyed[k])
-            for kk in whr:
-                if kk <= len(aa) - 1:
-                    aa[kk] = '*'
-            copyed[k] = ''.join(aa)
+# def solution(user_id, banned_id):
+#     ultar = []
+#     for i in banned_id:
+#         whr = []
+#         for index, v in enumerate(i):
+#             if v == '*':
+#                 whr.append(index)
+#         copyed = user_id[:]
+#         for k in range(len(copyed)):
+#             aa = list(copyed[k])
+#             for kk in whr:
+#                 if kk <= len(aa) - 1:
+#                     aa[kk] = '*'
+#             copyed[k] = ''.join(aa)
+#
+#         mini = []
+#         for k, v in enumerate(copyed):
+#             if v == i:
+#                 mini.append(user_id[k])
+#         ultar.append(mini)
+#     answer = set()
+#
+#     def dfs(index, currentset):
+#         if len(currentset) == len(ultar):
+#             print(currentset)
+#             # answer.add(set(currentset))
+#             return
+#
+#         for i in ultar[index]:
+#             if i not in currentset:
+#                 new = currentset
+#                 new.append(i)
+#                 dfs(index + 1, new)
+#
+#     dfs(0, [])
+#     print(answer)
+#     return answer
+#
+# solution(["frodo", "fradi", "crodo", "abc123", "frodoc"],["*rodo", "*rodo", "******"])
 
-        mini = []
-        for k, v in enumerate(copyed):
-            if v == i:
-                mini.append(user_id[k])
-        ultar.append(mini)
-    answer = set()
+def gen_permutations(arr, n):
+    result = []
+    if n == 0:
+        return [[]]
+    for i, elem in enumerate(arr):
+        for P in gen_permutations(arr[:i] + arr[i+1:], n-1):
+            result += [[elem]+P]
+            return result
 
-    def dfs(index, currentset):
-        if len(currentset) == len(ultar):
-            print(currentset)
-            # answer.add(set(currentset))
-            return
+arr = [0, 1, 2, 3, 4, 5]
+print(gen_permutations(arr, 3))
 
-        for i in ultar[index]:
-            if i not in currentset:
-                new = currentset
-                new.append(i)
-                dfs(index + 1, new)
-
-    dfs(0, [])
-    print(answer)
-    return answer
-
-solution(["frodo", "fradi", "crodo", "abc123", "frodoc"],["*rodo", "*rodo", "******"])
