@@ -732,204 +732,238 @@
 #
 # print(answer)
 
-class Node():
-    def __init__(self,data):
-        self.data = data
-        self.next = None
-
-class deque():
-    def __init__(self):
-        self.head = None
-        self.tail = None
-
-    def at(self,index):
-        now = self.head
-        for _ in range(index):
-            if now == None:
-                return None
-            now = now.next
-        return now.data
-
-    def max(self):
-        node = self.head
-
-        if node == None:
-            return None
-
-        maxValue = self.head.data
-
-        while node:
-            if maxValue < node.data:
-                maxValue = node.data
-            node = node.next
-
-        return maxValue
-
-    def min(self):
-        node = self.head
-
-        if node == None:
-            return None
-
-        minValue = self.head.data
-
-        while node:
-            if minValue > node.data:
-                minValue = node.data
-            node = node.next
-
-        return minValue
-
-    def append(self,node):
-        if self.head == None:
-            self.head = node
-            self.tail = node
-        else:
-            self.tail.next = node
-            self.tail = self.tail.next
-
-    def appendleft(self,value):
-        if self.head == None:
-            self.head = value
-            self.tail = value
-        else:
-            temp = value
-            temp.next = self.head
-            self.head = temp
-
-    def pop(self):
-        node = self.head
-        if node == None:
-            return None
-
-        while node.next.next:
-            node = node.next
-
-        answer = node.next.data
-        node.next = None
-        self.tail = node
-        return answer
-
-    def popleft(self):
-        if self.head == None:
-            return -1
-        v = self.head.data
-        self.head = self.head.next
-
-        if self.head == None:
-            self.tail = None
-
-        return v
-
-    def delete(self,data):
-        if self.head == None:
-            return None
-        if self.head.data == data:
-            temp = self.head
-            self.head = self.head.next
-            del temp
-        else:
-            node = self.head
-            while node.next:
-                if node.next.data == data:
-                    temp = node.next
-                    node.next = node.next.next
-                    del temp
-                    return
-                else:
-                    node = node.next
-
-    def isEmpty(self):
-        is_empty = False
-        if self.head is None:
-            is_empty = True
-        return is_empty
-
-    def isHave(self,target):
-        node = self.head
-        while node:
-            if node.data == target:
-                return True
-            node = node.next
-        return False
-
-    def lastValue(self):
-        node = self.tail
-        if node == None:
-            return None
-
-        return node.data
-
-    def firstValue(self):
-        node = self.head
-        if node == None:
-            return None
-
-        return node.data
-
-    def length(self):
-        answer = 1
-        node = self.head
-        if node == None:
-            return 0
-        else:
-            while node != None and node.next:
-                answer += 1
-                node = node.next
-
-        return answer
-
-
-class heapq:
-    def __init__(self):
-        self.data = [None]
-
-    def insert(self, item):
-        self.data.append(item)
-        i = len(self.data) - 1
-        while i > 1:
-            if self.data[i] > self.data[(i // 2)]:
-                self.data[i], self.data[(i // 2)] = self.data[(i // 2)], self.data[i]
-                i = i // 2
-            else:
-                break
-
-    def remove(self):
-        if len(self.data) > 1:
-            self.data[1], self.data[-1] = self.data[-1], self.data[1]
-            data = self.data.pop(-1)
-            self.maxHeapify(1)
-        else:
-            data = None
-        return data
-
-    def maxHeapify(self, i):
-        left = 2 * i
-        right = (2 * i) + 1
-        smallest = i
-
-        if left < len(self.data) and self.data[i] < self.data[left]:
-            smallest = left
-
-        if right < len(self.data) and self.data[i] > self.data[right]:
-            smallest = right
-
-        if smallest != i:
-            self.data[i], self.data[smallest] = self.data[smallest], self.data[i]
-
-            self.maxHeapify(smallest)
-
-now = heapq()
-now.insert(1)
-now.insert(3)
-now.insert(29)
-now.insert(292)
-now.insert(29123)
+# class Node():
+#     def __init__(self,data):
+#         self.data = data
+#         self.next = None
+#
+# class deque():
+#     def __init__(self):
+#         self.head = None
+#         self.tail = None
+#
+#     def at(self,index):
+#         now = self.head
+#         for _ in range(index):
+#             if now == None:
+#                 return None
+#             now = now.next
+#         return now.data
+#
+#     def max(self):
+#         node = self.head
+#
+#         if node == None:
+#             return None
+#
+#         maxValue = self.head.data
+#
+#         while node:
+#             if maxValue < node.data:
+#                 maxValue = node.data
+#             node = node.next
+#
+#         return maxValue
+#
+#     def min(self):
+#         node = self.head
+#
+#         if node == None:
+#             return None
+#
+#         minValue = self.head.data
+#
+#         while node:
+#             if minValue > node.data:
+#                 minValue = node.data
+#             node = node.next
+#
+#         return minValue
+#
+#     def append(self,node):
+#         if self.head == None:
+#             self.head = node
+#             self.tail = node
+#         else:
+#             self.tail.next = node
+#             self.tail = self.tail.next
+#
+#     def appendleft(self,value):
+#         if self.head == None:
+#             self.head = value
+#             self.tail = value
+#         else:
+#             temp = value
+#             temp.next = self.head
+#             self.head = temp
+#
+#     def pop(self):
+#         node = self.head
+#         if node == None:
+#             return None
+#
+#         while node.next.next:
+#             node = node.next
+#
+#         answer = node.next.data
+#         node.next = None
+#         self.tail = node
+#         return answer
+#
+#     def popleft(self):
+#         if self.head == None:
+#             return -1
+#         v = self.head.data
+#         self.head = self.head.next
+#
+#         if self.head == None:
+#             self.tail = None
+#
+#         return v
+#
+#     def delete(self,data):
+#         if self.head == None:
+#             return None
+#         if self.head.data == data:
+#             temp = self.head
+#             self.head = self.head.next
+#             del temp
+#         else:
+#             node = self.head
+#             while node.next:
+#                 if node.next.data == data:
+#                     temp = node.next
+#                     node.next = node.next.next
+#                     del temp
+#                     return
+#                 else:
+#                     node = node.next
+#
+#     def isEmpty(self):
+#         is_empty = False
+#         if self.head is None:
+#             is_empty = True
+#         return is_empty
+#
+#     def isHave(self,target):
+#         node = self.head
+#         while node:
+#             if node.data == target:
+#                 return True
+#             node = node.next
+#         return False
+#
+#     def lastValue(self):
+#         node = self.tail
+#         if node == None:
+#             return None
+#
+#         return node.data
+#
+#     def firstValue(self):
+#         node = self.head
+#         if node == None:
+#             return None
+#
+#         return node.data
+#
+#     def length(self):
+#         answer = 1
+#         node = self.head
+#         if node == None:
+#             return 0
+#         else:
+#             while node != None and node.next:
+#                 answer += 1
+#                 node = node.next
+#
+#         return answer
+#
+#
+# class heapq:
+#     def __init__(self):
+#         self.data = [None]
+#
+#     def insert(self, item):
+#         self.data.append(item)
+#         i = len(self.data) - 1
+#         while i > 1:
+#             if self.data[i] > self.data[(i // 2)]:
+#                 self.data[i], self.data[(i // 2)] = self.data[(i // 2)], self.data[i]
+#                 i = i // 2
+#             else:
+#                 break
+#
+#     def remove(self):
+#         if len(self.data) > 1:
+#             self.data[1], self.data[-1] = self.data[-1], self.data[1]
+#             data = self.data.pop(-1)
+#             self.maxHeapify(1)
+#         else:
+#             data = None
+#         return data
+#
+#     def maxHeapify(self, i):
+#         left = 2 * i
+#         right = (2 * i) + 1
+#         smallest = i
+#
+#         if left < len(self.data) and self.data[i] < self.data[left]:
+#             smallest = left
+#
+#         if right < len(self.data) and self.data[i] > self.data[right]:
+#             smallest = right
+#
+#         if smallest != i:
+#             self.data[i], self.data[smallest] = self.data[smallest], self.data[i]
+#
+#             self.maxHeapify(smallest)
+#
+# now = heapq()
+# now.insert(1)
+# now.insert(3)
 # now.insert(29)
-# now.insert(29)
-print(now.remove())
-print(now.remove())
-print(now.remove())
+# now.insert(292)
+# now.insert(29123)
+# # now.insert(29)
+# # now.insert(29)
 # print(now.remove())
 # print(now.remove())
 # print(now.remove())
+# # print(now.remove())
+# # print(now.remove())
+# # print(now.remove())
+
+# 15650번 n과 m(2)
+# from itertools import combinations
+#
+# n, m = map(int,input().split())
+#
+# for i in combinations(range(1,n+1),m):
+#     print(' '.join(map(str,i)))
+
+# 15650번 n과 m(4)
+# from itertools import combinations_with_replacement
+#
+# n, m = map(int,input().split())
+#
+# for i in combinations_with_replacement(range(1,n+1),m):
+#     print(' '.join(map(str,i)))
+
+# 15650번 n과 m(5)
+# from itertools import permutations
+#
+# n, m = map(int,input().split())
+# arr = sorted(list(map(int,input().split())))
+#
+# for i in permutations(arr,m):
+#     print(' '.join(map(str,i)))
+
+# 15650번 n과 m(8)
+# from itertools import combinations_with_replacement
+#
+# n, m = map(int,input().split())
+# arr = sorted(list(map(int,input().split())))
+#
+# for i in sorted(set(combinations_with_replacement(arr,m))):
+#     print(' '.join(map(str,i)))
