@@ -967,3 +967,44 @@
 #
 # for i in sorted(set(combinations_with_replacement(arr,m))):
 #     print(' '.join(map(str,i)))
+
+# 14938번 서강그라운드
+
+# import heapq
+#
+# n,m,r = map(int,input().split())
+#
+# arr = list(map(int,input().split()))
+# dic = {i+1:[] for i in range(n)}
+# INF = 1e9
+# answer = 0
+#
+# for i in range(r):
+#     frm,to,cost = map(int,input().split())
+#     dic[frm].append((to,cost))
+#     dic[to].append((frm, cost))
+#
+# for i in dic.keys():
+#     miniAnswer = 0
+#     distance = [INF] * (n+1)
+#     distance[i] = 0
+#     q = []
+#     heapq.heappush(q,(0,i))
+#
+#     while q:
+#         nowCost,now = heapq.heappop(q)
+#         if nowCost > distance[now]:
+#             continue
+#         for k in dic[now]:
+#             if distance[k[0]] > nowCost + k[1]:
+#                 distance[k[0]] = nowCost + k[1]
+#                 heapq.heappush(q,(nowCost + k[1],k[0]))
+#
+#     for index,value in enumerate(distance):
+#         if value <= m and value != INF:
+#             miniAnswer += arr[index-1]
+#
+#     if miniAnswer > answer:
+#         answer = miniAnswer
+#
+# print(answer)
