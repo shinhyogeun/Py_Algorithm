@@ -1008,3 +1008,128 @@
 #         answer = miniAnswer
 #
 # print(answer)
+
+# 17070번 파이프 옮기기1
+
+# n = int(input())
+#
+# arr = []
+# answerArr = []
+#
+# for i in range(n):
+#     arr.append(list(map(int,input().split())))
+#     answerArr.append([[0,0,0] for j in range(len(arr[0]))])
+#
+# answerArr[0][1] = [1,0,0]
+#
+# for i in range(n):
+#     for j in range(n):
+#         if (i == 0 and j == 0) or (i == 0 and j == 1) or arr[i][j] == 1:
+#             continue
+#
+#         one = 0
+#         two = 0
+#         three = 0
+#
+#         if n > i >= 0 and n > j-1 >= 0:
+#             one = answerArr[i][j-1][0] + answerArr[i][j-1][2]
+#         if n > i-1 >= 0 and n > j >= 0:
+#             two = answerArr[i-1][j][1] + answerArr[i-1][j][2]
+#         if n > i-1 >= 0 and n > j-1 >= 0 and arr[i-1][j] != 1 and arr[i][j-1] != 1:
+#             three = sum(answerArr[i-1][j-1])
+#
+#         answerArr[i][j] = [one,two,three]
+#
+# print(sum(answerArr[n-1][n-1]))
+
+# 11779번 최소비용 구하기 2
+# import heapq
+# import sys
+#
+# input = sys.stdin.readline
+# n = int(input())
+# m = int(input())
+# INF = 1e9
+#
+# dic = {i+1:[] for i in range(n)}
+# route = {i+1:[] for i in range(n)}
+#
+# for i in range(m):
+#     frm,to,cost = map(int,input().split())
+#     dic[frm].append((to,cost))
+#
+# start,end = map(int,input().split())
+#
+# q = []
+# heapq.heappush(q,(0,start))
+# route[start] = [start]
+#
+# distance = [INF] * (n+1)
+# distance[start] = 0
+#
+# while q:
+#     cost,now = heapq.heappop(q)
+#
+#     if cost > distance[now]:
+#         continue
+#
+#     for i in dic[now]:
+#         if distance[now] + i[1] < distance[i[0]]:
+#             distance[i[0]] = distance[now] + i[1]
+#             heapq.heappush(q,(distance[now] + i[1], i[0]))
+#             newRoute = route[now][:]
+#             newRoute.append(i[0])
+#             route[i[0]] = newRoute
+#
+# print(distance[end])
+# print(len(route[end]))
+# print(' '.join(map(str,route[end])))
+
+# 2206번 벽 부수고 이동하기
+# from collections import deque
+# import sys
+#
+# input = sys.stdin.readline
+#
+# n,m = map(int,input().rstrip().split())
+# arr = []
+# answer = []
+#
+# for i in range(n):
+#     a = list(map(int, list(input().rstrip())))
+#     arr.append(a)
+#     answer.append([[0,0] for _ in range(m)])
+# q = deque()
+# q.append(((0,0),False))
+# answer[0][0] = [1,0]
+#
+# while q:
+#     now,turn = q.popleft()
+#     dl = [0,1,0,-1]
+#     dm = [1,0,-1,0]
+#
+#     for i in zip(dl,dm):
+#         if n > now[0] + i[0] >= 0 and m > now[1] + i[1] >= 0:
+#             if arr[now[0] + i[0]][now[1] + i[1]] == 1 and not turn and answer[now[0] + i[0]][now[1] + i[1]][1] == 0:
+#                 answer[now[0] + i[0]][now[1] + i[1]][1] = answer[now[0]][now[1]][0] + 1
+#                 q.append(((now[0] + i[0], now[1] + i[1]), not turn))
+#             elif arr[now[0] + i[0]][now[1] + i[1]] == 0:
+#                 if turn and answer[now[0] + i[0]][now[1] + i[1]][1] == 0:
+#                     answer[now[0] + i[0]][now[1] + i[1]][1] = answer[now[0]][now[1]][1] + 1
+#                     q.append(((now[0] + i[0], now[1] + i[1]), turn))
+#                 elif not turn and answer[now[0] + i[0]][now[1] + i[1]][0] == 0:
+#                     answer[now[0] + i[0]][now[1] + i[1]][0] = answer[now[0]][now[1]][0] + 1
+#                     q.append(((now[0] + i[0],now[1] + i[1]),turn))
+#
+# if answer[n-1][m-1] == [0,0]:
+#     print(-1)
+# else:
+#     if answer[n-1][m-1][0] == 0:
+#         print(answer[n-1][m-1][1])
+#     elif answer[n-1][m-1][1] == 0:
+#         print(answer[n-1][m-1][0])
+#     else:
+#         print(min(answer[n-1][m-1]))
+
+# 12865번 평범한 배낭
+
