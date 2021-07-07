@@ -1131,5 +1131,93 @@
 #     else:
 #         print(min(answer[n-1][m-1]))
 
-# 12865번 평범한 배낭
+# 1043번 거짓말
 
+# n,m = map(int,input().split())
+# trues = set(list(map(int,input().split()))[1:])
+# total = []
+#
+# for i in range(m):
+#     now = list(map(int,input().split()))[1:]
+#     total.append(now)
+#
+# for _ in range(len(total)):
+#     for i in total:
+#         for j in i:
+#             if j in trues:
+#                 for s in i:
+#                     trues.add(s)
+#
+# answer = 0
+#
+# for i in total:
+#     for j in i:
+#         if j in trues:
+#             break
+#     else:
+#         answer += 1
+#
+# print(answer)
+
+#1238번 파티
+# import heapq
+#
+# n,m,x = map(int,input().split())
+# dic = {i+1:[] for i in range(n)}
+#
+# for i in range(m):
+#     frm,to,cost = map(int,input().split())
+#     dic[frm].append((to,cost))
+#
+# lists = [i+1 for i in range(n)]
+# INF = 1e9
+# back = []
+# go = [[]]
+#
+# for i in lists:
+#     q = []
+#     distance = [INF] * (n+1)
+#     heapq.heappush(q,(0,i))
+#     distance[i] = 0
+#
+#     while q:
+#         cost,now = heapq.heappop(q)
+#
+#         if cost > distance[now]:
+#             continue
+#
+#         for k in dic[now]:
+#             if cost+k[1] < distance[k[0]]:
+#                 distance[k[0]] = cost+k[1]
+#                 heapq.heappush(q,(cost+k[1],k[0]))
+#
+#     if i == x:
+#         back = distance[:]
+#         go.append([])
+#     else:
+#         go.append(distance[:])
+#
+# answer = 0
+#
+# for i,v in enumerate(go):
+#     if v != [] and answer < v[x] + back[i]:
+#         answer = v[x] + back[i]
+#
+# print(answer)
+
+# 12865번 평범한 배낭
+#
+# n,k = map(int,input().split())
+# dic = {i+1:0 for i in range(100000)}
+#
+# weight = []
+# value = []
+#
+# a,b = map(int,input().split())
+# weight.append(a)
+# value.append(b)
+#
+# for i in range(n-1):
+#     a, b = map(int, input().split())
+#     weight.append(a)
+#     value.append(b)
