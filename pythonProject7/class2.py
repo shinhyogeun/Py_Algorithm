@@ -1205,19 +1205,95 @@
 #
 # print(answer)
 
-# 12865번 평범한 배낭
+
+# 알고리즘 3주차 과제
+
+# class Node:
+#     def __init__(self, data, prev=None, next=None):
+#         self.data = data
+#         self.prev = prev
+#         self.next = next
+# 
 #
-# n,k = map(int,input().split())
-# dic = {i+1:0 for i in range(100000)}
+# class LinkedQueue:
+#     def __init__(self):
+#         self.front = None
+#         self.rear = None
 #
-# weight = []
-# value = []
+#     def is_empty(self):
+#         if self.front == None:
+#             return True
+#         return False
 #
-# a,b = map(int,input().split())
-# weight.append(a)
-# value.append(b)
+#     def put(self, data):
+#         if self.front == None:
+#             self.front = Node(data)
+#             self.rear = self.front
+#         else:
+#             node = self.front
+#             while node.next:
+#                 node = node.next
+#             new = Node(data)
+#             node.next = new
+#             new.prev = node
+#             self.rear = new
 #
-# for i in range(n-1):
-#     a, b = map(int, input().split())
-#     weight.append(a)
-#     value.append(b)
+#     def get(self):
+#         if self.front == None:
+#             return None
+#         returnValue = self.front
+#         self.front = self.front.next
+#         return returnValue.data
+#
+#     def peek(self):
+#         if self.front == None:
+#             return None
+#         return self.front.data
+#
+# class Stack:
+#     def __init__(self):
+#         self.list = list()
+#
+#     def push(self, data):
+#         self.list.append(data)
+#
+#     def pop(self):
+#         return self.list.pop()
+#
+#
+# class Calculator:
+#     def __init__(self):
+#         self.stack = Stack()
+#
+#     def calculate(self, string):
+#         for i in string.split(' '):
+#             if i in ['+', '-', '*', '/']:
+#                 self.stack.push(eval(str(self.stack.pop()) + str(i) + str(self.stack.pop())))
+#             elif i != ' ':
+#                 self.stack.push(i)
+#
+#         return int(self.stack.pop())
+#
+#
+# class Node:
+#     def __init__(self, data, left=None, right=None):
+#         self.data = data
+#         self.left = left
+#         self.right = right
+#
+#
+# class Tree:
+#     def __init__(self, root):
+#         self.root = root
+#
+#     def preorder(self):
+#         if self.root:
+#             print(self.root.data)
+#             king1 = self.root.left
+#             king2 = self.root.right
+#             if king1:
+#                 self.root = king1
+#                 self.preorder()
+#             if king2:
+#                 self.root = king2
+#                 self.preorder()
