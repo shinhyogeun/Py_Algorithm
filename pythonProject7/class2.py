@@ -1297,3 +1297,54 @@
 #             if king2:
 #                 self.root = king2
 #                 self.preorder()
+
+# def hash_func(key):
+#     return ord(key[0]) % 10
+#
+#
+# class HashTable:
+#     def __init__(self):
+#         self.table = [None] * 10
+#
+#     def set(self, key, value):
+#         self.table[hash_func(key)] = value
+#
+#     def get(self, key):
+#         return self.table[hash_func(key)]
+#
+#
+# class Node:
+#     def __init__(self, key, data):
+#         self.key = key
+#         self.data = data
+#         self.next = None
+#
+#
+# class ChainedHashTable(HashTable):
+#     def __init__(self):
+#         self.table = [None] * 10
+#
+#     def set(self, key, value):
+#         hash_address = hash_func(key)
+#         if self.table[hash_address] != None:
+#             now = self.table[hash_address]
+#             while now.next:
+#                 if now.key == key:
+#                     now.data = value
+#                     return
+#                 now = now.next
+#             now.next = Node(key, value)
+#         else:
+#             self.table[hash_address] = Node(key, value)
+#
+#     def get(self, key):
+#         hash_address = hash_func(key)
+#         if self.table[hash_address] != None:
+#             now = self.table[hash_address]
+#             while now:
+#                 if now.key == key:
+#                     return now.data
+#                 now = now.next
+#             return None
+#         else:
+#             return None
