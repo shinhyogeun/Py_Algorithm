@@ -1348,3 +1348,30 @@
 #             return None
 #         else:
 #             return None
+
+
+# 버블 정렬
+# data_list = [1,3,4,2,3,4,5,1,2,3,4]
+#
+# for i in range(len(data_list)-1):
+#     isSwap = False
+#     for j in range(len(data_list)-i-1):
+#         if data_list[j] > data_list[j+1]:
+#             data_list[j],data_list[j+1] = data_list[j+1],data_list[j]
+#     if isSwap:
+#         break
+#
+# print(data_list)
+
+# 선택 정렬
+# data_list = [1,3,4,2,3,4,5,1,2,3,4]
+#
+# for i in range(len(data_list)-1):
+#     mini = i
+#     for j in range(i+1,len(data_list)):
+#         if data_list[mini] > data_list[j]:
+#             mini = j
+#
+#     data_list[i],data_list[mini] = data_list[mini],data_list[i]
+#
+# print(data_list)
