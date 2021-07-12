@@ -1375,3 +1375,24 @@
 #     data_list[i],data_list[mini] = data_list[mini],data_list[i]
 #
 # print(data_list)
+
+# 삽입정렬
+# def selection_sort(data):
+#     for i in range(1,len(data)):
+#         for j in range(i,0,-1):
+#             if data[j] < data[j-1]:
+#                 data[j], data[j-1] = data[j-1], data[j]
+#             else:
+#                 break
+#     return data
+
+# def func(num):
+#     print(num)
+#     if num == 1:
+#         return
+#     if num % 2 == 1:
+#         func(num*3+1)
+#     else:
+#         func(num//2)
+#
+# func(3)
