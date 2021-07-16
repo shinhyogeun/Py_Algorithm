@@ -1396,6 +1396,3 @@ def func(num):
         func(num//2)
 
 func(3)
-
-
-t
