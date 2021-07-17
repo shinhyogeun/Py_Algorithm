@@ -1933,39 +1933,39 @@
 #     else:
 #         return a * b
 #
-# def solution(expression):
-#     answers = []
-#     numbers = []
-#     operators = []
-#     box = []
-#     for i in expression:
-#         if i in ['+','-','*']:
-#             numbers.append(int(''.join(box)))
-#             operators.append(i)q
-#             box = []
-#         else:
-#             box.append(i)
-#     if box != []:
-#         numbers.append(int(''.join(box)))
-#
-#     permutes = list(permutations(['+','-','*'], 3))
-#
-#     for permute in permutes:
-#         copyedNumbers = numbers[:]
-#         copyedOperators = operators[:]
-#         for one in permute:
-#             k = 0
-#             for i in range(len(copyedOperators)):
-#                 if one == copyedOperators[i-k]:
-#                     result = cal(copyedNumbers[i-k],copyedNumbers[i-k+1],one)
-#                     del copyedNumbers[i-k]
-#                     del copyedNumbers[i-k]
-#                     del copyedOperators[i-k]
-#
-#                     copyedNumbers.insert(i-k,result)
-#                     k += 1
-#         answers.append(abs(copyedNumbers[0]))
-#
-#     return max(answers)
-#
-# print(solution("100-200*300-500+20"))
+def solution(expression):
+    answers = []
+    numbers = []
+    operators = []
+    box = []
+    for i in expression:
+        if i in ['+','-','*']:
+            numbers.append(int(''.join(box)))
+            operators.append(i)q
+            box = []
+        else:
+            box.append(i)
+    if box != []:
+        numbers.append(int(''.join(box)))
+
+    permutes = list(permutations(['+','-','*'], 3))
+
+    for permute in permutes:
+        copyedNumbers = numbers[:]
+        copyedOperators = operators[:]
+        for one in permute:
+            k = 0
+            for i in range(len(copyedOperators)):
+                if one == copyedOperators[i-k]:
+                    result = cal(copyedNumbers[i-k],copyedNumbers[i-k+1],one)
+                    del copyedNumbers[i-k]
+                    del copyedNumbers[i-k]
+                    del copyedOperators[i-k]
+
+                    copyedNumbers.insert(i-k,result)
+                    k += 1
+        answers.append(abs(copyedNumbers[0]))
+
+    return max(answers)
+
+print(solution("100-200*300-500+20"))
