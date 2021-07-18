@@ -1933,39 +1933,102 @@
 #     else:
 #         return a * b
 #
-def solution(expression):
-    answers = []
-    numbers = []
-    operators = []
-    box = []
-    for i in expression:
-        if i in ['+','-','*']:
-            numbers.append(int(''.join(box)))
-            operators.append(i)q
-            box = []
-        else:
-            box.append(i)
-    if box != []:
-        numbers.append(int(''.join(box)))
+# def solution(expression):
+#     answers = []
+#     numbers = []
+#     operators = []
+#     box = []
+#     for i in expression:
+#         if i in ['+','-','*']:
+#             numbers.append(int(''.join(box)))
+#             operators.append(i)q
+#             box = []
+#         else:
+#             box.append(i)
+#     if box != []:
+#         numbers.append(int(''.join(box)))
+#
+#     permutes = list(permutations(['+','-','*'], 3))
+#
+#     for permute in permutes:
+#         copyedNumbers = numbers[:]
+#         copyedOperators = operators[:]
+#         for one in permute:
+#             k = 0
+#             for i in range(len(copyedOperators)):
+#                 if one == copyedOperators[i-k]:
+#                     result = cal(copyedNumbers[i-k],copyedNumbers[i-k+1],one)
+#                     del copyedNumbers[i-k]
+#                     del copyedNumbers[i-k]
+#                     del copyedOperators[i-k]
+#
+#                     copyedNumbers.insert(i-k,result)
+#                     k += 1
+#         answers.append(abs(copyedNumbers[0]))
+#
+#     return max(answers)
+#
+# print(solution("100-200*300-500+20"))
 
-    permutes = list(permutations(['+','-','*'], 3))
-
-    for permute in permutes:
-        copyedNumbers = numbers[:]
-        copyedOperators = operators[:]
-        for one in permute:
-            k = 0
-            for i in range(len(copyedOperators)):
-                if one == copyedOperators[i-k]:
-                    result = cal(copyedNumbers[i-k],copyedNumbers[i-k+1],one)
-                    del copyedNumbers[i-k]
-                    del copyedNumbers[i-k]
-                    del copyedOperators[i-k]
-
-                    copyedNumbers.insert(i-k,result)
-                    k += 1
-        answers.append(abs(copyedNumbers[0]))
-
-    return max(answers)
-
-print(solution("100-200*300-500+20"))
+# 과제1번 코드란
+# import heapq
+#
+# class PriorityQueue:
+#     def __init__(self):
+#         self.heap_array = []
+#
+#     def is_empty(self):
+#         if len(self.heap_array) == 0:
+#             return True
+#         else:
+#             return False
+#
+#     def put(self, data):
+#         heapq.heappush(self.heap_array, data)
+#
+#     def get(self):
+#         if len(self.heap_array) == 0:
+#             return None
+#         else:
+#             return heapq.heappop(self.heap_array)
+#
+#     def peek(self):
+#         if len(self.heap_array) == 0:
+#             return None
+#         else:
+#             return self.heap_array[0]
+#
+#
+# # 과제 2번 코드란
+# def countUniques(a):
+#     count = 1
+#     for i in range(len(a)-1):
+#         if a[i] != a[i+1]:
+#             count += 1
+#     return count
+#
+# # 과제 3번 코드란
+# def solution(a):
+#     answer = 0
+#     while answer <= len(a):
+#         for i in a:
+#             if i[0:answer+1] == a[0][0:answer+1]:
+#                 continue
+#             else:
+#                 return answer
+#         answer += 1
+#     return answer
+#
+# # 과제 4번 코드란
+# def solution(n):
+#     list = []
+#     while n not in list:
+#         result = 0
+#         for i in range(len(str(n))):
+#             result += int(str(n)[i])**2
+#         if str(result)[-1] == '1':
+#             return True
+#         else:
+#             list.append(n)
+#             n = result
+#     return False
