@@ -1973,18 +1973,18 @@
 과제1번 코드란
 # import heapq
 #
-# class PriorityQueue:
-#     def __init__(self):
-#         self.heap_array = []
-#
-#     def is_empty(self):
-#         if len(self.heap_array) == 0:
-#             return True
-#         else:
-#             return False
-#
-#     def put(self, data):
-#         heapq.heappush(self.heap_array, data)
+class PriorityQueue:
+    def __init__(self):
+        self.heap_array = []
+
+    def is_empty(self):
+        if len(self.heap_array) == 0:
+            return True
+        else:
+            return False
+
+    def put(self, data):
+        heapq.heappush(self.heap_array, data)
 #
 #     def get(self):
 #         if len(self.heap_array) == 0:
