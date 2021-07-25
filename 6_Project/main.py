@@ -1973,18 +1973,18 @@
 과제1번 코드란
 # import heapq
 #
-class PriorityQueue:
-    def __init__(self):
-        self.heap_array = []
-
-    def is_empty(self):
-        if len(self.heap_array) == 0:
-            return True
-        else:
-            return False
-
-    def put(self, data):
-        heapq.heappush(self.heap_array, data)
+# class PriorityQueue:
+#     def __init__(self):
+#         self.heap_array = []
+#
+#     def is_empty(self):
+#         if len(self.heap_array) == 0:
+#             return True
+#         else:
+#             return False
+#
+#     def put(self, data):
+#         heapq.heappush(self.heap_array, data)
 #
 #     def get(self):
 #         if len(self.heap_array) == 0:
@@ -2000,35 +2000,108 @@ class PriorityQueue:
 
 
 # 과제 2번 코드란
-def countUniques(a):
-    count = 1
-    for i in range(len(a)-1):
-        if a[i] != a[i+1]:
-            count += 1
-    return count
+# def countUniques(a):
+#     count = 1
+#     for i in range(len(a)-1):
+#         if a[i] != a[i+1]:
+#             count += 1
+#     return count
+#
+# # 과제 3번 코드란
+# def solution(a):
+#     answer = 0
+#     while answer <= len(a):
+#         for i in a:
+#             if i[0:answer+1] == a[0][0:answer+1]:
+#                 continue
+#             else:
+#                 return answer
+#         answer += 1
+#     return answer
+#
+# # 과제 4번 코드란
+# def solution(n):
+#     list = []
+#     while n not in list:
+#         result = 0
+#         for i in range(len(str(n))):
+#             result += int(str(n)[i])**2
+#         if str(result)[-1] == '1':
+#             return True
+#         else:
+#             list.append(n)
+#             n = result
+#     return False
+
+# 과제1번 코드란
+
+# def searchMatrix(matrix, target):
+#     flattedMatrix = []
+#
+#     for i in matrix:
+#       flattedMatrix.extend(i)
+#
+#     start = 0
+#     end = len(flattedMatrix)-1
+#
+#     while start <= end:
+#       pivot = (start + end) // 2
+#       if flattedMatrix[pivot] > target:
+#         end = pivot - 1
+#       elif flattedMatrix[pivot] < target:
+#         start = pivot + 1
+#       else:
+#         return True
+#
+#     return False
+
+# 과제 2번 코드란
+# def gcdString(A, B):
+#     for i in range(len(A)//2+1,0,-1):
+#       if A[:i] * (len(A)//i) == A and B[:i] * (len(B)//i) == B:
+#           return A[:i]
+#     return ''
 
 # 과제 3번 코드란
-def solution(a):
-    answer = 0
-    while answer <= len(a):
-        for i in a:
-            if i[0:answer+1] == a[0][0:answer+1]:
-                continue
-            else:
-                return answer
-        answer += 1
-    return answer
+# import heapq
+#
+# def solution(n, vertex):
+#     distance = [1e9] * (n+1)
+#     dic = {i+1:[] for i in range(n)}
+#     q = []
+#
+#     for i in vertex:
+#       dic[i[0]].append(i[1])
+#       dic[i[1]].append(i[0])
+#
+#     heapq.heappush(q,[0,1])
+#     distance[1] = 0
+#
+#     while q:
+#       cost,now = heapq.heappop(q)
+#
+#       if cost > distance[now]: continue
+#
+#       for i in dic[now]:
+#         if distance[i] > cost + 1:
+#           distance[i] = cost + 1
+#           heapq.heappush(q,[cost + 1,i])
+#
+#     distance = sorted(distance[1:],reverse=True)
+#
+#     return distance.count(max(distance))
 
 # 과제 4번 코드란
-def solution(n):
-    list = []
-    while n not in list:
-        result = 0
-        for i in range(len(str(n))):
-            result += int(str(n)[i])**2
-        if str(result)[-1] == '1':
-            return True
-        else:
-            list.append(n)
-            n = result
-    return False
+
+# def solution(N, trust):
+#     total = [i+1 for i in range(N)]
+#     for i in trust:
+#       if i[0] in total:
+#         total.remove(i[0])
+#     trusted = [i[1] for i in trust]
+#     for i in trusted:
+#       if trusted.count(i) != N-1 and i in total:
+#         total.remove(i)
+#     if len(total) > 1 or len(total) == 0:
+#       return -1
+#     return total[0]
