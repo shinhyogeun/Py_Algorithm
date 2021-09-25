@@ -260,3 +260,14 @@ print(__file__)
 print(os.path.realpath(__file__))
 print(os.path.abspath(__file__))'''
 
+
+def solution(numbers):
+    total = {i: False for i in range(10)}
+    answer = 0
+    for i in numbers:
+        if not total[i]:
+            total[i] = True
+
+    for i in total:
+        if total[i] != True: answer += i
+    return answer
