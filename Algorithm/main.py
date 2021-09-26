@@ -261,13 +261,23 @@ print(os.path.realpath(__file__))
 print(os.path.abspath(__file__))'''
 
 
-def solution(numbers):
-    total = {i: False for i in range(10)}
-    answer = 0
-    for i in numbers:
-        if not total[i]:
-            total[i] = True
+# def solution(numbers):
+#     total = {i: False for i in range(10)}
+#     answer = 0
+#     for i in numbers:
+#         if not total[i]:
+#             total[i] = True
+#
+#     for i in total:
+#         if total[i] != True: answer += i
+#     return answer
 
-    for i in total:
-        if total[i] != True: answer += i
-    return answer
+from itertools import product
+
+def solution(word):
+    total = ['A', 'E', 'I', 'O', 'U']
+    ultra = []
+    for i in range(1,6):
+        ultra += list(product(total, repeat=i))
+    ultra = sorted(ultra)
+    return ultra.index(tuple(word))+1
