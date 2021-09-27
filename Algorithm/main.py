@@ -272,12 +272,35 @@ print(os.path.abspath(__file__))'''
 #         if total[i] != True: answer += i
 #     return answer
 
-from itertools import product
+# from itertools import product
+#
+# def solution(word):
+#     total = ['A', 'E', 'I', 'O', 'U']
+#     ultra = []
+#     for i in range(1,6):
+#         ultra += list(product(total, repeat=i))
+#     ultra = sorted(ultra)
+#     return ultra.index(tuple(word))+1
+#
+# print(solution('AAAE'))
 
-def solution(word):
-    total = ['A', 'E', 'I', 'O', 'U']
-    ultra = []
-    for i in range(1,6):
-        ultra += list(product(total, repeat=i))
-    ultra = sorted(ultra)
-    return ultra.index(tuple(word))+1
+from collections import deque
+
+def solution(enter, leave):
+    answer = [0 for i in range(len(enter))]
+    enter = deque(enter)
+    leave = deque(leave)
+    total = []
+    total.append(enter.popleft())
+    while leave:
+        if leave[0] not in total:
+            for i in total:
+                answer[i-1] += 1
+            total.append(enter.popleft())
+            answer[total[-1]-1] = len(total)-1
+        else:
+            total.remove(leave.popleft())
+    return answer
+
+print(solution([1,4,2,3],[2,1,3,4]))
+print(solution([1,4,2,3],[2,1,4,3]))
