@@ -284,23 +284,48 @@ print(os.path.abspath(__file__))'''
 #
 # print(solution('AAAE'))
 
-from collections import deque
+# from collections import deque
+#
+# def solution(enter, leave):
+#     answer = [0 for i in range(len(enter))]
+#     enter = deque(enter)
+#     leave = deque(leave)
+#     total = []
+#     total.append(enter.popleft())
+#     while leave:
+#         if leave[0] not in total:
+#             for i in total:
+#                 answer[i-1] += 1
+#             total.append(enter.popleft())
+#             answer[total[-1]-1] = len(total)-1
+#         else:
+#             total.remove(leave.popleft())
+#     return answer
+#
+# print(solution([1,4,2,3],[2,1,3,4]))
+# print(solution([1,4,2,3],[2,1,4,3]))
 
-def solution(enter, leave):
-    answer = [0 for i in range(len(enter))]
-    enter = deque(enter)
-    leave = deque(leave)
-    total = []
-    total.append(enter.popleft())
-    while leave:
-        if leave[0] not in total:
-            for i in total:
-                answer[i-1] += 1
-            total.append(enter.popleft())
-            answer[total[-1]-1] = len(total)-1
-        else:
-            total.remove(leave.popleft())
-    return answer
+def dfs(total,i,j):
+    total[i][j] = 5
+    w = len(total[0])
+    h = len(total)
+    direction = [-1,0,1]
+    for a in direction:
+        for b in direction:
+            if (0<=i+a<h and 0<=j+b<w) and total[i+a][j+b] == 1:
+                dfs(total,i+a,j+b)
 
-print(solution([1,4,2,3],[2,1,3,4]))
-print(solution([1,4,2,3],[2,1,4,3]))
+
+while True:
+     w,h = list(map(int,input().split()))
+     if w == 0 and h == 0: break
+     total = []
+     for i in range(h):
+         total.append(list(map(int,input().split())))
+     answer = 0
+     for i in range(h):
+         for j in range(w):
+             if total[i][j] == 1:
+                 answer += 1
+                 dfs(total,i,j)
+     print(answer)
