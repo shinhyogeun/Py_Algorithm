@@ -285,7 +285,7 @@ print(os.path.abspath(__file__))'''
 # print(solution('AAAE'))
 
 # from collections import deque
-#
+#®
 # def solution(enter, leave):
 #     answer = [0 for i in range(len(enter))]
 #     enter = deque(enter)
@@ -305,27 +305,61 @@ print(os.path.abspath(__file__))'''
 # print(solution([1,4,2,3],[2,1,3,4]))
 # print(solution([1,4,2,3],[2,1,4,3]))
 
-def dfs(total,i,j):
-    total[i][j] = 5
-    w = len(total[0])
-    h = len(total)
-    direction = [-1,0,1]
-    for a in direction:
-        for b in direction:
-            if (0<=i+a<h and 0<=j+b<w) and total[i+a][j+b] == 1:
-                dfs(total,i+a,j+b)
+# def dfs(total,i,j):
+#     total[i][j] = 5
+#     w = len(total[0])
+#     h = len(total)
+#     direction = [-1,0,1]
+#     for a in direction:
+#         for b in direction:
+#             if (0<=i+a<h and 0<=j+b<w) and total[i+a][j+b] == 1:
+#                 dfs(total,i+a,j+b)
+#
+#
+# while True:
+#      w,h = list(map(int,input().split()))
+#      if w == 0 and h == 0: break
+#      total = []
+#      for i in range(h):
+#          total.append(list(map(int,input().split())))
+#      answer = 0
+#      for i in range(h):
+#          for j in range(w):
+#              if total[i][j] == 1:
+#                  answer += 1
+#                  dfs(total,i,j)
+#      print(answer)
+
+# from collections import deque
+#
+# total = deque(list(input()))
+# target = input()
+# answer = 0
+# now = ''
+#
+# while total:
+#     now += total.popleft()
+#     if now == target:
+#         answer += 1
+#         now = ''
+#     elif not target.startswith(now) and len(now) > 1:
+#         now = now[1:]
+#     elif not target.startswith(now) and len(now) == 1:
+#         now = ''
+#
+# print(answer)
+
+from collections import deque
+n = int(input())
+total = deque(map(int,input().split()))
+
+a1 = [total.popleft(), total.popleft()]
+
+while total:
+    newOne = total.popleft()
+    a2 = max(0,a1[0],newOne)
+    if a2 == 0:
 
 
-while True:
-     w,h = list(map(int,input().split()))
-     if w == 0 and h == 0: break
-     total = []
-     for i in range(h):
-         total.append(list(map(int,input().split())))
-     answer = 0
-     for i in range(h):
-         for j in range(w):
-             if total[i][j] == 1:
-                 answer += 1
-                 dfs(total,i,j)
-     print(answer)
+print(a2)
+
