@@ -349,17 +349,17 @@ print(os.path.abspath(__file__))'''
 #
 # print(answer)
 
-from collections import deque
-n = int(input())
-total = deque(map(int,input().split()))
-
-a1 = [total.popleft(), total.popleft()]
-
-while total:
-    newOne = total.popleft()
-    a2 = max(0,a1[0],newOne)
-    if a2 == 0:
-
-
-print(a2)
+# from collections import deque
+# n = int(input())
+# total = deque(map(int,input().split()))
+#
+# a1 = [total.popleft(), total.popleft()]
+#
+# while total:
+#     newOne = total.popleft()
+#     a2 = max(0,a1[0],newOne)
+#     if a2 == 0:
+#
+#
+# print(a2)
 
