@@ -363,3 +363,169 @@ print(os.path.abspath(__file__))'''
 #
 # print(a2)
 
+
+# total = ''.join(input().split(' '))
+# if total == '12345678':
+#     print('ascending')
+# elif total == '87654321':
+#     print('descending')
+# else:
+#     print('mixed')
+
+# from itertools import combinations
+#
+# number, total = map(int,input().split())
+# target = map(int,input().split())
+# real = sorted(list([sum(i) for i in combinations(target,3)]))
+# a = [i for i in real if i - total <= 0]
+# if len(a) == 0:
+#     print(real[-1])
+# else:
+#     print(a[-1])
+
+# n = int(input())
+# target = [int(input()) for i in range(n)]
+# stack = []
+# answer = []
+#
+# for i in range(1,n+1):
+#     stack.append(i)
+#     answer.append('+')
+#     if (stack[-1] == target[0]):
+#         while len(stack)!=0 and stack[-1] == target[0]:
+#             stack.pop()
+#             answer.append('-')
+#             target.pop(0)
+#
+# if(len(stack)!=0):
+#     print('NO')
+# else:
+#     for i in answer: print(i)
+
+# n = int(input())
+#
+# for i in range(n):
+#     length, target = map(int,input().split())
+#     all = [[i,v] for v,i in enumerate(list(map(int,input().split())))]
+#     count = 1
+#     while all != []:
+#         if all[0][0] >= max([i[0] for i in all]):
+#             if(all[0][1] == target):
+#                 print(count)
+#                 break
+#             else:
+#                 all.pop(0)
+#                 count += 1
+#         else:
+#             all.append(all.pop(0))
+
+
+
+# import sys
+#
+# n = int(input())
+#
+# for i in range(n):
+#     inputs = list(sys.stdin.readline().rstrip())
+#     answerLeft = []
+#     answerRight = []
+#     cursor = 0
+#     for i in inputs:
+#         if i == '<':
+#             if answerLeft != []:
+#                 answerRight.append(answerLeft.pop())
+#         elif i == '>':
+#             if answerRight != []:
+#                 answerLeft.append(answerRight.pop())
+#         elif i == '-':
+#             if answerLeft != []:
+#                 answerLeft.pop()
+#         else:
+#             answerLeft.append(i)
+#             cursor += 1
+#     print(''.join(answerLeft)+''.join(answerRight[::-1]))
+
+# import hashlib
+#
+# inp = input()
+# print(hashlib.sha256(inp.encode()).hexdigest())
+
+
+# n = int(input())
+# total = list(map(int,input().split()))
+# m = int(input())
+# target = list(map(int,input().split()))
+# total = sorted(total)
+# answer = []
+# for i in range(m):
+#     start = 0
+#     end = len(total)-1
+#     while start <= end:
+#         pivot = (start + end) // 2
+#         if total[pivot] == target[i]:
+#             answer.append(1)
+#             break
+#         elif total[pivot] > target[i]:
+#             end = pivot-1
+#         elif total[pivot] < target[i]:
+#             start = pivot+1
+#     if start > end:
+#         answer.append(0)
+# for i in answer:
+#     print(i)
+
+# n = int(input())
+#
+# for i in range(n):
+#     m = int(input())
+#     total = {}
+#     for i in range(m):
+#         frm,to = input().split()
+#         total[frm] = to
+
+# n = int(input())
+# a = [[] for i in range(200)]
+# for i in range(n):
+#     age,name = input().split()
+#     age = int(age)
+#     a[age-1].append(name)
+#
+# for i,v in enumerate(a):
+#     for j in v:
+#         print(i+1 , j)
+
+
+# n = int(input())
+# pibo = [0,1]
+#
+# def pibo(a):
+#     if a == 1 :
+#         return 1
+#     if a == 0 :
+#         return 0
+#     else:
+#         return pibo(a - 2) + pibo(a - 1)
+#
+# print(pibo(n))
+
+N,r,c = map(int,input().split())
+
+answer = 0
+
+def find(N,r,c):
+    global answer
+    if N == 0: return
+    if 0 <= r <= 2 ** (N - 1)-1 and 0 <= c <= 2 ** (N-1)-1:
+        return find(N - 1, r, c)
+    elif 0 <= r <= 2 ** (N - 1)-1 and 2 ** (N - 1) <= c <= 2 ** (N)-1:
+        answer += 2**(2*N)/4
+        return find(N - 1, r, c - 2 ** (N - 1))
+    elif 2 ** (N - 1) <= r <= 2 ** (N)-1 and 0 <= c <= 2 ** (N - 1)-1:
+        answer += (2**(2*N)/4) * 2
+        return find(N - 1, r - 2 ** (N - 1), c)
+    elif 2 ** (N - 1) <= r <= 2 ** (N) - 1 and 2 ** (N - 1) <= c <= 2 ** (N)-1:
+        answer += (2**(2*N)/4) * 3
+        return find(N - 1, r - 2 ** (N - 1), c - 2 ** (N - 1))
+
+find(N,r,c)
+print(int(answer))
