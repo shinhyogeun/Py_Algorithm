@@ -508,24 +508,156 @@ print(os.path.abspath(__file__))'''
 #
 # print(pibo(n))
 
-N,r,c = map(int,input().split())
+# N,r,c = map(int,input().split())
+#
+# answer = 0
+#
+# def find(N,r,c):
+#     global answer
+#     if N == 0: return
+#     if 0 <= r <= 2 ** (N - 1)-1 and 0 <= c <= 2 ** (N-1)-1:
+#         return find(N - 1, r, c)
+#     elif 0 <= r <= 2 ** (N - 1)-1 and 2 ** (N - 1) <= c <= 2 ** (N)-1:
+#         answer += 2**(2*N)/4
+#         return find(N - 1, r, c - 2 ** (N - 1))
+#     elif 2 ** (N - 1) <= r <= 2 ** (N)-1 and 0 <= c <= 2 ** (N - 1)-1:
+#         answer += (2**(2*N)/4) * 2
+#         return find(N - 1, r - 2 ** (N - 1), c)
+#     elif 2 ** (N - 1) <= r <= 2 ** (N) - 1 and 2 ** (N - 1) <= c <= 2 ** (N)-1:
+#         answer += (2**(2*N)/4) * 3
+#         return find(N - 1, r - 2 ** (N - 1), c - 2 ** (N - 1))
+#
+# find(N,r,c)
+# print(int(answer))
 
-answer = 0
 
-def find(N,r,c):
-    global answer
-    if N == 0: return
-    if 0 <= r <= 2 ** (N - 1)-1 and 0 <= c <= 2 ** (N-1)-1:
-        return find(N - 1, r, c)
-    elif 0 <= r <= 2 ** (N - 1)-1 and 2 ** (N - 1) <= c <= 2 ** (N)-1:
-        answer += 2**(2*N)/4
-        return find(N - 1, r, c - 2 ** (N - 1))
-    elif 2 ** (N - 1) <= r <= 2 ** (N)-1 and 0 <= c <= 2 ** (N - 1)-1:
-        answer += (2**(2*N)/4) * 2
-        return find(N - 1, r - 2 ** (N - 1), c)
-    elif 2 ** (N - 1) <= r <= 2 ** (N) - 1 and 2 ** (N - 1) <= c <= 2 ** (N)-1:
-        answer += (2**(2*N)/4) * 3
-        return find(N - 1, r - 2 ** (N - 1), c - 2 ** (N - 1))
+# n = int(input())
+# for i in range(n):
+#     arr = [i for i in range(1,int(input())+1)]
+#     answer = []
+#     def check(index,value):
+#         global arr
+#         if index == len(arr)-1 and value!= '' and (eval(value.replace(" ",""))) == 0: return answer.append(value)
+#         if index == len(arr)-1: return
+#         check(index+1,value+'+'+str(arr[index+1]))
+#         check(index+1,value+'-'+str(arr[index+1]))
+#         check(index+1,value+' '+str(arr[index+1]))
+#     check(0, '1')
+#     for i in sorted(answer):print(i)
+#     print()
 
-find(N,r,c)
-print(int(answer))
+# import sys
+#
+# n = int(sys.stdin.readline())
+# arr = []
+# for i in range(n):
+#     arr.append(int(sys.stdin.readline()))
+# for i in sorted(arr):
+#     print(i)
+
+
+# n,k = map(int, input().split())
+# arr = list(map(int,input().split()))
+# print(sorted(arr)[k-1])
+
+# total = input()
+# target = input()
+# answer = 0
+# while total:
+#     if total.startswith(target):
+#         answer += 1
+#         for i in range(len(target)):
+#             total = total[1:]
+#     else:
+#         total = total[1:]
+# print(answer)
+
+# n = int(input())
+# dic = {}
+# for i in range(n):
+#     name = input()
+#     if name in dic:
+#         dic[name] += 1
+#     else:
+#         dic[name] = 0
+#
+# print(sorted(dic.items(),key=lambda x:(-x[1],x[0]))[0][0])
+
+# l, m= map(int,input().split())
+# col = [False for i in range(l)]
+# row = [False for i in range(m)]
+# for i in range(l):
+#     a = list(input())
+#     for j,k in enumerate(a):
+#         if k == 'X':
+#             col[i] = True
+#             row[j] = True
+# print(max(col.count(False),row.count(False)))
+
+# n = int(input())
+
+# tree = {}
+# for i in range(n):
+#     node,frm,to = input().split()
+#     tree[node] = [frm,to]
+#
+# answer = []
+
+# def firstCicle(node):
+#     answer.append(node)
+#     if tree[node][0] != '.': firstCicle(tree[node][0])
+#     if tree[node][1] != '.': firstCicle(tree[node][1])
+
+# def middleCicle(node):
+#     if tree[node][0] != '.': middleCicle(tree[node][0])
+#     answer.append(node)
+#     if tree[node][1] != '.': middleCicle(tree[node][1])
+
+# def endCicle(node):
+#     if tree[node][0] != '.': endCicle(tree[node][0])
+#     if tree[node][1] != '.': endCicle(tree[node][1])
+#     answer.append(node)
+
+# firstCicle('A')
+# print(''.join(answer))
+# answer = []
+# middleCicle('A')
+# print(''.join(answer))
+# answer = []
+# endCicle('A')
+# print(''.join(answer))
+# answer = []
+
+# import heapq
+# import sys
+#
+# heap = []
+# n = int(sys.stdin.readline())
+
+# for i in range(n):
+#     inp = int(sys.stdin.readline())
+#     if inp == 0:
+#         if len(heap) != 0:
+#             print(heapq.heappop(heap))
+#         else:
+#             print(0)
+#     else:
+#         heapq.heappush(heap, inp)
+
+from collections import deque
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+total = []
+for i in range(n): total.append(int(input()))
+total = deque(sorted(total))
+
+if len(total) == 1: print(0)
+elif len(total) == 2: print(sum(total))
+else:
+    long = [total.popleft() + total.popleft()]
+    while total:
+        long.append(long[-1] + total.popleft())
+
+    print(long)
