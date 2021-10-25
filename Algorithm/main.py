@@ -644,20 +644,68 @@ print(os.path.abspath(__file__))'''
 #     else:
 #         heapq.heappush(heap, inp)
 
-from collections import deque
-import sys
-input = sys.stdin.readline
+# import heapq
+# import sys
+# input = sys.stdin.readline
+#
+# n = int(input())
+# total = []
+# for i in range(n):
+#     heapq.heappush(total,int(input()))
+#
+# if len(total) == 1: print(0)
+# elif len(total) == 2: print(sum(total))
+# else:
+#     answer = 0
+#     while len(total)!= 1:
+#         now = heapq.heappop(total) + heapq.heappop(total)
+#         answer += now
+#         heapq.heappush(total,now)
+#     print(answer)
 
-n = int(input())
-total = []
-for i in range(n): total.append(int(input()))
-total = deque(sorted(total))
+# from collections import deque
+#
+# n, m = map(int,input().split())
+# dic = {i:[] for i in range(1,n+1)}
+# weight = []
+#
+# for i in range(m):
+#     frm,to,cost = map(int,input().split())
+#     weight.append(cost)
+#     dic[frm].append([to,cost])
+#     dic[to].append([frm, cost])
+#
+# weight = sorted(list(set(weight)))
+# start,end = map(int,input().split())
+#
+# a = weight[0]
+# b = weight[-1]
+# answer = 0
+#
+# while a <= b:
+#     pivot = (a + b) // 2
+#     newDic = {}
+#     for i in dic:
+#         newDic[i] = []
+#         for j in dic[i]:
+#             if j[1] >= pivot:
+#                 newDic[i].append(j)
+#     queue = deque()
+#     queue.append(start)
+#     visited = []
+#     isPossible = False
+#     while queue:
+#         now = queue.popleft()
+#         if now not in visited:
+#             visited.append(now)
+#             for i in newDic[now]:
+#                 queue.append(i[0])
+#         if end in visited:
+#             answer = pivot
+#             isPossible = True
+#             break
+#     if isPossible: a = pivot+1
+#     else: b = pivot-1
+#
+# print(answer)
 
-if len(total) == 1: print(0)
-elif len(total) == 2: print(sum(total))
-else:
-    long = [total.popleft() + total.popleft()]
-    while total:
-        long.append(long[-1] + total.popleft())
-
-    print(long)
