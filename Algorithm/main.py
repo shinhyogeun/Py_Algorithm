@@ -709,3 +709,86 @@ print(os.path.abspath(__file__))'''
 #
 # print(answer)
 
+# from bisect import bisect_left, bisect_right
+# nums = [0,10,20,30,40,50,60,70,80,90]
+# n = 90
+# print(bisect_left(nums, n))
+# print(bisect_right(nums, n))
+
+# import sys
+# from bisect import bisect_left
+#
+# input = sys.stdin.readline
+#
+# n,m = map(int,input().split())
+# house = []
+# for i in range(n): house.append(int(input()))
+# house = sorted(house)
+#
+# start = 1
+# end = house[-1]
+# answer = 0
+#
+# while start <= end:
+#     pivot = (start+end)//2
+#     count = 1
+#     now = house[0]
+#     isPossible = False
+#
+#     while bisect_left(house,now + pivot) != len(house):
+#         count += 1
+#         if count == m :
+#             isPossible = True
+#             break
+#         now = house[bisect_left(house,now + pivot)]
+#
+#     if isPossible:
+#         answer = pivot
+#         start = pivot+1
+#     else:
+#         end = pivot-1
+#
+# print(answer)
+
+
+# n = int(input())
+# answer = 0
+# a = 0
+# i = 1
+#
+# while n != 0:
+#     if i > n :
+#         i = 1
+#     elif i == n:
+#         answer += 1
+#         break
+#     else:
+#         answer += 1
+#         n -= i
+#         i += 1
+#
+# print(answer)
+
+# n = int(input())
+# answer = []
+#
+# for i in range(n):  answer.append(int(input()))
+#
+# max = answer[0]
+# max2 = answer[-1]
+# a = 1
+# b = 1
+#
+# for i in answer[1:]:
+#     if i > max:
+#         a += 1
+#         max = i
+#
+# for i in answer[::-1][1:]:
+#     if i > max2:
+#         b += 1
+#         max2 = i
+#
+#
+# print(a)
+# print(b)
