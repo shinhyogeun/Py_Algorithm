@@ -792,3 +792,57 @@ print(os.path.abspath(__file__))'''
 #
 # print(a)
 # print(b)
+
+# for i in range(10):
+#     print('asd')
+
+# n = int(input())
+# a = [1,2,3]
+# count = 3
+# if n <= 3:
+#     print(a[n-1])
+# else:
+#     while len(a) != n:
+#         a.append((a[-3]+2*a[-2])%15746)
+#     print(a[-1])
+
+# n = int(input())
+# arr = list(map(int,input().split()))
+# answer = []
+#
+# for i in range(len(arr)):
+#     target = [k for k in range(len(arr[:i])) if arr[k] < arr[i]]
+#     if target != []:
+#         answer.append(max([answer[i] for i in target])+1)
+#     else:
+#         answer.append(1)
+# print(max(answer))
+
+# from collections import deque
+#
+# N,S,M = map(int,input().split())
+# volume = list(map(int,input().split()))
+# possible = deque([[]])
+#
+# if M >= S - volume[0] >= 0: possible[0].append(S - volume[0])
+# if M >= S + volume[0] >= 0: possible[0].append(S + volume[0])
+#
+# a = True
+# for i in range(1,N):
+#     added = []
+#     for j in possible[0]:
+#         if M >= j + volume[i] >= 0 and j + volume[i] not in added :
+#             added.append(j + volume[i])
+#         if M >= j - volume[i] >= 0 and j - volume[i] not in added:
+#             added.append(j - volume[i])
+#     if added == []: break
+#     possible.popleft()
+#     possible.append(added)
+# else:
+#     if possible[0] != []:
+#         print(max(possible[0]))
+#     else:
+#         print(-1)
+#     a = False
+# if a:
+#     print(-1)
