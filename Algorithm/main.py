@@ -849,18 +849,46 @@ print(os.path.abspath(__file__))'''
 
 
 # 로또의 최고 순위와 최저 순위
-def solution(lottos, win_nums):
-    count = 0
-    zeroCount = 0
-    for i in lottos:
-        if i in win_nums: count += 1
-        elif i == 0: zeroCount += 1
-    if count == 0:
-        if zeroCount <= 1: return [6, 6]
-        else: return [6-zeroCount+1, 6]
-    elif count == 1:
-        if zeroCount == 0: return [6, 6]
-        else: return [6-zeroCount, 6]
+# def solution(lottos, win_nums):
+#     count = 0
+#     zeroCount = 0
+#     for i in lottos:
+#         if i in win_nums: count += 1
+#         elif i == 0: zeroCount += 1
+#     if count == 0:
+#         if zeroCount <= 1: return [6, 6]
+#         else: return [6-zeroCount+1, 6]
+#     elif count == 1:
+#         if zeroCount == 0: return [6, 6]
+#         else: return [6-zeroCount, 6]
+#
+#     else:
+#         return [6-zeroCount-count+1, 6-count+1]
 
-    else:
-        return [6-zeroCount-count+1, 6-count+1]
+#1018 체스판
+n,m = map(int,input().split())
+
+total = []
+answers = []
+
+def turnOne(total,i,j,mode):
+    a = [['B','W'],['W','B']]
+    answer = 0
+    for k in range(8):
+        for u in range(8):
+            if (k+u)%2 == 1 and total[i+k][j+u] != a[mode][0]:
+                answer += 1
+            elif (k+u)%2 == 0 and total[i+k][j+u] != a[mode][1]:
+                answer += 1
+
+    return answer
+
+for i in range(n):
+    total.append(list(input()))
+
+for i in range(n-7):
+    for j in range(m-7):
+        answers.append(turnOne(total,i,j,0))
+        answers.append(turnOne(total,i,j,1))
+
+print(min(answers))
