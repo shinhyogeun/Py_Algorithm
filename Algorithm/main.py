@@ -894,11 +894,42 @@ print(os.path.abspath(__file__))'''
 # print(min(answers))
 
 
-def solution(absolutes, signs):
-    answer = 0
-    for i in range(len(absolutes)):
-        if signs[i] == False:
-            answer -= absolutes[i]
-        else:
-            answer += absolutes[i]
-    return answer
+# def solution(absolutes, signs):
+#     answer = 0
+#     for i in range(len(absolutes)):
+#         if signs[i] == False:
+#             answer -= absolutes[i]
+#         else:
+#             answer += absolutes[i]
+#     return answer
+
+# from collections import deque
+#
+# totalCount, targetCount = map(int,input().split())
+#
+# targets = list(map(int,input().split()))
+# total = deque([i for i in range(1,totalCount+1)])
+# [1,2,3,4,5]
+#
+# answer = 0
+#
+
+# 회전하는 큐(1021)
+# for i in targets:
+#     frontCount = 0
+#     for k in total:
+#         if k == i:
+#             break
+#         else:
+#             frontCount += 1
+#     backCount = len(total)-frontCount
+#     if frontCount < backCount:
+#         while total[0] != i:
+#             total.append(total.popleft())
+#             answer += 1
+#     else:
+#         while total[0] != i:
+#             total.appendleft(total.pop())
+#             answer += 1
+#     total.popleft()
+# print(answer)
