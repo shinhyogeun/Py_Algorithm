@@ -933,3 +933,89 @@ print(os.path.abspath(__file__))'''
 #             answer += 1
 #     total.popleft()
 # print(answer)
+
+
+# 분수찾기 (브론즈1) 1193번
+# n = int(input())
+# k = 0
+# while (k*(k+1))/2 <= n:
+#     k += 1
+# under = k-1
+#
+# i = 0
+# while k*(k-1)/2 + i != n:
+#     i += 1
+#
+# if (i == 0):
+#     if (((k-1) % 2) == 0):
+#         print(k - 1, '/', 1, sep='')
+#     else:
+#         print(1, '/', k - 1, sep='')
+# else:
+#     if (((k - 1) % 2) == 0):
+#         print(k - i + 1, '/', i, sep='')
+#     else:
+#         print(i, '/', k + 1 - i, sep='')
+
+# 소트인사이드 (실버5) 1427번
+
+# total = list(map(int,list(input())))
+# total = sorted(total,reverse=True)
+# print(''.join(map(str,total)))
+
+
+# 늑대와 양 (실버3) 16956번
+# from collections import deque
+#
+# r,c = map(int,input().split())
+# total = []
+#
+# for i in range(r):
+#     total.append(list(input()))
+#
+# q = deque([])
+# for i in range(r):
+#     for j in range(c):
+#         if total[i][j] == '.':
+#             total[i][j] = 'D'
+#         if total[i][j] == 'W':
+#             q.append([i,j])
+#
+# possible = 1
+# while q:
+#     i,j = q.popleft()
+#     dx = [0,0,1,-1]
+#     dy = [1,-1,0,0]
+#     for k in range(4):
+#         if 0 <= i+dx[k] < r and 0 <= j+dy[k] < c and (total[i+dx[k]][j+dy[k]] == 'S'):
+#             possible = 0
+#
+# if possible == 1:
+#     print(possible)
+#     for i in total:
+#         print(''.join(i))
+# else:
+#     print(possible)
+
+
+#알파벳
+
+# r,c = map(int,input().split())
+# total = []
+# for i in range(r):
+#     total.append(list(input()))
+# a = []
+# def check(now, acc):
+#     dx = [0, 0, 1, -1]
+#     dy = [1, -1, 0, 0]
+#
+#     for i in range(4):
+#         if 0 <= now[0]+dx[i] < r and 0 <= now[1]+dy[i] < c:
+#             if total[now[0]+dx[i]][now[1]+dy[i]] not in acc:
+#                 newAcc = [i for i in acc]
+#                 newAcc.append(total[now[0] + dx[i]][now[1] + dy[i]])
+#                 check([now[0]+dx[i], now[1]+dy[i]],newAcc)
+#             else:
+#                 a.append(len(acc))
+# check([0,0],[total[0][0]])
+# print(max(a))
