@@ -998,24 +998,31 @@ print(os.path.abspath(__file__))'''
 #     print(possible)
 
 
-#알파벳
+# 알파벳
+from collections import deque
 
-# r,c = map(int,input().split())
-# total = []
-# for i in range(r):
-#     total.append(list(input()))
-# a = []
-# def check(now, acc):
-#     dx = [0, 0, 1, -1]
-#     dy = [1, -1, 0, 0]
-#
-#     for i in range(4):
-#         if 0 <= now[0]+dx[i] < r and 0 <= now[1]+dy[i] < c:
-#             if total[now[0]+dx[i]][now[1]+dy[i]] not in acc:
-#                 newAcc = [i for i in acc]
-#                 newAcc.append(total[now[0] + dx[i]][now[1] + dy[i]])
-#                 check([now[0]+dx[i], now[1]+dy[i]],newAcc)
-#             else:
-#                 a.append(len(acc))
-# check([0,0],[total[0][0]])
-# print(max(a))
+r,c = map(int,input().split())
+total = []
+for i in range(r):
+    total.append(list(input()))
+answer = 0
+
+dx = [0, 0, 1, -1]
+dy = [1, -1, 0, 0]
+newAcc = [total[0][0]]
+
+def check():
+    global answer
+    q = set()
+    q.add((0,0,total[0][0]))
+    while q:
+        x,y,route = q.pop()
+        if len(route) > answer :
+            answer = len(route)
+
+        for i in range(4):
+            if 0 <= x+dx[i] < r and 0 <= y+dy[i] < c:
+                if total[x+dx[i]][y+dy[i]] not in route:
+                    q.add((x+dx[i], y+dy[i], route + total[x+dx[i]][y+dy[i]]))
+check()
+print(answer)
