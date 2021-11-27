@@ -1101,3 +1101,39 @@ print(os.path.abspath(__file__))'''
 # print(total[0][3])
 
 
+
+#나이트의 이동 7562번 실버2
+# from collections import deque
+#
+# n = int(input())
+#
+# for i in range(n):
+#     a = int(input())
+#     total = [[False for k in range(a)] for j in range(a)]
+#     now = list(map(int,input().split()))
+#     target = list(map(int, input().split()))
+#     q = deque([])
+#     q.append([now[0],now[1],0])
+#     total[now[0]][now[1]] = True
+#     direction = [[-2, -1], [-1, -2], [-2, 1], [-1, 2], [2, -1], [2, 1], [1, -2], [1, 2]]
+#
+#     while q:
+#         x,y,count = q.popleft()
+#         if [x, y] == target:
+#             print(count)
+#             break
+#
+#         for i in direction:
+#             if 0 <= x + i[0] < a and 0 <= y + i[1] < a and total[x + i[0]][y + i[1]] == False:
+#                 total[x + i[0]][y + i[1]] = True
+#                 q.append([x + i[0],y + i[1],count+1])
+
+# 다이얼 브론즈2
+total = ['ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ']
+word = list(input())
+number = []
+for i in word:
+    for j in range(len(total)):
+        if i in total[j]:
+            number.append(2+j)
+print(sum(number)+len(number))
