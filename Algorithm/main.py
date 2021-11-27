@@ -999,30 +999,105 @@ print(os.path.abspath(__file__))'''
 
 
 # 알파벳
-from collections import deque
+# from collections import deque
 
-r,c = map(int,input().split())
-total = []
-for i in range(r):
-    total.append(list(input()))
-answer = 0
+# r,c = map(int,input().split())
+# total = []
+# for i in range(r):
+#     total.append(list(input()))
+# answer = 0
+#
+# dx = [0, 0, 1, -1]
+# dy = [1, -1, 0, 0]
+# newAcc = [total[0][0]]
+#
+# def check():
+#     global answer
+#     q = set()
+#     q.add((0,0,total[0][0]))
+#     while q:
+#         x,y,route = q.pop()
+#         if len(route) > answer :
+#             answer = len(route)
+#
+#         for i in range(4):
+#             if 0 <= x+dx[i] < r and 0 <= y+dy[i] < c:
+#                 if total[x+dx[i]][y+dy[i]] not in route:
+#                     q.add((x+dx[i], y+dy[i], route + total[x+dx[i]][y+dy[i]]))
+# check()
+# print(answer)
 
-dx = [0, 0, 1, -1]
-dy = [1, -1, 0, 0]
-newAcc = [total[0][0]]
+# 주사위 4개 브론즈2 2484번
+# n =  int(input())
+# total = []
+# for i in range(n):
+#     total.append(list(map(int,input().split())))
+# answer = []
+#
+# def countSameNumber(arr):
+#     a = [0,0]
+#     for i in arr:
+#         if arr.count(i) > a[1]:
+#             a = [i,arr.count(i)]
+#     return a
+#
+# for i in total:
+#     setedList = set(i)
+#     if len(setedList) == 1:
+#         answer.append(50000 + list(setedList)[0]*5000)
+#     elif len(setedList) == 2 and countSameNumber(i)[1] == 3:
+#         answer.append(10000 + countSameNumber(i)[0] * 1000)
+#     elif len(setedList) == 2 and countSameNumber(i)[1] == 2:
+#         answer.append(2000 +  list(setedList)[0] * 500 +  list(setedList)[1] * 500)
+#     elif len(setedList) == 3:
+#         answer.append(1000 + countSameNumber(i)[0] * 100)
+#     elif len(setedList) == 4 :
+#         answer.append(max(setedList)*100)
+# print(max(answer))
 
-def check():
-    global answer
-    q = set()
-    q.add((0,0,total[0][0]))
-    while q:
-        x,y,route = q.pop()
-        if len(route) > answer :
-            answer = len(route)
+# 꽃길 실버2 14620번
+# from itertools import combinations
+#
+# n = int(input())
+# total = []
+# for i in range(n):
+#     total.append(list(map(int,input().split())))
+# answer = []
+# target = []
+#
+# def possible(arr):
+#     z = []
+#     dx = [-1, 0, 1, 0, 0]
+#     dy = [0, 1, 0, -1, 0]
+#     for i in arr:
+#         for a in range(5):
+#             z.append((i[0]+dx[a],i[1]+dy[a]))
+#     if(len(set(z)) == len(z)):
+#         return sum([total[i[0]][i[1]] for i in z])
+#     return -1
+#
+# for i in range(1,n-1):
+#     for j in range(1,n-1):
+#         target.append([i,j])
+#
 
-        for i in range(4):
-            if 0 <= x+dx[i] < r and 0 <= y+dy[i] < c:
-                if total[x+dx[i]][y+dy[i]] not in route:
-                    q.add((x+dx[i], y+dy[i], route + total[x+dx[i]][y+dy[i]]))
-check()
-print(answer)
+# for i in list(combinations(target,3)):
+#     possi = possible(i)
+#     if (possi != -1): answer.append(possi)
+#
+# print(min(answer))
+
+# 생일 5635 실버 5
+# n = int(input())
+# total = []
+# for i in range(n):
+#     a = list(input().split())
+#     a[1] = int(a[1])
+#     a[2] = int(a[2])
+#     a[3] = int(a[3])
+#     total.append(list(reversed(a)))
+# total = sorted(total)
+# print(total[-1][3])
+# print(total[0][3])
+
+
