@@ -1102,7 +1102,7 @@ print(os.path.abspath(__file__))'''
 
 
 
-#나이트의 이동 7562번 실버2
+# 나이트의 이동 7562번 실버2
 # from collections import deque
 #
 # n = int(input())
@@ -1128,7 +1128,7 @@ print(os.path.abspath(__file__))'''
 #                 total[x + i[0]][y + i[1]] = True
 #                 q.append([x + i[0],y + i[1],count+1])
 
-# 다이얼 브론즈2
+# 다이얼 브론즈2 5622
 total = ['ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ']
 word = list(input())
 number = []
