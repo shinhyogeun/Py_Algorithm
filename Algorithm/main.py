@@ -1129,11 +1129,57 @@ print(os.path.abspath(__file__))'''
 #                 q.append([x + i[0],y + i[1],count+1])
 
 # 다이얼 브론즈2 5622
-total = ['ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ']
-word = list(input())
-number = []
-for i in word:
-    for j in range(len(total)):
-        if i in total[j]:
-            number.append(2+j)
-print(sum(number)+len(number))
+# total = ['ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ']
+# word = list(input())
+# number = []
+# for i in word:
+#     for j in range(len(total)):
+#         if i in total[j]:
+#             number.append(2+j)
+# print(sum(number)+len(number))
+
+# 정수 N개의 합 브론즈2 15596
+
+def solve(list):
+    a = 0
+    for i in list:
+        a += i
+    return a
+
+# 빠른 A + B 브론즈2 15552
+# import sys
+# input = sys.stdin.readline
+# n = int(input())
+# for i in range(n):
+#     a,b = list(map(int,input().split()))
+#     print(a+b)
+
+# 네 번째 점 브론즈3 3009
+# a = []
+# b = []
+#
+# def find(arr):
+#     for i in arr:
+#         if arr.count(i) != 2:
+#             return i
+# for i in range(3):
+#     x,y = list(map(int,input().split()))
+#     a.append(x)
+#     b.append(y)
+# print(find(a), find(b))
+
+# 팩토리얼 브론즈3 10872
+# n = int(input())
+# a = 1
+# for i in range(n,0,-1):
+#     a = a * i
+# print(a)
+
+# 피보나치 수 5 브론즈2 10870
+# n = int(input())
+#
+# ans = [0,1,1]
+# if n >= 3:
+#     for i in range(n-2):
+#         ans.append(ans[-1]+ans[-2])
+# print(ans[n])
