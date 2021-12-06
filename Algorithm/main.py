@@ -1140,11 +1140,11 @@ print(os.path.abspath(__file__))'''
 
 # 정수 N개의 합 브론즈2 15596
 
-def solve(list):
-    a = 0
-    for i in list:
-        a += i
-    return a
+# def solve(list):
+#     a = 0
+#     for i in list:
+#         a += i
+#     return a
 
 # 빠른 A + B 브론즈2 15552
 # import sys
