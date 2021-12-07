@@ -1183,3 +1183,12 @@ print(os.path.abspath(__file__))'''
 #     for i in range(n-2):
 #         ans.append(ans[-1]+ans[-2])
 # print(ans[n])
+
+# 수 정렬하기 브론즈1 2750번
+n = int(input())
+arr = []
+for i in range(n):
+    arr.append(int(input()))
+arr = sorted(arr)
+for i in arr:
+    print(i)
