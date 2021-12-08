@@ -1185,10 +1185,17 @@ print(os.path.abspath(__file__))'''
 # print(ans[n])
 
 # 수 정렬하기 브론즈1 2750번
-n = int(input())
-arr = []
-for i in range(n):
-    arr.append(int(input()))
-arr = sorted(arr)
-for i in arr:
-    print(i)
+# n = int(input())
+# arr = []
+# for i in range(n):
+#     arr.append(int(input()))
+# arr = sorted(arr)
+# for i in arr:
+#     print(i)
+
+# 최소공배수 실버5 1934번
+# from math import gcd
+# n = int(input())
+# for i in range(n):
+#     a,b = map(int,input().split())
+#     print(a*b//gcd(a,b))
