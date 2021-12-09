@@ -1199,3 +1199,18 @@ print(os.path.abspath(__file__))'''
 # for i in range(n):
 #     a,b = map(int,input().split())
 #     print(a*b//gcd(a,b))
+
+# 이름 궁합 브론즈2 15312번
+x = [3, 2, 1, 2, 3, 3, 2, 3, 3, 2, 2, 1, 2, 2, 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 2, 1]
+a = [x[i-65] for i in list(map(ord,list(input())))]
+b = [x[i-65] for i in list(map(ord,list(input())))]
+answer = []
+for i in range(len(a)):
+    answer.append(a[i])
+    answer.append(b[i])
+while len(answer) != 2:
+    new = []
+    for i in range(len(answer)-1):
+        new.append((answer[i] + answer[i+1])%10)
+    answer = new
+print(''.join(map(str,answer)))
