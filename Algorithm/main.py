@@ -1215,14 +1215,33 @@ print(os.path.abspath(__file__))'''
 #     answer = new
 # print(''.join(map(str,answer)))
 
-# 문자열 실버4 1120
-a,b = input().split()
-target = len(b) - len(a)
-answers = []
-for i in range(target+1):
-    count = 0
-    for index,v in enumerate(b[i:i+len(a)]):
-        if a[index] != v:
-            count += 1
-    answers.append(count)
-print(min(answers))
+# 문자열 실버4 1120번
+# a,b = input().split()
+# target = len(b) - len(a)
+# answers = []
+# for i in range(target+1):
+#     count = 0
+#     for index,v in enumerate(b[i:i+len(a)]):
+#         if a[index] != v:
+#             count += 1
+#     answers.append(count)
+# print(min(answers))
+
+# 회문 실버1 17609번
+# def pelim(a,last):
+#     for i in range(len(a)//2):
+#         if a[i] != a[len(a)-1-i]:
+#             if last == False:
+#                 if 0 in [pelim(a[:i]+a[i+1:],True),pelim(a[:len(a)-1-i]+a[len(a)-i:],True)]:
+#                     return 1
+#                 else:
+#                     return 2
+#             else:
+#                 return 2
+#     else: return 0
+# n = int(input())
+# total = []
+# answer = []
+# for i in range(n): total.append(input())
+# for i in total: answer.append(pelim(i,False))
+# for i in answer: print(i)
