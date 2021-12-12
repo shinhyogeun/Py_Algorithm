@@ -1271,3 +1271,45 @@ print(os.path.abspath(__file__))'''
 #     answer.append(count)
 #
 # print(max(answer))
+
+# 영역 구하기 실버1 2583번
+# import sys
+# sys.setrecursionlimit(10000)
+#
+# y,x,c = map(int,input().split())
+# total = []
+# for i in range(y):
+#     total.append([False for j in range(x)])
+#
+# target = []
+# for i in range(c):
+#     target.append(list(map(int,input().split())))
+#
+# for x1,y1,x2,y2 in target:
+#     for i in range(y2,y1,-1):
+#         for j in range(x1,x2):
+#             total[y-i][j] = True
+#
+# dx = [1,-1,0,0]
+# dy = [0,0,1,-1]
+# count = 0
+# land = 0
+# answer = []
+#
+# def dfs(l,m):
+#     global count
+#     total[l][m] = True
+#     count += 1
+#     for i in range(4):
+#         if y > l + dx[i] >= 0 and x > m + dy[i] >= 0 and total[l + dx[i]][m + dy[i]] == False:
+#             dfs(l + dx[i], m + dy[i])
+#
+# for i in range(y):
+#     for j in range(x):
+#         if total[i][j] == False:
+#             land += 1
+#             dfs(i,j)
+#             answer.append(count)
+#             count = 0
+# print(land)
+# print(' '.join(map(str,sorted(answer))))
