@@ -1313,3 +1313,24 @@ print(os.path.abspath(__file__))'''
 #             count = 0
 # print(land)
 # print(' '.join(map(str,sorted(answer))))
+
+
+# 암호만들기 골드5 1759
+# n,m = map(int,input().split())
+# total = sorted(list(input().replace(' ','')))
+# answer = []
+# target = set(['a','e','i','o','u'])
+# def check(now,index):
+#     if len(now) == n:
+#         inter = len(set(list(now)).intersection(target))
+#         if inter >= 1 and len(now) - inter >= 2:
+#             return answer.append(now)
+#         else:
+#             return
+#     if len(now) + m-(index+1) < n: return
+#     for i in range(index+1,m):
+#         check(now+total[i],i)
+# for i,v in enumerate(total):
+#     check(v,i)
+# for i in answer:
+#     print(i)
