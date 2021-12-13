@@ -1334,3 +1334,59 @@ print(os.path.abspath(__file__))'''
 #     check(v,i)
 # for i in answer:
 #     print(i)
+
+# 배 골드5 1092
+# n = int(input())
+# crain = sorted(list(map(int,input().split())),reverse=True)
+# m = int(input())
+# box = sorted(list(map(int,input().split())),reverse=True)
+#
+# count = 0
+# if box[0] > crain[0]: print(-1)
+# else:
+#     while box:
+#         count += 1
+#         for i in crain:
+#             if len(box) == 0 : break
+#             for j,v in enumerate(box):
+#                 if i >= v:
+#                     del box[j]
+#                     break
+#  print(count)
+
+# 특정거리의 도시 찾기 실버2 18352번
+# import heapq
+#
+# n,m,k,x = map(int,input().split())
+# total = {}
+# INF = int(1e9)
+# distance = [INF for i in range(n+1)]
+# for i in range(m):
+#     frm,to = map(int,input().split())
+#     if frm in total.keys():
+#         total[frm].append(to)
+#     else:
+#         total[frm] = [to]
+#
+# q = []
+# heapq.heappush(q,(0,x))
+# distance[x] = 0
+#
+# while q:
+#     cost,now = heapq.heappop(q)
+#     # 돌아서 온경우구나!
+#     if distance[now] < cost:
+#         continue
+#     else:
+#         if now not in total.keys(): continue
+#
+#         for i in total[now]:
+#             if distance[i] > cost + 1:
+#                 distance[i] = cost+1
+#                 heapq.heappush(q,(cost+1,i))
+# if k not in distance:
+#     print(-1)
+# else:
+#     for i,v in enumerate(distance):
+#         if v == k:
+#             print(i)
