@@ -1390,3 +1390,103 @@ print(os.path.abspath(__file__))'''
 #     for i,v in enumerate(distance):
 #         if v == k:
 #             print(i)
+
+# 미로 골드4 2665번
+# import heapq
+#
+# n = int(input())
+# total = []
+# target = []
+# INF = int(1e9)
+#
+# for i in range(n):
+#     total.append(list(map(int,list(input()))))
+#     target.append([INF for i in range(n)])
+# q = []
+# heapq.heappush(q,(0,[0,0]))
+# target[0][0] = 0
+# dx = [1,-1,0,0]
+# dy = [0,0,1,-1]
+# while q:
+#     cost, now = heapq.heappop(q)
+#     if now == (n-1,n-1):
+#         print(cost)
+#         break
+#     for i in range(4):
+#         if n > now[0] + dx[i] >= 0 and n > now[1] + dy[i] >= 0:
+#             if total[now[0] + dx[i]][now[1] + dy[i]] == 0:
+#                 if target[now[0] + dx[i]][now[1] + dy[i]] > cost+1:
+#                     target[now[0] + dx[i]][now[1] + dy[i]] = cost + 1
+#                     heapq.heappush(q,(cost+1,(now[0] + dx[i],now[1] + dy[i])))
+#             else:
+#                 if target[now[0] + dx[i]][now[1] + dy[i]] > cost:
+#                     target[now[0] + dx[i]][now[1] + dy[i]] = cost
+#                     heapq.heappush(q, (cost, (now[0] + dx[i], now[1] + dy[i])))
+
+# 표 편집 프로그래머스 3단계 카카오 기출
+# def cal(answer,v,number,up):
+#     count = 0
+#     real = 0
+#     if up == True:
+#         while real != number:
+#             if answer[v-(count+1)] == 'O': real += 1
+#             count += 1
+#         return v-count
+#     else:
+#         while real != number:
+#             if answer[v+(count+1)] == 'O':
+#                 real += 1
+#             count += 1
+#         return v+count
+#
+# def moveup(answer,now):
+#     count = 1
+#     while answer[now-count] == 'X':
+#         count += 1
+#     return now-count
+#
+# def movedown(answer,now):
+#     count = 1
+#     while answer[now+count] == 'X':
+#         count += 1
+#     return now+count
+#
+# def solution(n, k, cmd):
+#     answer = ['O' for i in range(n)]
+#     now = k
+#     trash = []
+#     for order in cmd:
+#         if len(order) > 1:
+#             direction, count = order.split()
+#             if direction == 'U':
+#                 now = cal(answer,now,int(count),True)
+#             else:
+#                 now = cal(answer,now,int(count),False)
+#         else:
+#             if order == 'C':
+#                 trash.append(now)
+#                 answer[now] = 'X'
+#                 if now == len(answer)-1:
+#                     now = moveup(answer,now)
+#                 else:
+#                     now = movedown(answer,now)
+#             else:
+#                 re = trash.pop()
+#                 answer[re] = 'O'
+#         print(answer, now,order)
+#     return ''.join(answer)
+# print(solution(8,2,["U 2","C","C","Z","Z",]))
+# print(solution(8,2,["C","C","C","C","C",'U 1','C','U 1','D 1','C','Z','Z','Z','Z','D 4']))
+
+# 먹을 것인가 먹힐 것인가 실버3 7795번
+# from bisect import bisect_left
+#
+# n = int(input())
+# for i in range(n):
+#     a,b = map(int,input().split())
+#     Aarr = list(map(int,input().split()))
+#     Barr = sorted(list(map(int, input().split())))
+#     answer = 0
+#     for i in Aarr:
+#         answer += bisect_left(Barr,i)
+#     print(answer)
