@@ -1490,3 +1490,78 @@ print(os.path.abspath(__file__))'''
 #     for i in Aarr:
 #         answer += bisect_left(Barr,i)
 #     print(answer)
+
+# 미로탈출 프로그래머스 4단계 카카오 기출
+# import heapq
+#
+# def solution(n, start, end, roads, traps):
+#     dic = {i+1:[] for i in range(n)}
+#     reverseDic = {i+1:[] for i in range(n)}
+#     INF = int(1e9)
+#     distance = [INF for _ in range(n+1)]
+#     visitedCount = [0 for _ in range(n+1)]
+#     for frm,to,cost in roads:
+#         dic[frm].append((cost,to))
+#         reverseDic[to].append((cost,frm))
+#     q = []
+#     heapq.heappush(q,(0,start,dix))
+#     distance[start] = 0
+#     while q:
+#         cost,now = heapq.heappop(q)
+#         visitedCount[now] += 1
+#         if now == end :
+#             print(now,'asd')
+#         if now in traps:
+#             if visitedCount[now] == 1:
+#                 for added, to in reverseDic[now]:
+#                     distance[to] = cost + added
+#                     heapq.heappush(q,(cost + added,to))
+#             elif visitedCount[to] == 2:
+#                 for added, to in dic[now]:
+#                     distance[to] = cost + added
+#                     heapq.heappush(q,(cost + added,to))
+#         else:
+#             for added,to in dic[now]:
+#                 if distance[to] > cost + added:
+#                     distance[to] = cost + added
+#                     heapq.heappush(q,(cost + added,to))
+#         print(distance)
+#     return distance[end]
+#
+# # print(solution(3, 1, 3, [[1, 2, 2], [3, 2, 3]], [2]))
+# print(solution(4, 1, 4, [[1, 2, 1], [3, 2, 1], [2, 4, 1]], [2,3]))
+
+# 연산자 끼워넣기 실버1 14888
+# n = int(input())
+# numbers = list(map(int,input().split()))
+# operation = list(map(int,input().split()))
+# answers = []
+#
+# def cal(num,oper,count):
+#     if oper == [0,0,0,0]:
+#         answers.append(num)
+#     for i,v in enumerate(oper):
+#         if v == 0: continue
+#         if i == 0:
+#             newOper = [z for z in oper]
+#             newOper[i] -= 1
+#             cal(num+numbers[count+1],newOper,count+1)
+#         elif i == 1:
+#             newOper = [z for z in oper]
+#             newOper[i] -= 1
+#             cal(num-numbers[count+1],newOper,count+1)
+#         elif i == 2:
+#             newOper = [z for z in oper]
+#             newOper[i] -= 1
+#             cal(num*numbers[count+1],newOper,count+1)
+#         elif i == 3:
+#             newOper = [z for z in oper]
+#             newOper[i] -= 1
+#             if num < 0:
+#                 cal(-((-num)//numbers[count+1]),newOper,count+1)
+#             else:
+#                 cal(num//numbers[count+1],newOper,count+1)
+#
+# cal(numbers[0],operation,0)
+# print(max(answers))
+# print(min(answers))
