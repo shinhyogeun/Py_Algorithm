@@ -1565,3 +1565,48 @@ print(os.path.abspath(__file__))'''
 # cal(numbers[0],operation,0)
 # print(max(answers))
 # print(min(answers))
+
+# 가장 먼 노드 프로그래머스 LV3
+# import heapq
+#
+# def solution(n, edge):
+#     dic = {i+1:[] for i in range(n)}
+#     INF = int(1e9)
+#     distance = [INF for i in range(n+1)]
+#     for frm,to in edge:
+#         dic[frm].append(to)
+#         dic[to].append(frm)
+#     q = []
+#     heapq.heappush(q,(0,1))
+#     distance[1] = 0
+#     while q:
+#         cost,now = heapq.heappop(q)
+#         for to in dic[now]:
+#             if distance[to] > cost + 1:
+#                 distance[to] = cost + 1
+#                 heapq.heappush(q,(cost+1,to))
+#     distance = sorted(distance,reverse=True)
+#     maxi = 0
+#     for i in distance:
+#         if i != INF:
+#             maxi = i
+#             break
+#     answer = 0
+#     for i in distance:
+#         if i == maxi:
+#             answer += 1
+#     return answer
+
+# 멀리뛰기기
+# def solution(n):
+#     arr = [0 for i in range(n)]
+#     arr[0] = 1
+#     if n > 1:
+#         arr[1] = 2
+#         for i in range(2,n):
+#             arr[i] = arr[i-1] + arr[i-2]
+#     return arr[-1] % 1234567
+# print(solution(1))
+# print(solution(2))
+# print(solution(3))
+# print(solution(4))
