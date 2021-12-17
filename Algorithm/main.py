@@ -1610,3 +1610,14 @@ print(os.path.abspath(__file__))'''
 # print(solution(2))
 # print(solution(3))
 # print(solution(4))
+
+# 다리 놓기 실버5
+n = int(input())
+for i in range(n):
+    a,b = map(int,input().split())
+    under = 1
+    up = 1
+    for i in range(1,a+1):
+        up *= b-(i-1)
+        under *= i
+    print(up//under)
