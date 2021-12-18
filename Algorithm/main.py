@@ -1612,12 +1612,31 @@ print(os.path.abspath(__file__))'''
 # print(solution(4))
 
 # 다리 놓기 실버5
+# n = int(input())
+# for i in range(n):
+#     a,b = map(int,input().split())
+#     under = 1
+#     up = 1
+#     for i in range(1,a+1):
+#         up *= b-(i-1)
+#         under *= i
+#     print(up//under)
+
+# 주유소 실버4 13305번
 n = int(input())
-for i in range(n):
-    a,b = map(int,input().split())
-    under = 1
-    up = 1
-    for i in range(1,a+1):
-        up *= b-(i-1)
-        under *= i
-    print(up//under)
+line = list(map(int,input().split()))
+node = list(map(int,input().split()))
+answer = 0
+price = 0
+for i,v in enumerate(node):
+    if i == len(node)-1:break
+    if i == 0:
+        price = v
+        answer += price*line[i]
+    elif price <= v:
+        answer += price*line[i]
+    elif price > v:
+        price = v
+        answer += price * line[i]
+print(answer)
+
