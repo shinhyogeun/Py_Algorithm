@@ -1623,20 +1623,86 @@ print(os.path.abspath(__file__))'''
 #     print(up//under)
 
 # 주유소 실버4 13305번
-n = int(input())
-line = list(map(int,input().split()))
-node = list(map(int,input().split()))
-answer = 0
-price = 0
-for i,v in enumerate(node):
-    if i == len(node)-1:break
-    if i == 0:
-        price = v
-        answer += price*line[i]
-    elif price <= v:
-        answer += price*line[i]
-    elif price > v:
-        price = v
-        answer += price * line[i]
-print(answer)
+# n = int(input())
+# line = list(map(int,input().split()))
+# node = list(map(int,input().split()))
+# answer = 0
+# price = 0
+# for i,v in enumerate(node):
+#     if i == len(node)-1:break
+#     if i == 0:
+#         price = v
+#         answer += price*line[i]
+#     elif price <= v:
+#         answer += price*line[i]
+#     elif price > v:
+#         price = v
+#         answer += price * line[i]
+# print(answer)
 
+# 아이템 줍기 프로그래머스 LV3
+# from collections import deque
+#
+# def solution(rectangle, characterX, characterY, itemX, itemY):
+#     total = [[-1 for j in range(50)] for i in range(50)]
+#     visited = [[False for j in range(50)] for i in range(50)]
+#     last = [[False for j in range(50)] for i in range(50)]
+#     for x1,y1,x2,y2 in rectangle:
+#         for y in range(y1,y2+1):
+#             for x in range(x1,x2+1):
+#                 if visited[49-y][x] == False:
+#                     visited[49-y][x] = True
+#                     if x in [x1,x2] or 49-y in [49-y1,49-y2]:
+#                         total[49-y][x] = 0
+#                     else:
+#                         total[49-y][x] = 1
+#                 else:
+#                     if x in [x1, x2] or 49-y in [49-y1, 49-y2]:
+#                         total[49-y][x] += 0
+#                     else:
+#                         total[49-y][x] += 1
+#
+#     answer = 0
+#     dx = [1,-1,0,0]
+#     dy = [0,0,1,-1]
+#     a = []
+#     q = deque([])
+#     a.append((characterY,characterX))
+#     last[49-characterY][characterX] = True
+#
+#     for i in range(4):
+#         if 0 <= 49-(characterY+dy[i]) < 50 and 0 <= characterX+dx[i] < 50:
+#             if total[49-(characterY+dy[i])][characterX+dx[i]] == 0:
+#                 last[49-(characterY+dy[i])][characterX+dx[i]] = True
+#                 a.append((characterY+dy[i],characterX+dx[i]))
+#                 q.append((characterY+dy[i],characterX+dx[i]))
+#                 break
+#     while q:
+#         cY,cX = q.popleft()
+#         for i in range(4):
+#             if 0 <= cY+dy[i] < 50 and 0 <= cX+dx[i] < 50:
+#                 if total[49-(cY+dy[i])][cX+dx[i]] == 0 and last[49-(cY+dy[i])][cX+dx[i]] is False:
+#                     last[49-(cY+dy[i])][cX+dx[i]] = True
+#                     a.append((cY+dy[i],cX+dx[i]))
+#                     q.append((cY+dy[i],cX+dx[i]))
+#                     break
+#     targetIndex = 0
+#     for i,v in enumerate(a):
+#         if v == (itemY,itemX):
+#             targetIndex = i
+#     if targetIndex > len(a) - targetIndex:
+#         return len(a) - targetIndex
+#     else:
+#         return targetIndex
+#
+# print(solution([[1,1,7,4],[3,2,5,5],[4,3,6,9],[2,6,8,8]],1,3,7,8))
+# print(solution([[1,1,8,4],[2,2,4,9],[3,6,9,8],[6,3,7,7]],9,7,6,1))
+# print(solution([[1,1,5,7]],1,1,4,7))
+# print(solution([[2,1,7,5],[6,4,10,10]],3,1,7,10))
+# print(solution([[2,2,5,5],[1,3,6,4],[3,1,4,6]],1,4,6,3))
+
+# 백대열 실버4 14490
+# from math import gcd
+# a,b = map(int,input().split(':'))
+# gd = gcd(a,b)
+# print(a//gd,':',b//gd,sep='')
