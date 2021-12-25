@@ -1707,15 +1707,15 @@ print(os.path.abspath(__file__))'''
 # gd = gcd(a,b)
 # print(a//gd,':',b//gd,sep='')
 
-# def solution(N, trust):
-#     total = [i+1 for i in range(N)]
-#     for i in trust:
-#       if i[0] in total:
-#         total.remove(i[0])
-#     trusted = [i[1] for i in trust]
-#     for i in trusted:
-#       if trusted.count(i) != N-1 and i in total:
-#         total.remove(i)
-#     if len(total) > 1 or len(total) == 0:
-#       return -1
-#     return total[0]
+def solution(N, trust):
+    total = [i+1 for i in range(N)]
+    for i in trust:
+      if i[0] in total:
+        total.remove(i[0])
+    trusted = [i[1] for i in trust]
+    for i in trusted:
+      if trusted.count(i) != N-1 and i in total:
+        total.remove(i)
+    if len(total) > 1 or len(total) == 0:
+      return -1
+    return total[0]
