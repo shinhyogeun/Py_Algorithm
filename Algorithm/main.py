@@ -1719,3 +1719,108 @@ print(os.path.abspath(__file__))'''
 #     if len(total) > 1 or len(total) == 0:
 #       return -1
 #     return total[0]
+
+# 피로도 프로그래머스LV2
+# from itertools import permutations
+#
+# def solution(k, dungeons):
+#     length = len(dungeons)
+#     total = list(permutations(dungeons,length))
+#     answers = []
+#     for one in total:
+#         pi = k
+#         answer = 0
+#         for i in one:
+#             if pi >= i[0]:
+#                 pi -= i[1]
+#                 answer += 1
+#         answers.append(answer)
+#     return max(answers)
+#
+# print(solution(80,[[80,20],[50,40],[30,10]]))
+
+# 안전영역 2428번 실버1
+# from collections import deque
+# n = int(input())
+# total = []
+# flatedTotal = []
+# for i in range(n):
+#     a = list(map(int,input().split()))
+#     total.append(a)
+#     for z in a:
+#         flatedTotal.append(z)
+# maxi = max(flatedTotal)
+# mini = min(flatedTotal)
+# dx = [1, -1, 0, 0]
+# dy = [0, 0, 1, -1]
+# answer = []
+# for i in range(0, 101):
+#     visited = [[False for _ in one] for one in total]
+#     miniAnswer = 0
+#     for x in range(n):
+#         for y in range(n):
+#             if total[x][y] > i and visited[x][y] is False:
+#                 q = deque([])
+#                 q.append([x,y])
+#                 miniAnswer += 1
+#                 visited[x][y] = True
+#                 while q:
+#                     X,Y = q.popleft()
+#                     for v in range(4):
+#                         if 0 <= X+dx[v] < n and 0 <= Y+dy[v] < n:
+#                             if total[X+dx[v]][Y+dy[v]] > i and visited[X+dx[v]][Y+dy[v]] is False:
+#                                 q.append([X+dx[v],Y+dy[v]])
+#                                 visited[X][Y] = True
+#     answer.append(miniAnswer)
+# print(max(answer))
+
+#토마토 7576번 실버1
+# n,l = map(int,input().split())
+# total = []
+# q = []
+# for i in range(l): total.append(list(map(int,input().split())))
+#
+# for i in range(l):
+#     for j in range(n):
+#         if total[i][j] == 1:
+#             q.append([i,j])
+# dx = [1,-1,0,0]
+# dy = [0,0,1,-1]
+# answer = -1
+# while q:
+#     answer += 1
+#     newQ = []
+#     for i,j in q:
+#         for z in range(4):
+#             if 0 <= i+dx[z] < l and 0 <= j+dy[z] < n and total[i+dx[z]][j+dy[z]] == 0:
+#                 newQ.append([i+dx[z], j+dy[z]])
+#                 total[i+dx[z]][j+dy[z]] = 1
+#     q = newQ
+# zz = 0
+# for i in total:
+#     for j in i:
+#         if j == 0:
+#             zz = -1
+# if zz == -1:
+#     print(-1)
+# else:
+#     print(answer)
+
+# 연속합 1912번 실버2
+# n = int(input())
+# total = list(map(int,input().split()))
+# cash = []
+# cash.append(total[0])
+# for i in range(1,len(total)):
+#     cash.append(max(0,cash[i-1])+total[i])
+# print(max(cash))
+
+# 연속합 1912번 실버2
+n,m = map(int,input().split())
+dic = {i:[] for i in range(1,n+1)}
+visited = [0 for i in range(n)]
+for i in range(m):
+    to,start = map(int,input().split())
+    dic[start].push(to)
+
+for i in range():
