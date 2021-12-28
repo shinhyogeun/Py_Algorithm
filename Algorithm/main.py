@@ -1815,12 +1815,119 @@ print(os.path.abspath(__file__))'''
 #     cash.append(max(0,cash[i-1])+total[i])
 # print(max(cash))
 
-# 연속합 1912번 실버2
-n,m = map(int,input().split())
-dic = {i:[] for i in range(1,n+1)}
-visited = [0 for i in range(n)]
-for i in range(m):
-    to,start = map(int,input().split())
-    dic[start].push(to)
+# 효율적인 해킹 실버1
+# from collections import deque
+#
+# n,m = map(int,input().split())
+# dic = {i:[] for i in range(1,n+1)}
+# visited = [False for i in range(0,n+1)]
+# for i in range(m):
+#     to,frm = map(int,input().split())
+#     dic[frm].append(to)
+#
+# answers = []
+# for i in range(1,n+1):
+#     q = deque([])
+#     q.append(i)
+#     visited = [False for i in range(0, n + 1)]
+#     visited[i] = True
+#     miniAnswer = 1
+#     while q:
+#         now = q.popleft()
+#         for i in dic[now]:
+#             if visited[i] is False:
+#                 visited[i] = True
+#                 q.append(i)
+#                 miniAnswer += 1
+#     answers.append(miniAnswer)
+# maxi = max(answers)
+# for i,v in enumerate(answers):
+#     if v == maxi:
+#         print(i+1 ,sep=' ')
 
-for i in range():
+# 전쟁-전투 실버1 1303번
+# from collections import deque
+#
+# m,l = map(int,input().split())
+# total = []
+# visited = []
+# for i in range(l):
+#     oneLine = list(input())
+#     total.append(oneLine)
+#     visited.append([False for i in range(len(oneLine))])
+# dx = [1,-1,0,0]
+# dy = [0,0,1,-1]
+# answer = [0,0]
+# for i in range(l):
+#     for j in range(m):
+#         if visited[i][j] is True: continue
+#         q = deque([])
+#         q.append([i,j])
+#         visited[i][j] = True
+#         miniAnswer = 1
+#         while q:
+#             x,y = q.popleft()
+#             for z in range(4):
+#                 if 0 <= x+dx[z] < l and 0 <= y+dy[z] < m and visited[x+dx[z]][y+dy[z]] is False:
+#                     if total[x+dx[z]][y+dy[z]] == total[x][y]:
+#                         q.append([x+dx[z],y+dy[z]])
+#                         miniAnswer += 1
+#                         visited[x + dx[z]][y + dy[z]] = True
+#         if total[i][j] == 'W':
+#             answer[0] += miniAnswer * miniAnswer
+#         else:
+#             answer[1] += miniAnswer * miniAnswer
+# print(' '.join(map(str,answer)))
+
+# 예산 2512번 실버3
+# n = int(input())
+# prices = list(map(int,input().split()))
+# total = int(input())
+# start = 0
+# end = max(prices)
+# answer = 0
+# def isPossible(price):
+#     mi = 0
+#     for i in prices:
+#         if i <= price:
+#             mi += i
+#         else:
+#             mi += price
+#     if mi <= total:
+#         return price
+#     return False
+#
+# while start <= end:
+#     pivot = (start + end) // 2
+#     if isPossible(pivot):
+#         answer = isPossible(pivot)
+#         start = pivot + 1
+#     else:
+#         end = pivot - 1
+#
+# print(answer)
+
+# 포도주 시식 2156번 실버1
+# n = int(input())
+# total = []
+# for i in range(n):
+#     total.append(int(input()))
+# answers = []
+# if len(total) == 1:
+#     print(total[0])
+# elif len(total) == 2:
+#     print(total[0] + total[1])
+# else:
+#     answers = [total[0], total[0] + total[1], max([total[0] + total[1],total[0] + total[2],total[2] + total[1]])]
+#     for i in range(3,n):
+#         answers.append(max(answers[i-2]+total[i], answers[i-3]+total[i-1]+total[i], answers[i-1]))
+#     print(max(answers))
+
+# 물통 실버1 2251번
+a,b,c = map(int,input().split())
+total = [a,b,c]
+answers = []
+
+def dfs(list, history):
+    if len(history) == 3:
+        return answers.append(list[3])
