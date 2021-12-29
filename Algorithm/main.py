@@ -1924,10 +1924,78 @@ print(os.path.abspath(__file__))'''
 #     print(max(answers))
 
 # 물통 실버1 2251번
-a,b,c = map(int,input().split())
-total = [a,b,c]
-answers = []
+# from collections import deque
+#
+# a,b,c = map(int,input().split())
+# total = [a,b,c]
+# answers = set()
+# q = deque([])
+# visited = set()
+# q.append((0,0,c))
+# while q:
+#     list1 = q.popleft()
+#     A,B,C = list1
+#     if list1 in visited: continue
+#     visited.add(list1)
+#     if list1[0] == 0 :answers.add(C)
+#     if list1[0] <= b - list1[1]: q.append((0, list1[1] + list1[0], list1[2]))
+#     else: q.append(((list1[0] + list1[1]) - b, b, list1[2]))
+#
+#     if list1[0] <= c - list1[2]: q.append((0, list1[1], list1[2] + list1[0]))
+#     else: q.append((list1[0] + list1[2] - c, list1[1], c))
+#
+#     if list1[1] <= a - list1[0]: q.append((list1[0] + list1[1], 0, list1[2]))
+#     else: q.append((a, list1[1] + list1[0] - a, list1[2]))
+#
+#     if list1[1] <= c - list1[2]: q.append((list1[0], 0, list1[1] + list1[2]))
+#     else: q.append((list1[0], list1[1] + list1[2] - c, c))
+#
+#     if list1[2] <= a - list1[0]: q.append((list1[0] + list1[2], list1[1], 0))
+#     else: q.append((a, list1[1], list1[0] + list1[2] - a))
+#
+#     if list1[2] <= b - list1[1]: q.append((list1[0], list1[1] + list1[2], 0))
+#     else: q.append((list1[0], b, list1[1] + list1[2] - b))
+#
+# print(' '.join(map(str,sorted((answers)))))
 
-def dfs(list, history):
-    if len(history) == 3:
-        return answers.append(list[3])
+# 이분 그래프 골드4 1707번
+# from collections import deque
+#
+# k = int(input())
+# for i in range(k):
+#     v,e = map(int,input().split())
+#     dic = {i+1:[] for i in range(v)}
+#     visited = [False for i in range(v)]
+#     for j in range(e):
+#         a,b = map(int,i
+#         print('YES')nput().split())
+#         dic[a].append(b)
+#         dic[b].append(a)
+#     miniAnswer = 0
+#     isPossible = True
+#     for s in range(1,v+1):
+#         if visited[s-1] is not False: continue
+#         miniAnswer += 1
+#         q = deque([s])
+#         visited[s-1] = 'WHITE'
+#         while q:
+#             now = q.popleft()
+#             if not isPossible:
+#                 break
+#             for a in dic[now]:
+#                 if visited[a-1] is False:
+#                     q.append(a)
+#                     if visited[now-1] == 'WHITE':
+#                         visited[a-1] = 'BLACK'
+#                     else: visited[a-1] = 'WHITE'
+#                 else:
+#                     if visited[a-1] == visited[now-1]:
+#                         isPossible = False
+#         if not isPossible:
+#             break
+#     if not isPossible:
+#         print('NO')
+#     else:
+
+print([1,2,3,4][2],[1,2,3,4][2:])
+print('asdasd'[5:])
