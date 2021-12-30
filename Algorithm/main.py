@@ -1996,6 +1996,3 @@ print(os.path.abspath(__file__))'''
 #     if not isPossible:
 #         print('NO')
 #     else:
-
-print([1,2,3,4][2],[1,2,3,4][2:])
-print('asdasd'[5:])
