@@ -1996,3 +1996,23 @@ print(os.path.abspath(__file__))'''
 #     if not isPossible:
 #         print('NO')
 #     else:
+
+# def solution(n, computers):
+#     copyedComputers = [computer[:] for computer in computers]
+#     answer = 0
+#
+#     def dfs(i):
+#         for j in range(n):
+#             if copyedComputers[i][j] == 1:
+#                 copyedComputers[i][j] = 2
+#                 dfs(j)
+#
+#     for i in range(n):
+#         if 1 in copyedComputers[i]:
+#             answer += 1
+#             dfs(i)
+#
+#     return answer
+#
+# print(solution(3,[[1, 1, 0], [1, 1, 0], [0, 0, 1]]))
+# print(solution(3,[[1, 1, 0], [1, 1, 1], [0, 1, 1]]))
