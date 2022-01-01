@@ -2016,3 +2016,8 @@ print(os.path.abspath(__file__))'''
 #
 # print(solution(3,[[1, 1, 0], [1, 1, 0], [0, 0, 1]]))
 # print(solution(3,[[1, 1, 0], [1, 1, 1], [0, 1, 1]]))
+
+# 1085 직사각형에서 탈출
+
+# x,y,w,h = map(int,input().split())
+# print(min(x,y,w-x,h-y))
