@@ -2021,3 +2021,32 @@ print(os.path.abspath(__file__))'''
 
 # x,y,w,h = map(int,input().split())
 # print(min(x,y,w-x,h-y))
+
+
+#1018 체스판
+# n,m = map(int,input().split())
+#
+# total = []
+# answers = []
+#
+# def turnOne(total,i,j,mode):
+#     a = [['B','W'],['W','B']]
+#     answer = 0
+#     for k in range(8):
+#         for u in range(8):
+#             if (k+u)%2 == 1 and total[i+k][j+u] != a[mode][0]:
+#                 answer += 1
+#             elif (k+u)%2 == 0 and total[i+k][j+u] != a[mode][1]:
+#                 answer += 1
+#
+#     return answer
+#
+# for i in range(n):
+#     total.append(list(input()))
+#
+# for i in range(n-7):
+#     for j in range(m-7):
+#         answers.append(turnOne(total,i,j,0))
+#         answers.append(turnOne(total,i,j,1))
+#
+# print(min(answers))
