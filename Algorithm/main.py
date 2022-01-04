@@ -2050,3 +2050,18 @@ print(os.path.abspath(__file__))'''
 #         answers.append(turnOne(total,i,j,1))
 #
 # print(min(answers))
+
+# 1259 팰린드롬수
+
+# answer = []
+#
+# while True:
+#     n = input()
+#     if not int(n): break
+#     if len(n)%2 == 1 and list(n)[:len(n)//2][::-1] == list(n)[len(n)//2+1:]:
+#         print('yes')
+#         continue
+#     if len(n)%2 == 0 and list(str(n))[:len(n)//2][::-1] == list(str(n))[len(n)//2:]:
+#         print('yes')
+#         continue
+#     print('no')
