@@ -2065,3 +2065,15 @@ print(os.path.abspath(__file__))'''
 #         print('yes')
 #         continue
 #     print('no')
+
+# 1181번 정렬
+
+# n = int(input())
+# total = []
+# for i in range(n):
+#     word = input()
+#     total.append((len(word),word))
+# total = sorted(list(set(total)))
+#
+# for i in total:
+#     print(i[1])
