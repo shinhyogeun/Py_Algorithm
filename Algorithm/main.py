@@ -2105,3 +2105,39 @@ print(os.path.abspath(__file__))'''
 #         answers.append(turnOne(total,i,j,1))
 #
 # print(min(answers))
+
+# from itertools import permutations
+#
+# def solution(expression):
+#     number = []
+#     pri = []
+#     buket = []
+#
+#     answer = []
+#     for i in expression:
+#         if i in ['*','+','-']:
+#             number.append(int(''.join(buket)))
+#             buket = []
+#             pri.append(i)
+#         else:
+#             buket.append(i)
+#     number.append(int(''.join(buket)))
+#
+#     print(number, pri, buket)
+#     for oper in permutations(['*','+','-'],3):
+#         count = 'start'
+#         for op in oper:
+#             for index in range(len(pri)):
+#                 if pri[index] == op:
+#                     if count == 'start':
+#                         count = number[index]
+#                     if op == '*':
+#                         count *= number[index + 1]
+#                     elif op == '+':
+#                         count += number[index + 1]
+#                     else:
+#                         count -=  number[index + 1]
+#
+#         answer.append(abs(count))
+#
+#     return max(answer)
