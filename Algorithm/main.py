@@ -2141,3 +2141,52 @@ print(os.path.abspath(__file__))'''
 #         answer.append(abs(count))
 #
 #     return max(answer)
+
+# def tilt(s):
+#     length = len(s)
+#     answer = [[0 for i in range(length)] for j in range(length)]
+#
+#     for i in range(length):
+#         for j in range(length):
+#             answer[j][length-1-i] = s[i][j]
+#     return answer
+#
+# def check(total, keyLength, length):
+#     for i in range(keyLength-1, length-keyLength+1):
+#         for j in range(keyLength-1, length-keyLength+1):
+#             if total[i][j] in [0,2]:
+#                 return False
+#
+#     return True
+#
+# def insert(total,row,col,key):
+#     for i in range(len(key)):
+#         for j in range(len(key)):
+#             total[row+i][col+j] += key[i][j]
+#     return total
+#
+# def solution(key, lock):
+#     keyLength = len(key)
+#     lockLength = len(lock)
+#     key2 = key
+#
+#     length = lockLength + 2 * (keyLength - 1)
+#
+#     total = [[0 for i in range(length)] for i in range(length)]
+#
+#     for i in range(keyLength-1, length-keyLength+1):
+#         for j in range(keyLength-1, length-keyLength+1):
+#             total[i][j] = lock[i-(keyLength-1)][j-(keyLength-1)]
+#
+#     for i in range(4):
+#         key2 = tilt(key2)
+#         for i in range(length-keyLength+1):
+#             for j in range(length-keyLength+1):
+#                 copy = [[i for i in j] for j in total]
+#                 result = insert(copy, i, j, key2)
+#                 if check(result,keyLength,length):
+#                     return True
+#
+#     return False
+#
+# print(solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]], [[1, 1, 1], [1, 1, 0], [1, 0, 1]]))
