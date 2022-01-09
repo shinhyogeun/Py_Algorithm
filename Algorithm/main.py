@@ -2190,3 +2190,12 @@ print(os.path.abspath(__file__))'''
 #     return False
 #
 # print(solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]], [[1, 1, 1], [1, 1, 0], [1, 0, 1]]))
+
+# def tilt(s):
+#     length = len(s)
+#     answer = [[0 for i in range(length)] for j in range(length)]
+#
+#     for i in range(length):
+#         for j in range(length):
+#             answer[j][length-1-i] = s[i][j]
+#     return answer
