@@ -2199,3 +2199,21 @@ print(os.path.abspath(__file__))'''
 #         for j in range(length):
 #             answer[j][length-1-i] = s[i][j]
 #     return answer
+
+# length = int(input())
+# arr = list(map(int,input().split()))
+#
+# sortedArr = sorted(arr, reverse=True)
+#
+# answer = 0
+#
+# while len(sortedArr) != 0:
+#     king = sortedArr[0]
+#
+#     if len(sortedArr) >= king:
+#         del sortedArr[:king]
+#         answer = answer + 1
+#         continue
+#     break
+#
+# print(answer)
