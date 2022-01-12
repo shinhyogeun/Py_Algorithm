@@ -2232,3 +2232,18 @@ print(os.path.abspath(__file__))'''
 #         break
 #
 # print(answer)
+
+# arr = list(map(int,list(input())))
+#
+# a = 0
+# b = 0
+# pivot = 2
+#
+# for i in arr:
+#     if(pivot != i):
+#         pivot = i
+#         if(i == 0):
+#             a += 1
+#         else:
+#             b += 1
+# print(a if a < b else b)
