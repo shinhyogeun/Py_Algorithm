@@ -2247,3 +2247,35 @@ print(os.path.abspath(__file__))'''
 #         else:
 #             b += 1
 # print(a if a < b else b)
+
+ # import heapq
+#
+# nodes,lines = list(map(int,input().split(' ')))
+# fro = int(input())
+#
+# INF = int(1e9)
+# answers = [INF for i in range(nodes+1)]
+# visited = [False for i in range(nodes+1)]
+#
+# kings = []
+# heapq.heappush(kings,(0, fro))
+# infoArr = [[] for _ in range(nodes+1)]
+#
+# for i in range(lines):
+#     start, end, time = list(map(int, input().split(' ')))
+#     infoArr[start].append([end,time])
+#
+# while kings:
+#     answer, index = heapq.heappop(kings)
+#     if visited[index]:
+#         continue
+#     visited[index] = True
+#     answers[index] = answer
+#
+#     for end, time in infoArr[index]:
+#         if answers[end] > answer + time:
+#             answers[end] = answer + time
+#             heapq.heappush(kings,(answer + time, end))
+#
+# for i in range(1,len(answers)):
+#     print(answers[i])
