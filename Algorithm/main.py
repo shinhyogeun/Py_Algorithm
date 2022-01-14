@@ -2279,3 +2279,16 @@ print(os.path.abspath(__file__))'''
 #
 # for i in range(1,len(answers)):
 #     print(answers[i])
+
+# 숫자카드게임
+# row,col = map(int,input().split())
+# resultCompare = []
+# squre = [[0]*col for i in range(row)]
+# for i in range(row):
+#     squre[i] = list(map(int,input().split()))
+#
+# for i in range(row):
+#     squre[i].sort()
+#     resultCompare.append(squre[i][0])
+#
+# print(sorted(resultCompare)[-1])
