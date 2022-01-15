@@ -2292,3 +2292,27 @@ print(os.path.abspath(__file__))'''
 #     resultCompare.append(squre[i][0])
 #
 # print(sorted(resultCompare)[-1])
+
+# import sys
+#
+# n = int(input())
+#
+# for i in range(n):
+#     inputs = list(sys.stdin.readline().rstrip())
+#     answerLeft = []
+#     answerRight = []
+#     cursor = 0
+#     for i in inputs:
+#         if i == '<':
+#             if answerLeft != []:
+#                 answerRight.append(answerLeft.pop())
+#         elif i == '>':
+#             if answerRight != []:
+#                 answerLeft.append(answerRight.pop())
+#         elif i == '-':
+#             if answerLeft != []:
+#                 answerLeft.pop()
+#         else:
+#             answerLeft.append(i)
+#             cursor += 1
+#     print(''.join(answerLeft)+''.join(answerRight[::-1]))
