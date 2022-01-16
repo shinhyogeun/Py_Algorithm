@@ -2316,3 +2316,29 @@ print(os.path.abspath(__file__))'''
 #             answerLeft.append(i)
 #             cursor += 1
 #     print(''.join(answerLeft)+''.join(answerRight[::-1]))
+
+#고층건물 골드4 1027번
+# n = int(input())
+# total = list(map(int,input().split()))
+# answer = []
+# for i,v in enumerate(total):
+#     count = 0
+#     for i2,v2 in enumerate(total):
+#         per = 0
+#         if i > i2:
+#             gap = v2 - v
+#             for k in range(1,i-i2+1):
+#                 if v + gap * (k/(i-i2)) <= total[i-k]:
+#                     per += 1
+#             if per == 1:
+#                 count += 1
+#         elif i < i2:
+#             gap = v2 - v
+#             for k in range(1, i2-i+1):
+#                 if v + gap * (k / (i2 - i)) <= total[i+k]:
+#                     per += 1
+#             if per == 1:
+#                 count += 1
+#     answer.append(count)
+#
+# print(max(answer))
