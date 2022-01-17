@@ -2342,3 +2342,18 @@ print(os.path.abspath(__file__))'''
 #     answer.append(count)
 #
 # print(max(answer))
+
+# 타겟넘버 프로그래머스 LV2
+# def solution(numbers, target):
+#     answer = []
+#
+#     def dfs(value,index):
+#         if index != len(numbers):
+#             dfs(value+numbers[index],index+1)
+#             dfs(value-numbers[index],index+1)
+#         else:
+#             answer.append(value)
+#
+#     dfs(0,0)
+#
+#     return answer.count(target)
