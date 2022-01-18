@@ -2357,3 +2357,13 @@ print(os.path.abspath(__file__))'''
 #     dfs(0,0)
 #
 #     return answer.count(target)
+
+# 같은 숫자는 싫어 LV1
+# def solution(arr):
+#     answer = [arr[0]]
+#     if len(arr) == 0:
+#         return []
+#     for i in arr[1:]:
+#         if answer[-1] != i:
+#             answer.append(i)
+#     return answer
