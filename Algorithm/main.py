@@ -2369,12 +2369,19 @@ print(os.path.abspath(__file__))'''
 #     return answer
 
 # 폰켓몬 LV1
-def solution(nums):
-    numsSet = list(set(nums))
-    if len(numsSet) < len(nums) / 2:
-        return len(numsSet)
-    return int(len(nums) / 2)
+# def solution(nums):
+#     numsSet = list(set(nums))
+#     if len(numsSet) < len(nums) / 2:
+#         return len(numsSet)
+#     return int(len(nums) / 2)
+#
+# print(solution([3,1,2,3]))
+# print(solution([3,3,3,2,2,4]))
+# print(solution([3,3,3,2,2,2]))
 
-print(solution([3,1,2,3]))
-print(solution([3,3,3,2,2,4]))
-print(solution([3,3,3,2,2,2]))
+# 가운데 글자 가져오기 LV1
+def solution(s):
+    if len(s) % 2 == 0:
+        return s[len(s)//2 - 1:len(s)//2 + 1]
+    else:
+        return s[len(s)//2]
