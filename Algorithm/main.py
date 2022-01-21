@@ -2380,8 +2380,18 @@ print(os.path.abspath(__file__))'''
 # print(solution([3,3,3,2,2,2]))
 
 # 가운데 글자 가져오기 LV1
-def solution(s):
-    if len(s) % 2 == 0:
-        return s[len(s)//2 - 1:len(s)//2 + 1]
-    else:
-        return s[len(s)//2]
+# def solution(s):
+#     if len(s) % 2 == 0:
+#         return s[len(s)//2 - 1:len(s)//2 + 1]
+#     else:
+#         return s[len(s)//2]
+
+def solution(numbers):
+    answer = set([])
+    for i in range(len(numbers)):
+        for value in (numbers[:i] + numbers[i+1:]):
+            answer.add(numbers[i]+value)
+    return sorted(list(answer))
+
+print(solution([2,1,3,4,1]))
+print(solution([5,0,2,7]))
