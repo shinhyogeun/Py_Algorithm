@@ -2386,12 +2386,22 @@ print(os.path.abspath(__file__))'''
 #     else:
 #         return s[len(s)//2]
 
-def solution(numbers):
-    answer = set([])
-    for i in range(len(numbers)):
-        for value in (numbers[:i] + numbers[i+1:]):
-            answer.add(numbers[i]+value)
-    return sorted(list(answer))
+# def solution(numbers):
+#     answer = set([])
+#     for i in range(len(numbers)):
+#         for value in (numbers[:i] + numbers[i+1:]):
+#             answer.add(numbers[i]+value)
+#     return sorted(list(answer))
+#
+# print(solution([2,1,3,4,1]))
+# print(solution([5,0,2,7]))
 
-print(solution([2,1,3,4,1]))
-print(solution([5,0,2,7]))
+# 부족한 금액 계산하기 LV2
+def solution(price, money, count):
+    total = 0
+    for i in range(1,count+1):
+        total += i*price
+    if total > money:
+        return total-money
+    else:
+        return 0
