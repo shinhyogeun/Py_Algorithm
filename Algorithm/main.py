@@ -2397,11 +2397,21 @@ print(os.path.abspath(__file__))'''
 # print(solution([5,0,2,7]))
 
 # 부족한 금액 계산하기 LV2
-def solution(price, money, count):
-    total = 0
-    for i in range(1,count+1):
-        total += i*price
-    if total > money:
-        return total-money
-    else:
-        return 0
+# def solution(price, money, count):
+#     total = 0
+#     for i in range(1,count+1):
+#         total += i*price
+#     if total > money:
+#         return total-money
+#     else:
+#         return 0
+
+# 나누어 떨어지는 숫자 배 LV1
+def solution(arr, divisor):
+    answer = []
+    for i in arr:
+        if i / divisor == i // divisor:
+            answer.append(i)
+    if len(answer) == 0:
+        return [-1]
+    return sorted(answer)
