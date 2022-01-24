@@ -2407,11 +2407,13 @@ print(os.path.abspath(__file__))'''
 #         return 0
 
 # 나누어 떨어지는 숫자 배 LV1
-def solution(arr, divisor):
-    answer = []
-    for i in arr:
-        if i / divisor == i // divisor:
-            answer.append(i)
-    if len(answer) == 0:
-        return [-1]
-    return sorted(answer)
+# def solution(arr, divisor):
+#     answer = []
+#     for i in arr:
+#         if i / divisor == i // divisor:
+#             answer.append(i)
+#     if len(answer) == 0:
+#         return [-1]
+#     return sorted(answer)
+
+# 나누어 떨어지는 숫자 배 LV1
