@@ -90,3 +90,25 @@
 //     })
 //     return answer;
 // }
+
+// function solution(participant, completion) {
+//     const now = {};
+//     let answer = '';
+//     participant.forEach((v) => {
+//         if (now[v] === undefined){
+//             now[v] = 1
+//         } else {
+//             now[v] += 1
+//         }
+//     })
+//     completion.forEach((v) => {
+//         now[v] -= 1
+//     })
+    
+//     Object.keys(now).forEach((v) => {
+//         if (now[v] !== 0){
+//             answer = v 
+//         }
+//     })
+//     return answer;
+// }
