@@ -2416,4 +2416,7 @@ print(os.path.abspath(__file__))'''
 #         return [-1]
 #     return sorted(answer)
 
-# 나누어 떨어지는 숫자 배 LV1
+# 직사각형 별찍기
+# a, b = map(int, input().strip().split(' '))
+# for i in range(b):
+#     print('*' * a)
