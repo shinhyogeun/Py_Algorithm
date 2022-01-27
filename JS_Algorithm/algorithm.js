@@ -112,3 +112,17 @@
 //     })
 //     return answer;
 // }
+
+function solution(strings, n) {
+    const total = {};
+    strings.forEach((string) => {
+        if (total[string[n]]) {
+            total[string[n]].push(string)
+        }else {
+            total[string[n]] = [string]
+        }
+    })
+    let answer = []
+    Object.keys(total).sort().forEach((key) => answer = [...answer, ...total[key].sort()])
+    return answer;
+}
