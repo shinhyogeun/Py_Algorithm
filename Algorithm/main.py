@@ -2420,3 +2420,24 @@ print(os.path.abspath(__file__))'''
 # a, b = map(int, input().strip().split(' '))
 # for i in range(b):
 #     print('*' * a)
+
+# def solution(food_times, k):
+#     where = 0
+#     count = 0
+#
+#     while count != k+1:
+#         nowIndex = where % len(food_times)
+#
+#         if food_times[nowIndex] != 0:
+#             if (count == k):
+#                 return nowIndex+1
+#             food_times[nowIndex] -= 1
+#             count += 1
+#             where += 1
+#         else:
+#             if(food_times.count(0) == len(food_times)):
+#                 return -1
+#             else:
+#                 where += 1
+#
+# print(solution([3,1,2],5))
