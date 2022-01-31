@@ -113,16 +113,34 @@
 //     return answer;
 // }
 
-function solution(strings, n) {
-    const total = {};
-    strings.forEach((string) => {
-        if (total[string[n]]) {
-            total[string[n]].push(string)
-        }else {
-            total[string[n]] = [string]
-        }
-    })
-    let answer = []
-    Object.keys(total).sort().forEach((key) => answer = [...answer, ...total[key].sort()])
-    return answer;
-}
+// function solution(strings, n) {
+//     const total = {};
+//     strings.forEach((string) => {
+//         if (total[string[n]]) {
+//             total[string[n]].push(string)
+//         }else {
+//             total[string[n]] = [string]
+//         }
+//     })
+//     let answer = []
+//     Object.keys(total).sort().forEach((key) => answer = [...answer, ...total[key].sort()])
+//     return answer;
+// }
+
+
+// function solution(a, b) {
+//     let answer = 0
+//     a.forEach((v,i) => {
+//         answer += v * b[i]
+//     })
+//     return answer;
+// }
+
+// function solution(s){
+//     let count = 0;
+//     s.toUpperCase().split('').forEach((v) => {
+//         if (v === 'P') count += 1;
+//         else if (v === 'Y') count -= 1;
+//     })
+//     return !!!count;
+// }
