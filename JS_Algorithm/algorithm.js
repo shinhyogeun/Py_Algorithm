@@ -148,3 +148,15 @@
 // function solution(seoul) {
 //     return `김서방은 ${seoul.findIndex((v) => v.includes('Kim'))}에 있다`
 // }
+
+// function solution(n) {
+//     let answer = '';
+//     new Array(n).fill(0).forEach((v,i) => {
+//       if ((i+1) % 2 === 0)  {
+//           answer += '박'
+//       } else {
+//           answer += '수'
+//       }
+//     })
+//     return answer;
+// }
