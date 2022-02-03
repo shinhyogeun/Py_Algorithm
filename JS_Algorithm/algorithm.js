@@ -160,3 +160,15 @@
 //     })
 //     return answer;
 // }
+
+// function solution(arr1, arr2) {
+//     const answer = [];
+//     arr1.forEach((v,i) => {
+//         const a = []
+//         v.forEach((V,I) => {
+//             a.push(V + arr2[i][I])
+//         })
+//         answer.push(a)
+//     })
+//     return answer;
+// }
