@@ -172,3 +172,8 @@
 //     })
 //     return answer;
 // }
+
+// function isThereZero(obj){
+//     if (Object.values(obj).includes(0)) return true;
+//     return false;
+// }
