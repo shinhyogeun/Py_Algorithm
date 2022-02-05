@@ -177,3 +177,11 @@
 //     if (Object.values(obj).includes(0)) return true;
 //     return false;
 // }
+
+// function solution(n) {
+//     for (let i = 1; i <= n; i++) {
+//         if (n % i === 1) {
+//             return i
+//         }
+//     }
+// }
