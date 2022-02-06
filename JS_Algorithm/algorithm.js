@@ -185,3 +185,17 @@
 //         }
 //     }
 // }
+
+// const isNaNInS = (s) => s.split('').find((v) => isNaN(parseInt(v)))
+
+// function solution(s) {
+//     if (s.length !== 4 && s.length !== 6) {
+//         return false;
+//     } else {
+//         if (isNaNInS(s)) {
+//             return false
+//         } else {
+//             return true
+//         }
+//     }
+// }
